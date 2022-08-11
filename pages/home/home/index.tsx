@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Footer from '@/components/Footer';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Authenticated } from 'src/components/Authenticated';
 
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Link from '@/components/Link';
 
 function DashboardTasks() {
   return (
@@ -11,7 +12,11 @@ function DashboardTasks() {
       <Head>
         <title>Tasks Dashboard</title>
       </Head>
-      <Container maxWidth="lg">hey</Container>
+      <Container maxWidth="lg">
+        <Link href="/api/discord/login" passHref>
+          <Button>Login with discord</Button>
+        </Link>
+      </Container>
       <Footer />
     </>
   );

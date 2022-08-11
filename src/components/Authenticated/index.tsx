@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useAuth } from 'src/hooks/useAuth';
-import { Slide } from '@mui/material';
 
 interface AuthenticatedProps {
   children: ReactNode;
