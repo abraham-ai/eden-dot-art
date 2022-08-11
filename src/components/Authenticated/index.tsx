@@ -1,0 +1,42 @@
+import type { FC, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import { useAuth } from 'src/hooks/useAuth';
+import { Slide } from '@mui/material';
+
+interface AuthenticatedProps {
+  children: ReactNode;
+}
+
+export const Authenticated: FC<AuthenticatedProps> = (props) => {
+  const { children } = props;
+  const auth = useAuth();
+  const router = useRouter();
+  const [verified, setVerified] = useState(false);
+
+  useEffect(() => {
+    if (!router.isReady) {
+      return;
+    }
+
+    if (!auth.isAuthenticated) {
+      router.push({
+        pathname: '/auth/login',
+        query: { backTo: router.asPath }
+      });
+    } else {
+      setVerified(true);
+    }
+  }, [router.isReady]);
+
+  if (!verified) {
+    return null;
+  }
+
+  return <>{children}</>;
+};
+
+Authenticated.propTypes = {
+  children: PropTypes.node
+};
