@@ -3,14 +3,7 @@ import Footer from '@/components/Footer';
 import { Button, Container } from '@mui/material';
 
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
-import {
-  useClaimNFT,
-  useUnclaimedNFTs,
-  useNFTDrop,
-  useContract,
-  useOwnedNFTs,
-  useNFTBalance
-} from '@thirdweb-dev/react';
+import { useClaimNFT, useUnclaimedNFTs, useNFTDrop } from '@thirdweb-dev/react';
 import { useAccount, useContractRead } from 'wagmi';
 import { STORE_CONTRACT_ADDRESS } from '@/const/contracts';
 import { NFTDrop } from '@thirdweb-dev/sdk';
@@ -18,7 +11,6 @@ import { NFTDrop } from '@thirdweb-dev/sdk';
 function WalletStorePage() {
   const { address, isConnected } = useAccount();
   const nftDrop = useNFTDrop(STORE_CONTRACT_ADDRESS);
-  const { contract } = useContract(STORE_CONTRACT_ADDRESS);
   const { data: unclaimedNfts, isLoading: unclaimedNFTsLoading } =
     useUnclaimedNFTs(nftDrop, { start: 0, count: 100 });
   const { mutate: claimNft, isLoading: claimLoading } = useClaimNFT(nftDrop);
@@ -29,8 +21,6 @@ function WalletStorePage() {
     contractInterface: NFTDrop.contractAbi,
     args: [address]
   });
-
-  console.log(ownerBalance);
 
   return (
     <>

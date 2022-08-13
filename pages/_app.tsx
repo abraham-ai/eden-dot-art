@@ -14,7 +14,6 @@ import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { WalletProvider } from '@/contexts/WalletContext';
-import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 
 const clientSideEmotionCache = createEmotionCache();
 
