@@ -13,8 +13,6 @@ import createEmotionCache from 'src/createEmotionCache';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { AuthConsumer, AuthProvider } from 'src/contexts/Auth0Context';
-import Loader from 'src/components/Loader';
 import { WalletProvider } from '@/contexts/WalletContext';
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 
@@ -49,22 +47,12 @@ function TokyoApp(props: TokyoAppProps) {
       <SidebarProvider>
         <ThemeProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <AuthProvider>
-              <WalletProvider>
-                <ThirdwebProvider desiredChainId={ChainId.Goerli}>
-                  <CssBaseline />
-                  <AuthConsumer>
-                    {(auth) =>
-                      !auth.isInitialized ? (
-                        <Loader />
-                      ) : (
-                        getLayout(<Component {...pageProps} />)
-                      )
-                    }
-                  </AuthConsumer>
-                </ThirdwebProvider>
-              </WalletProvider>
-            </AuthProvider>
+            <WalletProvider>
+              <ThirdwebProvider desiredChainId={ChainId.Goerli}>
+                <CssBaseline />
+                {getLayout(<Component {...pageProps} />)}
+              </ThirdwebProvider>
+            </WalletProvider>
           </LocalizationProvider>
         </ThemeProvider>
       </SidebarProvider>

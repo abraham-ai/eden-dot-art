@@ -18,9 +18,7 @@ function WalletUsePage() {
 }
 
 WalletUsePage.getLayout = (page) => (
-  <Authenticated>
-    <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-  </Authenticated>
+  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
 );
 
 export default WalletUsePage;

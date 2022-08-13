@@ -23,9 +23,7 @@ function DashboardTasks() {
 }
 
 DashboardTasks.getLayout = (page) => (
-  <Authenticated>
-    <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-  </Authenticated>
+  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
 );
 
 export default DashboardTasks;

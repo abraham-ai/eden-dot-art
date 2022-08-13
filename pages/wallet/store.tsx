@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Footer from '@/components/Footer';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Authenticated } from 'src/components/Authenticated';
 
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
@@ -20,16 +20,17 @@ function WalletStorePage() {
       <Head>
         <title>Wallet</title>
       </Head>
-      <Container maxWidth="lg"></Container>
+      <Container maxWidth="lg">
+        <h1>Store</h1>
+        <Button>Mint NFT</Button>
+      </Container>
       <Footer />
     </>
   );
 }
 
 WalletStorePage.getLayout = (page) => (
-  <Authenticated>
-    <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-  </Authenticated>
+  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
 );
 
 export default WalletStorePage;
