@@ -48,10 +48,8 @@ function TokyoApp(props: TokyoAppProps) {
         <ThemeProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <WalletProvider>
-              <ThirdwebProvider desiredChainId={ChainId.Goerli}>
-                <CssBaseline />
-                {getLayout(<Component {...pageProps} />)}
-              </ThirdwebProvider>
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
             </WalletProvider>
           </LocalizationProvider>
         </ThemeProvider>
