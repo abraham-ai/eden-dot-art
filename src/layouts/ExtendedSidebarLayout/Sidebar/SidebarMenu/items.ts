@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { ROUTES } from '@/const/routes';
 
 export interface MenuItem {
   link?: string;
@@ -22,8 +23,23 @@ const menuItems: MenuItems[] = [
     heading: 'Test',
     items: [
       {
-        name: 'Test',
-        link: '/test',
+        name: 'Home',
+        link: ROUTES.TEST.HOME,
+        icon: AccountTreeTwoToneIcon
+      }
+    ]
+  },
+  {
+    heading: 'Wallet',
+    items: [
+      {
+        name: 'Store',
+        link: ROUTES.WALLET.STORE,
+        icon: AccountTreeTwoToneIcon
+      },
+      {
+        name: 'Use',
+        link: ROUTES.WALLET.USE,
         icon: AccountTreeTwoToneIcon
       }
     ]

@@ -14,6 +14,7 @@ import {
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -83,6 +84,7 @@ function Header() {
           </Tooltip>
         </Box>
       </Box>
+      <ConnectButton />
     </HeaderWrapper>
   );
 }

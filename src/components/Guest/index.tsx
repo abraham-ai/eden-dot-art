@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useAuth } from 'src/hooks/useAuth';
-import { AUTH_DEFAULT } from 'src/const/routes';
+import { ROUTES } from 'src/const/routes';
 
 interface GuestProps {
   children: ReactNode;
@@ -22,7 +22,7 @@ export const Guest: FC<GuestProps> = (props) => {
     }
 
     if (auth.isAuthenticated && demo !== 'true') {
-      router.push(AUTH_DEFAULT);
+      router.push(ROUTES.TEST.HOME);
     } else {
       setVerified(true);
     }
