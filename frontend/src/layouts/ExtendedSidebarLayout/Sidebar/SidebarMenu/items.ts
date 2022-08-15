@@ -25,6 +25,11 @@ const menuItems: MenuItems[] = [
         name: 'Test',
         link: '/test',
         icon: AccountTreeTwoToneIcon
+      },
+      {
+        name: 'Creations',
+        link: '/creations',
+        icon: AccountTreeTwoToneIcon
       }
     ]
   }

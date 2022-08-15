@@ -11,6 +11,11 @@ import {
   styled,
   useTheme
 } from '@mui/material';
+
+// NAV
+import { EdenNavTop } from '../../../components';
+
+// ICONS
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
@@ -58,6 +63,7 @@ function Header() {
               )}`
       }}
     >
+      <EdenNavTop />
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
