@@ -1,10 +1,11 @@
 import { Box, Card, Container, Button, styled } from '@mui/material';
 import type { ReactElement } from 'react';
 
-import Link from 'src/components/Link';
+import Link from '@/components/Link';
 import Head from 'next/head';
 
-import Logo from 'src/components/LogoSign';
+import { EdenNavTop } from '@/components';
+import { EdenLogo } from '@/components';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 const HeaderWrapper = styled(Card)(
@@ -35,7 +36,7 @@ function Overview() {
       <HeaderWrapper>
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
-            <Logo />
+            <EdenLogo />
             <Box
               display="flex"
               alignItems="center"
