@@ -14,7 +14,7 @@ import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AuthConsumer, AuthProvider } from 'src/contexts/Auth0Context';
-import Loader from 'src/components/Loader';
+import Loader from '@/components/loaders/Loader';
 
 const clientSideEmotionCache = createEmotionCache();
 
