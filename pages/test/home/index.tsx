@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Footer from '@/components/community/Footer';
 import { Button, Container } from '@mui/material';
 import { Authenticated } from '@/components/Authenticated';
-
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
 import Link from '@/components/Link';
 
@@ -23,9 +22,7 @@ function DashboardTasks() {
 }
 
 DashboardTasks.getLayout = (page) => (
-  <Authenticated>
-    <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-  </Authenticated>
+  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
 );
 
 export default DashboardTasks;

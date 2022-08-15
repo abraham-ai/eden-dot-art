@@ -15,6 +15,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AuthConsumer, AuthProvider } from 'src/contexts/Auth0Context';
 import Loader from '@/components/loaders/Loader';
+import { WalletProvider } from '@/contexts/WalletContext';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -47,18 +48,10 @@ function TokyoApp(props: TokyoAppProps) {
       <SidebarProvider>
         <ThemeProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <AuthProvider>
+            <WalletProvider>
               <CssBaseline />
-              <AuthConsumer>
-                {(auth) =>
-                  !auth.isInitialized ? (
-                    <Loader />
-                  ) : (
-                    getLayout(<Component {...pageProps} />)
-                  )
-                }
-              </AuthConsumer>
-            </AuthProvider>
+              {getLayout(<Component {...pageProps} />)}
+            </WalletProvider>
           </LocalizationProvider>
         </ThemeProvider>
       </SidebarProvider>

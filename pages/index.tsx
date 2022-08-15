@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { EdenNavTop } from '@/components';
 import { EdenLogo } from '@/components';
 import BaseLayout from 'src/layouts/BaseLayout';
+import { ROUTES } from '@/const/routes';
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
@@ -47,11 +48,11 @@ function Overview() {
               <Box>
                 <Button
                   component={Link}
-                  href="/auth/login"
+                  href={ROUTES.TEST.HOME}
                   variant="contained"
                   sx={{ ml: 2 }}
                 >
-                  Login
+                  To App
                 </Button>
               </Box>
             </Box>

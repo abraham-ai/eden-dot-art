@@ -3,7 +3,7 @@ import { Button, Box, Alert, styled } from '@mui/material';
 import { useAuth } from 'src/hooks/useAuth';
 import { useRefMounted } from 'src/hooks/useRefMounted';
 import { useRouter } from 'next/router';
-import { AUTH_DEFAULT } from '@/const/routes';
+import { ROUTES } from '@/const/routes';
 
 const ImgWrapper = styled('img')(
   ({ theme }) => `
@@ -23,7 +23,7 @@ export const LoginAuth0: FC = (props) => {
       await loginWithPopup();
 
       if (isMountedRef()) {
-        const backTo = (router.query.backTo as string) || AUTH_DEFAULT;
+        const backTo = (router.query.backTo as string) || ROUTES.TEST.HOME;
         router.push(backTo);
       }
     } catch (err) {
