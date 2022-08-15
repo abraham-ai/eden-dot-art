@@ -1,10 +1,10 @@
 import { Box, Card, Typography, Container, styled } from '@mui/material';
 import Head from 'next/head';
-import { Guest } from 'src/components/Guest';
+import { Guest } from '@/components/Guest';
 import { LoginAuth0 } from 'src/content/Auth/Login/LoginAuth0';
-import Logo from 'src/components/LogoSign';
+import Logo from '@/components/symbols/LogoSign';
 import BaseLayout from 'src/layouts/BaseLayout';
-import Link from 'src/components/Link';
+import Link from '@/components/Link';
 
 const MainContent = styled(Box)(
   () => `
