@@ -1,6 +1,10 @@
 import { Box, styled, Tooltip } from '@mui/material';
 import Link from 'src/components/Link';
 
+// ICONS
+import AppLogo from '../AppLogo';
+import EnergySavingsLeafIcon from '@mui/icons-material/EnergySavingsLeaf';
+
 const LogoWrapper = styled(Link)(
   ({ theme }) => `
         color: ${theme.palette.text.primary};
@@ -17,10 +21,8 @@ const LogoWrapper = styled(Link)(
 
 const LogoSignWrapper = styled(Box)(
   () => `
-        width: 52px;
-        height: 38px;
-        margin-top: 4px;
-        transform: scale(.8);
+        display: flex;
+        align-items: center;
 `
 );
 
@@ -77,6 +79,8 @@ const LogoSignInner = styled(Box)(
 const LogoTextWrapper = styled(Box)(
   ({ theme }) => `
         padding-left: ${theme.spacing(1)};
+        display: 'flex';
+        align-items: center;
 `
 );
 
@@ -104,21 +108,27 @@ function Logo() {
   return (
     <LogoWrapper href="/">
       <LogoSignWrapper>
-        <LogoSign>
+        {/* <EnergySavingsLeafIcon
+          fontSize="large"
+          sx={{ color: 'rgb(171, 254, 44)', fontSize: 50 }}
+        /> */}
+        <AppLogo logo="eden" size="x-small" />
+        {/* <LogoSign>
           <LogoSignInner />
-        </LogoSign>
+        </LogoSign> */}
       </LogoSignWrapper>
       <Box
         component="span"
         sx={{
-          display: { xs: 'none', sm: 'inline-block' }
+          display: { xs: 'none', sm: 'flex' },
+          alignItems: 'center'
         }}
       >
         <LogoTextWrapper>
-          <Tooltip title="Version 1.0" arrow placement="right">
-            <VersionBadge>1.0</VersionBadge>
+          <Tooltip title="Private Beta" arrow placement="right">
+            <VersionBadge>Beta</VersionBadge>
           </Tooltip>
-          <LogoText>Tokyo Free Black</LogoText>
+          <LogoText>Eden</LogoText>
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>
