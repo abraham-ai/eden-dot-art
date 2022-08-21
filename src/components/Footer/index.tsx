@@ -15,7 +15,9 @@ function Footer() {
         alignItems="center"
         textAlign={{ xs: 'center', md: 'left' }}
         justifyContent="space-between"
-      ></Box>
+      >
+        This is the footer
+      </Box>
     </FooterWrapper>
   );
 }
