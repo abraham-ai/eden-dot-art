@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Footer from '@/components/community/Footer';
+import Footer from '@/components/Footer';
 import { Button, Container } from '@mui/material';
 import { Authenticated } from '@/components/Authenticated';
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
