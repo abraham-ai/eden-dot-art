@@ -15,7 +15,7 @@ import {
 
 import SidebarMenu from './SidebarMenu';
 import SidebarFooter from './SidebarFooter';
-import Logo from '@/components/symbols/LogoSign';
+// import { LogoEden } from '../../../components';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -61,7 +61,7 @@ function Sidebar() {
                 width: 52
               }}
             >
-              <Logo />
+              {/* <LogoEden /> */}
             </Box>
           </Box>
           <Divider
@@ -106,7 +106,7 @@ function Sidebar() {
                   width: 52
                 }}
               >
-                <Logo />
+                {/* <Logo /> */}
               </Box>
             </Box>
             <Divider
