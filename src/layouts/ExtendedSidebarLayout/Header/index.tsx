@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 // NAV
-import { EdenNavTop } from '../../../components';
+// import { EdenNavTop } from '../../../components';
 
 // ICONS
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
@@ -64,7 +64,7 @@ function Header() {
               )}`
       }}
     >
-      <EdenNavTop />
+      {/* <EdenNavTop /> */}
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
