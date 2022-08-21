@@ -1,11 +1,26 @@
-import { Box, Card, Container, Button, styled } from '@mui/material';
+import {
+  Box,
+  Card,
+  Button,
+  styled,
+  CardHeader,
+  Switch,
+  CardContent,
+  Container,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  CssBaseline
+} from '@mui/material';
 import type { ReactElement } from 'react';
 
 import Link from '@/components/Link';
 import Head from 'next/head';
 
-import { EdenNavTop } from '@/components';
-import { EdenLogo } from '@/components';
+import FrontPage from '@/components/FrontPage';
+import Logo from '@/components/Logo';
+import AppLogo from '@/components/AppLogo';
+// import { LogoEden } from '../frontend/src/components/index';
 import BaseLayout from 'src/layouts/BaseLayout';
 import { ROUTES } from '@/const/routes';
 
@@ -28,16 +43,16 @@ const OverviewWrapper = styled(Box)(
 `
 );
 
-function Overview() {
+function Overview({ changeTheme, isDarkTheme }) {
   return (
     <OverviewWrapper>
       <Head>
-        <title>Eden</title>
+        <title>Eden.Art</title>
       </Head>
       <HeaderWrapper>
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
-            <EdenLogo />
+            <Logo />
             <Box
               display="flex"
               alignItems="center"
@@ -45,6 +60,38 @@ function Overview() {
               flex={1}
             >
               <Box />
+              <Box>
+                <Link href={ROUTES.TEST.HOME} sx={{ ml: 2 }}>
+                  DEV GARDEN
+                </Link>
+              </Box>
+              <Box>
+                <Link href={ROUTES.TEST.HOME} sx={{ ml: 2 }}>
+                  IDEAS
+                </Link>
+              </Box>
+              <Box>
+                <Link href={ROUTES.TEST.HOME} sx={{ ml: 2 }}>
+                  APPS
+                </Link>
+              </Box>
+              <Box>
+                <Link href={ROUTES.TEST.HOME} sx={{ ml: 2 }}>
+                  FAQ
+                </Link>
+              </Box>
+              <CardHeader
+                action={
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch checked={isDarkTheme} onChange={changeTheme} />
+                      }
+                      label="🌙"
+                    />
+                  </FormGroup>
+                }
+              />
               <Box>
                 <Button
                   component={Link}
@@ -59,12 +106,13 @@ function Overview() {
           </Box>
         </Container>
       </HeaderWrapper>
+      <FrontPage />
     </OverviewWrapper>
   );
 }
 
 export default Overview;
 
-Overview.getLayout = function getLayout(page: ReactElement) {
-  return <BaseLayout>{page}</BaseLayout>;
+Overview.getLayout = function getLayout(page: ReactElement, props) {
+  return <BaseLayout {...props}>{page}</BaseLayout>;
 };
