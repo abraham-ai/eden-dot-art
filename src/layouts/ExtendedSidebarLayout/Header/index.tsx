@@ -1,15 +1,20 @@
-import { useContext } from 'react';
-
+import { useContext, useState } from 'react';
+import { SelectChangeEvent } from '@mui/material/Select';
 import {
   Box,
   alpha,
+  InputLabel,
   Stack,
   lighten,
+  MenuItem,
   Divider,
   IconButton,
+  FormControl,
+  Select,
   Tooltip,
   styled,
-  useTheme
+  useTheme,
+  Typography
 } from '@mui/material';
 
 // NAV
@@ -20,6 +25,12 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+// VIEW ICONS
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import ListIcon from '@mui/icons-material/List';
+import GridViewIcon from '@mui/icons-material/GridView';
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -43,6 +54,12 @@ const HeaderWrapper = styled(Box)(
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const theme = useTheme();
+
+  const [model, setModel] = useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setModel(event.target.value as string);
+  };
 
   return (
     <HeaderWrapper
@@ -90,6 +107,95 @@ function Header() {
           </Tooltip>
         </Box>
       </Box>
+
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          <MenuItem value={'eden-clip-x'}>Newest</MenuItem>
+          <MenuItem value={'stable-diffusion'}>Praise</MenuItem>
+          <MenuItem value={'vqgan'}>Burn</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Model</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          <MenuItem value={'eden-clip-x'}>Eden Clip X</MenuItem>
+          <MenuItem value={'stable-diffusion'}>Stable Diffusion</MenuItem>
+          <MenuItem value={'vqgan'}>VQGAN</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Layout</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          <MenuItem value={'stable-diffusion'}>
+            <GridViewIcon />
+            <Typography>Grid</Typography>
+          </MenuItem>
+          <MenuItem value={'vqgan'}>
+            <ViewQuiltIcon />
+            <Typography>Quilt</Typography>
+          </MenuItem>
+          <MenuItem value={'vqgan'}>
+            <ViewColumnIcon />
+            <Typography>Masonry</Typography>
+          </MenuItem>
+          <MenuItem value={'eden-clip-x'}>
+            <ListIcon />
+            <Typography>List</Typography>
+          </MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Size</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          <MenuItem value={'eden-clip-x'}>Vertical</MenuItem>
+          <MenuItem value={'stable-diffusion'}>Landscape</MenuItem>
+          <MenuItem value={'vqgan'}>Square</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Source</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          <MenuItem value={'eden-clip-x'}>Web3</MenuItem>
+          <MenuItem value={'stable-diffusion'}>Discord</MenuItem>
+          <MenuItem value={'vqgan'}>Bots</MenuItem>
+        </Select>
+      </FormControl>
+
       <ConnectButton />
     </HeaderWrapper>
   );
