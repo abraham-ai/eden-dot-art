@@ -14,14 +14,19 @@ import {
 } from '@mui/material';
 import type { ReactElement } from 'react';
 
+// COMPONENTS
 import Link from '@/components/Link';
 import Head from 'next/head';
-
-import FrontPage from '@/components/FrontPage';
 import Logo from '@/components/Logo';
-import AppLogo from '@/components/AppLogo';
-// import { LogoEden } from '../frontend/src/components/index';
+import Footer from '@/components/Footer';
+
+// PAGES
+import FrontPage from '@/components/FrontPage';
+
+// CSS
 import BaseLayout from 'src/layouts/BaseLayout';
+
+// ROUTES
 import { ROUTES } from '@/const/routes';
 
 const HeaderWrapper = styled(Card)(
@@ -107,6 +112,7 @@ function Overview({ changeTheme, isDarkTheme }) {
         </Container>
       </HeaderWrapper>
       <FrontPage />
+      <Footer />
     </OverviewWrapper>
   );
 }
