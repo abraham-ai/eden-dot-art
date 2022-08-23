@@ -3,21 +3,31 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
-import Head from 'next/head';
+
+// ROUTER
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+
+// STYLES
 import ThemeProvider from 'src/theme/ThemeProvider';
 import { createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from 'src/createEmotionCache';
+
+// NAV
+import Head from 'next/head';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+
+// AUTH
 import { AuthConsumer, AuthProvider } from 'src/contexts/Auth0Context';
-import Loader from '@/components/loaders/Loader';
 import { WalletProvider } from '@/contexts/WalletContext';
+
+// COMPONENTS
+import Loader from '@/components/loaders/Loader';
 
 const clientSideEmotionCache = createEmotionCache();
 
