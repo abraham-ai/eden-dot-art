@@ -1,4 +1,11 @@
 export const ROUTES = {
+  EDEN_DEV: {
+    HOME: '/',
+    PRICING: '/pricing'
+  },
+  CREATE: {
+    MAIN: '/create'
+  },
   TEST: {
     HOME: '/test/home'
   },
@@ -8,6 +15,6 @@ export const ROUTES = {
     USE: '/wallet/use'
   },
   CREATIONS: {
-    EDEN: '/creations/'
+    EDEN: '/eden/'
   }
 };
