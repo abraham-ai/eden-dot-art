@@ -48,6 +48,9 @@ const HeaderWrapper = styled(Box)(
             left: ${theme.sidebar.width};
             width: auto;
         }
+        .menu-item {
+          display: flex;
+        }
 `
 );
 
@@ -108,7 +111,7 @@ function Header() {
         </Box>
       </Box>
 
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
         <InputLabel id="demo-simple-select-label">Sort</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -123,7 +126,7 @@ function Header() {
         </Select>
       </FormControl>
 
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
         <InputLabel id="demo-simple-select-label">Model</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -138,7 +141,7 @@ function Header() {
         </Select>
       </FormControl>
 
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
         <InputLabel id="demo-simple-select-label">Layout</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -147,26 +150,26 @@ function Header() {
           label="Model"
           onChange={handleChange}
         >
-          <MenuItem value={'stable-diffusion'}>
+          <MenuItem className="menu-item" value={'stable-diffusion'}>
             <GridViewIcon />
             <Typography>Grid</Typography>
           </MenuItem>
-          <MenuItem value={'vqgan'}>
+          <MenuItem className="menu-item" value={'vqgan'}>
             <ViewQuiltIcon />
             <Typography>Quilt</Typography>
           </MenuItem>
-          <MenuItem value={'vqgan'}>
+          <MenuItem className="menu-item" value={'vqgan'}>
             <ViewColumnIcon />
             <Typography>Masonry</Typography>
           </MenuItem>
-          <MenuItem value={'eden-clip-x'}>
+          <MenuItem className="menu-item" value={'eden-clip-x'}>
             <ListIcon />
             <Typography>List</Typography>
           </MenuItem>
         </Select>
       </FormControl>
 
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
         <InputLabel id="demo-simple-select-label">Size</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -181,7 +184,7 @@ function Header() {
         </Select>
       </FormControl>
 
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
         <InputLabel id="demo-simple-select-label">Source</InputLabel>
         <Select
           labelId="demo-simple-select-label"
