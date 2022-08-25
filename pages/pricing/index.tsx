@@ -13,6 +13,8 @@ import {
   Switch
 } from '@mui/material';
 
+import CreditsTable from '@/components/CreditsTable';
+
 const useStyles = styled((theme) => ({
   section: {
     backgroundImage: 'url("nereus-assets/img/bg/pattern1.png")',
@@ -76,6 +78,10 @@ export default function Pricing(props) {
   return (
     <section className={classes.section}>
       <Container maxWidth="lg">
+        <Typography variant={'h2'}>Credit Pricing</Typography>
+
+        <CreditsTable />
+
         <Box py={8} textAlign="center">
           <Box mb={3}>
             <Container maxWidth="sm">
