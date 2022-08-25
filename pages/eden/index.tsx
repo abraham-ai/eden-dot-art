@@ -20,7 +20,10 @@ import {
   createFilterOptions,
   styled,
   Box,
-  Typography
+  Typography,
+  InputAdornment,
+  IconButton,
+  Icon
 } from '@mui/material';
 
 // ROUTER
@@ -33,12 +36,21 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 import SchoolIcon from '@mui/icons-material/School';
 
 // ICONS || CREATE INPUT
+import CreateIcon from '@/components/CreateIcon';
 import { FaDiscord } from 'react-icons/fa';
-import MicIcon from '@mui/icons-material/Mic';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import TuneIcon from '@mui/icons-material/Tune';
+import MicIcon from '@mui/icons-material/MicIcon';
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlinedIcon';
+
+// ICONS || CREATE TEMPLATE
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+
+// ICONS || MODIFIERS
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 // STYLES
-const CreationsStyles = styled(Box)(
+const EdenHomeStyles = styled(Box)(
   () => `
     display: flex;
     flex: 1;
@@ -48,9 +60,109 @@ const CreationsStyles = styled(Box)(
     .recent-creations {
       display: flex;
     }
-    label { 
-      right: 0;
-      text-align: center;
+    // TEXT-INPUT
+    .text-input-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 100px 0;
+    }
+    // label { 
+    //   right: 0;
+    //   text-align: center;
+    // }
+    .section-wrapper {
+      margin: 20px;
+    }
+    // TEMPLATES
+    .templates-wrapper {
+      display: flex:
+      align-items: flex-end;
+    }
+    .recent-templates {
+      display: flex;
+      align-items: flex-end;
+    }
+    .single-template {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+    .template-color {
+      background: lightgray;
+      overflow: hidden;
+    }
+    .template-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+    .template-square {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      min-height: 50px;
+      padding: 0;
+      margin: 0;
+    }
+    .template-vertical {
+      height: 100px;
+      width: 50px;
+    }
+    .template-post {
+      height: 100px;
+      width: 50px;
+    }
+    .template-landscape {
+      width: 100px;
+      min-height: 50px;
+    }
+    .template-clipx {
+      width: 100px;
+      height: 100px;
+    }
+    .template-stablediffusion {
+      width: 100px;
+      height: 100px;
+    }
+    // TRENDING MODIFIERS
+    .modifiers-wrapper {
+      display: flex;
+      width: 600px;
+      flex: 1;
+      justify-content: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .single-modifier {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      margin: 0 10px 10px 0;
+      flex: 0;
+      height: 32px;
+      max-height: 32px;
+      border: 1px solid gray;
+      border-radius: 20px;
+    }
+    .modifier-text {
+      padding: 0 10px 0 5px;
+    }
+    .separator {
+      border-right: 1px solid lightgray;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      height: 70%;
+      margin: 5px;
+    }
+    // RECENT CREATIONS
+    .recent-creation-img {
+      width: 30px;
+      height: 30px;
     }
     .recent-creations-wrapper {
       display: flex;
@@ -58,6 +170,15 @@ const CreationsStyles = styled(Box)(
       align-items: center;
       justify-content: center;
       padding: 20px 0 0 0;
+    }
+    .section-header-wrapper {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0 0 15px 0;
+      // padding: 0 0 0 40px;
     }
     .recent-creations {
       display: flex;
@@ -71,10 +192,6 @@ const CreationsStyles = styled(Box)(
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
-    }
-    .recent-creation-img {
-      width: 30px;
-      height: 30px;
     }
     .recent-creation-prompt {
       text-align: center;
@@ -126,69 +243,475 @@ function DashboardTasks() {
       </Head>
       <Container maxWidth="lg">
         <Link href="/api/discord/login" passHref>
-          <FaDiscord />
+          <span>
+            <FaDiscord />
+          </span>
           <Button>Discord Login</Button>
         </Link>
 
-        <CreationsStyles className="main-creations-wrapper">
-          <AppLogo logo="eden" />
-          <Autocomplete
-            value={value}
-            onChange={(event, newValue) => {
-              if (typeof newValue === 'string') {
-                setValue({
-                  title: newValue
-                });
-              } else if (newValue && newValue.inputValue) {
-                // Create a new value from the user input
-                setValue({
-                  title: newValue.inputValue
-                });
-              } else {
-                setValue(newValue);
-              }
-            }}
-            filterOptions={(options, params) => {
-              const filtered = filter(options, params);
+        <EdenHomeStyles className="main-creations-wrapper">
+          <div className="text-input-wrapper">
+            <AppLogo logo="eden" size="large" />
+            <Autocomplete
+              value={value}
+              onChange={(event, newValue) => {
+                if (typeof newValue === 'string') {
+                  setValue({
+                    title: newValue
+                  });
+                } else if (newValue && newValue.inputValue) {
+                  // Create a new value from the user input
+                  setValue({
+                    title: newValue.inputValue
+                  });
+                } else {
+                  setValue(newValue);
+                }
+              }}
+              filterOptions={(options, params) => {
+                const filtered = filter(options, params);
 
-              const { inputValue } = params;
-              // Suggest the creation of a new value
-              const isExisting = options.some(
-                (option) => inputValue === option.title
-              );
-              if (inputValue !== '' && !isExisting) {
-                filtered.push({
-                  inputValue,
-                  title: `Add "${inputValue}"`
-                });
-              }
+                const { inputValue } = params;
+                // Suggest the creation of a new value
+                const isExisting = options.some(
+                  (option) => inputValue === option.title
+                );
+                if (inputValue !== '' && !isExisting) {
+                  filtered.push({
+                    inputValue,
+                    title: `Add "${inputValue}"`
+                  });
+                }
 
-              return filtered;
-            }}
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
-            id="free-solo-with-text-demo"
-            options={top100Films}
-            getOptionLabel={(option) => {
-              // Value selected with enter, right from the input
-              if (typeof option === 'string') {
-                return option;
-              }
-              // Add "xxx" option created dynamically
-              if (option.inputValue) {
-                return option.inputValue;
-              }
-              // Regular option
-              return option.title;
-            }}
-            renderOption={(props, option) => <li {...props}>{option.title}</li>}
-            sx={{ width: 300 }}
-            freeSolo
-            renderInput={(params) => (
-              <TextField {...params} label="Create prompt" />
-            )}
-          />
+                return filtered;
+              }}
+              selectOnFocus
+              clearOnBlur
+              handleHomeEndKeys
+              id="free-solo-with-text-demo"
+              options={top100Films}
+              getOptionLabel={(option) => {
+                // Value selected with enter, right from the input
+                if (typeof option === 'string') {
+                  return option;
+                }
+                // Add "xxx" option created dynamically
+                if (option.inputValue) {
+                  return option.inputValue;
+                }
+                // Regular option
+                return option.title;
+              }}
+              renderOption={(props, option) => (
+                <li {...props}>{option.title}</li>
+              )}
+              sx={{ width: 300 }}
+              freeSolo
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Create prompt"
+                  placeholder="Imagine what's on your mind?"
+                  multiline
+                  maxRows={4}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <TuneIcon />
+                      </InputAdornment>
+                    ),
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <CreateIcon />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              )}
+            />
+          </div>
+
+          <section className="section-wrapper">
+            <Typography variant={'h4'}>Explore</Typography>
+            <Typography variant={'body1'}>Eden Garden</Typography>
+
+            <div className="recent-creations">
+              <Box>
+                <Button className="recent-creation-single">
+                  <ConnectWithoutContactIcon />
+                  <span className="recent-creation-prompt">Curate</span>
+                </Button>
+              </Box>
+              <Box>
+                <Button className="recent-creation-single">
+                  <TravelExploreIcon />
+                  <span className="recent-creation-prompt">Browse</span>
+                </Button>
+              </Box>
+              <Box>
+                <Button className="recent-creation-single">
+                  <LiveTvIcon />
+                  <span className="recent-creation-prompt">Watch</span>
+                </Button>
+              </Box>
+              <Box>
+                <Button className="recent-creation-single">
+                  <SchoolIcon />
+                  <span className="recent-creation-prompt">Learn</span>
+                </Button>
+              </Box>
+            </div>
+          </section>
+
+          <section className="section-wrapper templates-wrapper">
+            <div className="section-header-wrapper">
+              <Typography variant={'h4'}>Templates</Typography>
+              <Typography variant={'body1'}>you might like</Typography>
+            </div>
+
+            <div className="recent-templates">
+              <Box className="single-template">
+                <Button className="template-vertical template-color">
+                  <AddPhotoAlternateOutlinedIcon />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Story
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-square template-color">
+                  <AddPhotoAlternateOutlinedIcon />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Square
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-post template-color">
+                  <AddPhotoAlternateOutlinedIcon />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Post
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-landscape template-color">
+                  <AddPhotoAlternateOutlinedIcon />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Landscape
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+            </div>
+          </section>
+
+          <section className="section-wrapper templates-wrapper">
+            <div className="section-header-wrapper">
+              <Typography variant={'h4'}>Praises</Typography>
+              <Typography variant={'body1'}>you've liked</Typography>
+            </div>
+
+            <div className="recent-templates">
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+            </div>
+          </section>
+
+          <section className="section-wrapper templates-wrapper">
+            <div className="section-header-wrapper">
+              <Typography variant={'h4'}>Burns</Typography>
+              <Typography variant={'body1'}>trending</Typography>
+            </div>
+
+            <div className="recent-templates">
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-stablediffusion template-color">
+                  <img
+                    className="template-image"
+                    src="https://minio.aws.abraham.fun/creations-prd//97abdacdd65d3f25f547c8b6f093e203bfc335530a646740691ccb00e4f77722"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Stable Diffusion
+                </Typography>
+              </Box>
+              <Box className="single-template">
+                <Button className="template-clipx template-color">
+                  <img
+                    className="template-image"
+                    src="https://res.cloudinary.com/react-graphql-store/image/upload/v1637103814/test-creation_gikt95.jpg"
+                  />
+                </Button>
+                <Typography variant={'body1'} className="template-type-text">
+                  Eden Clip X
+                </Typography>
+              </Box>
+            </div>
+          </section>
+
+          <section className="section-wrapper prompt-recommendations">
+            <div className="section-header-wrapper">
+              <Typography variant={'h4'}>Suggested Modifiers</Typography>
+              <Typography variant={'body1'}>
+                You'll see top modifiers suggested when creating.
+              </Typography>
+            </div>
+            <div className="modifiers-wrapper">
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Photorealistic
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  4k
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Artstation
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  DSLR
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Ancient
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Renaissance
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Panorama
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Digital
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  2D
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Monochrome
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  3D
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Illustration
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Futuristic
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Detailed
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+              <article className="single-modifier">
+                <Typography variant={'h4'} className="modifier-text">
+                  Fantasy
+                </Typography>
+                <AddOutlinedIcon />
+                <span className="separator"></span>
+                <CloseOutlinedIcon />
+              </article>
+            </div>
+            <div>
+              <Typography>See More</Typography>
+            </div>
+          </section>
 
           <section className="recent-creations-wrapper">
             <div className="recent-creations">
@@ -239,35 +762,6 @@ function DashboardTasks() {
             </div>
           </section>
 
-          <section className="recent-creations-wrapper">
-            <div className="recent-creations">
-              <Box>
-                <Button className="recent-creation-single">
-                  <ConnectWithoutContactIcon />
-                  <span className="recent-creation-prompt">Curate</span>
-                </Button>
-              </Box>
-              <Box>
-                <Button className="recent-creation-single">
-                  <TravelExploreIcon />
-                  <span className="recent-creation-prompt">Browse</span>
-                </Button>
-              </Box>
-              <Box>
-                <Button className="recent-creation-single">
-                  <LiveTvIcon />
-                  <span className="recent-creation-prompt">Watch</span>
-                </Button>
-              </Box>
-              <Box>
-                <Button className="recent-creation-single">
-                  <SchoolIcon />
-                  <span className="recent-creation-prompt">Learn</span>
-                </Button>
-              </Box>
-            </div>
-          </section>
-
           <section className="discover-wrapper three-columns">
             <Typography variant={'h4'}>Discover</Typography>
             <Typography variant={'body1'}>
@@ -313,19 +807,19 @@ function DashboardTasks() {
           </section>
 
           <section className="prompt-recommendations">
-            <Typography variant={'h4'}>People also prompt</Typography>... 
+            <Typography variant={'h4'}>People also prompt</Typography>
             <div className="discover-img-wrapper">
-              <Typography>Avocado chair<Typography/>V
-              <Typography>Astronaut on a horse<Typography/>V
-              <Typography>Water Lily Pond<Typography/>V
-              <Typography>City skyline in the style of Van Gogh<Typography/>V
+              <Typography>Avocado chair</Typography>
+              <Typography>Astronaut on a horse</Typography>
+              <Typography>Water Lily Pond</Typography>
+              <Typography>City skyline in the style of Van Gogh</Typography>
             </div>
           </section>
 
           <ImageListStandard />
 
           <ImageListQuilted />
-        </CreationsStyles>
+        </EdenHomeStyles>
       </Container>
       <Footer />
     </>
