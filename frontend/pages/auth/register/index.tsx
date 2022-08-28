@@ -1,10 +1,20 @@
-import { Box, Card, Typography, Container, styled } from '@mui/material';
 import Head from 'next/head';
+
+// ROUTER
+import Link from '@/components/Link';
+
+// COMPONENTS
 import { Guest } from '@/components/Guest';
 import { RegisterAuth0 } from 'src/content/Auth/Register/RegisterAuth0';
-import Logo from '@/components/symbols/LogoSign';
+
+// NAV
 import BaseLayout from 'src/layouts/BaseLayout';
-import Link from '@/components/Link';
+
+// UI
+import { Box, Card, Typography, Container, styled } from '@mui/material';
+
+// ICONS
+import Logo from '@/components/symbols/LogoSign';
 
 const MainContent = styled(Box)(
   () => `
