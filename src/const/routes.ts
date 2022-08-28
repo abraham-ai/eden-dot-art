@@ -1,13 +1,17 @@
 export const ROUTES = {
   EDEN_DEV: {
-    HOME: '/about',
+    HOME: '/dev-about',
     PRICING: '/dev-pricing',
-    API_DOCUMENTATION: '/documentation'
+    API_DOCS: '/docs',
+    DEV_GARDEN: '/garden',
+    IDEAS: '/ideas',
+    APPS: '/apps',
+    FAQ: '/faq'
   },
   EDEN_ART: {
     HOME: '/',
     PRICING: '/pricing',
-    CREATIONS: '/creations',
+    CREATIONS: '/creations'
   },
   CREATE: {
     MAIN: '/create'
