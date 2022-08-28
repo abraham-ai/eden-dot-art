@@ -128,7 +128,7 @@ function Logo() {
           <Tooltip title="Private Beta" arrow placement="right">
             <VersionBadge>Beta</VersionBadge>
           </Tooltip>
-          <LogoText>Eden</LogoText>
+          <LogoText>Eden.Art</LogoText>
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>
