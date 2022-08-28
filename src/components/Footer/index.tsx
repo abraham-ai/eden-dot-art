@@ -55,7 +55,7 @@ function Footer() {
             Company
           </Typography>
 
-          <Link href="/about">
+          <Link href="/dev-about">
             <Typography className="footer-link" variant={'h4'}>
               About
             </Typography>
