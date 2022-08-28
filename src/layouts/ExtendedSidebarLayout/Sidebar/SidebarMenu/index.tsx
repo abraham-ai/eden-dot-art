@@ -1,9 +1,26 @@
 import { useEffect } from 'react';
 
-import { ListSubheader, alpha, Box, List, styled } from '@mui/material';
-import SidebarMenuItem from './item';
+// ROUTES
 import menuItems, { MenuItem } from './items';
+
+// ROUTER
 import { useRouter } from 'next/router';
+
+// NAV
+import SidebarMenuItem from './item';
+
+// UI
+import { ListSubheader, alpha, Box, List, styled } from '@mui/material';
+
+// COMPONENTS
+import AppLogo from '@/components/AppLogo';
+
+const AppLogoWrapper = styled(Box)(
+  ({ theme }) => `
+  display: flex;
+  justify-content: center;
+  `
+);
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -222,6 +239,9 @@ function SidebarMenu() {
 
   return (
     <>
+      <AppLogoWrapper id="app-logo-wrapper">
+        <AppLogo logo={'eden'} />
+      </AppLogoWrapper>
       {menuItems.map((section) => (
         <MenuWrapper key={section.heading}>
           <List

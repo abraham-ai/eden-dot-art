@@ -84,6 +84,30 @@ function Header() {
               )}`
       }}
     >
+      {/* <Link href="/garden" className="nav-link-wrapper">
+        <Text level={3} strong>
+          DEV GARDEN
+        </Text>
+      </Link>
+
+      <Link href="/ideas" className="nav-link-wrapper">
+        <Text level={3} strong>
+          IDEAS
+        </Text>
+      </Link>
+
+      <Link href="/apps" className="nav-link-wrapper">
+        <Text level={3} strong>
+          APPS
+        </Text>
+      </Link>
+
+      <Link href="/FAQ" className="nav-link-wrapper">
+        <Text level={3} strong>
+          FAQ
+        </Text>
+      </Link> */}
+
       {/* <EdenNavTop /> */}
       <Stack
         direction="row"
