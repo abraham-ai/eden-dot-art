@@ -3,13 +3,18 @@ import { useState } from 'react';
 // NEXTJS
 import Head from 'next/head';
 
-// COMPONENTS
+// NAV
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
 import Footer from '@/components/Footer';
-import AppLogo from '@/components/AppLogo';
+
+// COMPONENTS
+import { Authenticated } from '@/components/Authenticated';
 import ImageListQuilted from '@/components/ImageListQuilted';
 import ImageListStandard from '@/components/ImageListStandard';
-import { Authenticated } from '@/components/Authenticated';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import CreationCarousel from '@/components/CreationCarousel';
+
+// HOOKS
+import { useAccount } from 'wagmi';
 
 // UI
 import {
@@ -30,6 +35,7 @@ import {
 import Link from '@/components/Link';
 
 // ICONS || ACTIONS
+import AppLogo from '@/components/AppLogo';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
@@ -49,6 +55,37 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
+// INFO ICONS
+import InfoIcon from '@mui/icons-material/Info';
+import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { MdHomeFilled } from 'react-icons/md';
+
+// CREATE ICONS
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+import CropLandscapeIcon from '@mui/icons-material/CropLandscape';
+import { TbRectangleVertical } from 'react-icons/tb';
+
+// SORT ICONS
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import BorderAllIcon from '@mui/icons-material/BorderAll';
+import PersonIcon from '@mui/icons-material/Person';
+import FlareIcon from '@mui/icons-material/Flare';
+import { RiMagicLine, RiMagicFill } from 'react-icons/ri';
+import { IoFlashOutline, IoFlashSharp } from 'react-icons/io5';
+import { AiFillFire, AiOutlineFire } from 'react-icons/ai';
+
+// PRICNG ICONS
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { GrMoney } from 'react-icons/gr';
+// import { BorderBottomOutlined } from '@ant-design/icons';
+import { TiArrowShuffle } from 'react-icons/ti';
+import {
+  HiSparkles,
+  HiOutlineSparkles,
+  HiCube,
+  HiOutlineCube
+} from 'react-icons/hi';
+
 // STYLES
 const EdenHomeStyles = styled(Box)(
   () => `
@@ -67,11 +104,16 @@ const EdenHomeStyles = styled(Box)(
       justify-content: center;
       align-items: center;
       margin: 100px 0;
+      width: 100%;
     }
     // label { 
     //   right: 0;
     //   text-align: center;
     // }
+    #text-input-autocomplete {
+      display: flex;
+      justify-content: center;
+    }
     .section-wrapper {
       margin: 20px;
     }
@@ -234,20 +276,24 @@ const EdenHomeStyles = styled(Box)(
 
 const filter = createFilterOptions<FilmOptionType>();
 
-function DashboardTasks() {
+function EdenArtHomePage() {
   const [value, setValue] = useState<FilmOptionType | null>(null);
+  const { address, isConnected } = useAccount();
   return (
     <>
       <Head>
-        <title>Creations</title>
+        <title>Eden.Art | Home</title>
       </Head>
+
       <Container maxWidth="lg">
-        <Link href="/api/discord/login" passHref>
-          <span>
-            <FaDiscord />
-          </span>
-          <Button>Discord Login</Button>
-        </Link>
+        {/* <Link href="/api/discord/login" passHref>
+          <Button variant="contained">
+            <span className="icon-wrapper">
+              <FaDiscord />
+            </span>
+            <Typography>Discord Login</Typography>
+          </Button>
+        </Link> */}
 
         <EdenHomeStyles className="main-creations-wrapper">
           <div className="text-input-wrapper">
@@ -268,6 +314,7 @@ function DashboardTasks() {
                   setValue(newValue);
                 }
               }}
+              id="text-input-autocomplete"
               filterOptions={(options, params) => {
                 const filtered = filter(options, params);
 
@@ -288,7 +335,6 @@ function DashboardTasks() {
               selectOnFocus
               clearOnBlur
               handleHomeEndKeys
-              id="free-solo-with-text-demo"
               options={top100Films}
               getOptionLabel={(option) => {
                 // Value selected with enter, right from the input
@@ -305,19 +351,22 @@ function DashboardTasks() {
               renderOption={(props, option) => (
                 <li {...props}>{option.title}</li>
               )}
-              sx={{ width: 300 }}
+              sx={{ width: 600 }}
               freeSolo
               renderInput={(params) => (
                 <TextField
                   {...params}
                   label="Create prompt"
                   placeholder="Imagine what's on your mind?"
-                  multiline
-                  maxRows={4}
+                  // multiline
+                  // maxRows={4}
+                  sx={{ width: 600 }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <TuneIcon />
+                        <IconButton edge="end" color="primary">
+                          <TuneIcon />
+                        </IconButton>
                       </InputAdornment>
                     ),
                     startAdornment: (
@@ -362,6 +411,8 @@ function DashboardTasks() {
               </Box>
             </div>
           </section>
+
+          {/* <CreationCarousel /> */}
 
           <section className="section-wrapper templates-wrapper">
             <div className="section-header-wrapper">
@@ -714,6 +765,12 @@ function DashboardTasks() {
           </section>
 
           <section className="recent-creations-wrapper">
+            <div className="section-header-wrapper">
+              <Typography variant={'h4'}>Recent Prompts</Typography>
+              <Typography variant={'body1'}>
+                Explore your prmopt history.
+              </Typography>
+            </div>
             <div className="recent-creations">
               <Box>
                 <Button className="recent-creation-single">
@@ -760,6 +817,7 @@ function DashboardTasks() {
                 </Button>
               </Box>
             </div>
+            <Typography>See More</Typography>
           </section>
 
           <section className="discover-wrapper three-columns">
@@ -828,7 +886,7 @@ function DashboardTasks() {
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: '4k', year: 1994 },
   { title: 'The Godfather', year: 1972 },
   { title: 'The Godfather: Part II', year: 1974 },
   { title: 'The Dark Knight', year: 2008 },
@@ -955,8 +1013,8 @@ const top100Films = [
   { title: 'Monty Python and the Holy Grail', year: 1975 }
 ];
 
-DashboardTasks.getLayout = (page) => (
+EdenArtHomePage.getLayout = (page) => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
 );
 
-export default DashboardTasks;
+export default EdenArtHomePage;
