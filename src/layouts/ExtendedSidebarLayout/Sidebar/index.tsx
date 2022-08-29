@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Scrollbar from 'src/components/Scrollbar';
+import Scrollbar from '@/components/Scrollbar';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
 import {
@@ -15,7 +15,7 @@ import {
 
 import SidebarMenu from './SidebarMenu';
 import SidebarFooter from './SidebarFooter';
-import Logo from 'src/components/LogoSign';
+// import { LogoEden } from '../../../components';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -61,7 +61,7 @@ function Sidebar() {
                 width: 52
               }}
             >
-              <Logo />
+              {/* <LogoEden /> */}
             </Box>
           </Box>
           <Divider
@@ -106,7 +106,7 @@ function Sidebar() {
                   width: 52
                 }}
               >
-                <Logo />
+                {/* <Logo /> */}
               </Box>
             </Box>
             <Divider

@@ -2,18 +2,32 @@ import type { ReactElement, ReactNode } from 'react';
 
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
+import { useState } from 'react';
+
+// ROUTER
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+
+// STYLES
 import ThemeProvider from 'src/theme/ThemeProvider';
+import { createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from 'src/createEmotionCache';
+
+// NAV
+import Head from 'next/head';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+
+// AUTH
+import { AuthConsumer, AuthProvider } from 'src/contexts/Auth0Context';
 import { WalletProvider } from '@/contexts/WalletContext';
+
+// COMPONENTS
+import Loader from '@/components/loaders/Loader';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -26,6 +40,19 @@ interface TokyoAppProps extends AppProps {
   Component: NextPageWithLayout;
 }
 
+// Define theme settings
+const light = {
+  palette: {
+    mode: 'light'
+  }
+};
+
+const dark = {
+  palette: {
+    mode: 'dark'
+  }
+};
+
 function TokyoApp(props: TokyoAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -34,21 +61,37 @@ function TokyoApp(props: TokyoAppProps) {
   Router.events.on('routeChangeError', nProgress.done);
   Router.events.on('routeChangeComplete', nProgress.done);
 
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  const changeTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Tokyo Free Black NextJS Typescript Admin Dashboard</title>
+        <title>
+          Eden.Art | Compute, Scalablity, and Scaffolding for ML Model Creators
+        </title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
       <SidebarProvider>
-        <ThemeProvider>
+        <ThemeProvider
+          theme={isDarkTheme ? createTheme(dark) : createTheme(light)}
+        >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <WalletProvider>
               <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
+              {getLayout(
+                <Component
+                  {...pageProps}
+                  changeTheme={changeTheme}
+                  isDarkTheme={isDarkTheme}
+                />
+              )}
             </WalletProvider>
           </LocalizationProvider>
         </ThemeProvider>

@@ -1,4 +1,9 @@
 import { useContext, useState } from 'react';
+
+// ROUTER
+import Link from 'next/link';
+
+// UI
 import { SelectChangeEvent } from '@mui/material/Select';
 import {
   Box,
@@ -84,32 +89,25 @@ function Header() {
               )}`
       }}
     >
-      {/* <Link href="/garden" className="nav-link-wrapper">
-        <Text level={3} strong>
-          DEV GARDEN
-        </Text>
+      {/* <EdenNavTop /> */}
+
+      <Link href="/garden" className="nav-link-wrapper">
+        <Typography variant={'h4'}>DEV GARDEN</Typography>
       </Link>
 
       <Link href="/ideas" className="nav-link-wrapper">
-        <Text level={3} strong>
-          IDEAS
-        </Text>
+        <Typography variant={'h4'}>IDEAS</Typography>
       </Link>
 
       <Link href="/apps" className="nav-link-wrapper">
-        <Text level={3} strong>
-          APPS
-        </Text>
+        <Typography variant={'h4'}>APPS</Typography>
       </Link>
 
       <Link href="/FAQ" className="nav-link-wrapper">
-        <Text level={3} strong>
-          FAQ
-        </Text>
-      </Link> */}
+        <Typography variant={'h4'}>FAQ</Typography>
+      </Link>
 
-      {/* <EdenNavTop /> */}
-      <Stack
+      {/* <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
         alignItems="center"
@@ -221,7 +219,7 @@ function Header() {
           <MenuItem value={'stable-diffusion'}>Discord</MenuItem>
           <MenuItem value={'vqgan'}>Bots</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       <ConnectButton />
     </HeaderWrapper>

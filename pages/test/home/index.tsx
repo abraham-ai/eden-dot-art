@@ -1,9 +1,35 @@
 import Head from 'next/head';
-import Footer from '@/components/Footer';
-import { Button, Container } from '@mui/material';
 
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+// ROUTER
 import Link from '@/components/Link';
+
+// NAV
+import Footer from '@/components/Footer';
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+
+// UI
+import { Button, Container, Typography, Box, styled } from '@mui/material';
+
+// COMPONENTS
+import { Authenticated } from '@/components/Authenticated';
+
+// ICONS
+import { FaDiscord } from 'react-icons/fa';
+
+const DashboardStyles = styled(Box)(
+  () => `
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 9px 0 0;
+    }
+  `
+);
 
 function DashboardTasks() {
   return (
@@ -11,11 +37,18 @@ function DashboardTasks() {
       <Head>
         <title>Tasks Dashboard</title>
       </Head>
-      <Container maxWidth="lg">
-        <Link href="/api/discord/login" passHref>
-          <Button>Login with discord</Button>
-        </Link>
-      </Container>
+      <DashboardStyles>
+        <Container maxWidth="lg">
+          <Link href="/api/discord/login" passHref>
+            <Button variant="contained">
+              <span className="icon-wrapper">
+                <FaDiscord style={{ fontSize: '20px' }} />
+              </span>
+              <Typography>Login with Discord</Typography>
+            </Button>
+          </Link>
+        </Container>
+      </DashboardStyles>
       <Footer />
     </>
   );
