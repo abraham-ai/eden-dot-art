@@ -7,41 +7,43 @@ import Link from 'next/link';
 const LogoStyles = styled('div')(
   ({ theme }) => `
   flex: 0;
-  a {
-    text-decoration: none !important;
-    border: none !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  a:hover {
+  text-decoration: none !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :hover {
     background: transparent;
   }
-  a.middle {
+  .middle {
     display: flex;
     align-items: center;
   }
-  a img.x-small {
+  img.icon-small {
+    max-height: 20px !important;
+    max-width: 20px !important;
+  }
+  img.x-small {
     max-height: 40px !important;
     max-width: 40px !important;
   }
-  a img.small {
+  img.small {
     max-height: 45px !important;
     max-width: 45px !important;
   }
-  a img.medium {
+  img.medium {
     min-height: 50px;
     min-width: 50px;
   }
-  a img.large {
-    min-height: 150px;
-    min-width: 150px;
+  img.large {
+    min-height: 120px;
+    min-width: 120px;
   }
-  a img.x-large {
+  img.x-large {
     min-height: 200px;
     min-width: 200px;
   }
-  a img.xx-large {
+  img.xx-large {
     min-height: 300px;
     min-width: 300px;
   }
@@ -69,6 +71,8 @@ export default function AppLogo({
 
   function renderSize(size) {
     switch (size) {
+      case 'icon-small':
+        return 'icon-small';
       case 'x-small':
         return 'x-small';
       case 'small':
