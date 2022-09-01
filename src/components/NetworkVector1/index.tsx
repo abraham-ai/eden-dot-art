@@ -8,7 +8,8 @@ const NetworkVector1Styles = styled('section')(
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 50;
+  opacity: 0.7;
+  z-index: 10;
   .network-vector-1 {
     background: #00501;
     color:#00501;
