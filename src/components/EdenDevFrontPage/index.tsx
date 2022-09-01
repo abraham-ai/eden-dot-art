@@ -5,12 +5,25 @@ import Link from 'next/link';
 // import { NavLink, Link } from 'react-router-dom';
 
 // UI
-import { Button, Typography, Box, Alert, styled } from '@mui/material';
+import {
+  Button,
+  Typography,
+  Box,
+  Alert,
+  styled,
+  Container,
+  Card,
+  CardMedia
+} from '@mui/material';
 // import { BuildTwoTone, GithubOutlined } from '@ant-design/icons';
 
 // ICONS
+import { AiFillApi } from 'react-icons/ai';
+
 import EnergySavingsLeafIcon from '@mui/icons-material/EnergySavingsLeaf';
-import { FaRobot } from 'react-icons/fa';
+import { FaRobot, FaTiktok, FaDiscord, FaTwitter } from 'react-icons/fa';
+import { AiFillInstagram } from 'react-icons/ai';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 import MemoryIcon from '@mui/icons-material/Memory';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
@@ -36,7 +49,7 @@ const EdenDevFrontPageStyles = styled('section')(
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-top: 100px;
+  padding-top: 50px;
   .home-wrapper {
     display: flex;
     flex: 1;
@@ -50,10 +63,36 @@ const EdenDevFrontPageStyles = styled('section')(
     justify-content: center;
     align-items: center;
     position: relative;
+    padding: 0;
   }
+  @media (min-width: 1280px) {
+    .section-wrapper {
+      max-width: unset; 
+    }
+  }
+  @media (min-width: 600px) {
+    .section-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .section-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  /* SPLASH TEXT INFO */
+  .splash-garden-card {
+    opacity: 0.2;
+  }
+  .splash-garden-card:hover {
+    opacity: 1;
+  }
+  fontSize: '1.5rem';
   /* HIGHLIGHT */
   .highlight {
-    padding: 50px 0;
+    padding: 50px 0 100px 0;
     background: rgb(171, 254, 44);
     display: flex;
     justify-content: center;
@@ -80,11 +119,15 @@ const EdenDevFrontPageStyles = styled('section')(
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    max-width: 600px;
   }
   .info-wrapper .button-wrapper {
     padding: 50px 0;
     display: flex;
+    z-index: 20;
+  }
+  .info-wrapper .more-description {
+    max-width: 600px;
+    z-index: 20;
   }
   .eden-logotype {
     display: flex;
@@ -102,6 +145,7 @@ const EdenDevFrontPageStyles = styled('section')(
     bottom: 15px;
     left: 3px;
     background: #ff2457;
+    background: #8C7CF0;
     position: absolute;
   }
   .slogan .art {
@@ -129,7 +173,6 @@ const EdenDevFrontPageStyles = styled('section')(
   .apps-text {
     position: relative;
     width: 100%;
-    margin: 0 0 30px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,7 +180,6 @@ const EdenDevFrontPageStyles = styled('section')(
   .apps-text .text {
     padding: 7px;
     text-align: center;
-    font-size: 16px;
     position: relative;
     display: block;
     z-index: 10;
@@ -283,12 +325,229 @@ export default function EdenDevFrontPage() {
   return (
     <EdenDevFrontPageStyles>
       <div className="home-wrapper">
-        <div
-          className="logo-wrapper"
-          style={{ justifyContent: 'center', display: 'flex' }}
-        >
-          {/* <Logo logo="eden" size="x-large" position="middle" /> */}
-        </div>
+        <section className="section-wrapper">
+          <div
+            className="section-center-wrapper"
+            style={{ paddingBottom: 100 }}
+          >
+            <div
+              className="logo-wrapper"
+              style={{
+                justifyContent: 'center',
+                display: 'flex'
+              }}
+            >
+              <AppLogo logo="eden" size="large" position="middle" />
+            </div>
+
+            <Typography
+              variant={'h4'}
+              sx={{
+                fontSize: '1rem',
+                fontWeight: 'bolder',
+                padding: '30px 0',
+                color: '#8C7CF0;',
+                background:
+                  'linear-gradient(45deg, rgb(97, 87, 255) 0%, rgb(0, 204, 255) 100%) text',
+                zIndex: 50
+              }}
+            >
+              Image Synthesis Engine
+            </Typography>
+
+            <Typography
+              variant={'h1'}
+              sx={{ fontSize: '2.6rem', pb: 3, color: 'white', zIndex: 50 }}
+            >
+              <div>
+                Garden of{' '}
+                <span className="artificial">
+                  <span className="underline"></span>
+                  <span className="art">art</span>
+                </span>
+                <span>ificial</span>
+                <span> delights</span>
+              </div>{' '}
+            </Typography>
+
+            <Typography
+              className="splash-text-description"
+              variant={'h3'}
+              sx={{
+                fontSize: '1.3rem',
+                textAlign: 'center',
+                maxWidth: 700,
+                lineHeight: 2,
+                zIndex: 50,
+                color: 'rgb(166, 166, 166)'
+              }}
+            >
+              we are Artworks, Digital Paintings, Apps, Video Clips, Stories,
+              and much more. We are your mobile{' '}
+              <span style={{ color: 'white', textDecoration: 'underline' }}>
+                AI toolkit
+              </span>{' '}
+              to help you express yourself and make your everyday more
+              delightful.
+            </Typography>
+
+            <Container
+              sx={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                padding: 0
+              }}
+            >
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  position: 'absolute',
+                  bottom: '-450px',
+                  maxWidth: '600px',
+                  zIndex: 40
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="eden video"
+                // autoPlay
+                // mute
+              />
+
+              <article
+                className="button-wrapper"
+                style={{ display: 'flex', paddingTop: 50, zIndex: 50 }}
+              >
+                <Box>
+                  <Button
+                    href={'/creations'}
+                    variant="contained"
+                    sx={{ ml: 2, minWidth: '200px' }}
+                  >
+                    Browse Creations
+                  </Button>
+                </Box>
+
+                <Box>
+                  <Button
+                    href={'/creations'}
+                    variant="outlined"
+                    sx={{ ml: 2, minWidth: '200px' }}
+                  >
+                    Join Discord
+                  </Button>
+                </Box>
+              </article>
+            </Container>
+          </div>
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 200,
+              position: 'absolute',
+              top: '60px',
+              zIndex: 0,
+              left: 0
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//29a67e4ee022bd6497c77ff6ad119257cd50af42209178240011dd81298854dc"
+              alt="flower"
+            />
+          </Card>
+
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 250,
+              position: 'absolute',
+              bottom: 0,
+              zIndex: 0,
+              left: '8%'
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//f184148b763de85153e794ce662c3dfec28f79ca23c958889f8692dd510de705"
+              alt="animals"
+            />
+          </Card>
+
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 200,
+              position: 'absolute',
+              top: '-15%',
+              zIndex: 0,
+              left: '18%'
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//76201d976e504d3511cda2475ce0e43f56d231abe931c28142f8e5aa6f04bf9d"
+              alt="fairy"
+            />
+          </Card>
+
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 300,
+              position: 'absolute',
+              bottom: '50%',
+              zIndex: 0,
+              right: '5%'
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//3a4cbfe59d568d2b74ec792d513632eeb60eeae8b2c803f173afa1c6d017a02b"
+              alt="Paella dish"
+            />
+          </Card>
+
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 180,
+              position: 'absolute',
+              bottom: '-10%',
+              zIndex: 0,
+              right: '8%'
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//207a9dea558d2bf71b2aa89ebf53f5d6a561a2c6b43c176a71132b1b8280a3d5"
+              alt="bosch birds"
+            />
+          </Card>
+
+          <Card
+            className="splash-garden-card"
+            sx={{
+              maxWidth: 230,
+              position: 'absolute',
+              top: '-28%',
+              zIndex: 0,
+              right: 0
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image="https://minio.aws.abraham.fun/creations-prd//a4bd02030fe493513d86ba880f2d9b821ee189e89b2db05f6f7418998dc9e34b"
+              alt="dragon"
+            />
+          </Card>
+        </section>
 
         {/* <div
           style={{
@@ -343,12 +602,15 @@ export default function EdenDevFrontPage() {
           </svg>
         </div> */}
 
-        <section className="section-wrapper">
+        <Container className="section-wrapper" sx={{ pl: 0, pr: 0, mt: 9 }}>
           <NetworkVector1 />
           <NetworkVector2 />
           <div className="highlight">
-            <section className="info-wrapper">
-              <Typography
+            <Container
+              className="info-wrapper"
+              sx={{ margin: '250px 0 0 0', pl: 0, pr: 0, maxWidth: 600 }}
+            >
+              {/* <Typography
                 className="eden-logotype"
                 variant={'h3'}
                 style={{
@@ -359,25 +621,62 @@ export default function EdenDevFrontPage() {
                 }}
               >
                 EDEN
-              </Typography>
+              </Typography> */}
+
               <Typography
-                className="slogan"
+                className="more-description"
                 variant={'h4'}
-                style={{
-                  fontSize: '70px',
-                  lineHeight: 1,
-                  color: 'rgb(0 80 30)'
+                sx={{
+                  fontSize: '1.5rem',
+                  lineHeight: 1.5,
+                  color: 'rgb(0 80 30)',
+                  textAlign: 'center',
+                  pb: 8
                 }}
               >
-                Garden of{' '}
-                <div>
-                  <span className="artificial">
-                    <span className="underline"></span>
-                    <span className="art">art</span>
+                <div>EDEN</div>
+                is the AI first{' '}
+                <span style={{ position: 'relative', zIndex: 10 }}>
+                  <span style={{ position: 'relative', zIndex: 10 }}>
+                    creation engine
                   </span>
-                  <span>ificial</span>
-                  <span> delights</span>
-                </div>{' '}
+                  <span className="underline" style={{ zIndex: 0 }}></span>
+                </span>{' '}
+                that generates <br />
+                your world. From text-to-image tools, video clip making apps,
+                multiplayer art systems <br /> and everything in between.
+              </Typography>
+
+              <Typography
+                className="more-description"
+                variant={'h4'}
+                sx={{
+                  fontSize: '1.5rem',
+                  lineHeight: 1.5,
+                  color: 'rgb(0 80 30)',
+                  textAlign: 'center',
+                  pb: 8
+                }}
+              >
+                We are the platform where you can find the AI content you are
+                passionate about — whether it be style modifiers for your
+                prompts, looping GIFs, quick editing tools to tell your Stories,
+                or conversation-starting Clips content.
+              </Typography>
+
+              <Typography
+                className="more-description"
+                variant={'h4'}
+                sx={{
+                  fontSize: '1.5rem',
+                  lineHeight: 1.5,
+                  color: 'rgb(0 80 30)',
+                  textAlign: 'center'
+                }}
+              >
+                Whether you‘re a creator, content partner, developer, or artist
+                — you name it — EDEN is home to the content making your
+                conversations and stories more positive, more fun, and more you.
               </Typography>
               <article className="button-wrapper">
                 <Box>
@@ -400,9 +699,239 @@ export default function EdenDevFrontPage() {
                   </Button>
                 </Box>
               </article>
-            </section>
+            </Container>
           </div>
-        </section>
+        </Container>
+
+        <Container className="section-wrapper" sx={{ mt: 0, pl: 0, pr: 0 }}>
+          <Container className="info-wrapper" sx={{ m: 0, pl: 5, pr: 5 }}>
+            {/* <Typography
+                className="eden-logotype"
+                variant={'h3'}
+                style={{
+                  fontSize: '35px',
+                  lineHeight: 1,
+                  textAlign: 'left',
+                  color: 'rgb(0 80 30)'
+                }}
+              >
+                EDEN
+              </Typography> */}
+            <Box
+              className="our-philosophies"
+              sx={{
+                maxWidth: 600,
+                pb: 10,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+              }}
+            >
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  position: 'absolute',
+                  top: '-45px',
+                  maxWidth: '150px',
+                  zIndex: 40
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="eden video"
+                // autoPlay
+                // mute
+              />
+
+              <Typography
+                className="more-description"
+                variant={'h4'}
+                sx={{
+                  fontSize: '3rem',
+                  lineHeight: 1,
+                  color: 'white',
+                  pt: 3,
+                  textAlign: 'center'
+                }}
+              >
+                Our Philosophies
+              </Typography>
+              <Typography
+                className="more-description"
+                variant={'h4'}
+                sx={{
+                  fontSize: '1.5rem',
+                  lineHeight: 1.5,
+                  color: 'rgb(166, 166, 166)',
+                  textAlign: 'center',
+                  pt: 3
+                }}
+              >
+                This is what we believe. These philosophies guide our approach
+                to EDEN's community, culture, and products.
+              </Typography>
+            </Box>
+
+            <Box sx={{ p: 5, display: 'flex' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  pr: 5
+                }}
+              >
+                <Typography
+                  className="more-description"
+                  variant={'h3'}
+                  sx={{
+                    fontSize: '1.5rem',
+                    lineHeight: 1.5,
+                    color: 'white',
+                    textAlign: 'center'
+                  }}
+                >
+                  People Before Product
+                </Typography>
+                <Typography
+                  className="more-description"
+                  variant={'h4'}
+                  sx={{
+                    fontSize: '1rem',
+                    lineHeight: 1.5,
+                    textAlign: 'center',
+                    color: 'rgb(166, 166, 166)'
+                  }}
+                >
+                  The most important product we can ever develop is our people.
+                  People make products, people use products, we are a people
+                  company.
+                </Typography>
+              </Box>
+
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '400px',
+                  zIndex: 40
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="eden video"
+                // autoPlay
+                // mute
+              />
+            </Box>
+
+            <Box sx={{ p: 5, display: 'flex' }}>
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '400px',
+                  zIndex: 40
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="eden video"
+                // autoPlay
+                // mute
+              />
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  pl: 5
+                }}
+              >
+                <Typography
+                  className="more-description"
+                  variant={'h3'}
+                  sx={{
+                    fontSize: '1.5rem',
+                    lineHeight: 1.5,
+                    color: 'white',
+                    textAlign: 'center'
+                  }}
+                >
+                  Community Before Corporation
+                </Typography>
+                <Typography
+                  className="more-description"
+                  variant={'h4'}
+                  sx={{
+                    fontSize: '1rem',
+                    lineHeight: 1.5,
+                    color: 'rgb(166, 166, 166)',
+                    textAlign: 'center'
+                  }}
+                >
+                  The most important product we can ever develop is our people.
+                  People make products, people use products, we are a people
+                  company.
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={{ p: 5, display: 'flex' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  pr: 3
+                }}
+              >
+                <Box
+                  maxWidth={600}
+                  sx={{
+                    pr: 5
+                  }}
+                >
+                  <Typography
+                    className="more-description"
+                    variant={'h3'}
+                    sx={{
+                      fontSize: '1.5rem',
+                      lineHeight: 1.5,
+                      color: 'white',
+                      textAlign: 'center'
+                    }}
+                  >
+                    Relationships Before Process
+                  </Typography>
+                  <Typography
+                    className="more-description"
+                    variant={'h4'}
+                    sx={{
+                      fontSize: '1rem',
+                      lineHeight: 1.5,
+                      color: 'rgb(166, 166, 166)',
+                      textAlign: 'center'
+                    }}
+                  >
+                    The most important product we can ever develop is our
+                    people. People make products, people use products, we are a
+                    people company.
+                  </Typography>
+                </Box>
+              </Box>
+
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '400px',
+                  zIndex: 40
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="eden video"
+                // autoPlay
+                // mute
+              />
+            </Box>
+          </Container>
+        </Container>
 
         {/* <section className="section-wrapper">
           <div className="info-wrapper">
@@ -450,7 +979,7 @@ export default function EdenDevFrontPage() {
         </section>
 
         <div className="apps-wrapper">
-          <div className="apps-text">
+          <div className="apps-text" style={{ marginBottom: 30 }}>
             <span className="separator" />
             <Typography className="text" variant={'h3'}>
               Our growing ecosysten of AI Apps and tools
@@ -512,7 +1041,7 @@ export default function EdenDevFrontPage() {
             <Button className="app-link-wrapper">
               <Link href="/creations/all/new">
                 <AppLink
-                  icon={<AppLogo logo="abraham" />}
+                  icon={<AiFillApi style={{ fontSize: '3rem' }} />}
                   title="APIs"
                   description="Scalable inferencing and compute"
                 />
@@ -544,28 +1073,241 @@ export default function EdenDevFrontPage() {
         <div className="apps-wrapper">
           <div className="apps-text">
             <span className="separator" />
-            <Typography className="text" variant={'h3'}>
-              Garden of Artificial Delights
-            </Typography>
+            <CardMedia
+              className="eden-splash-video"
+              sx={{
+                maxWidth: '150px',
+                zIndex: 40,
+                m: 5
+              }}
+              component="img"
+              image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+              alt="eden video"
+              // autoPlay
+              // mute
+            />
             <span className="separator" />
           </div>
+          <Container
+            className="section-wrapper"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}
+          >
+            <Typography
+              className="text"
+              variant={'h3'}
+              sx={{ fontSize: '2rem', color: 'white' }}
+            >
+              Connect with Us
+            </Typography>
+            <Box
+              sx={{ display: 'flex', justifyContent: 'space-between', p: 3 }}
+            >
+              <Link href="/">
+                <FaTwitter style={{ margin: '10px', fontSize: '1.6rem' }} />
+              </Link>
+              <Link href="/">
+                <AiFillInstagram
+                  style={{ margin: '10px', fontSize: '1.6rem' }}
+                />
+              </Link>
+              <Link href="/">
+                <FaTiktok style={{ margin: '10px', fontSize: '1.6rem' }} />
+              </Link>
+              <Link href="/">
+                <FaDiscord style={{ margin: '10px', fontSize: '1.6rem' }} />
+              </Link>
+            </Box>
+
+            <Box sx={{ display: 'flex' }}>
+              <Box sx={{ p: 2 }}>
+                <Typography variant={'h4'} sx={{ fontSize: '1.2rem', p: 1 }}>
+                  Do you have a press inquiry?
+                </Typography>
+                <Typography variant={'body1'} sx={{ fontSize: '1rem', p: 1 }}>
+                  Email us at <Link href="/">press@eden.art</Link>
+                </Typography>
+              </Box>
+
+              <Box sx={{ p: 2 }}>
+                <Typography
+                  variant={'h4'}
+                  sx={{ fontSize: '1.2rem', p: 1, maxWidth: 300 }}
+                >
+                  Have an account or product question?
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  sx={{ fontSize: '1rem', p: 1, maxWidth: 300 }}
+                >
+                  Check out our <Link href="/">support page</Link>
+                </Typography>
+              </Box>
+            </Box>
+          </Container>
         </div>
 
-        <section className="splash-wrapper">
+        <Container
+          className="section-wrapper"
+          sx={{
+            flexDirection: 'column',
+            height: 1000,
+            position: 'relative',
+            zIndex: 100,
+            mt: 5,
+            justifyContent: 'flex-start'
+          }}
+        >
+          <Typography variant={'h2'} sx={{ pb: 2, color: 'white' }}>
+            Our Team
+          </Typography>
+
+          <Typography
+            variant={'h4'}
+            maxWidth={1}
+            sx={{
+              fontSize: '1.5rem',
+              color: 'rgb(166, 166, 166)',
+              maxWidth: 600,
+              pb: 5
+            }}
+          >
+            Eden is an independent research lab exploring new mediums of thought
+            and expanding the imaginative powers of the human species. We are a
+            small self-funded team focused on design, human infrastructure, and
+            AI. We have 7 core contributors and an incredible set of advisors.
+          </Typography>
+
+          <div
+            style={{
+              position: 'relative',
+              height: 500,
+              width: '100%'
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                position: 'absolute',
+                height: 500,
+                bottom: 0
+              }}
+            >
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 2
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Gene"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 1
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Xander Stenbergue"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 2
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Vanessa"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 3
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Daniel"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 5
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Mayuhk"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 1
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Nico"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 1
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Jmill"
+              />
+              <CardMedia
+                className="eden-splash-video"
+                sx={{
+                  maxWidth: '250px',
+                  zIndex: 40,
+                  m: 1
+                }}
+                component="img"
+                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
+                alt="Moises"
+              />
+            </Box>
+          </div>
+        </Container>
+
+        <Container
+          className="section-wrapper"
+          sx={{ flexDirection: 'column', mt: 5, justifyContent: 'flex-start' }}
+        >
+          <Typography variant={'h3'} sx={{ pb: 2, color: 'white' }}>
+            Subscribe to our Newsletter
+          </Typography>
           <Subscribe />
+        </Container>
+
+        <section className="splash-wrapper">
           <VectorPerspectiveGrid />
         </section>
 
         {/* <div className="apps-wrapper">
           <div className="apps-text">
             <span className="separator" />
-            <Typography className="text" variant={'h3'}>
-              Eden is an independent research lab exploring new mediums of
-              thought and expanding the imaginative powers of the human species.
-              We are a small self-funded team focused on design, human
-              infrastructure, and AI. We have 7 core contributors and an
-              incredible set of advisors.
-            </Typography>
+            
             <span className="separator" />
           </div>
 

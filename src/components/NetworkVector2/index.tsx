@@ -7,8 +7,9 @@ const NetworkVector2Styles = styled('section')(
   width: 415px;
   position: absolute;
   right: 0;
-  bottom: -5px;
-  z-index: 50;
+  bottom: -20px;
+  z-index: 10;
+  opacity: 0.7;
   #network-vector-svg {
     // fill: #00501;
   }

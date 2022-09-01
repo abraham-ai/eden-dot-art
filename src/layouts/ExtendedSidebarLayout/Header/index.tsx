@@ -14,11 +14,18 @@ import {
   Tooltip,
   styled,
   useTheme,
-  Typography
+  Typography,
+  LinkMUI
 } from '@mui/material';
+
+// ROUTER
+import Link from 'next/link';
 
 // NAV
 // import { EdenNavTop } from '../../../components';
+
+// COMPONENTS
+import SpeedDial from '@/components/SpeedDial';
 
 // ICONS
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
@@ -44,6 +51,16 @@ const HeaderWrapper = styled(Box)(
         position: fixed;
         justify-content: space-between;
         width: 100%;
+        .nav-link-wrapper {
+          padding: 0 10px;
+        }
+        .nav-link-wrapper:hover {
+          color: white;
+        }
+        .nav-link-text:hover {
+          cursor: pointer;
+          color: white;
+        }
         @media (min-width: ${theme.breakpoints.values.lg}px) {
             left: ${theme.sidebar.width};
             width: auto;
@@ -84,37 +101,15 @@ function Header() {
               )}`
       }}
     >
-      {/* <Link href="/garden" className="nav-link-wrapper">
-        <Text level={3} strong>
-          DEV GARDEN
-        </Text>
-      </Link>
-
-      <Link href="/ideas" className="nav-link-wrapper">
-        <Text level={3} strong>
-          IDEAS
-        </Text>
-      </Link>
-
-      <Link href="/apps" className="nav-link-wrapper">
-        <Text level={3} strong>
-          APPS
-        </Text>
-      </Link>
-
-      <Link href="/FAQ" className="nav-link-wrapper">
-        <Text level={3} strong>
-          FAQ
-        </Text>
-      </Link> */}
-
       {/* <EdenNavTop /> */}
-      <Stack
+
+      {/* <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
         alignItems="center"
         spacing={2}
-      ></Stack>
+      ></Stack> */}
+
       <Box display="flex" alignItems="center">
         <Box
           component="span"
@@ -135,94 +130,37 @@ function Header() {
         </Box>
       </Box>
 
-      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
-        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={model}
-          label="Model"
-          onChange={handleChange}
-        >
-          <MenuItem value={'eden-clip-x'}>Newest</MenuItem>
-          <MenuItem value={'stable-diffusion'}>Praise</MenuItem>
-          <MenuItem value={'vqgan'}>Burn</MenuItem>
-        </Select>
-      </FormControl>
+      <Link href="/creations" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          CREATIONS
+        </Typography>
+      </Link>
 
-      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
-        <InputLabel id="demo-simple-select-label">Model</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={model}
-          label="Model"
-          onChange={handleChange}
-        >
-          <MenuItem value={'eden-clip-x'}>Eden Clip X</MenuItem>
-          <MenuItem value={'stable-diffusion'}>Stable Diffusion</MenuItem>
-          <MenuItem value={'vqgan'}>VQGAN</MenuItem>
-        </Select>
-      </FormControl>
+      <Link href="/garden" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          DEV GARDEN
+        </Typography>
+      </Link>
 
-      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
-        <InputLabel id="demo-simple-select-label">Layout</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={model}
-          label="Model"
-          onChange={handleChange}
-        >
-          <MenuItem className="menu-item" value={'stable-diffusion'}>
-            <GridViewIcon />
-            <Typography>Grid</Typography>
-          </MenuItem>
-          <MenuItem className="menu-item" value={'vqgan'}>
-            <ViewQuiltIcon />
-            <Typography>Quilt</Typography>
-          </MenuItem>
-          <MenuItem className="menu-item" value={'vqgan'}>
-            <ViewColumnIcon />
-            <Typography>Masonry</Typography>
-          </MenuItem>
-          <MenuItem className="menu-item" value={'eden-clip-x'}>
-            <ListIcon />
-            <Typography>List</Typography>
-          </MenuItem>
-        </Select>
-      </FormControl>
+      <Link href="/ideas" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          IDEAS
+        </Typography>
+      </Link>
 
-      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
-        <InputLabel id="demo-simple-select-label">Size</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={model}
-          label="Model"
-          onChange={handleChange}
-        >
-          <MenuItem value={'eden-clip-x'}>Vertical</MenuItem>
-          <MenuItem value={'stable-diffusion'}>Landscape</MenuItem>
-          <MenuItem value={'vqgan'}>Square</MenuItem>
-        </Select>
-      </FormControl>
+      <Link href="/apps" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          APPS
+        </Typography>
+      </Link>
 
-      <FormControl sx={{ minWidth: 100 }} className="select-sort-form">
-        <InputLabel id="demo-simple-select-label">Source</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={model}
-          label="Model"
-          onChange={handleChange}
-        >
-          <MenuItem value={'eden-clip-x'}>Web3</MenuItem>
-          <MenuItem value={'stable-diffusion'}>Discord</MenuItem>
-          <MenuItem value={'vqgan'}>Bots</MenuItem>
-        </Select>
-      </FormControl>
+      <Link href="/faq" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          FAQ
+        </Typography>
+      </Link>
 
+      <SpeedDial />
       <ConnectButton />
     </HeaderWrapper>
   );
