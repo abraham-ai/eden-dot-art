@@ -103,7 +103,7 @@ function Header() {
         <Typography variant={'h4'}>APPS</Typography>
       </Link>
 
-      <Link href="/FAQ" className="nav-link-wrapper">
+      <Link href="/faq" className="nav-link-wrapper">
         <Typography variant={'h4'}>FAQ</Typography>
       </Link>
 
