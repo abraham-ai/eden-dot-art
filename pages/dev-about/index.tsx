@@ -6,10 +6,28 @@ import Footer from '@/components/Footer';
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
 
 // UI
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, styled } from '@mui/material';
 
 // COMPONENTS
 import { useAccount, useContractRead } from 'wagmi';
+
+const AboutPageStyles = styled(Container)(
+  ({ theme }) => `
+    .page-container {
+      padding-left: 0;
+      padding-right: 0;
+      max-width: unset;
+    }
+    // background: ${theme.palette.common.white};
+    @media (min-width: 1280px) {
+      max-width: unset; 
+    }
+    @media (min-width: 600px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  `
+);
 
 function DevAboutPage() {
   const { address, isConnected } = useAccount();
@@ -19,7 +37,11 @@ function DevAboutPage() {
       <Head>
         <title>Eden.Dev | About</title>
       </Head>
-      <Container maxWidth="lg">
+      <AboutPageStyles
+        className="page-container"
+        // maxWidth="lg"
+        sx={{ padding: 0 }}
+      >
         {/* {isConnected ? (
           <>
             <Typography variant={'h3'}>
@@ -32,7 +54,7 @@ function DevAboutPage() {
         )} */}
 
         <EdenDevFrontPage />
-      </Container>
+      </AboutPageStyles>
       <Footer />
     </>
   );
