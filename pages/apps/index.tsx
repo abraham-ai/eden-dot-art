@@ -1,25 +1,14 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
-import {
-  Button,
-  Container,
-  Typography,
-  IconButton,
-  styled
-} from '@mui/material';
+import { Button, Container, Typography, styled } from '@mui/material'
 
 // COMPONENTS
-import { useAccount } from 'wagmi';
-import BasicCard from '@/components/BasicCard';
-
-// ICONS
-import { FaDiscord, FaGithub } from 'react-icons/fa';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import BasicCard from '@/components/BasicCard'
 
 const EdenIdeasPageStyles = styled('section')(
   () => `
@@ -57,12 +46,10 @@ const EdenIdeasPageStyles = styled('section')(
     align-items: center;
     justify-content: center;
   }
-  `
-);
+  `,
+)
 
 function EdenIdeasPage() {
-  const { address, isConnected } = useAccount();
-
   return (
     <>
       <Head>
@@ -85,7 +72,7 @@ function EdenIdeasPage() {
                     fontWeight: 'bold',
                     display: 'inline-block',
                     marginLeft: 5,
-                    marginRight: 5
+                    marginRight: 5,
                   }}
                 >
                   Eden Developers ecosystem
@@ -174,11 +161,11 @@ function EdenIdeasPage() {
 
       <Footer />
     </>
-  );
+  )
 }
 
-EdenIdeasPage.getLayout = (page) => (
+EdenIdeasPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default EdenIdeasPage;
+export default EdenIdeasPage

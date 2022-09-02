@@ -1,21 +1,16 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
-import { Button, Container, Typography, IconButton } from '@mui/material';
-
-// COMPONENTS
-import { useAccount } from 'wagmi';
+import { Button, Container, Typography, IconButton } from '@mui/material'
 
 // ICONS
-import { FaDiscord, FaGithub } from 'react-icons/fa';
+import { FaDiscord, FaGithub } from 'react-icons/fa'
 
 function EdenDevGardenPage() {
-  const { address, isConnected } = useAccount();
-
   return (
     <>
       <Head>
@@ -67,11 +62,11 @@ function EdenDevGardenPage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-EdenDevGardenPage.getLayout = (page) => (
+EdenDevGardenPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default EdenDevGardenPage;
+export default EdenDevGardenPage

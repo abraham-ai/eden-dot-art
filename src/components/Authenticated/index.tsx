@@ -1,41 +1,41 @@
-import type { FC, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
-import { useAuth } from 'src/hooks/useAuth';
+import type { FC, ReactNode } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
+import { useAuth } from 'src/hooks/useAuth'
 
 interface AuthenticatedProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-export const Authenticated: FC<AuthenticatedProps> = (props) => {
-  const { children } = props;
-  const auth = useAuth();
-  const router = useRouter();
-  const [verified, setVerified] = useState(false);
+export const Authenticated: FC<AuthenticatedProps> = props => {
+  const { children } = props
+  const auth = useAuth()
+  const router = useRouter()
+  const [verified, setVerified] = useState(false)
 
   useEffect(() => {
     if (!router.isReady) {
-      return;
+      return
     }
 
     if (!auth.isAuthenticated) {
       router.push({
         pathname: '/auth/login',
-        query: { backTo: router.asPath }
-      });
+        query: { backTo: router.asPath },
+      })
     } else {
-      setVerified(true);
+      setVerified(true)
     }
-  }, [router.isReady]);
+  }, [router, auth.isAuthenticated])
 
   if (!verified) {
-    return null;
+    return null
   }
 
-  return <>{children}</>;
-};
+  return <>{children}</>
+}
 
 Authenticated.propTypes = {
-  children: PropTypes.node
-};
+  children: PropTypes.node,
+}

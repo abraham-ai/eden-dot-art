@@ -5,30 +5,25 @@ import {
   styled,
   CardHeader,
   Switch,
-  CardContent,
   Container,
-  Typography,
   FormGroup,
   FormControlLabel,
-  CssBaseline
-} from '@mui/material';
-import type { ReactElement } from 'react';
+} from '@mui/material'
+import type { ReactElement } from 'react'
 
 // COMPONENTS
-import Link from '@/components/Link';
-import Head from 'next/head';
-import Logo from '@/components/Logo';
-import Footer from '@/components/Footer';
+import Link from '@/components/Link'
+import Head from 'next/head'
+import Logo from '@/components/Logo'
 
 // PAGES
-import EdenArtFrontPage from '@/components/EdenArtFrontPage';
-import EdenDevFrontPage from '@/components/EdenDevFrontPage';
+import EdenArtFrontPage from '@/components/EdenArtFrontPage'
 
 // CSS
-import BaseLayout from 'src/layouts/BaseLayout';
+import BaseLayout from 'src/layouts/BaseLayout'
 
 // ROUTES
-import { ROUTES } from '@/const/routes';
+import { ROUTES } from '@/const/routes'
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
@@ -37,8 +32,8 @@ const HeaderWrapper = styled(Card)(
   align-items: center;
   height: ${theme.spacing(10)};
   margin-bottom: ${theme.spacing(10)};
-`
-);
+`,
+)
 
 const OverviewWrapper = styled(Box)(
   ({ theme }) => `
@@ -46,8 +41,8 @@ const OverviewWrapper = styled(Box)(
     background: ${theme.palette.common.white};
     flex: 1;
     overflow-x: hidden;
-`
-);
+`,
+)
 
 function Overview({ changeTheme, isDarkTheme }) {
   return (
@@ -136,11 +131,11 @@ function Overview({ changeTheme, isDarkTheme }) {
       {/* <EdenDevFrontPage /> */}
       {/* <Footer /> */}
     </OverviewWrapper>
-  );
+  )
 }
 
-export default Overview;
+export default Overview
 
 Overview.getLayout = function getLayout(page: ReactElement, props) {
-  return <BaseLayout {...props}>{page}</BaseLayout>;
-};
+  return <BaseLayout {...props}>{page}</BaseLayout>
+}

@@ -1,20 +1,17 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
 // ROUTER
-import Link from '@/components/Link';
+import Link from '@/components/Link'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
-import { Button, Container, Typography, Box, styled } from '@mui/material';
-
-// COMPONENTS
-import { Authenticated } from '@/components/Authenticated';
+import { Button, Container, Typography, Box, styled } from '@mui/material'
 
 // ICONS
-import { FaDiscord } from 'react-icons/fa';
+import { FaDiscord } from 'react-icons/fa'
 
 const DashboardStyles = styled(Box)(
   () => `
@@ -28,8 +25,8 @@ const DashboardStyles = styled(Box)(
       justify-content: center;
       margin: 0 9px 0 0;
     }
-  `
-);
+  `,
+)
 
 function DashboardTasks() {
   return (
@@ -51,11 +48,11 @@ function DashboardTasks() {
       </DashboardStyles>
       <Footer />
     </>
-  );
+  )
 }
 
-DashboardTasks.getLayout = (page) => (
+DashboardTasks.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default DashboardTasks;
+export default DashboardTasks

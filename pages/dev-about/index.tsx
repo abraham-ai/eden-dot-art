@@ -1,15 +1,12 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import EdenDevFrontPage from '@/components/EdenDevFrontPage';
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import EdenDevFrontPage from '@/components/EdenDevFrontPage'
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
-import { Button, Container, Typography, styled } from '@mui/material';
-
-// COMPONENTS
-import { useAccount, useContractRead } from 'wagmi';
+import { Container, styled } from '@mui/material'
 
 const AboutPageStyles = styled(Container)(
   ({ theme }) => `
@@ -26,12 +23,10 @@ const AboutPageStyles = styled(Container)(
       padding-left: 0;
       padding-right: 0;
     }
-  `
-);
+  `,
+)
 
 function DevAboutPage() {
-  const { address, isConnected } = useAccount();
-
   return (
     <>
       <Head>
@@ -57,11 +52,11 @@ function DevAboutPage() {
       </AboutPageStyles>
       <Footer />
     </>
-  );
+  )
 }
 
-DevAboutPage.getLayout = (page) => (
+DevAboutPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default DevAboutPage;
+export default DevAboutPage

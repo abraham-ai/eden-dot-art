@@ -1,43 +1,42 @@
-import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import '@rainbow-me/rainbowkit/styles.css'
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import {
   chain,
   configureChains,
   createClient,
   useSigner,
-  WagmiConfig
-} from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
-import { ReactNode, FC } from 'react';
-import { ChainId, ThirdwebSDKProvider } from '@thirdweb-dev/react';
+  WagmiConfig,
+} from 'wagmi'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
+import { ReactNode, FC } from 'react'
+import { ChainId, ThirdwebSDKProvider } from '@thirdweb-dev/react'
 
 const { chains, provider } = configureChains(
   [chain.goerli],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-    publicProvider()
-  ]
-);
+    publicProvider(),
+  ],
+)
 
 const { connectors } = getDefaultWallets({
   appName: 'eden.art',
-  chains
-});
+  chains,
+})
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider
-});
+  provider,
+})
 
 interface WalletProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const ThirdwebProvider = ({ wagmiClient, children }: any) => {
-  const { data: signer } = useSigner();
-  console.log('signer', signer)
+  const { data: signer } = useSigner()
   return (
     <ThirdwebSDKProvider
       desiredChainId={ChainId.Goerli}
@@ -47,11 +46,11 @@ const ThirdwebProvider = ({ wagmiClient, children }: any) => {
     >
       {children}
     </ThirdwebSDKProvider>
-  );
-};
+  )
+}
 
-export const WalletProvider: FC<WalletProviderProps> = (props) => {
-  const { children } = props;
+export const WalletProvider: FC<WalletProviderProps> = props => {
+  const { children } = props
 
   return (
     <WagmiConfig client={wagmiClient}>
@@ -61,5 +60,5 @@ export const WalletProvider: FC<WalletProviderProps> = (props) => {
         </ThirdwebProvider>
       </RainbowKitProvider>
     </WagmiConfig>
-  );
-};
+  )
+}

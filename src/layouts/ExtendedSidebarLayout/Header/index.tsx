@@ -1,43 +1,31 @@
-import { useContext, useState } from 'react';
-import { SelectChangeEvent } from '@mui/material/Select';
+import { useContext } from 'react'
 import {
   Box,
   alpha,
-  InputLabel,
-  Stack,
   lighten,
-  MenuItem,
-  Divider,
   IconButton,
-  FormControl,
-  Select,
   Tooltip,
   styled,
   useTheme,
   Typography,
-  LinkMUI
-} from '@mui/material';
+} from '@mui/material'
 
 // ROUTER
-import Link from 'next/link';
+import Link from 'next/link'
 
 // NAV
 // import { EdenNavTop } from '../../../components';
 
 // COMPONENTS
-import SpeedDial from '@/components/SpeedDial';
+import SpeedDial from '@/components/SpeedDial'
 
 // ICONS
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
+import { SidebarContext } from 'src/contexts/SidebarContext'
+import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // VIEW ICONS
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import ListIcon from '@mui/icons-material/List';
-import GridViewIcon from '@mui/icons-material/GridView';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -68,18 +56,12 @@ const HeaderWrapper = styled(Box)(
         .menu-item {
           display: flex;
         }
-`
-);
+`,
+)
 
 function Header() {
-  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
-  const theme = useTheme();
-
-  const [model, setModel] = useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setModel(event.target.value as string);
-  };
+  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
+  const theme = useTheme()
 
   return (
     <HeaderWrapper
@@ -90,15 +72,15 @@ function Header() {
           theme.palette.mode === 'dark'
             ? `0 1px 0 ${alpha(
                 lighten(theme.colors.primary.main, 0.7),
-                0.15
+                0.15,
               )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
             : `0px 2px 8px -3px ${alpha(
                 theme.colors.alpha.black[100],
-                0.2
+                0.2,
               )}, 0px 5px 22px -4px ${alpha(
                 theme.colors.alpha.black[100],
-                0.1
-              )}`
+                0.1,
+              )}`,
       }}
     >
       {/* <EdenNavTop /> */}
@@ -115,7 +97,7 @@ function Header() {
           component="span"
           sx={{
             ml: 2,
-            display: { lg: 'none', xs: 'inline-block' }
+            display: { lg: 'none', xs: 'inline-block' },
           }}
         >
           <Tooltip arrow title="Toggle Menu">
@@ -163,7 +145,7 @@ function Header() {
       <SpeedDial />
       <ConnectButton />
     </HeaderWrapper>
-  );
+  )
 }
 
-export default Header;
+export default Header

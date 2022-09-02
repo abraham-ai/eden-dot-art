@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 // CSS
-import { Box, styled, Tooltip } from '@mui/material';
+import { styled } from '@mui/material'
 
 const CreateIconStyles = styled('div')(
-  ({ theme }) => `
+  () => `
   display: flex !important;
   align-items: center;
   justify-content: center;
-  `
+  `,
 )
 
 export default function CreateIcon() {
@@ -22,5 +22,5 @@ export default function CreateIcon() {
         </g>
       </svg>
     </CreateIconStyles>
-  );
+  )
 }

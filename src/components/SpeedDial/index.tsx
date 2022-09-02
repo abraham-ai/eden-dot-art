@@ -1,34 +1,17 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import * as React from 'react'
+import { styled } from '@mui/material/styles'
 
-import {
-  Box,
-  Typography,
-  FormControl,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Switch,
-  Backdrop,
-  FormControlLabel,
-  SpeedDial
-} from '@mui/material';
-import { SpeedDialProps } from '@mui/material/SpeedDial';
+import { Box, Typography, SpeedDial } from '@mui/material'
 
 // ICONS
-import CreateIcon from '@/components/CreateIcon';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import { TiSpiral } from 'react-icons/ti';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
+import CreateIcon from '@/components/CreateIcon'
+import FileUploadIcon from '@mui/icons-material/FileUpload'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import VideoCallIcon from '@mui/icons-material/VideoCall'
+import { TiSpiral } from 'react-icons/ti'
+import SpeedDialAction from '@mui/material/SpeedDialAction'
 
-const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
+const StyledSpeedDial = styled(SpeedDial)(() => ({
   position: 'absolute',
   '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
     // bottom: theme.spacing(2),
@@ -37,44 +20,30 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
     // top: theme.spacing(2),
     // left: theme.spacing(2)
-  }
-}));
+  },
+}))
 
 const actions = [
   {
     icon: <AddPhotoAlternateIcon sx={{ fontSize: '1.7rem' }} />,
-    name: <Typography sx={{ color: 'white' }}>Image</Typography>
+    name: <Typography sx={{ color: 'white' }}>Image</Typography>,
   },
   {
     icon: <VideoCallIcon sx={{ fontSize: '1.7rem' }} />,
-    name: <Typography sx={{ color: 'white' }}>Video</Typography>
+    name: <Typography sx={{ color: 'white' }}>Video</Typography>,
   },
   {
     icon: <TiSpiral style={{ fontSize: '1.7rem' }} />,
-    name: <Typography sx={{ color: 'white' }}>Zoom</Typography>
+    name: <Typography sx={{ color: 'white' }}>Zoom</Typography>,
   },
   {
     icon: <FileUploadIcon sx={{ fontSize: '1.7rem' }} />,
-    name: <Typography sx={{ color: 'white' }}>Upload Image</Typography>
-  }
-];
+    name: <Typography sx={{ color: 'white' }}>Upload Image</Typography>,
+  },
+]
 
 export default function SpeedDialEdenCreate() {
-  const [direction, setDirection] =
-    React.useState<SpeedDialProps['direction']>('up');
-  const [hidden, setHidden] = React.useState(false);
-
-  const handleDirectionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDirection(
-      (event.target as HTMLInputElement).value as SpeedDialProps['direction']
-    );
-  };
-
-  const handleHiddenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHidden(event.target.checked);
-  };
+  const hidden = false
 
   return (
     <Box
@@ -83,7 +52,7 @@ export default function SpeedDialEdenCreate() {
         display: 'flex',
         height: '56px',
         width: '56px',
-        justifyContent: 'center'
+        justifyContent: 'center',
       }}
     >
       {/* <FormControlLabel
@@ -118,9 +87,9 @@ export default function SpeedDialEdenCreate() {
         icon={<CreateIcon />}
         direction={'down'}
       >
-        {actions.map((action) => (
+        {actions.map(action => (
           <SpeedDialAction
-            key={action.name}
+            key={action.name.key}
             icon={action.icon}
             tooltipTitle={action.name}
             tooltipOpen
@@ -128,5 +97,5 @@ export default function SpeedDialEdenCreate() {
         ))}
       </StyledSpeedDial>
     </Box>
-  );
+  )
 }
