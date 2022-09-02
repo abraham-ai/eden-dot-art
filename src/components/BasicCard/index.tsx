@@ -1,36 +1,18 @@
-import * as React from 'react';
-import { Box, ThemeProvider, createTheme } from '@mui/system';
+import * as React from 'react'
+import { Box } from '@mui/material'
 
 // ICONS
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
-const theme = createTheme({
-  palette: {
-    background: {
-      paper: '#272c48'
-    },
-    text: {
-      primary: '#173A5E',
-      secondary: '#46505A'
-    },
-    action: {
-      active: '#001E3C'
-    },
-    success: {
-      dark: '#8C7CF0'
-    }
-  }
-});
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 export default function BasicCard({
   header = <ArrowForwardIcon />,
   title = '98.3 K',
   highlight = '+18.77%',
   description = 'vs. last week',
-  icon = null
+  icon = null,
 }) {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Box
         sx={{
           bgcolor: 'background.paper',
@@ -41,14 +23,14 @@ export default function BasicCard({
           maxWidth: 400,
           display: 'flex',
           flexDirection: 'column',
-          flex: 1
+          flex: 1,
         }}
       >
         <Box
           sx={{
             color: 'primary.text',
             display: 'flex',
-            justifyContent: 'flex-end'
+            justifyContent: 'flex-end',
           }}
         >
           {header}
@@ -65,7 +47,7 @@ export default function BasicCard({
             display: 'inline',
             fontWeight: 'bold',
             mx: 0.5,
-            fontSize: 14
+            fontSize: 14,
           }}
         >
           {highlight}
@@ -74,6 +56,6 @@ export default function BasicCard({
           {description}
         </Box>
       </Box>
-    </ThemeProvider>
-  );
+    </>
+  )
 }

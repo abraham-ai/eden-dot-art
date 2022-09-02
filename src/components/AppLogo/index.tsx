@@ -69,7 +69,7 @@ export default function AppLogo({
   const edenLogo =
     'https://res.cloudinary.com/react-graphql-store/image/upload/v1659514317/eden_logo_transparent_z62wfi.png'
 
-  function renderSize(size) {
+  function renderSize(size: string) {
     switch (size) {
       case 'icon-small':
         return 'icon-small'
@@ -88,7 +88,7 @@ export default function AppLogo({
     }
   }
 
-  function renderPosition(position) {
+  function renderPosition(position: string) {
     let currentPosition
 
     switch (position) {
@@ -108,7 +108,7 @@ export default function AppLogo({
     return currentPosition
   }
 
-  function renderLogo(logo) {
+  function renderLogo(logo: string) {
     let currentLogo
 
     switch (logo) {

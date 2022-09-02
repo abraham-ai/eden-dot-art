@@ -1,4 +1,4 @@
-const withImages = require('next-images');
+const withImages = require('next-images')
 
 const redirects = {
   async redirects() {
@@ -6,10 +6,15 @@ const redirects = {
       {
         source: '/dashboards',
         destination: '/dashboards/tasks',
-        permanent: true
-      }
-    ];
-  }
-};
+        permanent: true,
+      },
+    ]
+  },
+}
 
-module.exports = withImages(redirects);
+module.exports = {
+  experimental: {
+    outputStandalone: true,
+  },
+  ...withImages(redirects),
+}

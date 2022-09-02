@@ -1,30 +1,28 @@
-import Head from 'next/head';
-import Footer from '@/components/Footer';
+import Head from 'next/head'
+import Footer from '@/components/Footer'
 import {
   Box,
   Button,
   Container,
   ImageList,
   ImageListItem,
-  Stack
-} from '@mui/material';
+  Stack,
+} from '@mui/material'
 
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
-import { STORE_CONTRACT_ADDRESS } from '@/const/contracts';
-import { useAccount } from 'wagmi';
-import { useContract, useOwnedNFTs } from '@thirdweb-dev/react';
-import { useState } from 'react';
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+import { STORE_CONTRACT_ADDRESS } from '@/const/contracts'
+import { useAccount } from 'wagmi'
+import { useContract, useOwnedNFTs } from '@thirdweb-dev/react'
+import { useState } from 'react'
 
 function WalletUsePage() {
-  const [selectedIdx, setSelectedIdx] = useState<number | undefined>(0);
-  const { address } = useAccount();
-  const { contract } = useContract(STORE_CONTRACT_ADDRESS);
+  const [selectedIdx, setSelectedIdx] = useState<number | undefined>(0)
+  const { address } = useAccount()
+  const { contract } = useContract(STORE_CONTRACT_ADDRESS)
   const { data: ownedNFTs, isLoading: ownedNFTsLoading } = useOwnedNFTs(
     contract?.nft,
-    address
-  );
-
-  console.log(ownedNFTs);
+    address,
+  )
 
   return (
     <>
@@ -57,11 +55,11 @@ function WalletUsePage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-WalletUsePage.getLayout = (page) => (
+WalletUsePage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default WalletUsePage;
+export default WalletUsePage

@@ -1,18 +1,18 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
-import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
+import * as React from 'react'
+import clsx from 'clsx'
+import { useRouter } from 'next/router'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
+import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 
 // Add support for the sx prop for consistency with the other branches.
-const Anchor = styled('a')({});
+const Anchor = styled('a')({})
 
 interface NextLinkComposedProps
   extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>,
     Omit<NextLinkProps, 'href' | 'as' | 'onClick' | 'onMouseEnter'> {
-  to: NextLinkProps['href'];
-  linkAs?: NextLinkProps['as'];
+  to: NextLinkProps['href']
+  linkAs?: NextLinkProps['as']
 }
 
 export const NextLinkComposed = React.forwardRef<
@@ -20,7 +20,7 @@ export const NextLinkComposed = React.forwardRef<
   NextLinkComposedProps
 >(function NextLinkComposed(props, ref) {
   const { to, linkAs, replace, scroll, shallow, prefetch, locale, ...other } =
-    props;
+    props
 
   return (
     <NextLink
@@ -35,23 +35,23 @@ export const NextLinkComposed = React.forwardRef<
     >
       <Anchor ref={ref} {...other} />
     </NextLink>
-  );
-});
+  )
+})
 
 export type LinkProps = {
-  activeClassName?: string;
-  as?: NextLinkProps['as'];
-  href: NextLinkProps['href'];
-  linkAs?: NextLinkProps['as']; // Useful when the as prop is shallow by styled().
-  noLinkStyle?: boolean;
+  activeClassName?: string
+  as?: NextLinkProps['as']
+  href: NextLinkProps['href']
+  linkAs?: NextLinkProps['as'] // Useful when the as prop is shallow by styled().
+  noLinkStyle?: boolean
 } & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
-  Omit<MuiLinkProps, 'href'>;
+  Omit<MuiLinkProps, 'href'>
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/api-reference/next/link
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   props,
-  ref
+  ref,
 ) {
   const {
     activeClassName = 'active',
@@ -63,31 +63,30 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     noLinkStyle,
     prefetch,
     replace,
-    role, // Link don't have roles.
     scroll,
     shallow,
     ...other
-  } = props;
+  } = props
 
-  const router = useRouter();
-  const pathname = typeof href === 'string' ? href : href.pathname;
+  const router = useRouter()
+  const pathname = typeof href === 'string' ? href : href.pathname
   const className = clsx(classNameProps, {
-    [activeClassName]: router.pathname === pathname && activeClassName
-  });
+    [activeClassName]: router.pathname === pathname && activeClassName,
+  })
 
   const isExternal =
     typeof href === 'string' &&
-    (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
+    (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0)
 
   if (isExternal) {
     if (noLinkStyle) {
-      return <Anchor className={className} href={href} ref={ref} {...other} />;
+      return <Anchor className={className} href={href} ref={ref} {...other} />
     }
 
-    return <MuiLink className={className} href={href} ref={ref} {...other} />;
+    return <MuiLink className={className} href={href} ref={ref} {...other} />
   }
 
-  const linkAs = linkAsProp || as;
+  const linkAs = linkAsProp || as
   const nextjsProps = {
     to: href,
     linkAs,
@@ -95,8 +94,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     scroll,
     shallow,
     prefetch,
-    locale
-  };
+    locale,
+  }
 
   if (noLinkStyle) {
     return (
@@ -106,7 +105,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         {...nextjsProps}
         {...other}
       />
-    );
+    )
   }
 
   return (
@@ -117,7 +116,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       {...nextjsProps}
       {...other}
     />
-  );
-});
+  )
+})
 
-export default Link;
+export default Link
