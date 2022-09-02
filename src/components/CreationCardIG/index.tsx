@@ -1,13 +1,9 @@
-import * as React from 'react';
-
-// UTILS
-import time_ago from '@/util/timeAgo';
+import * as React from 'react'
 
 // STYLES
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo';
 
 // MUI COMPONENTS
 import {
@@ -19,73 +15,59 @@ import {
   CardMedia,
   Chip,
   Collapse,
-  SvgIcon,
-  Icon,
   Tooltip,
   IconButton,
-  Typography
-} from '@mui/material';
-import { IconButtonProps } from '@mui/material/IconButton';
+  Typography,
+} from '@mui/material'
+import { IconButtonProps } from '@mui/material/IconButton'
 
 // COLORS
-import { red } from '@mui/material/colors';
+import { red } from '@mui/material/colors'
 
 // ICONS
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { RiMagicLine, RiMagicFill } from 'react-icons/ri';
-import { IoFlashOutline, IoFlashSharp } from 'react-icons/io5';
-import { TiArrowShuffle } from 'react-icons/ti';
-import {
-  HiSparkles,
-  HiOutlineSparkles,
-  HiCube,
-  HiOutlineCube
-} from 'react-icons/hi';
-import IosShareIcon from '@mui/icons-material/IosShare';
-import { FaDiscord, FaRobot, FaRetweet, FaHashtag } from 'react-icons/fa';
-import { AiFillFire, AiOutlineFire } from 'react-icons/ai';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { HiOutlineSparkles } from 'react-icons/hi'
+import IosShareIcon from '@mui/icons-material/IosShare'
+import { FaDiscord, FaRetweet, FaHashtag } from 'react-icons/fa'
+import { AiOutlineFire } from 'react-icons/ai'
 
 // META ICONS
-import { GrChannel } from 'react-icons/gr';
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import MemoryIcon from '@mui/icons-material/Memory';
-import { SiEthereum } from 'react-icons/si';
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull'
+import MemoryIcon from '@mui/icons-material/Memory'
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 
 interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
+  expand: boolean
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+  const { ...other } = props
+  return <IconButton {...other} />
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest
-  })
-}));
+    duration: theme.transitions.duration.shortest,
+  }),
+}))
 
 export default function CreationCardIG({ creation }) {
-  const { address, text_input, date, _id, sha, status_code, intermediate_sha } =
-    creation;
-  const { model_name, clip_model, width, height, username } = creation.config;
-  // const { generator_name } = creation.generator.name;
-  const { origin, author_name, channel_name } = creation.source;
+  const { address, text_input, intermediate_sha } = creation
+  const { model_name, clip_model, width, height } = creation.config
+  const { origin, author_name, channel_name } = creation.source
 
-  const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//';
+  const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+    setExpanded(!expanded)
+  }
 
-  const currentUserName = origin === 'discord' ? author_name : address;
-  const creationTimeAgo = time_ago(date.toString(), date);
+  const currentUserName = origin === 'discord' ? author_name : address
+  const creationTimeAgo = 100
 
   const currentGuildIcon =
     creation.source.guild_name === 'abraham-ai' ? (
@@ -94,10 +76,9 @@ export default function CreationCardIG({ creation }) {
       // <SiEthereum />
       <FaDiscord />
       // <AppLogo style={{ width: 10 }} size={'icon-small'} />
-    );
+    )
 
-  const currentModel = model_name !== null ? model_name : null;
-  const currentClipModel = clip_model !== null ? clip_model : null;
+  const currentClipModel = clip_model !== null ? clip_model : null
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -227,5 +208,5 @@ export default function CreationCardIG({ creation }) {
         </CardContent>
       </Collapse>
     </Card>
-  );
+  )
 }

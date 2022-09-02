@@ -1,52 +1,47 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 // NAV
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // MUI
 import {
   Collapse,
-  Button,
   Container,
   Typography,
   Box,
   styled,
-  IconButton
-} from '@mui/material';
-
-// COMPONENTS
-import { useAccount } from 'wagmi';
+  IconButton,
+  IconButtonProps,
+} from '@mui/material'
 
 // ICONS
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add'
 
 interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
+  expand: boolean
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+  const { ...other } = props
+  return <IconButton {...other} />
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest
-  })
-}));
+    duration: theme.transitions.duration.shortest,
+  }),
+}))
 
 function EdenDevFAQPage() {
-  const { address, isConnected } = useAccount();
-
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(true)
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+    setExpanded(!expanded)
+  }
 
   return (
     <>
@@ -80,7 +75,7 @@ function EdenDevFAQPage() {
             minWidth: 600,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           <Box
@@ -95,7 +90,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -105,7 +100,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -144,7 +139,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -154,7 +149,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -193,7 +188,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -203,7 +198,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -242,7 +237,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -254,7 +249,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -293,7 +288,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Typography variant={'h3'}>What is Eden.Art?</Typography>
@@ -314,7 +309,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Typography variant={'h3'}>How Much does Eden.Dev Cost?</Typography>
@@ -335,7 +330,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -345,7 +340,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -384,7 +379,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -394,7 +389,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -433,7 +428,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -443,7 +438,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -482,7 +477,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -494,7 +489,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -533,7 +528,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -545,7 +540,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -584,7 +579,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -597,7 +592,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -636,7 +631,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -648,7 +643,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -687,7 +682,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -699,7 +694,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -738,7 +733,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -750,7 +745,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -789,7 +784,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -801,7 +796,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -840,7 +835,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -852,7 +847,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -891,7 +886,7 @@ function EdenDevFAQPage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              flex: 1
+              flex: 1,
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -903,7 +898,7 @@ function EdenDevFAQPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
                 }}
               >
                 <ExpandMore
@@ -933,11 +928,11 @@ function EdenDevFAQPage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-EdenDevFAQPage.getLayout = (page) => (
+EdenDevFAQPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default EdenDevFAQPage;
+export default EdenDevFAQPage

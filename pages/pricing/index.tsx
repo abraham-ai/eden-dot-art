@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   styled,
   Container,
@@ -7,28 +7,21 @@ import {
   Typography,
   Card,
   CardContent,
-  CardHeader,
   Button,
   Link,
-  Switch
-} from '@mui/material';
+  Switch,
+  CardHeader,
+} from '@mui/material'
 
-import CreditsTable from '@/components/CreditsTable';
+import CreditsTable from '@/components/CreditsTable'
 
-const useStyles = styled((theme) => ({
-  section: {
-    backgroundImage: 'url("nereus-assets/img/bg/pattern1.png")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
-  },
-  cardHeader: {
-    paddingTop: theme.spacing(3)
-  }
-}));
+const Section = styled('section')({
+  backgroundImage: `url("nereus-assets/img/bg/pattern1.png")`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+})
 
 export default function Pricing(props) {
-  const classes = useStyles();
-
   const content = {
     badge: 'LOREM IPSUM',
     'header-p1': 'Donec lacinia',
@@ -64,19 +57,19 @@ export default function Pricing(props) {
     '03_benefit4': '50 GB Storage',
     '03_primary-action': 'Select plan',
     '03_secondary-action': 'Learn more',
-    ...props.content
-  };
+    ...props.content,
+  }
 
   const [state, setState] = React.useState({
-    checkbox: true
-  });
+    checkbox: true,
+  })
 
-  const handleChange = (event) => {
-    setState({ ...state, checkbox: event.target.checked });
-  };
+  const handleChange = event => {
+    setState({ ...state, checkbox: event.target.checked })
+  }
 
   return (
-    <section className={classes.section}>
+    <Section>
       <Container maxWidth="lg">
         <Typography variant={'h2'}>Credit Pricing</Typography>
 
@@ -125,10 +118,7 @@ export default function Pricing(props) {
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['01_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['01_title']} />
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -171,11 +161,7 @@ export default function Pricing(props) {
                       {content['01_benefit4']}
                     </Typography>
                   </Box>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    className={classes.primaryAction}
-                  >
+                  <Button variant="outlined" color="primary">
                     {content['01_primary-action']}
                   </Button>
                   <Box mt={2}>
@@ -188,10 +174,7 @@ export default function Pricing(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['02_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['02_title']}></CardHeader>
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -247,10 +230,7 @@ export default function Pricing(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['03_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['03_title']}></CardHeader>
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -307,6 +287,6 @@ export default function Pricing(props) {
           </Grid>
         </Box>
       </Container>
-    </section>
-  );
+    </Section>
+  )
 }

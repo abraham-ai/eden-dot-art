@@ -1,81 +1,51 @@
-import { useState } from 'react';
-import Head from 'next/head';
+import { useState } from 'react'
+import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
 import {
   Box,
-  alpha,
   InputLabel,
-  Stack,
-  lighten,
   MenuItem,
-  Divider,
-  IconButton,
   FormControl,
   Container,
   Select,
-  Tooltip,
-  styled,
-  useTheme,
-  Typography,
-  LinkMUI
-} from '@mui/material';
+  SelectChangeEvent,
+} from '@mui/material'
 
 // COMPONENTS
-import CreationCardMedia from '@/components/CreationCardMedia';
-import CreationCardIG from '@/components/CreationCardIG';
-import Masonry from '@mui/lab/Masonry';
-import { useAccount, useContractRead } from 'wagmi';
+import CreationCardIG from '@/components/CreationCardIG'
+import Masonry from '@mui/lab/Masonry'
 
 // CONSTS
-import { GET_CREATIONS } from '@/const/get-creations';
+import { GET_CREATIONS } from '@/const/get-creations'
 
 // ICONS
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { HiChip } from 'react-icons/hi';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import BorderAllIcon from '@mui/icons-material/BorderAll';
-import PersonIcon from '@mui/icons-material/Person';
-import FlareIcon from '@mui/icons-material/Flare';
-import { BorderBottomOutlined } from '@ant-design/icons';
-import { RiMagicLine, RiMagicFill } from 'react-icons/ri';
-import { IoFlashOutline, IoFlashSharp } from 'react-icons/io5';
-import { TiArrowShuffle } from 'react-icons/ti';
-import {
-  HiSparkles,
-  HiOutlineSparkles,
-  HiCube,
-  HiOutlineCube
-} from 'react-icons/hi';
-import { FaDiscord, FaRobot } from 'react-icons/fa';
-import { SiEthereum } from 'react-icons/si';
-import { AiFillFire, AiOutlineFire } from 'react-icons/ai';
+import { IoFlashOutline } from 'react-icons/io5'
+import { HiOutlineSparkles } from 'react-icons/hi'
+import { FaDiscord, FaRobot } from 'react-icons/fa'
+import { SiEthereum } from 'react-icons/si'
+import { AiOutlineFire } from 'react-icons/ai'
 
 // LAYOUT ICONS
-import { TbRectangleVertical, TbSquare } from 'react-icons/tb';
-import { MdOutlineCropLandscape } from 'react-icons/md';
+import { TbRectangleVertical, TbSquare } from 'react-icons/tb'
+import { MdOutlineCropLandscape } from 'react-icons/md'
 
 // VIEW ICONS
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import ListIcon from '@mui/icons-material/List';
-import GridViewIcon from '@mui/icons-material/GridView';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn'
+import ListIcon from '@mui/icons-material/List'
+import GridViewIcon from '@mui/icons-material/GridView'
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt'
 
 function CreationsPage() {
-  const { address, isConnected } = useAccount();
-
-  const [model, setModel] = useState('');
+  const [model, setModel] = useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
-    setModel(event.target.value as string);
-  };
+    setModel(event.target.value as string)
+  }
 
   // label={
   //   <>
@@ -109,7 +79,7 @@ function CreationsPage() {
             justifyContent: 'center',
             alignItems: 'center',
             pt: 10,
-            pb: 3
+            pb: 3,
           }}
         >
           <FormControl
@@ -167,7 +137,7 @@ function CreationsPage() {
                     width: 10,
                     marginRight: 10,
                     borderRadius: '50%',
-                    position: 'relative'
+                    position: 'relative',
                   }}
                 ></span>
                 Eden Clip X
@@ -276,11 +246,11 @@ function CreationsPage() {
         <Box sx={{ width: '100%', minHeight: 393 }}>
           <Masonry columns={4} spacing={2}>
             {GET_CREATIONS.map((creation, index) => {
-              const rand = Math.random();
+              const rand = Math.random()
               if (rand > 0.5) {
-                return <CreationCardIG key={index} creation={creation} />;
+                return <CreationCardIG key={index} creation={creation} />
               } else {
-                return <CreationCardIG key={index} creation={creation} />;
+                return <CreationCardIG key={index} creation={creation} />
                 // return <CreationCardMedia key={index} creation={creation} />;
               }
             })}
@@ -289,11 +259,11 @@ function CreationsPage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-CreationsPage.getLayout = (page) => (
+CreationsPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default CreationsPage;
+export default CreationsPage

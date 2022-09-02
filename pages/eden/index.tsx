@@ -1,20 +1,15 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 // NEXTJS
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
-import Footer from '@/components/Footer';
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+import Footer from '@/components/Footer'
 
 // COMPONENTS
-import { Authenticated } from '@/components/Authenticated';
-import ImageListQuilted from '@/components/ImageListQuilted';
-import ImageListStandard from '@/components/ImageListStandard';
-import CreationCarousel from '@/components/CreationCarousel';
-
-// HOOKS
-import { useAccount } from 'wagmi';
+import ImageListQuilted from '@/components/ImageListQuilted'
+import ImageListStandard from '@/components/ImageListStandard'
 
 // UI
 import {
@@ -28,63 +23,27 @@ import {
   Typography,
   InputAdornment,
   IconButton,
-  Icon
-} from '@mui/material';
+} from '@mui/material'
 
 // ROUTER
-import Link from '@/components/Link';
 
 // ICONS || ACTIONS
-import AppLogo from '@/components/AppLogo';
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import SchoolIcon from '@mui/icons-material/School';
+import AppLogo from '@/components/AppLogo'
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
+import TravelExploreIcon from '@mui/icons-material/TravelExplore'
+import LiveTvIcon from '@mui/icons-material/LiveTv'
+import SchoolIcon from '@mui/icons-material/School'
 
 // ICONS || CREATE INPUT
-import CreateIcon from '@/components/CreateIcon';
-import { FaDiscord } from 'react-icons/fa';
-import TuneIcon from '@mui/icons-material/Tune';
-import MicIcon from '@mui/icons-material/MicIcon';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlinedIcon';
+import CreateIcon from '@/components/CreateIcon'
+import TuneIcon from '@mui/icons-material/Tune'
 
 // ICONS || CREATE TEMPLATE
-import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
 
 // ICONS || MODIFIERS
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-
-// INFO ICONS
-import InfoIcon from '@mui/icons-material/Info';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import { MdHomeFilled } from 'react-icons/md';
-
-// CREATE ICONS
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import CropLandscapeIcon from '@mui/icons-material/CropLandscape';
-import { TbRectangleVertical } from 'react-icons/tb';
-
-// SORT ICONS
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import BorderAllIcon from '@mui/icons-material/BorderAll';
-import PersonIcon from '@mui/icons-material/Person';
-import FlareIcon from '@mui/icons-material/Flare';
-import { RiMagicLine, RiMagicFill } from 'react-icons/ri';
-import { IoFlashOutline, IoFlashSharp } from 'react-icons/io5';
-import { AiFillFire, AiOutlineFire } from 'react-icons/ai';
-
-// PRICNG ICONS
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { GrMoney } from 'react-icons/gr';
-// import { BorderBottomOutlined } from '@ant-design/icons';
-import { TiArrowShuffle } from 'react-icons/ti';
-import {
-  HiSparkles,
-  HiOutlineSparkles,
-  HiCube,
-  HiOutlineCube
-} from 'react-icons/hi';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 // STYLES
 const EdenHomeStyles = styled(Box)(
@@ -271,14 +230,13 @@ const EdenHomeStyles = styled(Box)(
     .discover-wrapper.grid-square  .discover-img-wrapper .discover-img-single {
       width: 50%;
     }
-`
-);
+`,
+)
 
-const filter = createFilterOptions<FilmOptionType>();
+const filter = createFilterOptions()
 
 function EdenArtHomePage() {
-  const [value, setValue] = useState<FilmOptionType | null>(null);
-  const { address, isConnected } = useAccount();
+  const [value, setValue] = useState(null)
   return (
     <>
       <Head>
@@ -300,60 +258,60 @@ function EdenArtHomePage() {
             <AppLogo logo="eden" size="large" />
             <Autocomplete
               value={value}
-              onChange={(event, newValue) => {
+              onChange={(_, newValue) => {
                 if (typeof newValue === 'string') {
                   setValue({
-                    title: newValue
-                  });
+                    title: newValue,
+                  })
                 } else if (newValue && newValue.inputValue) {
                   // Create a new value from the user input
                   setValue({
-                    title: newValue.inputValue
-                  });
+                    title: newValue.inputValue,
+                  })
                 } else {
-                  setValue(newValue);
+                  setValue(newValue)
                 }
               }}
               id="text-input-autocomplete"
               filterOptions={(options, params) => {
-                const filtered = filter(options, params);
+                const filtered = filter(options, params)
 
-                const { inputValue } = params;
+                const { inputValue } = params
                 // Suggest the creation of a new value
                 const isExisting = options.some(
-                  (option) => inputValue === option.title
-                );
+                  option => inputValue === option.title,
+                )
                 if (inputValue !== '' && !isExisting) {
                   filtered.push({
                     inputValue,
-                    title: `Add "${inputValue}"`
-                  });
+                    title: `Add "${inputValue}"`,
+                  })
                 }
 
-                return filtered;
+                return filtered
               }}
               selectOnFocus
               clearOnBlur
               handleHomeEndKeys
               options={top100Films}
-              getOptionLabel={(option) => {
+              getOptionLabel={option => {
                 // Value selected with enter, right from the input
                 if (typeof option === 'string') {
-                  return option;
+                  return option
                 }
                 // Add "xxx" option created dynamically
                 if (option.inputValue) {
-                  return option.inputValue;
+                  return option.inputValue
                 }
                 // Regular option
-                return option.title;
+                return option.title
               }}
               renderOption={(props, option) => (
                 <li {...props}>{option.title}</li>
               )}
               sx={{ width: 600 }}
               freeSolo
-              renderInput={(params) => (
+              renderInput={params => (
                 <TextField
                   {...params}
                   label="Create prompt"
@@ -373,7 +331,7 @@ function EdenArtHomePage() {
                       <InputAdornment position="start">
                         <CreateIcon />
                       </InputAdornment>
-                    )
+                    ),
                   }}
                 />
               )}
@@ -411,8 +369,6 @@ function EdenArtHomePage() {
               </Box>
             </div>
           </section>
-
-          {/* <CreationCarousel /> */}
 
           <section className="section-wrapper templates-wrapper">
             <div className="section-header-wrapper">
@@ -881,7 +837,7 @@ function EdenArtHomePage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
@@ -895,23 +851,23 @@ const top100Films = [
   { title: 'Pulp Fiction', year: 1994 },
   {
     title: 'The Lord of the Rings: The Return of the King',
-    year: 2003
+    year: 2003,
   },
   { title: 'The Good, the Bad and the Ugly', year: 1966 },
   { title: 'Fight Club', year: 1999 },
   {
     title: 'The Lord of the Rings: The Fellowship of the Ring',
-    year: 2001
+    year: 2001,
   },
   {
     title: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980
+    year: 1980,
   },
   { title: 'Forrest Gump', year: 1994 },
   { title: 'Inception', year: 2010 },
   {
     title: 'The Lord of the Rings: The Two Towers',
-    year: 2002
+    year: 2002,
   },
   { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
   { title: 'Goodfellas', year: 1990 },
@@ -919,7 +875,7 @@ const top100Films = [
   { title: 'Seven Samurai', year: 1954 },
   {
     title: 'Star Wars: Episode IV - A New Hope',
-    year: 1977
+    year: 1977,
   },
   { title: 'City of God', year: 2002 },
   { title: 'Se7en', year: 1995 },
@@ -956,7 +912,7 @@ const top100Films = [
   {
     title:
       'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-    year: 1964
+    year: 1964,
   },
   { title: 'The Great Dictator', year: 1940 },
   { title: 'Cinema Paradiso', year: 1988 },
@@ -979,7 +935,7 @@ const top100Films = [
   { title: 'Vertigo', year: 1958 },
   {
     title: 'Star Wars: Episode VI - Return of the Jedi',
-    year: 1983
+    year: 1983,
   },
   { title: 'Reservoir Dogs', year: 1992 },
   { title: 'Braveheart', year: 1995 },
@@ -993,7 +949,7 @@ const top100Films = [
   { title: 'Double Indemnity', year: 1944 },
   {
     title: 'Eternal Sunshine of the Spotless Mind',
-    year: 2004
+    year: 2004,
   },
   { title: 'Amadeus', year: 1984 },
   { title: 'To Kill a Mockingbird', year: 1962 },
@@ -1010,11 +966,11 @@ const top100Films = [
   { title: 'Inglourious Basterds', year: 2009 },
   { title: 'Snatch', year: 2000 },
   { title: '3 Idiots', year: 2009 },
-  { title: 'Monty Python and the Holy Grail', year: 1975 }
-];
+  { title: 'Monty Python and the Holy Grail', year: 1975 },
+]
 
-EdenArtHomePage.getLayout = (page) => (
+EdenArtHomePage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default EdenArtHomePage;
+export default EdenArtHomePage

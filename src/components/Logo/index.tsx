@@ -1,9 +1,8 @@
-import { Box, styled, Tooltip } from '@mui/material';
-import Link from 'src/components/Link';
+import { Box, styled, Tooltip } from '@mui/material'
+import Link from 'src/components/Link'
 
 // ICONS
-import AppLogo from '../AppLogo';
-import EnergySavingsLeafIcon from '@mui/icons-material/EnergySavingsLeaf';
+import AppLogo from '../AppLogo'
 
 const LogoWrapper = styled(Link)(
   ({ theme }) => `
@@ -16,73 +15,23 @@ const LogoWrapper = styled(Link)(
         &:hover {
           text-decoration: none;
         }
-`
-);
+`,
+)
 
 const LogoSignWrapper = styled(Box)(
   () => `
         display: flex;
         align-items: center;
-`
-);
-
-const LogoSign = styled(Box)(
-  ({ theme }) => `
-        background: ${theme.general.reactFrameworkColor};
-        width: 18px;
-        height: 18px;
-        border-radius: ${theme.general.borderRadiusSm};
-        position: relative;
-        transform: rotate(45deg);
-        top: 3px;
-        left: 17px;
-
-        &:after, 
-        &:before {
-            content: "";
-            display: block;
-            width: 18px;
-            height: 18px;
-            position: absolute;
-            top: -1px;
-            right: -20px;
-            transform: rotate(0deg);
-            border-radius: ${theme.general.borderRadiusSm};
-        }
-
-        &:before {
-            background: ${theme.palette.primary.main};
-            right: auto;
-            left: 0;
-            top: 20px;
-        }
-
-        &:after {
-            background: ${theme.palette.secondary.main};
-        }
-`
-);
-
-const LogoSignInner = styled(Box)(
-  ({ theme }) => `
-        width: 16px;
-        height: 16px;
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        z-index: 5;
-        border-radius: ${theme.general.borderRadiusSm};
-        background: ${theme.header.background};
-`
-);
+`,
+)
 
 const LogoTextWrapper = styled(Box)(
   ({ theme }) => `
         padding-left: ${theme.spacing(1)};
         display: 'flex';
         align-items: center;
-`
-);
+`,
+)
 
 const VersionBadge = styled(Box)(
   ({ theme }) => `
@@ -94,15 +43,15 @@ const VersionBadge = styled(Box)(
         display: inline-block;
         line-height: 1;
         font-size: ${theme.typography.pxToRem(11)};
-`
-);
+`,
+)
 
 const LogoText = styled(Box)(
   ({ theme }) => `
         font-size: ${theme.typography.pxToRem(15)};
         font-weight: ${theme.typography.fontWeightBold};
-`
-);
+`,
+)
 
 function Logo() {
   return (
@@ -121,7 +70,7 @@ function Logo() {
         component="span"
         sx={{
           display: { xs: 'none', sm: 'flex' },
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <LogoTextWrapper>
@@ -132,7 +81,7 @@ function Logo() {
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>
-  );
+  )
 }
 
-export default Logo;
+export default Logo

@@ -1,26 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 // ROUTES
-import menuItems, { MenuItem } from './items';
+import menuItems, { MenuItem } from './items'
 
 // ROUTER
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 // NAV
-import SidebarMenuItem from './item';
+import SidebarMenuItem from './item'
 
 // UI
-import { ListSubheader, alpha, Box, List, styled } from '@mui/material';
+import { ListSubheader, alpha, Box, List, styled } from '@mui/material'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo';
+import AppLogo from '@/components/AppLogo'
 
 const AppLogoWrapper = styled(Box)(
-  ({ theme }) => `
+  () => `
   display: flex;
   justify-content: center;
-  `
-);
+  `,
+)
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -40,8 +40,8 @@ const MenuWrapper = styled(Box)(
       padding: ${theme.spacing(0, 2.5)};
       line-height: 1.4;
     }
-`
-);
+`,
+)
 
 const SubMenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -138,7 +138,7 @@ const SubMenuWrapper = styled(Box)(
                 opacity: 0;
                 transition: ${theme.transitions.create([
                   'transform',
-                  'opacity'
+                  'opacity',
                 ])};
                 width: 6px;
                 height: 6px;
@@ -161,35 +161,35 @@ const SubMenuWrapper = styled(Box)(
         }
       }
     }
-`
-);
+`,
+)
 
 const renderSidebarMenuItems = ({
   items,
-  path
+  path,
 }: {
-  items: MenuItem[];
-  path: string;
+  items: MenuItem[]
+  path: string
 }): JSX.Element => (
   <SubMenuWrapper>
     <List component="div">
       {items.reduce((ev, item) => reduceChildRoutes({ ev, item, path }), [])}
     </List>
   </SubMenuWrapper>
-);
+)
 
 const reduceChildRoutes = ({
   ev,
   path,
-  item
+  item,
 }: {
-  ev: JSX.Element[];
-  path: string;
-  item: MenuItem;
+  ev: JSX.Element[]
+  path: string
+  item: MenuItem
 }): Array<JSX.Element> => {
-  const key = item.name;
-  const partialMatch = path.includes(item.link);
-  const exactMatch = path === item.link;
+  const key = item.name
+  const partialMatch = path.includes(item.link)
+  const exactMatch = path === item.link
 
   if (item.items) {
     ev.push(
@@ -205,10 +205,10 @@ const reduceChildRoutes = ({
       >
         {renderSidebarMenuItems({
           path,
-          items: item.items
+          items: item.items,
         })}
-      </SidebarMenuItem>
-    );
+      </SidebarMenuItem>,
+    )
   } else {
     ev.push(
       <SidebarMenuItem
@@ -219,30 +219,30 @@ const reduceChildRoutes = ({
         badge={item.badge}
         badgeTooltip={item.badgeTooltip}
         icon={item.icon}
-      />
-    );
+      />,
+    )
   }
 
-  return ev;
-};
+  return ev
+}
 
 function SidebarMenu() {
-  const router = useRouter();
+  const router = useRouter()
 
   const handlePathChange = () => {
     if (!router.isReady) {
-      return;
+      return
     }
-  };
+  }
 
-  useEffect(handlePathChange, [router.isReady, router.asPath]);
+  useEffect(handlePathChange, [router.isReady, router.asPath])
 
   return (
     <>
       <AppLogoWrapper id="app-logo-wrapper">
         <AppLogo logo={'eden'} />
       </AppLogoWrapper>
-      {menuItems.map((section) => (
+      {menuItems.map(section => (
         <MenuWrapper key={section.heading}>
           <List
             component="div"
@@ -254,13 +254,13 @@ function SidebarMenu() {
           >
             {renderSidebarMenuItems({
               items: section.items,
-              path: router.asPath
+              path: router.asPath,
             })}
           </List>
         </MenuWrapper>
       ))}
     </>
-  );
+  )
 }
 
-export default SidebarMenu;
+export default SidebarMenu

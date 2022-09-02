@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 // ROUTING
-import Link from 'next/link';
+import Link from 'next/link'
 // import { NavLink, Link } from 'react-router-dom';
 
 // UI
@@ -9,37 +9,33 @@ import {
   Button,
   Typography,
   Box,
-  Alert,
   styled,
   Container,
   Card,
-  CardMedia
-} from '@mui/material';
+  CardMedia,
+} from '@mui/material'
 // import { BuildTwoTone, GithubOutlined } from '@ant-design/icons';
 
 // ICONS
-import { AiFillApi } from 'react-icons/ai';
+import { AiFillApi } from 'react-icons/ai'
 
-import EnergySavingsLeafIcon from '@mui/icons-material/EnergySavingsLeaf';
-import { FaRobot, FaTiktok, FaDiscord, FaTwitter } from 'react-icons/fa';
-import { AiFillInstagram } from 'react-icons/ai';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import { FaRobot, FaTiktok, FaDiscord, FaTwitter } from 'react-icons/fa'
+import { AiFillInstagram } from 'react-icons/ai'
 
-import MemoryIcon from '@mui/icons-material/Memory';
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import AppShortcutIcon from '@mui/icons-material/AppShortcut';
+import MemoryIcon from '@mui/icons-material/Memory'
+import CloudQueueIcon from '@mui/icons-material/CloudQueue'
+import AppShortcutIcon from '@mui/icons-material/AppShortcut'
 
 // ROUTES
-import { ROUTES } from 'src/const/routes';
 
 // DESIGN
-import NetworkVector1 from '@/components/NetworkVector1';
-import NetworkVector2 from '@/components/NetworkVector2';
+import NetworkVector1 from '@/components/NetworkVector1'
+import NetworkVector2 from '@/components/NetworkVector2'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo';
-import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid';
-import Subscribe from '@/components/Subscribe';
+import AppLogo from '@/components/AppLogo'
+import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
+import Subscribe from '@/components/Subscribe'
 // EdenHeader,
 // FollowUs
 
@@ -300,8 +296,8 @@ const EdenDevFrontPageStyles = styled('section')(
   }
   @media (min-width: 80em) {
   }
-`
-);
+`,
+)
 
 export function AppLink({ title, description, icon }) {
   return (
@@ -318,7 +314,7 @@ export function AppLink({ title, description, icon }) {
         </span>
       </div>
     </>
-  );
+  )
 }
 
 export default function EdenDevFrontPage() {
@@ -334,7 +330,7 @@ export default function EdenDevFrontPage() {
               className="logo-wrapper"
               style={{
                 justifyContent: 'center',
-                display: 'flex'
+                display: 'flex',
               }}
             >
               <AppLogo logo="eden" size="large" position="middle" />
@@ -349,7 +345,7 @@ export default function EdenDevFrontPage() {
                 color: '#8C7CF0;',
                 background:
                   'linear-gradient(45deg, rgb(97, 87, 255) 0%, rgb(0, 204, 255) 100%) text',
-                zIndex: 50
+                zIndex: 50,
               }}
             >
               Image Synthesis Engine
@@ -379,7 +375,7 @@ export default function EdenDevFrontPage() {
                 maxWidth: 700,
                 lineHeight: 2,
                 zIndex: 50,
-                color: 'rgb(166, 166, 166)'
+                color: 'rgb(166, 166, 166)',
               }}
             >
               we are Artworks, Digital Paintings, Apps, Video Clips, Stories,
@@ -396,7 +392,7 @@ export default function EdenDevFrontPage() {
                 position: 'relative',
                 display: 'flex',
                 justifyContent: 'center',
-                padding: 0
+                padding: 0,
               }}
             >
               <CardMedia
@@ -405,7 +401,7 @@ export default function EdenDevFrontPage() {
                   position: 'absolute',
                   bottom: '-450px',
                   maxWidth: '600px',
-                  zIndex: 40
+                  zIndex: 40,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -447,7 +443,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               top: '60px',
               zIndex: 0,
-              left: 0
+              left: 0,
             }}
           >
             <CardMedia
@@ -465,7 +461,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               bottom: 0,
               zIndex: 0,
-              left: '8%'
+              left: '8%',
             }}
           >
             <CardMedia
@@ -483,7 +479,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               top: '-15%',
               zIndex: 0,
-              left: '18%'
+              left: '18%',
             }}
           >
             <CardMedia
@@ -501,7 +497,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               bottom: '50%',
               zIndex: 0,
-              right: '5%'
+              right: '5%',
             }}
           >
             <CardMedia
@@ -519,7 +515,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               bottom: '-10%',
               zIndex: 0,
-              right: '8%'
+              right: '8%',
             }}
           >
             <CardMedia
@@ -537,7 +533,7 @@ export default function EdenDevFrontPage() {
               position: 'absolute',
               top: '-28%',
               zIndex: 0,
-              right: 0
+              right: 0,
             }}
           >
             <CardMedia
@@ -631,7 +627,7 @@ export default function EdenDevFrontPage() {
                   lineHeight: 1.5,
                   color: 'rgb(0 80 30)',
                   textAlign: 'center',
-                  pb: 8
+                  pb: 8,
                 }}
               >
                 <div>EDEN</div>
@@ -655,7 +651,7 @@ export default function EdenDevFrontPage() {
                   lineHeight: 1.5,
                   color: 'rgb(0 80 30)',
                   textAlign: 'center',
-                  pb: 8
+                  pb: 8,
                 }}
               >
                 We are the platform where you can find the AI content you are
@@ -671,7 +667,7 @@ export default function EdenDevFrontPage() {
                   fontSize: '1.5rem',
                   lineHeight: 1.5,
                   color: 'rgb(0 80 30)',
-                  textAlign: 'center'
+                  textAlign: 'center',
                 }}
               >
                 Whether you‘re a creator, content partner, developer, or artist
@@ -724,7 +720,7 @@ export default function EdenDevFrontPage() {
                 pb: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
               }}
             >
               <CardMedia
@@ -733,7 +729,7 @@ export default function EdenDevFrontPage() {
                   position: 'absolute',
                   top: '-45px',
                   maxWidth: '150px',
-                  zIndex: 40
+                  zIndex: 40,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -750,7 +746,7 @@ export default function EdenDevFrontPage() {
                   lineHeight: 1,
                   color: 'white',
                   pt: 3,
-                  textAlign: 'center'
+                  textAlign: 'center',
                 }}
               >
                 Our Philosophies
@@ -763,7 +759,7 @@ export default function EdenDevFrontPage() {
                   lineHeight: 1.5,
                   color: 'rgb(166, 166, 166)',
                   textAlign: 'center',
-                  pt: 3
+                  pt: 3,
                 }}
               >
                 This is what we believe. These philosophies guide our approach
@@ -777,7 +773,7 @@ export default function EdenDevFrontPage() {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  pr: 5
+                  pr: 5,
                 }}
               >
                 <Typography
@@ -787,7 +783,7 @@ export default function EdenDevFrontPage() {
                     fontSize: '1.5rem',
                     lineHeight: 1.5,
                     color: 'white',
-                    textAlign: 'center'
+                    textAlign: 'center',
                   }}
                 >
                   People Before Product
@@ -799,7 +795,7 @@ export default function EdenDevFrontPage() {
                     fontSize: '1rem',
                     lineHeight: 1.5,
                     textAlign: 'center',
-                    color: 'rgb(166, 166, 166)'
+                    color: 'rgb(166, 166, 166)',
                   }}
                 >
                   The most important product we can ever develop is our people.
@@ -812,7 +808,7 @@ export default function EdenDevFrontPage() {
                 className="eden-splash-video"
                 sx={{
                   maxWidth: '400px',
-                  zIndex: 40
+                  zIndex: 40,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -827,7 +823,7 @@ export default function EdenDevFrontPage() {
                 className="eden-splash-video"
                 sx={{
                   maxWidth: '400px',
-                  zIndex: 40
+                  zIndex: 40,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -841,7 +837,7 @@ export default function EdenDevFrontPage() {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  pl: 5
+                  pl: 5,
                 }}
               >
                 <Typography
@@ -851,7 +847,7 @@ export default function EdenDevFrontPage() {
                     fontSize: '1.5rem',
                     lineHeight: 1.5,
                     color: 'white',
-                    textAlign: 'center'
+                    textAlign: 'center',
                   }}
                 >
                   Community Before Corporation
@@ -863,7 +859,7 @@ export default function EdenDevFrontPage() {
                     fontSize: '1rem',
                     lineHeight: 1.5,
                     color: 'rgb(166, 166, 166)',
-                    textAlign: 'center'
+                    textAlign: 'center',
                   }}
                 >
                   The most important product we can ever develop is our people.
@@ -879,13 +875,13 @@ export default function EdenDevFrontPage() {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  pr: 3
+                  pr: 3,
                 }}
               >
                 <Box
                   maxWidth={600}
                   sx={{
-                    pr: 5
+                    pr: 5,
                   }}
                 >
                   <Typography
@@ -895,7 +891,7 @@ export default function EdenDevFrontPage() {
                       fontSize: '1.5rem',
                       lineHeight: 1.5,
                       color: 'white',
-                      textAlign: 'center'
+                      textAlign: 'center',
                     }}
                   >
                     Relationships Before Process
@@ -907,7 +903,7 @@ export default function EdenDevFrontPage() {
                       fontSize: '1rem',
                       lineHeight: 1.5,
                       color: 'rgb(166, 166, 166)',
-                      textAlign: 'center'
+                      textAlign: 'center',
                     }}
                   >
                     The most important product we can ever develop is our
@@ -921,7 +917,7 @@ export default function EdenDevFrontPage() {
                 className="eden-splash-video"
                 sx={{
                   maxWidth: '400px',
-                  zIndex: 40
+                  zIndex: 40,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1078,7 +1074,7 @@ export default function EdenDevFrontPage() {
               sx={{
                 maxWidth: '150px',
                 zIndex: 40,
-                m: 5
+                m: 5,
               }}
               component="img"
               image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1093,7 +1089,7 @@ export default function EdenDevFrontPage() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}
           >
             <Typography
@@ -1158,7 +1154,7 @@ export default function EdenDevFrontPage() {
             position: 'relative',
             zIndex: 100,
             mt: 5,
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
           }}
         >
           <Typography variant={'h2'} sx={{ pb: 2, color: 'white' }}>
@@ -1172,7 +1168,7 @@ export default function EdenDevFrontPage() {
               fontSize: '1.5rem',
               color: 'rgb(166, 166, 166)',
               maxWidth: 600,
-              pb: 5
+              pb: 5,
             }}
           >
             Eden is an independent research lab exploring new mediums of thought
@@ -1185,7 +1181,7 @@ export default function EdenDevFrontPage() {
             style={{
               position: 'relative',
               height: 500,
-              width: '100%'
+              width: '100%',
             }}
           >
             <Box
@@ -1195,7 +1191,7 @@ export default function EdenDevFrontPage() {
                 justifyContent: 'center',
                 position: 'absolute',
                 height: 500,
-                bottom: 0
+                bottom: 0,
               }}
             >
               <CardMedia
@@ -1203,7 +1199,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 2
+                  m: 2,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1214,7 +1210,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 1
+                  m: 1,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1225,7 +1221,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 2
+                  m: 2,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1236,7 +1232,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 3
+                  m: 3,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1247,7 +1243,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 5
+                  m: 5,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1258,7 +1254,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 1
+                  m: 1,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1269,7 +1265,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 1
+                  m: 1,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1280,7 +1276,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   maxWidth: '250px',
                   zIndex: 40,
-                  m: 1
+                  m: 1,
                 }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
@@ -1400,5 +1396,5 @@ export default function EdenDevFrontPage() {
         </div> */}
       </div>
     </EdenDevFrontPageStyles>
-  );
+  )
 }

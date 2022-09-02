@@ -1,11 +1,11 @@
 // CSS
-import { Box, styled, Tooltip } from '@mui/material';
+import { styled } from '@mui/material'
 
 // COMPONENTS
-import Link from 'next/link';
+import Link from 'next/link'
 
 const LogoStyles = styled('div')(
-  ({ theme }) => `
+  () => `
   flex: 0;
   text-decoration: none !important;
   border: none !important;
@@ -56,79 +56,79 @@ const LogoStyles = styled('div')(
         max-width: 35px !important;
       } */
   }
-`
-);
+`,
+)
 
 export default function AppLogo({
   size = 'medium',
   position = 'middle',
-  logo = 'abraham'
+  logo = 'abraham',
 }) {
   const abrahamLogo =
-    'https://res.cloudinary.com/react-graphql-store/image/upload/v1637103749/abraham_uuknth.png';
+    'https://res.cloudinary.com/react-graphql-store/image/upload/v1637103749/abraham_uuknth.png'
   const edenLogo =
-    'https://res.cloudinary.com/react-graphql-store/image/upload/v1659514317/eden_logo_transparent_z62wfi.png';
+    'https://res.cloudinary.com/react-graphql-store/image/upload/v1659514317/eden_logo_transparent_z62wfi.png'
 
   function renderSize(size) {
     switch (size) {
       case 'icon-small':
-        return 'icon-small';
+        return 'icon-small'
       case 'x-small':
-        return 'x-small';
+        return 'x-small'
       case 'small':
-        return 'small';
+        return 'small'
       case 'medium':
-        return 'medium';
+        return 'medium'
       case 'large':
-        return 'large';
+        return 'large'
       case 'x-large':
-        return 'x-large';
+        return 'x-large'
       default:
-        return 'medium';
+        return 'medium'
     }
   }
 
   function renderPosition(position) {
-    let currentPosition;
+    let currentPosition
 
     switch (position) {
       case 'left':
-        currentPosition = 'left';
-        break;
+        currentPosition = 'left'
+        break
       case 'middle':
-        currentPosition = 'middle';
-        break;
+        currentPosition = 'middle'
+        break
       case 'right':
-        currentPosition = 'right';
-        break;
+        currentPosition = 'right'
+        break
       default:
-        currentPosition = 'middle';
-        break;
+        currentPosition = 'middle'
+        break
     }
-    return currentPosition;
+    return currentPosition
   }
 
   function renderLogo(logo) {
-    let currentLogo;
+    let currentLogo
 
     switch (logo) {
       case 'abraham':
-        currentLogo = abrahamLogo;
-        break;
+        currentLogo = abrahamLogo
+        break
       case 'eden':
-        currentLogo = edenLogo;
-        break;
+        currentLogo = edenLogo
+        break
       default:
-        currentLogo = edenLogo;
-        break;
+        currentLogo = edenLogo
+        break
     }
 
-    return currentLogo;
+    return currentLogo
   }
 
-  const sizeType = renderSize(size);
-  const positionType = renderPosition(position);
-  const logoType = renderLogo(logo);
+  const sizeType = renderSize(size)
+  const positionType = renderPosition(position)
+  const logoType = renderLogo(logo)
 
   return (
     <LogoStyles id="logo" className={`${sizeType} ${positionType}`}>
@@ -136,5 +136,5 @@ export default function AppLogo({
         <img className={`logo ${sizeType}`} src={logoType} height="60px" />
       </Link>
     </LogoStyles>
-  );
+  )
 }

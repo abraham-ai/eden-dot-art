@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
+import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer';
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
+import Footer from '@/components/Footer'
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
 import {
-  styled,
   Container,
   Grid,
   Box,
@@ -17,32 +15,13 @@ import {
   CardHeader,
   Button,
   Link,
-  Switch
-} from '@mui/material';
+  Switch,
+} from '@mui/material'
 
-// COMPONENTS
-import { useAccount } from 'wagmi';
-import CreditsTable from '@/components/CreditsTable';
-
-// ICONS
-import { FaDiscord, FaGithub } from 'react-icons/fa';
-
-const useStyles = styled((theme) => ({
-  section: {
-    backgroundImage: 'url("nereus-assets/img/bg/pattern1.png")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
-  },
-  cardHeader: {
-    paddingTop: theme.spacing(3)
-  }
-}));
+import CreditsTable from '@/components/CreditsTable'
+import { useState } from 'react'
 
 function EdenDevPricingPage(props) {
-  const { address, isConnected } = useAccount();
-
-  const classes = useStyles();
-
   const content = {
     badge: 'LOREM IPSUM',
     'header-p1': 'Donec lacinia',
@@ -78,16 +57,16 @@ function EdenDevPricingPage(props) {
     '03_benefit4': '50 GB Storage',
     '03_primary-action': 'Select plan',
     '03_secondary-action': 'Learn more',
-    ...props.content
-  };
+    ...props.content,
+  }
 
-  const [state, setState] = React.useState({
-    checkbox: true
-  });
+  const [state, setState] = useState({
+    checkbox: true,
+  })
 
-  const handleChange = (event) => {
-    setState({ ...state, checkbox: event.target.checked });
-  };
+  const handleChange = event => {
+    setState({ ...state, checkbox: event.target.checked })
+  }
 
   return (
     <>
@@ -142,10 +121,7 @@ function EdenDevPricingPage(props) {
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['01_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['01_title']}></CardHeader>
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -188,11 +164,7 @@ function EdenDevPricingPage(props) {
                       {content['01_benefit4']}
                     </Typography>
                   </Box>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    className={classes.primaryAction}
-                  >
+                  <Button variant="outlined" color="primary">
                     {content['01_primary-action']}
                   </Button>
                   <Box mt={2}>
@@ -205,10 +177,7 @@ function EdenDevPricingPage(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['02_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['02_title']}></CardHeader>
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -264,10 +233,7 @@ function EdenDevPricingPage(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <Card variant="outlined">
-                <CardHeader
-                  title={content['03_title']}
-                  className={classes.cardHeader}
-                ></CardHeader>
+                <CardHeader title={content['03_title']}></CardHeader>
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -326,11 +292,11 @@ function EdenDevPricingPage(props) {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-EdenDevPricingPage.getLayout = (page) => (
+EdenDevPricingPage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default EdenDevPricingPage;
+export default EdenDevPricingPage
