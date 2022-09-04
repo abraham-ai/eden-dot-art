@@ -1,18 +1,20 @@
-import { Box, Card, styled, Container } from '@mui/material'
-import type { ReactElement } from 'react'
+// import type { ReactElement } from 'react'
 
 // COMPONENTS
 import Head from 'next/head'
 import Logo from '@/components/Logo'
 
+// MUI
+import { Box, Card, styled, Container } from '@mui/material'
+
 // PAGES
 import EdenArtFrontPage from '@/components/EdenArtFrontPage'
 
 // CSS
-import BaseLayout from 'src/layouts/BaseLayout'
+// import BaseLayout from 'src/layouts/BaseLayout'
 
 // ROUTES
-import { ROUTES } from '@/const/routes'
+// import { ROUTES } from '@/const/routes'
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
