@@ -68,7 +68,7 @@ function EdenDevFAQPage() {
           softwares with cutting-edge technologies in service to the
           enlightenment of mankind.
         </Typography> */}
-        <section
+        {/* <section
           className="faq-wrapper"
           style={{
             maxWidth: 600,
@@ -924,7 +924,7 @@ function EdenDevFAQPage() {
               </Typography>
             </Collapse>
           </Box>
-        </section>
+        </section> */}
       </Container>
       <Footer />
     </>
