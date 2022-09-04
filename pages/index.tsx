@@ -1,18 +1,7 @@
-import {
-  Box,
-  Card,
-  Button,
-  styled,
-  CardHeader,
-  Switch,
-  Container,
-  FormGroup,
-  FormControlLabel,
-} from '@mui/material'
+import { Box, Card, styled, Container } from '@mui/material'
 import type { ReactElement } from 'react'
 
 // COMPONENTS
-import Link from '@/components/Link'
 import Head from 'next/head'
 import Logo from '@/components/Logo'
 
@@ -44,7 +33,7 @@ const OverviewWrapper = styled(Box)(
 `,
 )
 
-function Overview({ changeTheme, isDarkTheme }) {
+export default function IndexPage({ changeTheme, isDarkTheme }) {
   return (
     <OverviewWrapper>
       <Head>
@@ -54,7 +43,7 @@ function Overview({ changeTheme, isDarkTheme }) {
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
             <Logo />
-            <Box
+            {/* <Box
               display="flex"
               alignItems="center"
               justifyContent="space-between"
@@ -123,7 +112,7 @@ function Overview({ changeTheme, isDarkTheme }) {
                   To Test Home
                 </Button>
               </Box>
-            </Box>
+            </Box> */}
           </Box>
         </Container>
       </HeaderWrapper>
@@ -134,8 +123,8 @@ function Overview({ changeTheme, isDarkTheme }) {
   )
 }
 
-export default Overview
+// export default IndexPage
 
-Overview.getLayout = function getLayout(page: ReactElement, props) {
-  return <BaseLayout {...props}>{page}</BaseLayout>
-}
+// IndexPage.getLayout = function getLayout(page: ReactElement, props) {
+//   return <BaseLayout {...props}>{page}</BaseLayout>
+// }
