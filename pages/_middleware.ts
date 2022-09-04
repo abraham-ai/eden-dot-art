@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-export async function middleware(request: NextRequest, event) {
+export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
   if (url.pathname == '/') {
     url.pathname = '/creations'
