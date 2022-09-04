@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 
 // NAV
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+// import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 import Footer from '@/components/Footer'
 
 // COMPONENTS

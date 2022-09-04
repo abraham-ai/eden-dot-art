@@ -1,22 +1,12 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer'
+// import Footer from '@/components/Footer'
 import BaseLayout from 'src/layouts/BaseLayout'
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
-import {
-  Box,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Container,
-  Select,
-  SelectChangeEvent,
-  styled,
-} from '@mui/material'
+import { Box, Container, styled } from '@mui/material'
 
 // COMPONENTS
 import CreationCardIG from '@/components/CreationCardIG'
