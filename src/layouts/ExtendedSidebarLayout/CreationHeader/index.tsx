@@ -21,23 +21,23 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
-        height: ${theme.header.height};
-        color: ${theme.header.textColor};
-        padding: ${theme.spacing(0, 2)};
-        right: 0;
-        z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
-        backdrop-filter: blur(3px);
-        position: fixed;
-        justify-content: space-between;
-        width: 100%;
-        @media (min-width: ${theme.breakpoints.values.lg}px) {
-            left: ${theme.sidebar.width};
-            width: auto;
-        }
-        .menu-item {
-          display: flex;
-        }
+    height: ${theme.header.height};
+    color: ${theme.header.textColor};
+    padding: ${theme.spacing(0, 2)};
+    right: 0;
+    z-index: 6;
+    background-color: ${alpha(theme.header.background, 0.95)};
+    backdrop-filter: blur(3px);
+    position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    @media (min-width: ${theme.breakpoints.values.lg}px) {
+        left: ${theme.sidebar.width};
+        width: auto;
+    }
+    .menu-item {
+      display: flex;
+    }
 `,
 )
 
@@ -66,7 +66,7 @@ function Header() {
     >
       {/* <EdenNavTop /> */}
 
-      <Link href="/garden" className="nav-link-wrapper">
+      {/* <Link href="/garden" className="nav-link-wrapper">
         <Typography variant={'h4'}>DEV GARDEN</Typography>
       </Link>
 
@@ -80,7 +80,7 @@ function Header() {
 
       <Link href="/faq" className="nav-link-wrapper">
         <Typography variant={'h4'}>FAQ</Typography>
-      </Link>
+      </Link> */}
 
       {/* <Stack
         direction="row"

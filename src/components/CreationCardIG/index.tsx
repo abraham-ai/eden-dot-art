@@ -106,18 +106,18 @@ export default function CreationCardIG({ creation }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="praise">
           <HiOutlineSparkles />
         </IconButton>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="burn">
           <AiOutlineFire />
         </IconButton>
-        <IconButton aria-label="add to favorites">
+        {/* <IconButton aria-label="recreation">
           <FaRetweet />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="bookmark">
           <BookmarkBorderIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton aria-label="share">
           <IosShareIcon />
         </IconButton>

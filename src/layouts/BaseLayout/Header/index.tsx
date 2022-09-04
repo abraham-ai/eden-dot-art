@@ -19,14 +19,15 @@ import {
 // ROUTER
 import Link from 'next/link'
 
-// NAV
-// import { EdenNavTop } from '../../../components';
-
 // WALLET
 import { useAccount, useContractRead } from 'wagmi'
 
+// NAV
+// import { EdenNavTop } from '../../../components';
+
 // COMPONENTS
 import Logo from '@/components/Logo'
+import SortCreationsBar from '@/components/SortCreationsBar'
 
 // ICONS
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
@@ -35,6 +36,8 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+
+// VIEW ICONS
 
 const BoxModalStyle = {
   position: 'absolute' as 'absolute',
@@ -71,7 +74,8 @@ const HeaderWrapper = styled(Box)(
           color: white;
         }
         @media (min-width: ${theme.breakpoints.values.lg}px) {
-            left: ${theme.sidebar.width};
+            // left: ${theme.sidebar.width};
+            left: 0;
             width: auto;
         }
         .menu-item {
@@ -82,6 +86,7 @@ const HeaderWrapper = styled(Box)(
 
 export default function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
+  const { address, isConnected } = useAccount()
   const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
@@ -173,20 +178,24 @@ export default function Header() {
 
       <Logo />
 
-      <Box>
-        <Button
-          id="create-button"
-          variant="contained"
-          onClick={handleCreateOpen}
-          size="medium"
-          endIcon={<AddIcon fontSize={'large'} />}
-          sx={{ mr: 1 }}
-        >
-          Create
-        </Button>
+      <SortCreationsBar />
+
+      <Box sx={{ display: 'flex' }}>
+        {isConnected ? (
+          <Button
+            id="create-button"
+            variant="contained"
+            onClick={handleCreateOpen}
+            size="medium"
+            endIcon={<AddIcon fontSize={'large'} />}
+            sx={{ mr: 1 }}
+          >
+            Create
+          </Button>
+        ) : null}
 
         <Button id="login-button" variant="contained" onClick={handleLoginOpen}>
-          Login
+          Sign-in
         </Button>
       </Box>
 
