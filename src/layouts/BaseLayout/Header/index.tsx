@@ -5,22 +5,19 @@ import {
   alpha,
   Button,
   Box,
-  Fade,
   Backdrop,
-  IconButton,
   lighten,
   Modal,
   styled,
-  Tooltip,
-  Typography,
   useTheme,
 } from '@mui/material'
+// Fade
 
 // ROUTER
 import Link from 'next/link'
 
 // WALLET
-import { useAccount, useContractRead } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 // NAV
 // import { EdenNavTop } from '../../../components';
@@ -30,9 +27,9 @@ import Logo from '@/components/Logo'
 import SortCreationsBar from '@/components/SortCreationsBar'
 
 // ICONS
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
+// import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
 import { SidebarContext } from 'src/contexts/SidebarContext'
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
+// import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
