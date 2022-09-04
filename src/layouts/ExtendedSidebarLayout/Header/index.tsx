@@ -1,13 +1,19 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+
+// MUI
 import {
-  Box,
   alpha,
-  lighten,
+  Button,
+  Box,
+  Fade,
+  Backdrop,
   IconButton,
-  Tooltip,
+  lighten,
+  Modal,
   styled,
-  useTheme,
+  Tooltip,
   Typography,
+  useTheme,
 } from '@mui/material'
 
 // ROUTER
@@ -16,16 +22,31 @@ import Link from 'next/link'
 // NAV
 // import { EdenNavTop } from '../../../components';
 
+// WALLET
+import { useAccount, useContractRead } from 'wagmi'
+
 // COMPONENTS
-import SpeedDial from '@/components/SpeedDial'
+import Logo from '@/components/Logo'
 
 // ICONS
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
 import { SidebarContext } from 'src/contexts/SidebarContext'
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
+import AddIcon from '@mui/icons-material/Add'
+import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
-// VIEW ICONS
+const BoxModalStyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -59,9 +80,17 @@ const HeaderWrapper = styled(Box)(
 `,
 )
 
-function Header() {
+export default function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
   const theme = useTheme()
+
+  const [createOpen, setCreateOpen] = useState(false)
+  const handleCreateOpen = () => setCreateOpen(true)
+  const handleCreateClose = () => setCreateOpen(false)
+
+  const [loginOpen, setLoginOpen] = useState(false)
+  const handleLoginOpen = () => setLoginOpen(true)
+  const handleLoginClose = () => setLoginOpen(false)
 
   return (
     <HeaderWrapper
@@ -92,7 +121,7 @@ function Header() {
         spacing={2}
       ></Stack> */}
 
-      <Box display="flex" alignItems="center">
+      {/* <Box display="flex" alignItems="center">
         <Box
           component="span"
           sx={{
@@ -110,9 +139,9 @@ function Header() {
             </IconButton>
           </Tooltip>
         </Box>
-      </Box>
+      </Box> */}
 
-      <Link href="/creations" className="nav-link-wrapper">
+      {/* <Link href="/creations" className="nav-link-wrapper">
         <Typography variant={'h4'} className="nav-link-text">
           CREATIONS
         </Typography>
@@ -140,12 +169,71 @@ function Header() {
         <Typography variant={'h4'} className="nav-link-text">
           FAQ
         </Typography>
-      </Link>
+      </Link> */}
 
-      <SpeedDial />
-      <ConnectButton />
+      <Logo />
+
+      <Box>
+        <Button
+          id="create-button"
+          variant="contained"
+          onClick={handleCreateOpen}
+          size="medium"
+          endIcon={<AddIcon fontSize={'large'} />}
+          sx={{ mr: 1 }}
+        >
+          Create
+        </Button>
+
+        <Button id="login-button" variant="contained" onClick={handleLoginOpen}>
+          Login
+        </Button>
+      </Box>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={createOpen}
+        onClose={handleCreateClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
+      </Modal>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={loginOpen}
+        onClose={handleLoginClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Box sx={BoxModalStyle}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
+            <ConnectButton />
+            Or
+            <Button variant={'contained'}>
+              Connect Discord
+              <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+
+      {/* <SpeedDial /> */}
     </HeaderWrapper>
   )
 }
-
-export default Header
