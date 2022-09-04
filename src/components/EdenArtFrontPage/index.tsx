@@ -230,7 +230,7 @@ const EdenHomeStyles = styled(Box)(
 
 const filter = createFilterOptions()
 
-function EdenArtHomePage() {
+export default function EdenArtHomePage() {
   const [value, setValue] = useState(null)
   return (
     <>
@@ -964,8 +964,7 @@ const top100Films = [
   { title: 'Monty Python and the Holy Grail', year: 1975 },
 ]
 
-EdenArtHomePage.getLayout = page => (
-  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-)
-
-export default EdenArtHomePage
+// EdenArtHomePage.getLayout = page => (
+//   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
+// )
+// export default EdenArtHomePage
