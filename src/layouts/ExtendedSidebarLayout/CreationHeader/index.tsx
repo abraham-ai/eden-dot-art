@@ -1,15 +1,8 @@
 // ROUTER
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // UI
-import {
-  Box,
-  alpha,
-  lighten,
-  styled,
-  useTheme,
-  Typography,
-} from '@mui/material'
+import { Box, alpha, lighten, styled, useTheme } from '@mui/material'
 
 // NAV
 // import { EdenNavTop } from '../../../components';
