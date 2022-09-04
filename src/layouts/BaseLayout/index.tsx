@@ -1,9 +1,14 @@
-import { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { FC, ReactNode } from 'react'
+import PropTypes from 'prop-types'
+
+// MUI
+import { Box } from '@mui/material'
+
+// LAYOUTS
+import Header from '@/layouts/BaseLayout/Header'
 
 interface BaseLayoutProps {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
@@ -12,16 +17,18 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
       sx={{
         display: 'flex',
         flex: 1,
-        height: '100%'
+        width: '100%',
+        height: '100%',
       }}
     >
+      <Header />
       {children}
     </Box>
-  );
-};
+  )
+}
 
 BaseLayout.propTypes = {
-  children: PropTypes.node
-};
+  children: PropTypes.node,
+}
 
-export default BaseLayout;
+export default BaseLayout
