@@ -1,4 +1,7 @@
-import { useContext, useState } from 'react'
+import {
+  // useContext,
+  useState,
+} from 'react'
 
 // MUI
 import {
@@ -23,7 +26,7 @@ import Logo from '@/components/Logo'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
-import { SidebarContext } from 'src/contexts/SidebarContext'
+// import { SidebarContext } from 'src/contexts/SidebarContext'
 // import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
@@ -74,7 +77,7 @@ const HeaderWrapper = styled(Box)(
 )
 
 export default function Header() {
-  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
+  // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
   const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
