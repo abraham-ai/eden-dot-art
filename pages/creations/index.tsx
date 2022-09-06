@@ -1,4 +1,5 @@
 // import { useState } from 'react'
+import type { ReactElement } from 'react'
 import Head from 'next/head'
 
 // NAV
@@ -9,7 +10,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import { Box, Container, styled } from '@mui/material'
 
 // COMPONENTS
-import CreationCardIG from '@/components/CreationCardIG'
+import CreationCardMinimal from '@/components/CreationCardMinimal'
 import Masonry from '@mui/lab/Masonry'
 
 // CONSTS
@@ -55,9 +56,9 @@ export default function CreationsPage() {
               {GET_CREATIONS.map((creation, index) => {
                 const rand = Math.random()
                 if (rand > 0.5) {
-                  return <CreationCardIG key={index} creation={creation} />
+                  return <CreationCardMinimal key={index} creation={creation} />
                 } else {
-                  return <CreationCardIG key={index} creation={creation} />
+                  return <CreationCardMinimal key={index} creation={creation} />
                   // return <CreationCardMedia key={index} creation={creation} />;
                 }
               })}
