@@ -66,7 +66,8 @@ function Logo() {
           <LogoSignInner />
         </LogoSign> */}
       </LogoSignWrapper>
-      <Box
+
+      {/* <Box
         component="span"
         sx={{
           display: { xs: 'none', sm: 'flex' },
@@ -79,7 +80,7 @@ function Logo() {
           </Tooltip>
           <LogoText>Eden.Art</LogoText>
         </LogoTextWrapper>
-      </Box>
+      </Box> */}
     </LogoWrapper>
   )
 }
