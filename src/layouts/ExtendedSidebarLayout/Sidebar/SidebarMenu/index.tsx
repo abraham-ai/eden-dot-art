@@ -15,12 +15,12 @@ import { ListSubheader, alpha, Box, List, styled } from '@mui/material'
 // COMPONENTS
 import AppLogo from '@/components/AppLogo'
 
-const AppLogoWrapper = styled(Box)(
-  () => `
-  display: flex;
-  justify-content: center;
-  `,
-)
+// const AppLogoWrapper = styled(Box)(
+//   () => `
+//   display: flex;
+//   justify-content: center;
+//   `,
+// )
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
