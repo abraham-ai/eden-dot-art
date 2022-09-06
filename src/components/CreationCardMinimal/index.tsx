@@ -12,48 +12,51 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
+  // CardHeader,
   CardMedia,
-  Chip,
-  Collapse,
+  // Chip,
+  // Collapse,
   IconButton,
-  Tooltip,
+  // Tooltip,
   Typography,
 } from '@mui/material'
-import { IconButtonProps } from '@mui/material/IconButton'
+// import { IconButtonProps } from '@mui/material/IconButton'
 
 // COLORS
-import { red } from '@mui/material/colors'
+// import { red } from '@mui/material/colors'
 
 // ICONS
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IosShareIcon from '@mui/icons-material/IosShare'
-import { FaDiscord, FaHashtag } from 'react-icons/fa'
+// import {
+//   FaDiscord,
+//   FaHashtag
+// } from 'react-icons/fa'
 // import { HiOutlineSparkles } from 'react-icons/hi'
 // FaRetweet,
 // import { AiOutlineFire } from 'react-icons/ai'
 
 // META ICONS
-import OpenInFullIcon from '@mui/icons-material/OpenInFull'
-import MemoryIcon from '@mui/icons-material/Memory'
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
+// import OpenInFullIcon from '@mui/icons-material/OpenInFull'
+// import MemoryIcon from '@mui/icons-material/Memory'
+// import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean
-}
+// interface ExpandMoreProps extends IconButtonProps {
+//   expand: boolean
+// }
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}))
+// const ExpandMore = styled((props: ExpandMoreProps) => {
+//   const { ...other } = props
+//   return <IconButton {...other} />
+// })(({ theme, expand }) => ({
+//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+//   marginLeft: 'auto',
+//   transition: theme.transitions.create('transform', {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }))
 
 const CardStyles = styled(Card)(
   () => `
@@ -119,19 +122,23 @@ const CardStyles = styled(Card)(
 
 export default function CreationCardIG({ creation }) {
   const { address, text_input, intermediate_sha } = creation
-  const { model_name, clip_model, width, height } = creation.config
-  const { origin, author_name, channel_name } = creation.source
+  // const { model_name, clip_model, width, height } = creation.config
+  const {
+    origin,
+    author_name,
+    // channel_name
+  } = creation.source
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
-  const [expanded, setExpanded] = React.useState(false)
+  // const [expanded, setExpanded] = React.useState(false)
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded)
+  // }
 
   const currentUserName = origin === 'discord' ? author_name : address
-  const creationTimeAgo = 100
+  // const creationTimeAgo = 100
 
   function randomColor() {
     let hex = Math.floor(Math.random() * 0xffffff)
@@ -140,16 +147,16 @@ export default function CreationCardIG({ creation }) {
     return color
   }
 
-  const currentGuildIcon =
-    creation.source.guild_name === 'abraham-ai' ? (
-      <FaDiscord style={{ fontSize: '1.2rem' }} />
-    ) : (
-      // <SiEthereum />
-      <FaDiscord />
-      // <AppLogo style={{ width: 10 }} size={'icon-small'} />
-    )
+  // const currentGuildIcon =
+  //   creation.source.guild_name === 'abraham-ai' ? (
+  //     <FaDiscord style={{ fontSize: '1.2rem' }} />
+  //   ) : (
+  //     // <SiEthereum />
+  //     <FaDiscord />
+  //     // <AppLogo style={{ width: 10 }} size={'icon-small'} />
+  //   )
 
-  const currentClipModel = clip_model !== null ? clip_model : null
+  // const currentClipModel = clip_model !== null ? clip_model : null
 
   return (
     <CardStyles>
@@ -233,7 +240,7 @@ export default function CreationCardIG({ creation }) {
         </Box>
 
         {/* COLLAPSE */}
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Chip
               sx={{ m: 0.5 }}
@@ -307,7 +314,7 @@ export default function CreationCardIG({ creation }) {
               </Tooltip>
             ) : null}
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
 
       <Box className="creation-header">
