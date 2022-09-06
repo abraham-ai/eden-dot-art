@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
 // NAV
 import Head from 'next/head'
@@ -8,40 +8,37 @@ import Footer from '@/components/Footer'
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // MUI
-import {
-  Collapse,
-  Container,
-  Typography,
-  Box,
-  styled,
-  IconButton,
-  IconButtonProps,
-} from '@mui/material'
+import { Container, Typography } from '@mui/material'
+// styled,
+// IconButton,
+// IconButtonProps,
+// Collapse,
+// Box,
 
 // ICONS
-import AddIcon from '@mui/icons-material/Add'
+// import AddIcon from '@mui/icons-material/Add'
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean
-}
+// interface ExpandMoreProps extends IconButtonProps {
+//   expand: boolean
+// }
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}))
+// const ExpandMore = styled((props: ExpandMoreProps) => {
+//   const { ...other } = props
+//   return <IconButton {...other} />
+// })(({ theme, expand }) => ({
+//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+//   marginLeft: 'auto',
+//   transition: theme.transitions.create('transform', {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }))
 
 function EdenDevFAQPage() {
-  const [expanded, setExpanded] = useState(true)
+  // const [expanded, setExpanded] = useState(true)
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded)
+  // }
 
   return (
     <>

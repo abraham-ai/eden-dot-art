@@ -1,4 +1,4 @@
-import { Box, styled, Tooltip } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import Link from 'src/components/Link'
 
 // ICONS
@@ -25,33 +25,33 @@ const LogoSignWrapper = styled(Box)(
 `,
 )
 
-const LogoTextWrapper = styled(Box)(
-  ({ theme }) => `
-        padding-left: ${theme.spacing(1)};
-        display: 'flex';
-        align-items: center;
-`,
-)
+// const LogoTextWrapper = styled(Box)(
+//   ({ theme }) => `
+//         padding-left: ${theme.spacing(1)};
+//         display: 'flex';
+//         align-items: center;
+// `,
+// )
 
-const VersionBadge = styled(Box)(
-  ({ theme }) => `
-        background: ${theme.palette.success.main};
-        color: ${theme.palette.success.contrastText};
-        padding: ${theme.spacing(0.4, 1)};
-        border-radius: ${theme.general.borderRadiusSm};
-        text-align: center;
-        display: inline-block;
-        line-height: 1;
-        font-size: ${theme.typography.pxToRem(11)};
-`,
-)
+// const VersionBadge = styled(Box)(
+//   ({ theme }) => `
+//         background: ${theme.palette.success.main};
+//         color: ${theme.palette.success.contrastText};
+//         padding: ${theme.spacing(0.4, 1)};
+//         border-radius: ${theme.general.borderRadiusSm};
+//         text-align: center;
+//         display: inline-block;
+//         line-height: 1;
+//         font-size: ${theme.typography.pxToRem(11)};
+// `,
+// )
 
-const LogoText = styled(Box)(
-  ({ theme }) => `
-        font-size: ${theme.typography.pxToRem(15)};
-        font-weight: ${theme.typography.fontWeightBold};
-`,
-)
+// const LogoText = styled(Box)(
+//   ({ theme }) => `
+//         font-size: ${theme.typography.pxToRem(15)};
+//         font-weight: ${theme.typography.fontWeightBold};
+// `,
+// )
 
 function Logo() {
   return (
@@ -66,7 +66,8 @@ function Logo() {
           <LogoSignInner />
         </LogoSign> */}
       </LogoSignWrapper>
-      <Box
+
+      {/* <Box
         component="span"
         sx={{
           display: { xs: 'none', sm: 'flex' },
@@ -79,7 +80,7 @@ function Logo() {
           </Tooltip>
           <LogoText>Eden.Art</LogoText>
         </LogoTextWrapper>
-      </Box>
+      </Box> */}
     </LogoWrapper>
   )
 }

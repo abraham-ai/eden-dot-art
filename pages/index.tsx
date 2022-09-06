@@ -35,7 +35,8 @@ const OverviewWrapper = styled(Box)(
 `,
 )
 
-export default function IndexPage({ changeTheme, isDarkTheme }) {
+export default function IndexPage() {
+  // { changeTheme, isDarkTheme }
   return (
     <OverviewWrapper>
       <Head>

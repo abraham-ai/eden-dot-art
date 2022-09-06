@@ -1,4 +1,7 @@
-import { useContext, useState } from 'react'
+import {
+  // useContext,
+  useState,
+} from 'react'
 
 // MUI
 import {
@@ -14,7 +17,7 @@ import {
 // Fade
 
 // ROUTER
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // WALLET
 import { useAccount } from 'wagmi'
@@ -28,7 +31,7 @@ import SortCreationsBar from '@/components/SortCreationsBar'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
-import { SidebarContext } from 'src/contexts/SidebarContext'
+// import { SidebarContext } from 'src/contexts/SidebarContext'
 // import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
@@ -82,8 +85,11 @@ const HeaderWrapper = styled(Box)(
 )
 
 export default function Header() {
-  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
-  const { address, isConnected } = useAccount()
+  // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
+  const {
+    // address,
+    isConnected,
+  } = useAccount()
   const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
