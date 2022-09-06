@@ -239,9 +239,9 @@ function SidebarMenu() {
 
   return (
     <>
-      <AppLogoWrapper id="app-logo-wrapper">
-        <AppLogo logo={'eden'} />
-      </AppLogoWrapper>
+      <AppLogo logo={'eden'} />
+      {/* <AppLogoWrapper id="app-logo-wrapper">
+      </AppLogoWrapper> */}
       {menuItems.map(section => (
         <MenuWrapper key={section.heading}>
           <List
