@@ -13,8 +13,7 @@ import {
 
 // ICONS
 import { IoFlashOutline } from 'react-icons/io5'
-import { HiOutlineSparkles } from 'react-icons/hi'
-import { AiOutlineFire } from 'react-icons/ai'
+import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 
 // LAYOUT ICONS
 import { TbRectangleVertical, TbSquare } from 'react-icons/tb'
@@ -88,21 +87,19 @@ export default function SortCreationsBar() {
             value={sort}
             label={'Sort'}
             onChange={handleSortChange}
-            sx={{ width: 150 }}
+            autoWidth
           >
             <MenuItem value={'newest'} id="select-menu-item">
               <IoFlashOutline style={{ fontSize: '1.5rem', marginRight: 10 }} />
               Newest
             </MenuItem>
             <MenuItem value={'praise'} className="select-menu-item">
-              <HiOutlineSparkles
-                style={{ fontSize: '1.5rem', marginRight: 10 }}
-              />
-              Praise
+              <TbArrowBigTop style={{ fontSize: '1.5rem', marginRight: 10 }} />
+              Up Votes
             </MenuItem>
             <MenuItem value={'burn'} className="select-menu-item">
-              <AiOutlineFire style={{ fontSize: '1.5rem', marginRight: 10 }} />
-              Burn
+              <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
+              Down Votes
             </MenuItem>
           </Select>
         </FormControl>
