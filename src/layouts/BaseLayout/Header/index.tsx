@@ -13,11 +13,12 @@ import {
   Modal,
   styled,
   useTheme,
+  Typography,
 } from '@mui/material'
 // Fade
 
 // ROUTER
-// import Link from 'next/link'
+import Link from 'next/link'
 
 // WALLET
 import { useAccount } from 'wagmi'
@@ -28,12 +29,15 @@ import { useAccount } from 'wagmi'
 // COMPONENTS
 import Logo from '@/components/Logo'
 import SortCreationsBar from '@/components/SortCreationsBar'
+import CreateModal from '@/components/CreateModal'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
 // import { SidebarContext } from 'src/contexts/SidebarContext'
 // import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
+import LoginIcon from '@mui/icons-material/Login'
 import AddIcon from '@mui/icons-material/Add'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
@@ -93,7 +97,10 @@ export default function Header() {
   const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
-  const handleCreateOpen = () => setCreateOpen(true)
+  const handleCreateOpen = () => {
+    console.log('HANDLE CREATE OPEN!')
+    setCreateOpen(true)
+  }
   const handleCreateClose = () => setCreateOpen(false)
 
   const [loginOpen, setLoginOpen] = useState(false)
@@ -149,13 +156,7 @@ export default function Header() {
         </Box>
       </Box> */}
 
-      {/* <Link href="/creations" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          CREATIONS
-        </Typography>
-      </Link>
-
-      <Link href="/garden" className="nav-link-wrapper">
+      {/* <Link href="/garden" className="nav-link-wrapper">
         <Typography variant={'h4'} className="nav-link-text">
           DEV GARDEN
         </Typography>
@@ -181,6 +182,12 @@ export default function Header() {
 
       <Logo />
 
+      <Link href="/about" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          ABOUT
+        </Typography>
+      </Link>
+
       <SortCreationsBar />
 
       <Box sx={{ display: 'flex' }}>
@@ -190,19 +197,45 @@ export default function Header() {
             variant="contained"
             onClick={handleCreateOpen}
             size="medium"
-            endIcon={<AddIcon fontSize={'large'} />}
+            endIcon={<AddIcon className="create-icon" fontSize={'large'} />}
             sx={{ mr: 1 }}
           >
             Create
           </Button>
         ) : null}
 
-        <Button id="login-button" variant="contained" onClick={handleLoginOpen}>
-          Sign-in
-        </Button>
+        {isConnected ? (
+          <Button
+            id="mycreations-button"
+            variant="outlined"
+            // onClick={handleCreateOpen}
+            size="medium"
+            endIcon={
+              <AccountCircleIcon className="account-icon" fontSize={'large'} />
+            }
+            sx={{ mr: 1 }}
+          >
+            My Creations
+          </Button>
+        ) : null}
+
+        {isConnected ? (
+          <ConnectButton />
+        ) : (
+          <Button
+            id="login-button"
+            variant="contained"
+            onClick={handleLoginOpen}
+            size="medium"
+            endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
+            sx={{ mr: 1 }}
+          >
+            Sign-in
+          </Button>
+        )}
       </Box>
 
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={createOpen}
@@ -214,7 +247,9 @@ export default function Header() {
         }}
       >
         <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
-      </Modal>
+      </Modal> */}
+
+      <CreateModal isOpen={createOpen} onClose={handleCreateClose} />
 
       <Modal
         aria-labelledby="transition-modal-title"
