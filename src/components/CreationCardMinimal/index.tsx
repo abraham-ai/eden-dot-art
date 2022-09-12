@@ -14,12 +14,12 @@ import {
   CardContent,
   // CardHeader,
   CardMedia,
-  Chip,
+  // Chip,
   // Collapse,
   IconButton,
-  Modal,
-  Backdrop,
-  Tooltip,
+  // Modal,
+  // Backdrop,
+  // Tooltip,
   Typography,
 } from '@mui/material'
 // import { IconButtonProps } from '@mui/material/IconButton'
@@ -28,18 +28,19 @@ import {
 // import { red } from '@mui/material/colors'
 
 // ICONS
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IosShareIcon from '@mui/icons-material/IosShare'
-import { FaDiscord, FaHashtag } from 'react-icons/fa'
+// import { FaDiscord } from 'react-icons/fa'
+// FaHashtag
 // import { HiOutlineSparkles } from 'react-icons/hi'
 // FaRetweet,
 // import { AiOutlineFire } from 'react-icons/ai'
 
 // META ICONS
-import OpenInFullIcon from '@mui/icons-material/OpenInFull'
-import MemoryIcon from '@mui/icons-material/Memory'
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
+// import OpenInFullIcon from '@mui/icons-material/OpenInFull'
+// import MemoryIcon from '@mui/icons-material/Memory'
+// import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 
@@ -58,18 +59,18 @@ import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 //   }),
 // }))
 
-const BoxModalStyle = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  bgcolor: 'background.paper',
-  maxHeight: '90%',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-}
+// const BoxModalStyle = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: '90%',
+//   bgcolor: 'background.paper',
+//   maxHeight: '90%',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// }
 
 const CardStyles = styled(Card)(
   () => `
@@ -133,16 +134,45 @@ const CardStyles = styled(Card)(
   `,
 )
 
-export default function CreationCardIG({ creation }) {
-  const { address, text_input, intermediate_sha } = creation
-  const { model_name, clip_model, width, height } = creation.config
-  const { origin, author_name, channel_name } = creation.source
+export default function CreationCardMinimal({ creation }) {
+  // MAIN
+  // const address = creation.address === undefined ? 'none' : creation.address
+  const text_input =
+    creation.text_input === undefined ? 'none' : creation.text_input
+  const intermediate_sha =
+    creation.intermediate_sha === undefined ? [] : creation.intermediate_sha
+
+  // DIMENSIONS
+  // const width = creation.width === undefined ? 100 : creation.width
+  // const height = creation.height === undefined ? 100 : creation.height
+
+  // SOURCE
+  // const origin = creation.source.origin === undefined ? 'none' : creation.source
+  // const author_name =
+  creation.source.author_name === undefined ? 'none' : creation.source
+  // const channel_name =
+  creation.source.channel_name === undefined ? 'none' : creation.source
+  // const guild_name =
+  creation.source.guild_name === undefined ? 'none' : creation.source
+  const { address } =
+    creation.source.address === undefined ? 'none' : creation.source
+
+  // GENERATOR
+  // const generator_name =
+  creation.generator === undefined ? 'none' : creation.generator
 
   const [cardOpen, setCardOpen] = useState(false)
   const handleCardOpen = () => setCardOpen(true)
-  const handleCardClose = () => setCardOpen(false)
+  // const handleCardClose = () => setCardOpen(false)
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
+
+  const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
+
+  // const imageFullURL =
+  creation.intermediate_sha === undefined
+    ? 'none'
+    : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
 
   // const [expanded, setExpanded] = React.useState(false)
 
@@ -150,7 +180,9 @@ export default function CreationCardIG({ creation }) {
   //   setExpanded(!expanded)
   // }
 
-  const currentUserName = origin === 'discord' ? author_name : address
+  // const currentUserName = origin === 'discord' ? author_name : address
+  // console.log({ currentUserName })
+
   // const creationTimeAgo = 100
 
   function randomColor() {
@@ -160,16 +192,19 @@ export default function CreationCardIG({ creation }) {
     return color
   }
 
-  const currentGuildIcon =
-    creation.source.guild_name === 'abraham-ai' ? (
-      <FaDiscord style={{ fontSize: '1.2rem' }} />
-    ) : (
-      // <SiEthereum />
-      <FaDiscord />
-      // <AppLogo style={{ width: 10 }} size={'icon-small'} />
-    )
+  // const currentGuildIcon =
+  //   guild_name === 'abraham-ai' ? (
+  //     <FaDiscord style={{ fontSize: '1.2rem' }} />
+  //   ) : (
+  //     // <SiEthereum />
+  //     <FaDiscord />
+  //     // <AppLogo style={{ width: 10 }} size={'icon-small'} />
+  //   )
 
-  const currentClipModel = clip_model !== null ? clip_model : null
+  // console.log(address)
+  // console.log(cardOpen)
+
+  // const currentClipModel = clip_model !== null ? clip_model : null
 
   return (
     <CardStyles>
@@ -178,7 +213,7 @@ export default function CreationCardIG({ creation }) {
           <CardMedia
             component="img"
             height="auto"
-            image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
+            image={STG_URL + intermediate_sha[intermediate_sha.length - 1]}
             alt="Card Media"
             sx={{ position: 'relative' }}
           />
@@ -202,16 +237,12 @@ export default function CreationCardIG({ creation }) {
                 </Typography>
               </Box>
             </Box>
+
             <CardActions className="creation-actions" disableSpacing>
-              {/* <IconButton aria-label="praise">
-          <HiOutlineSparkles />
-        </IconButton>
-        <IconButton aria-label="burn">
-          <AiOutlineFire />
-        </IconButton>
-        <IconButton aria-label="recreation">
-          <FaRetweet />
-        </IconButton> */}
+              {/* </IconButton>
+              <IconButton aria-label="recreation">
+                <FaRetweet />
+              </IconButton> */}
 
               <Box
                 sx={{
@@ -244,6 +275,7 @@ export default function CreationCardIG({ creation }) {
               >
                 <IosShareIcon />
               </IconButton>
+
               {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
@@ -304,7 +336,7 @@ export default function CreationCardIG({ creation }) {
                   {currentGuildIcon}
                 </Avatar>
               }
-              label={creation.source.guild_name}
+              label={guild_name}
               variant="outlined"
             />
             <Chip
@@ -318,7 +350,7 @@ export default function CreationCardIG({ creation }) {
               variant="outlined"
             />
 
-            {model_name ? (
+            {generator_name ? (
               <Tooltip title="Model Name">
                 <Chip
                   sx={{ m: 0.5 }}
@@ -327,7 +359,7 @@ export default function CreationCardIG({ creation }) {
                       <MemoryIcon sx={{ fontSize: '1.5rem' }} />
                     </Avatar>
                   }
-                  label={creation.config.model_name}
+                  label={creation.config.generator_name}
                   variant="outlined"
                 />
               </Tooltip>
@@ -355,190 +387,17 @@ export default function CreationCardIG({ creation }) {
         <Box sx={{ display: 'flex' }}>
           <Avatar
             sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
-            aria-label="recipe"
+            aria-label="username"
           />
           <Typography noWrap={true} sx={{ display: 'inline-block' }}>
-            {currentUserName.substring(0, currentUserName.indexOf('#'))}
+            {address}
+            {/* {currentUserName === 'none'
+              ? currentUserName
+              : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
           </Typography>
         </Box>
+        <span style={{ display: 'none' }}>{cardOpen}</span>
       </Box>
-
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={cardOpen}
-        onClose={handleCardClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Box sx={BoxModalStyle}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="auto"
-              image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
-              alt="Card Media"
-              sx={{ position: 'relative', maxHeight: '500px' }}
-            />
-
-            <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ p: 2, color: 'white' }}
-              >
-                {text_input}
-              </Typography>
-            </Box>
-
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                  padding: 0,
-                  mr: 1,
-                }}
-              >
-                <IconButton aria-label="bookmark" className="arrow-up">
-                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-                <IconButton aria-label="bookmark" className="arrow-down">
-                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-              </Box>
-              <IconButton
-                aria-label="share"
-                sx={{
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '50%',
-                  width: 'auto',
-                  mr: 1,
-                }}
-              >
-                <IosShareIcon />
-              </IconButton>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                }}
-              >
-                <IconButton aria-label="bookmark">
-                  <BookmarkBorderIcon />
-                </IconButton>
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
-            </Box>
-
-            {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                >
-                <ExpandMoreIcon />
-              </ExpandMore> */}
-
-            <Box>
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar
-                    alt="generator name"
-                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                  />
-                }
-                label={creation.generator.name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={`${width}x${height}`}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                    {currentGuildIcon}
-                  </Avatar>
-                }
-                label={creation.source.guild_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                    <FaHashtag style={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={channel_name}
-                variant="outlined"
-              />
-              {model_name ? (
-                <Tooltip title="Model Name">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="model name"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.model_name}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null}
-
-              {currentClipModel ? (
-                <Tooltip title="Clip Model">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="clip model"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.clip_model}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null}
-            </Box>
-          </Box>
-        </Box>
-      </Modal>
     </CardStyles>
   )
 }
