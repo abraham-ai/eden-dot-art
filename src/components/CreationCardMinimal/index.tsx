@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 
 // STYLES
 import { styled } from '@mui/material/styles'
@@ -17,6 +17,8 @@ import {
   // Chip,
   // Collapse,
   IconButton,
+  // Modal,
+  // Backdrop,
   // Tooltip,
   Typography,
 } from '@mui/material'
@@ -29,10 +31,8 @@ import {
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IosShareIcon from '@mui/icons-material/IosShare'
-// import {
-//   FaDiscord,
-//   FaHashtag
-// } from 'react-icons/fa'
+// import { FaDiscord } from 'react-icons/fa'
+// FaHashtag
 // import { HiOutlineSparkles } from 'react-icons/hi'
 // FaRetweet,
 // import { AiOutlineFire } from 'react-icons/ai'
@@ -42,6 +42,7 @@ import IosShareIcon from '@mui/icons-material/IosShare'
 // import MemoryIcon from '@mui/icons-material/Memory'
 // import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 
 // interface ExpandMoreProps extends IconButtonProps {
 //   expand: boolean
@@ -57,6 +58,19 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 //     duration: theme.transitions.duration.shortest,
 //   }),
 // }))
+
+// const BoxModalStyle = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: '90%',
+//   bgcolor: 'background.paper',
+//   maxHeight: '90%',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// }
 
 const CardStyles = styled(Card)(
   () => `
@@ -120,16 +134,45 @@ const CardStyles = styled(Card)(
   `,
 )
 
-export default function CreationCardIG({ creation }) {
-  const { address, text_input, intermediate_sha } = creation
-  // const { model_name, clip_model, width, height } = creation.config
-  const {
-    origin,
-    author_name,
-    // channel_name
-  } = creation.source
+export default function CreationCardMinimal({ creation }) {
+  // MAIN
+  // const address = creation.address === undefined ? 'none' : creation.address
+  const text_input =
+    creation.text_input === undefined ? 'none' : creation.text_input
+  const intermediate_sha =
+    creation.intermediate_sha === undefined ? [] : creation.intermediate_sha
+
+  // DIMENSIONS
+  // const width = creation.width === undefined ? 100 : creation.width
+  // const height = creation.height === undefined ? 100 : creation.height
+
+  // SOURCE
+  // const origin = creation.source.origin === undefined ? 'none' : creation.source
+  // const author_name =
+  creation.source.author_name === undefined ? 'none' : creation.source
+  // const channel_name =
+  creation.source.channel_name === undefined ? 'none' : creation.source
+  // const guild_name =
+  creation.source.guild_name === undefined ? 'none' : creation.source
+  const { address } =
+    creation.source.address === undefined ? 'none' : creation.source
+
+  // GENERATOR
+  // const generator_name =
+  creation.generator === undefined ? 'none' : creation.generator
+
+  const [cardOpen, setCardOpen] = useState(false)
+  const handleCardOpen = () => setCardOpen(true)
+  // const handleCardClose = () => setCardOpen(false)
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
+
+  const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
+
+  // const imageFullURL =
+  creation.intermediate_sha === undefined
+    ? 'none'
+    : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
 
   // const [expanded, setExpanded] = React.useState(false)
 
@@ -137,7 +180,9 @@ export default function CreationCardIG({ creation }) {
   //   setExpanded(!expanded)
   // }
 
-  const currentUserName = origin === 'discord' ? author_name : address
+  // const currentUserName = origin === 'discord' ? author_name : address
+  // console.log({ currentUserName })
+
   // const creationTimeAgo = 100
 
   function randomColor() {
@@ -148,7 +193,7 @@ export default function CreationCardIG({ creation }) {
   }
 
   // const currentGuildIcon =
-  //   creation.source.guild_name === 'abraham-ai' ? (
+  //   guild_name === 'abraham-ai' ? (
   //     <FaDiscord style={{ fontSize: '1.2rem' }} />
   //   ) : (
   //     // <SiEthereum />
@@ -156,16 +201,19 @@ export default function CreationCardIG({ creation }) {
   //     // <AppLogo style={{ width: 10 }} size={'icon-small'} />
   //   )
 
+  // console.log(address)
+  // console.log(cardOpen)
+
   // const currentClipModel = clip_model !== null ? clip_model : null
 
   return (
     <CardStyles>
-      <Card id="creation-card">
+      <Card id="creation-card" onClick={handleCardOpen}>
         <Box sx={{ position: 'relative' }}>
           <CardMedia
             component="img"
             height="auto"
-            image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
+            image={STG_URL + intermediate_sha[intermediate_sha.length - 1]}
             alt="Card Media"
             sx={{ position: 'relative' }}
           />
@@ -189,16 +237,32 @@ export default function CreationCardIG({ creation }) {
                 </Typography>
               </Box>
             </Box>
+
             <CardActions className="creation-actions" disableSpacing>
-              {/* <IconButton aria-label="praise">
-          <HiOutlineSparkles />
-        </IconButton>
-        <IconButton aria-label="burn">
-          <AiOutlineFire />
-        </IconButton>
-        <IconButton aria-label="recreation">
-          <FaRetweet />
-        </IconButton> */}
+              {/* </IconButton>
+              <IconButton aria-label="recreation">
+                <FaRetweet />
+              </IconButton> */}
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  backdropFilter: 'blur(16px)',
+                  borderRadius: '25px',
+                  width: 'auto',
+                  padding: 0,
+                  mr: 1,
+                }}
+              >
+                <IconButton aria-label="bookmark" className="arrow-up">
+                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
+                </IconButton>
+                <IconButton aria-label="bookmark" className="arrow-down">
+                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
+                </IconButton>
+              </Box>
+
               <IconButton
                 aria-label="share"
                 sx={{
@@ -211,6 +275,7 @@ export default function CreationCardIG({ creation }) {
               >
                 <IosShareIcon />
               </IconButton>
+
               {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
@@ -222,6 +287,7 @@ export default function CreationCardIG({ creation }) {
 
               <Box
                 sx={{
+                  display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
                   backdropFilter: 'blur(16px)',
                   borderRadius: '25px',
@@ -270,7 +336,7 @@ export default function CreationCardIG({ creation }) {
                   {currentGuildIcon}
                 </Avatar>
               }
-              label={creation.source.guild_name}
+              label={guild_name}
               variant="outlined"
             />
             <Chip
@@ -284,7 +350,7 @@ export default function CreationCardIG({ creation }) {
               variant="outlined"
             />
 
-            {model_name ? (
+            {generator_name ? (
               <Tooltip title="Model Name">
                 <Chip
                   sx={{ m: 0.5 }}
@@ -293,7 +359,7 @@ export default function CreationCardIG({ creation }) {
                       <MemoryIcon sx={{ fontSize: '1.5rem' }} />
                     </Avatar>
                   }
-                  label={creation.config.model_name}
+                  label={creation.config.generator_name}
                   variant="outlined"
                 />
               </Tooltip>
@@ -321,12 +387,16 @@ export default function CreationCardIG({ creation }) {
         <Box sx={{ display: 'flex' }}>
           <Avatar
             sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
-            aria-label="recipe"
+            aria-label="username"
           />
           <Typography noWrap={true} sx={{ display: 'inline-block' }}>
-            {currentUserName.substring(0, currentUserName.indexOf('#'))}
+            {address}
+            {/* {currentUserName === 'none'
+              ? currentUserName
+              : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
           </Typography>
         </Box>
+        <span style={{ display: 'none' }}>{cardOpen}</span>
       </Box>
     </CardStyles>
   )

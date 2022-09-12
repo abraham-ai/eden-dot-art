@@ -71,8 +71,11 @@ const CardStyles = styled(Card)(
 
 export default function CreationCardIG({ creation }) {
   const { address, text_input, intermediate_sha } = creation
-  const { model_name, clip_model, width, height } = creation.config
+  const { name } = creation.generator
+  const { clip_model, width, height } = creation.config
   const { origin, author_name, channel_name } = creation.source
+
+  const model_name = name
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
@@ -210,7 +213,7 @@ export default function CreationCardIG({ creation }) {
                         <MemoryIcon sx={{ fontSize: '1.5rem' }} />
                       </Avatar>
                     }
-                    label={creation.config.model_name}
+                    label={model_name}
                     variant="outlined"
                   />
                 </Tooltip>

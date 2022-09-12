@@ -3,6 +3,16 @@ import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
+// APOLLO
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  from,
+} from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+
 // ROUTER
 import Router from 'next/router'
 import nProgress from 'nprogress'
@@ -23,18 +33,49 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 // AUTH
 import { WalletProvider } from '@/contexts/WalletContext'
 
+// networkError
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors) {
+//     graphQLErrors.map(({ message, locations, path }) => {
+//       console.log(message, locations, path)
+//       // alert(`Graphql error ${message} ${locations} ${path}`)
+//     })
+//   }
+// })
+
+const errorLink = onError(() => null)
+
+const link = from([
+  errorLink,
+  new HttpLink({ uri: 'https://graphql.stg.aws.abraham.fun/' }),
+])
+
+// https://minio.aws.abraham.fun/creations-stg
+
+const apiUrl = 'https://graphql.stg.aws.abraham.fun/'
+
+// || 'http://localhost:3000/'
+
+const client = new ApolloClient({
+  uri: apiUrl, // change to YOUR own production server
+  cache: new InMemoryCache(),
+  name: 'web',
+  version: '1.0',
+  link: link,
+})
+
 const clientSideEmotionCache = createEmotionCache()
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-interface TokyoAppProps extends AppProps {
+interface EdenAppProps extends AppProps {
   emotionCache?: EmotionCache
   Component: NextPageWithLayout
 }
 
-function TokyoApp(props: TokyoAppProps) {
+function EdenApp(props: EdenAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
 
@@ -43,28 +84,31 @@ function TokyoApp(props: TokyoAppProps) {
   Router.events.on('routeChangeComplete', nProgress.done)
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>
-          Eden.Art | Compute, Scalablity, and Scaffolding for ML Model Creators
-        </title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-      </Head>
-      <SidebarProvider>
-        <ThemeProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <WalletProvider>
-              <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
-            </WalletProvider>
-          </LocalizationProvider>
-        </ThemeProvider>
-      </SidebarProvider>
-    </CacheProvider>
+    <ApolloProvider client={client}>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>
+            Eden.Art | Compute, Scalablity, and Scaffolding for ML Model
+            Creators
+          </title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <SidebarProvider>
+          <ThemeProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <WalletProvider>
+                <CssBaseline />
+                {getLayout(<Component {...pageProps} />)}
+              </WalletProvider>
+            </LocalizationProvider>
+          </ThemeProvider>
+        </SidebarProvider>
+      </CacheProvider>
+    </ApolloProvider>
   )
 }
 
-export default TokyoApp
+export default EdenApp
