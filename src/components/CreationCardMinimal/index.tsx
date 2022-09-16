@@ -17,8 +17,8 @@ import {
   // Chip,
   // Collapse,
   IconButton,
-  // Modal,
-  // Backdrop,
+  Modal,
+  Backdrop,
   // Tooltip,
   Typography,
 } from '@mui/material'
@@ -59,18 +59,18 @@ import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 //   }),
 // }))
 
-// const BoxModalStyle = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: '90%',
-//   bgcolor: 'background.paper',
-//   maxHeight: '90%',
-//   border: '2px solid #000',
-//   boxShadow: 24,
-//   p: 4,
-// }
+const BoxModalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '90%',
+  bgcolor: 'background.paper',
+  maxHeight: '90%',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const CardStyles = styled(Card)(
   () => `
@@ -163,16 +163,16 @@ export default function CreationCardMinimal({ creation }) {
 
   const [cardOpen, setCardOpen] = useState(false)
   const handleCardOpen = () => setCardOpen(true)
-  // const handleCardClose = () => setCardOpen(false)
+  const handleCardClose = () => setCardOpen(false)
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
   const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
 
-  // const imageFullURL =
-  creation.intermediate_sha === undefined
-    ? 'none'
-    : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
+  const imageFullURL =
+    creation.intermediate_sha === undefined
+      ? 'none'
+      : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
 
   // const [expanded, setExpanded] = React.useState(false)
 
@@ -382,6 +382,184 @@ export default function CreationCardMinimal({ creation }) {
           </CardContent>
         </Collapse> */}
       </Card>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={cardOpen}
+        onClose={handleCardClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Box sx={BoxModalStyle}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="auto"
+              image={imageFullURL}
+              alt="Card Media"
+              sx={{ position: 'relative', maxHeight: '500px' }}
+            />
+
+            <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ p: 2, color: 'white' }}
+              >
+                {text_input}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  backdropFilter: 'blur(16px)',
+                  borderRadius: '25px',
+                  width: 'auto',
+                  padding: 0,
+                  mr: 1,
+                }}
+              >
+                <IconButton aria-label="bookmark" className="arrow-up">
+                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
+                </IconButton>
+                <IconButton aria-label="bookmark" className="arrow-down">
+                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
+                </IconButton>
+              </Box>
+              <IconButton
+                aria-label="share"
+                sx={{
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  backdropFilter: 'blur(16px)',
+                  borderRadius: '50%',
+                  width: 'auto',
+                  mr: 1,
+                }}
+              >
+                <IosShareIcon />
+              </IconButton>
+              <Box
+                sx={{
+                  display: 'flex',
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  backdropFilter: 'blur(16px)',
+                  borderRadius: '25px',
+                  width: 'auto',
+                }}
+              >
+                <IconButton aria-label="bookmark">
+                  <BookmarkBorderIcon />
+                </IconButton>
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              </Box>
+            </Box>
+
+            {/* <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+                >
+                <ExpandMoreIcon />
+              </ExpandMore> */}
+
+            <Box>
+              {/* <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar
+                    alt="generator name"
+                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
+                  />
+                }
+                label={generator_name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
+                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={`${width}x${height}`}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
+                    {currentGuildIcon}
+                  </Avatar>
+                }
+                label={guild_name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
+                    <FaHashtag style={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={channel_name}
+                variant="outlined"
+              /> */}
+
+              {/* {generator_name ? (
+                <Tooltip title="Model Name">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar
+                        alt="model name"
+                        src="/static/images/avatar/1.jpg"
+                      >
+                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
+                      </Avatar>
+                    }
+                    label={generator_name}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null} */}
+
+              {/* {currentClipModel ? (
+                <Tooltip title="Clip Model">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar
+                        alt="clip model"
+                        src="/static/images/avatar/1.jpg"
+                      >
+                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
+                      </Avatar>
+                    }
+                    label={creation.config.clip_model}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null} */}
+            </Box>
+          </Box>
+        </Box>
+      </Modal>
 
       <Box className="creation-header">
         <Box sx={{ display: 'flex' }}>
