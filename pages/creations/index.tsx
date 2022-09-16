@@ -1,4 +1,5 @@
-// import { useEffect } from 'react'
+import { useMemo, useState } from 'react'
+// useEffect,
 import type { ReactElement } from 'react'
 
 // GQL
@@ -22,6 +23,9 @@ import Masonry from '@mui/lab/Masonry'
 // CONSTS
 // import { GET_CREATIONS } from '@/const/get-creations'
 
+// HOOKS
+import useWindowDimensions from '@/hooks/useWindowDimensions'
+
 // GQL Creations query to retreive all Creations //
 import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
 
@@ -34,6 +38,7 @@ const SelectStyles = styled('section')(
 )
 
 export default function CreationsPage() {
+  const [breakpointCols, setBreakpointCols] = useState(3)
   const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
     variables: {
       offset: 0,
@@ -41,9 +46,55 @@ export default function CreationsPage() {
     },
   })
 
+  const { width } = useWindowDimensions()
+
   // useEffect(() => {
   //   console.log({ data })
   // }, [data])
+
+  const deviceWidthMobile = 640
+  const deviceWidthTablet = 840
+  const deviceWidthDesktop = 1150
+  const deviceWidthDesktopXL = 1300
+  const deviceWidthDesktopXXL = 1400
+
+  // console.log({ width })
+
+  // const getBreakpointCols =
+  useMemo(() => {
+    // console.log('USE-MEMO BREAKPOINTS!!!!')
+    // console.log(width)
+    // console.log(width <= 960)
+
+    if (width <= deviceWidthMobile) {
+      // console.log('USE-MEMO BREAKPOINTS MOBILE!!!!')
+      setBreakpointCols(1)
+      return 1
+    } else if (width >= deviceWidthMobile && width <= deviceWidthTablet) {
+      // console.log('USE-MEMO BREAKPOINTS TABLET!!!!')
+      setBreakpointCols(2)
+      return 2
+    } else if (width >= deviceWidthTablet && width <= deviceWidthDesktop) {
+      // console.log('USE-MEMO BREAKPOINTS TABLET!!!!')
+      setBreakpointCols(3)
+      return 2
+    } else if (width >= deviceWidthDesktop && width < deviceWidthDesktopXL) {
+      // console.log('USE-MEMO BREAKPOINTS DESKTOP!!!!')
+      setBreakpointCols(4)
+      return 4
+    } else if (width >= deviceWidthDesktopXL && width < deviceWidthDesktopXXL) {
+      setBreakpointCols(4)
+      return 6
+    } else if (width >= deviceWidthDesktopXXL) {
+      setBreakpointCols(4)
+      return 7
+    } else {
+      // console.log('USE MEMO DEFAULT!!!')
+    }
+  }, [width])
+
+  // console.log(breakpointCols)
+  // console.log(getBreakpointCols)
 
   const onLoadMore = () =>
     fetchMore({
@@ -85,7 +136,7 @@ export default function CreationsPage() {
         )} */}
 
           <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
-            <Masonry columns={4} spacing={2}>
+            <Masonry columns={breakpointCols} spacing={2}>
               <QueryResult error={error} loading={loading} data={data}>
                 {data?.creationsForHome?.map((creation, index) => (
                   <CreationCardMinimal
