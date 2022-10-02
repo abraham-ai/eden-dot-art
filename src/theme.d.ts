@@ -25,3 +25,5 @@ declare module '@mui/material/styles' {
     darker?: string
   }
 }
+
+export default ThemeOptions
