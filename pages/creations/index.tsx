@@ -29,14 +29,6 @@ import useWindowDimensions from '@/hooks/useWindowDimensions'
 // GQL Creations query to retreive all Creations //
 import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
 
-const SelectStyles = styled('section')(
-  () => `
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  `,
-)
-
 export default function CreationsPage() {
   const [breakpointCols, setBreakpointCols] = useState(3)
   const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
@@ -120,9 +112,8 @@ export default function CreationsPage() {
       <Head>
         <title>Creations</title>
       </Head>
-      <SelectStyles>
-        <Container maxWidth="xl">
-          {/* {isConnected ? (
+      <Container maxWidth="xl">
+        {/* {isConnected ? (
           <>
             <Typography variant={'h3'}>
               You are connected with you wallet!
@@ -135,24 +126,24 @@ export default function CreationsPage() {
           </Button>
         )} */}
 
-          <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
-            <Masonry columns={breakpointCols} spacing={2}>
-              <QueryResult error={error} loading={loading} data={data}>
-                {data?.creationsForHome?.map((creation, index) => (
-                  <CreationCardMinimal
-                    key={`${creation.id}_${index}`}
-                    creation={creation}
-                  />
-                ))}
-              </QueryResult>
-              <a href="#" onClick={onLoadMore}>
-                Load More
-              </a>
-            </Masonry>
-          </Box>
-        </Container>
+        <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
+          <Masonry columns={breakpointCols} spacing={2}>
+            <QueryResult error={error} loading={loading} data={data}>
+              {data?.creationsForHome?.map((creation, index) => (
+                <CreationCardMinimal
+                  key={`${creation.id}_${index}`}
+                  creation={creation}
+                />
+              ))}
+            </QueryResult>
+          </Masonry>
+          <a href="#" onClick={onLoadMore} style={{ color: 'black' }}>
+            Load More
+          </a>
+        </Box>
+      </Container>
 
-        {/* <Container maxWidth="xl">
+      {/* <Container maxWidth="xl">
           {isConnected ? (
           <>
             <Typography variant={'h3'}>
@@ -180,7 +171,6 @@ export default function CreationsPage() {
             </Masonry>
           </Box>
         </Container> */}
-      </SelectStyles>
       {/* <Footer /> */}
     </>
   )
