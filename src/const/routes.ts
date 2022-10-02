@@ -6,24 +6,25 @@ export const ROUTES = {
     DEV_GARDEN: '/garden',
     IDEAS: '/ideas',
     APPS: '/apps',
-    FAQ: '/faq'
+    FAQ: '/faq',
+    COLLAGE: '/collage',
   },
   EDEN_ART: {
     HOME: '/',
     PRICING: '/pricing',
-    CREATIONS: '/creations'
+    CREATIONS: '/creations',
   },
   CREATE: {
-    MAIN: '/create'
+    MAIN: '/create',
   },
   TEST: {
-    HOME: '/test/home'
+    HOME: '/test/home',
   },
   WALLET: {
     CONNECT: '/wallet/connect',
     CREDITS: '/wallet/credits',
     USE: '/wallet/use',
     CREATE: '/create',
-    MYCREATIONS: '/mycreations'
-  }
-};
+    MYCREATIONS: '/mycreations',
+  },
+}
