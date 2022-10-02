@@ -13,12 +13,12 @@ import {
   Modal,
   styled,
   useTheme,
-  Typography,
+  // Typography,
 } from '@mui/material'
 // Fade
 
 // ROUTER
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // WALLET
 import { useAccount } from 'wagmi'
@@ -44,7 +44,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 // VIEW ICONS
 
 const BoxModalStyle = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -98,7 +98,7 @@ export default function Header() {
 
   const [createOpen, setCreateOpen] = useState(false)
   const handleCreateOpen = () => {
-    console.log('HANDLE CREATE OPEN!')
+    // console.log('HANDLE CREATE OPEN!')
     setCreateOpen(true)
   }
   const handleCreateClose = () => setCreateOpen(false)
@@ -182,11 +182,11 @@ export default function Header() {
 
       <Logo />
 
-      <Link href="/about" className="nav-link-wrapper">
+      {/* <Link href="/about" className="nav-link-wrapper">
         <Typography variant={'h4'} className="nav-link-text">
           ABOUT
         </Typography>
-      </Link>
+      </Link> */}
 
       <SortCreationsBar />
 
