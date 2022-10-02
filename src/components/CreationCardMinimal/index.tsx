@@ -70,6 +70,7 @@ const BoxModalStyle = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  backgroundColor: 'white',
 }
 
 const CardStyles = styled(Card)(
@@ -148,12 +149,13 @@ export default function CreationCardMinimal({ creation }) {
 
   // SOURCE
   // const origin = creation.source.origin === undefined ? 'none' : creation.source
-  // const author_name =
-  creation.source.author_name === undefined ? 'none' : creation.source
-  // const channel_name =
-  creation.source.channel_name === undefined ? 'none' : creation.source
-  // const guild_name =
-  creation.source.guild_name === undefined ? 'none' : creation.source
+  const { type } = creation.source.type === undefined ? 'none' : creation.source
+  const { handle } =
+    creation.source.handle === undefined ? 'none' : creation.source
+  const author_name =
+    creation.source.author_name === undefined ? 'none' : creation.source
+  // const channel_name = creation.source.channel_name === undefined ? 'none' : creation.source
+  // const guild_name = creation.source.guild_name === undefined ? 'none' : creation.source
   const { address } =
     creation.source.address === undefined ? 'none' : creation.source
 
@@ -167,7 +169,7 @@ export default function CreationCardMinimal({ creation }) {
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
-  const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
+  // const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
 
   const imageFullURL =
     creation.intermediate_sha === undefined
@@ -180,8 +182,8 @@ export default function CreationCardMinimal({ creation }) {
   //   setExpanded(!expanded)
   // }
 
-  // const currentUserName = origin === 'discord' ? author_name : address
-  // console.log({ currentUserName })
+  // console.log({ currentUserName, origin, author_name, address })
+  const currentUserName = type === 'discord' ? handle : address
 
   // const creationTimeAgo = 100
 
@@ -203,6 +205,7 @@ export default function CreationCardMinimal({ creation }) {
 
   // console.log(address)
   // console.log(cardOpen)
+  // console.log(creation)
 
   // const currentClipModel = clip_model !== null ? clip_model : null
 
@@ -213,7 +216,7 @@ export default function CreationCardMinimal({ creation }) {
           <CardMedia
             component="img"
             height="auto"
-            image={STG_URL + intermediate_sha[intermediate_sha.length - 1]}
+            image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
             alt="Card Media"
             sx={{ position: 'relative' }}
           />
@@ -402,19 +405,30 @@ export default function CreationCardMinimal({ creation }) {
               alignItems: 'flex-start',
             }}
           >
-            <CardMedia
-              component="img"
-              height="auto"
-              image={imageFullURL}
-              alt="Card Media"
-              sx={{ position: 'relative', maxHeight: '500px' }}
-            />
+            <Box sx={{ overflowY: 'auto', display: 'flex' }}>
+              <CardMedia
+                component="img"
+                height="auto"
+                className="creation-card"
+                image={imageFullURL}
+                alt="Card Media"
+                sx={{
+                  position: 'relative',
+                  maxHeight: '500px',
+                  maxWidth: '500px',
+                  pb: 2,
+                }}
+              />
 
-            <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ p: 2, color: 'white' }}
+                sx={{
+                  p: 2,
+                  color: '#111',
+                  fontWeight: 600,
+                  fontSize: '1.2rem',
+                }}
               >
                 {text_input}
               </Typography>
@@ -567,8 +581,14 @@ export default function CreationCardMinimal({ creation }) {
             sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
             aria-label="username"
           />
-          <Typography noWrap={true} sx={{ display: 'inline-block' }}>
-            {address}
+          <Typography
+            noWrap={true}
+            sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
+          >
+            {/* {address} */}
+
+            {currentUserName}
+
             {/* {currentUserName === 'none'
               ? currentUserName
               : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
