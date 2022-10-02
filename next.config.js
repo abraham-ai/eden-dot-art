@@ -16,5 +16,11 @@ module.exports = {
   experimental: {
     outputStandalone: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
+  env: {
+    NEXT_PUBLIC_ABRAHAM_GATEWAY: 'https://gateway.prd.aws.abraham.fun',
+  },
   ...withImages(redirects),
 }
