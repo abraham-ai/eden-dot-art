@@ -1,7 +1,11 @@
-import {
-  // useContext,
-  useState,
-} from 'react'
+import { useState, useEffect } from 'react'
+// useContext,
+
+// ROUTER
+import Link from 'next/link'
+
+// REDUX
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 
 // MUI
 import {
@@ -17,11 +21,8 @@ import {
 } from '@mui/material'
 // Fade
 
-// ROUTER
-import Link from 'next/link'
-
-// WALLET
-import { useAccount } from 'wagmi'
+// WEB3 HOOKS
+import { useAccount, useSignMessage } from 'wagmi'
 
 // NAV
 // import { EdenNavTop } from '../../../components';
@@ -40,11 +41,12 @@ import AddIcon from '@mui/icons-material/Add'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 
 // VIEW ICONS
 
 const BoxModalStyle = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -52,6 +54,7 @@ const BoxModalStyle = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
+  backgroundColor: 'white',
   p: 4,
 }
 
@@ -62,7 +65,7 @@ const HeaderWrapper = styled(Box)(
         padding: ${theme.spacing(0, 2)};
         right: 0;
         z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
+        background-color: white;
         backdrop-filter: blur(3px);
         position: fixed;
         justify-content: space-between;
@@ -98,18 +101,31 @@ export default function Header() {
 
   const [createOpen, setCreateOpen] = useState(false)
   const handleCreateOpen = () => {
-    console.log('HANDLE CREATE OPEN!')
+    // console.log('HANDLE CREATE OPEN!')
     setCreateOpen(true)
   }
   const handleCreateClose = () => setCreateOpen(false)
+
+  // retrieve current state of redux store
+  const dispatch = useAppDispatch()
 
   const [loginOpen, setLoginOpen] = useState(false)
   const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
+  const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
+    useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(setIsWeb3WalletConnected(isConnected))
+  }, [isConnected, dispatch])
+
+  // console.log({ createOpen })
+
   return (
     <HeaderWrapper
       display="flex"
+      justifyContent="space-between"
       alignItems="center"
       sx={{
         boxShadow:
@@ -182,16 +198,22 @@ export default function Header() {
 
       <Logo />
 
-      <Link href="/about" className="nav-link-wrapper">
+      {/* <Link href="/about" className="nav-link-wrapper">
         <Typography variant={'h4'} className="nav-link-text">
           ABOUT
         </Typography>
-      </Link>
+      </Link> */}
 
-      <SortCreationsBar />
+      {/* <Link href="/apps" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          APPS
+        </Typography>
+      </Link> */}
+
+      {/* <SortCreationsBar /> */}
 
       <Box sx={{ display: 'flex' }}>
-        {isConnected ? (
+        {/* {isWeb3WalletConnected ? (
           <Button
             id="create-button"
             variant="contained"
@@ -204,7 +226,7 @@ export default function Header() {
           </Button>
         ) : null}
 
-        {isConnected ? (
+        {isWeb3WalletConnected ? (
           <Button
             id="mycreations-button"
             variant="outlined"
@@ -217,12 +239,10 @@ export default function Header() {
           >
             My Creations
           </Button>
-        ) : null}
+        ) : null} */}
 
-        {isConnected ? (
-          <ConnectButton />
-        ) : (
-          <Button
+        <ConnectButton />
+        {/* <Button
             id="login-button"
             variant="contained"
             onClick={handleLoginOpen}
@@ -231,8 +251,7 @@ export default function Header() {
             sx={{ mr: 1 }}
           >
             Sign-in
-          </Button>
-        )}
+          </Button> */}
       </Box>
 
       {/* <Modal
@@ -249,7 +268,7 @@ export default function Header() {
         <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
       </Modal> */}
 
-      <CreateModal isOpen={createOpen} onClose={handleCreateClose} />
+      {/* <CreateModal isOpen={createOpen} onClose={handleCreateClose} /> */}
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -279,8 +298,6 @@ export default function Header() {
           </Box>
         </Box>
       </Modal>
-
-      {/* <SpeedDial /> */}
     </HeaderWrapper>
   )
 }
