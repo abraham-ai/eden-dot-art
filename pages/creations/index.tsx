@@ -14,7 +14,7 @@ import Head from 'next/head'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 // UI
-import { Box, Container, styled } from '@mui/material'
+import { Box, Container } from '@mui/material'
 
 // COMPONENTS
 import CreationCardMinimal from '@/components/CreationCardMinimal'
@@ -126,8 +126,9 @@ export default function CreationsPage() {
           </Button>
         )} */}
 
+        {/* breakpointCols */}
         <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
-          <Masonry columns={breakpointCols} spacing={2}>
+          <Masonry columns={4} spacing={2}>
             <QueryResult error={error} loading={loading} data={data}>
               {data?.creationsForHome?.map((creation, index) => (
                 <CreationCardMinimal
@@ -137,7 +138,11 @@ export default function CreationsPage() {
               ))}
             </QueryResult>
           </Masonry>
-          <a href="#" onClick={onLoadMore} style={{ color: 'black' }}>
+          <a
+            href="#"
+            onClick={onLoadMore}
+            style={{ color: 'black', paddingBottom: 10 }}
+          >
             Load More
           </a>
         </Box>
