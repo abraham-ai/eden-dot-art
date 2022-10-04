@@ -15,6 +15,7 @@ import {
   SelectChangeEvent,
   // styled,
   TextField,
+  Typography,
   // useTheme,
 } from '@mui/material'
 
@@ -30,7 +31,7 @@ const BoxModalStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
-  bgcolor: 'background.paper',
+  bgcolor: 'white',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -102,15 +103,19 @@ export default function CreateUI({ isOpen = true, onClose }) {
                   <MenuItem value={'all'}>All</MenuItem>
                   <MenuItem value={'vertical'}>
                     <TbRectangleVertical className="filter-icon" />
-                    Vertical 9:16
+                    <Typography sx={{ color: 'black' }}>
+                      Vertical 9:16
+                    </Typography>
                   </MenuItem>
                   <MenuItem value={'landscape'}>
                     <MdOutlineCropLandscape className="filter-icon" />
-                    Landscape 16:9
+                    <Typography sx={{ color: 'black' }}>
+                      Landscape 16:9
+                    </Typography>
                   </MenuItem>
                   <MenuItem value={'square'}>
                     <TbSquare className="filter-icon" />
-                    Square 1:1
+                    <Typography sx={{ color: 'black' }}>Square 1:1</Typography>
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -148,7 +153,9 @@ export default function CreateUI({ isOpen = true, onClose }) {
                         position: 'relative',
                       }}
                     ></span>
-                    Stable Diffusion
+                    <Typography sx={{ color: '#111' }}>
+                      Stable Diffusion
+                    </Typography>
                   </MenuItem>
                 </Select>
               </FormControl>
