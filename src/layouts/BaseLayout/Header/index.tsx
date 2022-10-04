@@ -17,12 +17,16 @@ import {
   Modal,
   styled,
   useTheme,
-  Typography,
+  // Typography,
 } from '@mui/material'
 // Fade
 
-// WEB3 HOOKS
-import { useAccount, useSignMessage } from 'wagmi'
+// ROUTER
+// import Link from 'next/link'
+
+// WALLET
+import { useAccount } from 'wagmi'
+// useSignMessage
 
 // NAV
 // import { EdenNavTop } from '../../../components';
