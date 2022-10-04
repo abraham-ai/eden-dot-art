@@ -213,7 +213,7 @@ export default function Header() {
       {/* <SortCreationsBar /> */}
 
       <Box sx={{ display: 'flex' }}>
-        {/* {isWeb3WalletConnected ? (
+        {isWeb3WalletConnected ? (
           <Button
             id="create-button"
             variant="contained"
@@ -239,19 +239,19 @@ export default function Header() {
           >
             My Creations
           </Button>
-        ) : null} */}
+        ) : null}
 
         <ConnectButton />
         {/* <Button
-            id="login-button"
-            variant="contained"
-            onClick={handleLoginOpen}
-            size="medium"
-            endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
-            sx={{ mr: 1 }}
-          >
-            Sign-in
-          </Button> */}
+          id="login-button"
+          variant="contained"
+          onClick={handleLoginOpen}
+          size="medium"
+          endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
+          sx={{ mr: 1 }}
+        >
+          Sign-in
+        </Button> */}
       </Box>
 
       {/* <Modal
@@ -268,7 +268,7 @@ export default function Header() {
         <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
       </Modal> */}
 
-      {/* <CreateModal isOpen={createOpen} onClose={handleCreateClose} /> */}
+      <CreateModal isOpen={createOpen} onClose={handleCreateClose} />
 
       <Modal
         aria-labelledby="transition-modal-title"
