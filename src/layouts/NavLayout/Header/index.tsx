@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
-// useCallback,
+//  useCallback
 
 // ROUTER
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // REDUX
 import { useAppDispatch } from '@/hooks/hooks'
-//
+// useAppSelector
+
+// COMPONENTS
+// import CreateModal from '@/components/CreateModal'
 
 // MUI
 import {
@@ -16,7 +19,7 @@ import {
   lighten,
   styled,
   useTheme,
-  Typography,
+  // Typography,
 } from '@mui/material'
 
 // WEB3 HOOKS
@@ -28,6 +31,7 @@ import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 // COMPONENTS
 import Logo from '@/components/Logo'
 // import LoginButton from '@/components/LoginButton'
+// import CreateSignInJWT from '@/components/CreateSignInJWT'
 import SignInJWT from '@/components/SignInJWT'
 
 // ICONS
@@ -85,11 +89,11 @@ export default function Header() {
 
   // const handleAccountNav = useCallback(() => {
   //   if (!isWeb3WalletConnected) {
-  //     return <LoginButton />
+  //     return <ConnectButton />
   //   } else if (isWeb3WalletConnected && !isWeb3AuthSuccess) {
   //     return (
   //       <>
-  //         <SignInJWT />
+  //         <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
   //         <ConnectButton />
   //       </>
   //     )
@@ -116,31 +120,25 @@ export default function Header() {
                 theme.colors.alpha.black[100],
                 0.1,
               )}`,
+        backgroundColor: 'white',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Box sx={{ pr: 10 }}>
-          <Logo name={'Collage'} />
-        </Box>
-        <Link href="/about-collage" className="nav-link-wrapper">
-          <Typography variant={'h4'} className="nav-link-text" sx={{ pr: 5 }}>
-            ABOUT
-          </Typography>
-        </Link>
-
-        <Link href="/apps" className="nav-link-wrapper">
-          <Typography variant={'h4'} className="nav-link-text">
-            APPS
-          </Typography>
-        </Link>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flex: 1,
+        }}
+      >
+        {/* <LoginButton /> */}
+        <Logo name="eden" />
         {/* {handleAccountNav()} */}
 
-        {/* <LoginButton /> */}
-        <SignInJWT />
-        <ConnectButton />
+        <Box sx={{ display: 'flex' }}>
+          <SignInJWT />
+          <ConnectButton />
+        </Box>
       </Box>
     </HeaderWrapper>
   )

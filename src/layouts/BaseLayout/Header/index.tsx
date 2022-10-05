@@ -214,6 +214,23 @@ export default function Header() {
         </Typography>
       </Link> */}
 
+      {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ pr: 10 }}>
+          <Logo name={'Collage'} />
+        </Box>
+        <Link href="/about-collage" className="nav-link-wrapper">
+          <Typography variant={'h4'} className="nav-link-text" sx={{ pr: 5 }}>
+            ABOUT
+          </Typography>
+        </Link>
+
+        <Link href="/apps" className="nav-link-wrapper">
+          <Typography variant={'h4'} className="nav-link-text">
+            APPS
+          </Typography>
+        </Link>
+      </Box> */}
+
       {/* <SortCreationsBar /> */}
 
       <Box sx={{ display: 'flex' }}>
@@ -256,6 +273,35 @@ export default function Header() {
         >
           Sign-in
         </Button> */}
+        <CreateModal isOpen={createOpen} onClose={handleCreateClose} />
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={loginOpen}
+          onClose={handleLoginClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Box sx={BoxModalStyle}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+              }}
+            >
+              <ConnectButton />
+              Or
+              <Button variant={'contained'}>
+                Connect Discord
+                <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
       </Box>
 
       {/* <Modal
@@ -271,37 +317,6 @@ export default function Header() {
       >
         <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
       </Modal> */}
-
-      <CreateModal isOpen={createOpen} onClose={handleCreateClose} />
-
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={loginOpen}
-        onClose={handleLoginClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Box sx={BoxModalStyle}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }}
-          >
-            <ConnectButton />
-            Or
-            <Button variant={'contained'}>
-              Connect Discord
-              <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
-            </Button>
-          </Box>
-        </Box>
-      </Modal>
     </HeaderWrapper>
   )
 }
