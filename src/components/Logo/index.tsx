@@ -46,14 +46,17 @@ const VersionBadge = styled(Box)(
 `,
 )
 
+const typeColor = '#111'
+
 const LogoText = styled(Box)(
   ({ theme }) => `
+        color: ${typeColor};
         font-size: ${theme.typography.pxToRem(15)};
         font-weight: ${theme.typography.fontWeightBold};
 `,
 )
 
-function Logo() {
+function Logo({ name = 'Eden' }) {
   return (
     <LogoWrapper href="/">
       <LogoSignWrapper>
@@ -78,7 +81,7 @@ function Logo() {
           <Tooltip title="Private Beta" arrow placement="right">
             <VersionBadge>Alpha</VersionBadge>
           </Tooltip>
-          <LogoText>Eden</LogoText>
+          <LogoText>{name}</LogoText>
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>

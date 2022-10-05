@@ -9,6 +9,7 @@ import {
   Select,
   SelectChangeEvent,
   styled,
+  Typography,
 } from '@mui/material'
 
 // ICONS
@@ -25,29 +26,46 @@ import ListIcon from '@mui/icons-material/List'
 import GridViewIcon from '@mui/icons-material/GridView'
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt'
 
+const typeColorPrimary = '#111'
+
 const SortCreationsBarStyles = styled('section')(
   ({ theme }) => `
-    color: ${theme.palette.text.primary};
-    font-weight: ${theme.typography.fontWeightBold};
+    color: ${typeColorPrimary};
+    font-weight: 600;
     .select-sort-form {
       min-width: 100px; 
       margin: 5px; 
+      color: ${typeColorPrimary};
     }
     .filter-select {
       width: 150;
       display: 'flex';
       align-items: 'center';
+      color: ${typeColorPrimary};
     }
     .filter-select > div {
       display: flex;
       align-items: center;
+      color: ${typeColorPrimary};
     }
     .filter-icon {
       font-size: 1.5rem; 
       margin-right: 10px;
+      color: ${typeColorPrimary};
     }
 `,
 )
+
+const typeColor = '#111'
+
+const TypographyStyles = {
+  color: typeColor,
+  fontWeight: 600,
+}
+
+const MenuItemStyles = {
+  backgroundColor: 'white',
+}
 
 export default function SortCreationsBar() {
   const [sort, setSort] = useState('newest')
@@ -77,9 +95,14 @@ export default function SortCreationsBar() {
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor: 'white',
         }}
       >
-        <FormControl className="select-sort-form" size="small">
+        <FormControl
+          className="select-sort-form"
+          size="small"
+          sx={{ backgroundColor: 'white' }}
+        >
           <InputLabel id="filter-select-label">Sort</InputLabel>
           <Select
             labelId="filter-label"
@@ -88,18 +111,31 @@ export default function SortCreationsBar() {
             label={'Sort'}
             onChange={handleSortChange}
             autoWidth
+            sx={{ backgroundColor: 'white' }}
           >
-            <MenuItem value={'newest'} id="select-menu-item">
+            <MenuItem
+              value={'newest'}
+              className="select-menu-item"
+              sx={MenuItemStyles}
+            >
               <IoFlashOutline style={{ fontSize: '1.5rem', marginRight: 10 }} />
-              Newest
+              <Typography sx={TypographyStyles}>Newest</Typography>
             </MenuItem>
-            <MenuItem value={'praise'} className="select-menu-item">
+            <MenuItem
+              value={'praise'}
+              className="select-menu-item"
+              sx={MenuItemStyles}
+            >
               <TbArrowBigTop style={{ fontSize: '1.5rem', marginRight: 10 }} />
-              Up Votes
+              <Typography sx={TypographyStyles}>Up Votes</Typography>
             </MenuItem>
-            <MenuItem value={'burn'} className="select-menu-item">
+            <MenuItem
+              value={'burn'}
+              className="select-menu-item"
+              sx={MenuItemStyles}
+            >
               <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-              Down Votes
+              <Typography sx={TypographyStyles}>Down Votes</Typography>
             </MenuItem>
           </Select>
         </FormControl>

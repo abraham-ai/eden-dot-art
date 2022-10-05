@@ -33,7 +33,7 @@ import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const BoxModalStyle = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -228,8 +228,6 @@ export default function Header() {
           </Box>
         </Box>
       </Modal>
-
-      {/* <SpeedDial /> */}
     </HeaderWrapper>
   )
 }

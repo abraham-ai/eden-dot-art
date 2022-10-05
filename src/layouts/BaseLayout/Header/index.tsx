@@ -1,7 +1,11 @@
-import {
-  // useContext,
-  useState,
-} from 'react'
+import { useState, useEffect } from 'react'
+// useContext,
+
+// ROUTER
+import Link from 'next/link'
+
+// REDUX
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 
 // MUI
 import {
@@ -22,6 +26,7 @@ import {
 
 // WALLET
 import { useAccount } from 'wagmi'
+// useSignMessage
 
 // NAV
 // import { EdenNavTop } from '../../../components';
@@ -40,6 +45,7 @@ import AddIcon from '@mui/icons-material/Add'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 
 // VIEW ICONS
 
@@ -52,6 +58,7 @@ const BoxModalStyle = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
+  backgroundColor: 'white',
   p: 4,
 }
 
@@ -62,7 +69,7 @@ const HeaderWrapper = styled(Box)(
         padding: ${theme.spacing(0, 2)};
         right: 0;
         z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
+        background-color: white;
         backdrop-filter: blur(3px);
         position: fixed;
         justify-content: space-between;
@@ -103,13 +110,26 @@ export default function Header() {
   }
   const handleCreateClose = () => setCreateOpen(false)
 
+  // retrieve current state of redux store
+  const dispatch = useAppDispatch()
+
   const [loginOpen, setLoginOpen] = useState(false)
   const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
+  const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
+    useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(setIsWeb3WalletConnected(isConnected))
+  }, [isConnected, dispatch])
+
+  // console.log({ createOpen })
+
   return (
     <HeaderWrapper
       display="flex"
+      justifyContent="space-between"
       alignItems="center"
       sx={{
         boxShadow:
@@ -188,10 +208,16 @@ export default function Header() {
         </Typography>
       </Link> */}
 
-      <SortCreationsBar />
+      {/* <Link href="/apps" className="nav-link-wrapper">
+        <Typography variant={'h4'} className="nav-link-text">
+          APPS
+        </Typography>
+      </Link> */}
+
+      {/* <SortCreationsBar /> */}
 
       <Box sx={{ display: 'flex' }}>
-        {isConnected ? (
+        {isWeb3WalletConnected ? (
           <Button
             id="create-button"
             variant="contained"
@@ -204,7 +230,7 @@ export default function Header() {
           </Button>
         ) : null}
 
-        {isConnected ? (
+        {isWeb3WalletConnected ? (
           <Button
             id="mycreations-button"
             variant="outlined"
@@ -219,20 +245,17 @@ export default function Header() {
           </Button>
         ) : null}
 
-        {isConnected ? (
-          <ConnectButton />
-        ) : (
-          <Button
-            id="login-button"
-            variant="contained"
-            onClick={handleLoginOpen}
-            size="medium"
-            endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
-            sx={{ mr: 1 }}
-          >
-            Sign-in
-          </Button>
-        )}
+        <ConnectButton />
+        {/* <Button
+          id="login-button"
+          variant="contained"
+          onClick={handleLoginOpen}
+          size="medium"
+          endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
+          sx={{ mr: 1 }}
+        >
+          Sign-in
+        </Button> */}
       </Box>
 
       {/* <Modal
@@ -279,8 +302,6 @@ export default function Header() {
           </Box>
         </Box>
       </Modal>
-
-      {/* <SpeedDial /> */}
     </HeaderWrapper>
   )
 }
