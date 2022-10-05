@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 
 // COMPONENTS
+import Image from 'next/image'
 
 // MUI COMPONENTS
 import {
@@ -136,6 +137,9 @@ const CardStyles = styled(Card)(
 )
 
 export default function CreationCardMinimal({ creation }) {
+  // console.log(creation)
+  // add source, width, height
+
   // MAIN
   // const address = creation.address === undefined ? 'none' : creation.address
   const text_input =
@@ -212,13 +216,18 @@ export default function CreationCardMinimal({ creation }) {
     <CardStyles>
       <Card id="creation-card" onClick={handleCardOpen}>
         <Box sx={{ position: 'relative' }}>
-          <CardMedia
-            component="img"
-            height="auto"
-            image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
-            alt="Card Media"
-            sx={{ position: 'relative' }}
+          {/* <Box sx={{ width: 512, height: 512 }}> */}
+          <Image
+            // component="img"
+            // image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
+            src={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
+            height={512}
+            width={512}
+            alt="Eden Creation"
+            layout="responsive"
+            style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
           />
+          {/* </Box> */}
 
           <CardContent className="creation-content">
             <Box
