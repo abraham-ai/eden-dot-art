@@ -43,7 +43,7 @@ const BoxModalStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   // width: '90%',
-  bgcolor: 'background.paper',
+  bgcolor: 'white',
   maxHeight: '90%',
   border: '2px solid #000',
   boxShadow: 24,
@@ -130,7 +130,8 @@ export default function SignInJWT() {
       // address
       // console.log('🆔 🔍 Verify Token!!')
       // console.log(response)
-      const responseToken = response
+      const responseToken = response.data.token
+
       // console.log({ responseToken })
       // console.log({
       //   authToken,
@@ -530,9 +531,14 @@ export default function SignInJWT() {
               <Box sx={{ pb: 3 }}>
                 <AppLogo logo={'eden'} size={'large'} />
               </Box>
-              <Typography variant={'h4'}>
-                Sign-in to create with Eden Collage.
-              </Typography>
+
+              {!isWeb3AuthSuccess ? (
+                <Typography variant={'h4'} sx={{ color: 'black' }}>
+                  Sign-in to create with Eden Collage.
+                </Typography>
+              ) : (
+                { handleAuthClose }
+              )}
 
               <Button
                 disabled={isLoading}
@@ -546,7 +552,7 @@ export default function SignInJWT() {
               {/* USER AUTH DATA */}
               <Box sx={{ maxWidth: '400px' }}>
                 {isSuccess && (
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ color: 'black' }}>
                     Signature:
                     <div style={{ wordBreak: 'break-all' }}>{data}</div>
                   </Typography>
@@ -555,7 +561,10 @@ export default function SignInJWT() {
                   <Typography variant="body1">Error signing message</Typography>
                 )}
                 {isWeb3AuthSuccess && (
-                  <Typography variant="body1">
+                  <Typography
+                    variant="body1"
+                    sx={{ wordBreak: 'break-word', color: 'black' }}
+                  >
                     Auth Token: {authToken}
                   </Typography>
                 )}
