@@ -152,8 +152,7 @@ export default function CreationCardMinimal({ creation }) {
   const { type } = creation.source.type === undefined ? 'none' : creation.source
   const { handle } =
     creation.source.handle === undefined ? 'none' : creation.source
-  const author_name =
-    creation.source.author_name === undefined ? 'none' : creation.source
+  // const author_name = creation.source.author_name === undefined ? 'none' : creation.source
   // const channel_name = creation.source.channel_name === undefined ? 'none' : creation.source
   // const guild_name = creation.source.guild_name === undefined ? 'none' : creation.source
   const { address } =

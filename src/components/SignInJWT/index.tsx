@@ -23,7 +23,8 @@ const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
 // console.log({ serverUrl })
 
 // AUTH
-import jwt_decode, { JwtPayload } from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
+// import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo'
@@ -74,7 +75,7 @@ export default function SignInJWT() {
 
   // retrieve current state of redux store
   const authToken = useAppSelector(state => state.token.value)
-  const appAddress = useAppSelector(state => state.address.value)
+  // const appAddress = useAppSelector(state => state.address.value)
 
   const { address, isConnected } = useAccount()
   const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
@@ -120,8 +121,13 @@ export default function SignInJWT() {
     // })
   }
 
+  interface AuthTokenType {
+    address: string
+  }
+
   const verifyToken = useCallback(
-    (response, address) => {
+    response => {
+      // address
       // console.log('🆔 🔍 Verify Token!!')
       // console.log(response)
       const responseToken = response
@@ -222,7 +228,8 @@ export default function SignInJWT() {
       // console.log(`USE-AUTH-JWT: ${address}`)
 
       if (authToken !== '') {
-        const decodedToken = jwt_decode<JwtPayload>(authToken || '') || null
+        const decodedToken = jwtDecode<AuthTokenType>(authToken)
+        // const decodedToken = jwt_decode<JwtPayload>(authToken || '') || null
         // console.log({ decodedToken })
 
         // console.log(`AUTH-TOKEN: ${authToken}`)
@@ -237,7 +244,8 @@ export default function SignInJWT() {
             })
             .then(response => {
               // console.log(response)
-              verifyToken(response, address)
+              // address
+              verifyToken(response)
               setIsClicked(false)
             })
             .catch(error => checkError(error))
@@ -358,7 +366,8 @@ export default function SignInJWT() {
           localStorage.setItem('token', authToken)
         }
         // console.log({ authToken, address })
-        verifyToken(authToken, address)
+        verifyToken(authToken)
+        // address
       }
     },
     [address, appMessage, verifyToken, dispatch],

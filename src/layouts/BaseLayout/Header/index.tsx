@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 // useContext,
 
 // ROUTER
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // REDUX
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
@@ -33,14 +33,14 @@ import { useAccount } from 'wagmi'
 
 // COMPONENTS
 import Logo from '@/components/Logo'
-import SortCreationsBar from '@/components/SortCreationsBar'
+// import SortCreationsBar from '@/components/SortCreationsBar'
 import CreateModal from '@/components/CreateModal'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
 // import { SidebarContext } from 'src/contexts/SidebarContext'
 // import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
-import LoginIcon from '@mui/icons-material/Login'
+// import LoginIcon from '@mui/icons-material/Login'
 import AddIcon from '@mui/icons-material/Add'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { FaDiscord } from 'react-icons/fa'
@@ -114,11 +114,11 @@ export default function Header() {
   const dispatch = useAppDispatch()
 
   const [loginOpen, setLoginOpen] = useState(false)
-  const handleLoginOpen = () => setLoginOpen(true)
+  // const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
-  const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
-    useAppSelector(state => state.auth)
+  // isWeb3AuthSuccess, isWeb3AuthSigning,
+  const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
 
   useEffect(() => {
     dispatch(setIsWeb3WalletConnected(isConnected))
