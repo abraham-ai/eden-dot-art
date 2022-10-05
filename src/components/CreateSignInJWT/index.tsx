@@ -473,7 +473,10 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
               <Typography variant="body1">Error signing message</Typography>
             )}
             {isWeb3AuthSuccess && (
-              <Typography variant="body1" sx={{ wordBreak: 'break-word' }}>
+              <Typography
+                variant="body1"
+                sx={{ wordBreak: 'break-word', color: 'black' }}
+              >
                 Auth Token: {authToken}
               </Typography>
             )}
