@@ -23,7 +23,7 @@ import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // STYLES
-import { colors, createTheme } from '@mui/material'
+// import { colors, createTheme } from '@mui/material'
 import ThemeProvider from 'src/theme/ThemeProvider'
 import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider, EmotionCache } from '@emotion/react'

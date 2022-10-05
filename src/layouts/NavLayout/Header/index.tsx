@@ -1,15 +1,17 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
+// useCallback,
 
 // ROUTER
 import Link from 'next/link'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppDispatch } from '@/hooks/hooks'
+//
 
 // MUI
 import {
   alpha,
-  Button,
+  // Button,
   Box,
   lighten,
   styled,
@@ -25,7 +27,7 @@ import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 
 // COMPONENTS
 import Logo from '@/components/Logo'
-import LoginButton from '@/components/LoginButton'
+// import LoginButton from '@/components/LoginButton'
 import SignInJWT from '@/components/SignInJWT'
 
 // ICONS
@@ -73,28 +75,28 @@ export default function Header() {
   // retrieve current state of redux store
   const dispatch = useAppDispatch()
 
-  const { isWeb3AuthSuccess, isWeb3WalletConnected } = useAppSelector(
-    state => state.auth,
-  )
+  // const { isWeb3AuthSuccess, isWeb3WalletConnected } = useAppSelector(
+  //   state => state.auth,
+  // )
 
   useEffect(() => {
     dispatch(setIsWeb3WalletConnected(isConnected))
   }, [isConnected, dispatch])
 
-  const handleAccountNav = useCallback(() => {
-    if (!isWeb3WalletConnected) {
-      return <LoginButton />
-    } else if (isWeb3WalletConnected && !isWeb3AuthSuccess) {
-      return (
-        <>
-          <SignInJWT />
-          <ConnectButton />
-        </>
-      )
-    } else if (isWeb3WalletConnected && isWeb3AuthSuccess) {
-      return <ConnectButton />
-    }
-  }, [isWeb3WalletConnected, isWeb3AuthSuccess])
+  // const handleAccountNav = useCallback(() => {
+  //   if (!isWeb3WalletConnected) {
+  //     return <LoginButton />
+  //   } else if (isWeb3WalletConnected && !isWeb3AuthSuccess) {
+  //     return (
+  //       <>
+  //         <SignInJWT />
+  //         <ConnectButton />
+  //       </>
+  //     )
+  //   } else if (isWeb3WalletConnected && isWeb3AuthSuccess) {
+  //     return <ConnectButton />
+  //   }
+  // }, [isWeb3WalletConnected, isWeb3AuthSuccess])
 
   return (
     <HeaderWrapper

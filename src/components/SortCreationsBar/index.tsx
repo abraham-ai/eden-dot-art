@@ -28,8 +28,9 @@ import ViewQuiltIcon from '@mui/icons-material/ViewQuilt'
 
 const typeColorPrimary = '#111'
 
+// { theme }
 const SortCreationsBarStyles = styled('section')(
-  ({ theme }) => `
+  () => `
     color: ${typeColorPrimary};
     font-weight: 600;
     .select-sort-form {
