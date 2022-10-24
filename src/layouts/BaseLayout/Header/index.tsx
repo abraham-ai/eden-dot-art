@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 // useContext,
 
 // ROUTER
-// import Link from 'next/link'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { ROUTES } from '@/const/routes'
 
 // REDUX
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
@@ -21,15 +23,9 @@ import {
 } from '@mui/material'
 // Fade
 
-// ROUTER
-// import Link from 'next/link'
-
 // WALLET
 import { useAccount } from 'wagmi'
 // useSignMessage
-
-// NAV
-// import { EdenNavTop } from '../../../components';
 
 // COMPONENTS
 import Logo from '@/components/Logo'
@@ -84,6 +80,21 @@ const HeaderWrapper = styled(Box)(
           cursor: pointer;
           color: white;
         }
+        .nav-link.active a {
+          font-weight: 600;
+          color: black;
+          margin: 20px;
+          text-decoration: unset;
+          padding-bottom: 3px;
+          border-bottom: 3px solid black
+        }
+        .nav-link a {
+          font-weight: 600;
+          color: gray;
+          margin: 20px;
+          text-decoration: unset;
+          padding-bottom: 3px;
+        }
         @media (min-width: ${theme.breakpoints.values.lg}px) {
             // left: ${theme.sidebar.width};
             left: 0;
@@ -102,6 +113,7 @@ export default function Header() {
     isConnected,
   } = useAccount()
   const theme = useTheme()
+  const router = useRouter()
 
   const [createOpen, setCreateOpen] = useState(false)
   const handleCreateOpen = () => {
@@ -125,7 +137,14 @@ export default function Header() {
   }, [isConnected, dispatch])
 
   // console.log({ createOpen })
+  // console.log('ROUTER:', router.asPath)
+  // if (router.asPath === '/watch') {
+  //   console.log('TRUEEE /WATCH')
+  // }
 
+  function getIsActive(route) {
+    return router.asPath === route ? 'active' : ''
+  }
   return (
     <HeaderWrapper
       display="flex"
@@ -201,6 +220,19 @@ export default function Header() {
       </Link> */}
 
       <Logo />
+
+      <Box sx={{ display: 'flex' }}>
+        <Box className={`nav-link ${getIsActive('/browse')}`}>
+          <Link href={ROUTES.EDEN_ART.BROWSE} style={{ marginLeft: 2 }}>
+            BROWSE
+          </Link>
+        </Box>
+        <Box className={`nav-link ${getIsActive('/watch')}`}>
+          <Link href={ROUTES.EDEN_ART.WATCH} style={{ marginLeft: 2 }}>
+            WATCH
+          </Link>
+        </Box>
+      </Box>
 
       {/* <Link href="/about" className="nav-link-wrapper">
         <Typography variant={'h4'} className="nav-link-text">

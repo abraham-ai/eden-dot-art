@@ -13,6 +13,8 @@ export const ROUTES = {
     HOME: '/',
     PRICING: '/pricing',
     CREATIONS: '/creations',
+    WATCH: '/watch',
+    BROWSE: '/browse',
   },
   CREATE: {
     MAIN: '/create',

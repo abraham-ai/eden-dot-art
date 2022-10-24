@@ -153,14 +153,20 @@ export default function CreationCardMinimal({ creation }) {
 
   // SOURCE
   // const origin = creation.source.origin === undefined ? 'none' : creation.source
-  const { type } = creation.source.type === undefined ? 'none' : creation.source
-  const { handle } =
-    creation.source.handle === undefined ? 'none' : creation.source
-  // const author_name = creation.source.author_name === undefined ? 'none' : creation.source
-  // const channel_name = creation.source.channel_name === undefined ? 'none' : creation.source
-  // const guild_name = creation.source.guild_name === undefined ? 'none' : creation.source
-  const { address } =
-    creation.source.address === undefined ? 'none' : creation.source
+
+  const { origin, author_name, address } = creation.source
+
+  // const { origin } =
+  //   creation.source.origin === undefined ? 'none' : creation.source
+  // const { author_name } =
+  //   creation.source.author_name === undefined
+  //     ? 'none'
+  //     : creation.source.author_name
+  // // const author_name = creation.source.author_name === undefined ? 'none' : creation.source
+  // // const channel_name = creation.source.channel_name === undefined ? 'none' : creation.source
+  // // const guild_name = creation.source.guild_name === undefined ? 'none' : creation.source
+  // const { address } =
+  //   creation.source.address === undefined ? 'none' : creation.source
 
   // GENERATOR
   // const generator_name =
@@ -185,8 +191,9 @@ export default function CreationCardMinimal({ creation }) {
   //   setExpanded(!expanded)
   // }
 
+  // console.log({ creation })
+  const currentUserName = origin === 'discord' ? author_name : address
   // console.log({ currentUserName, origin, author_name, address })
-  const currentUserName = type === 'discord' ? handle : address
 
   // const creationTimeAgo = 100
 
