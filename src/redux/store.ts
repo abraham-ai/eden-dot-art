@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 
 // SLICES
 import {
-  // accountButtonReducer,
-  // allTokensReducer,
-  // counterReducer,
-  // filterReducer,
-  // sortReducer,
-  // creationsReducer,
+  accountButtonReducer,
+  allTokensReducer,
+  counterReducer,
+  filterReducer,
+  sortReducer,
+  creationsReducer,
   addressReducer,
   authReducer,
   tokenReducer,
@@ -15,12 +15,12 @@ import {
 
 export const store = configureStore({
   reducer: {
-    // accountButton: accountButtonReducer,
-    // counter: counterReducer,
-    // allTokens: allTokensReducer,
-    // filter: filterReducer,
-    // sort: sortReducer,
-    // creations: creationsReducer,
+    accountButton: accountButtonReducer,
+    counter: counterReducer,
+    allTokens: allTokensReducer,
+    filter: filterReducer,
+    sort: sortReducer,
+    creations: creationsReducer,
     address: addressReducer,
     auth: authReducer,
     token: tokenReducer,

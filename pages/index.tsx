@@ -4,6 +4,9 @@
 import Head from 'next/head'
 import Logo from '@/components/Logo'
 
+// NEXT
+import Link from 'next/link'
+
 // MUI
 import { Box, Card, styled, Container } from '@mui/material'
 
@@ -14,7 +17,7 @@ import EdenArtFrontPage from '@/components/EdenArtFrontPage'
 // import BaseLayout from 'src/layouts/BaseLayout'
 
 // ROUTES
-// import { ROUTES } from '@/const/routes'
+import { ROUTES } from '@/const/routes'
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
@@ -46,6 +49,17 @@ export default function IndexPage() {
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
             <Logo />
+
+            <Box>
+              <Link href={ROUTES.EDEN_ART.BROWSE} style={{ marginLeft: 2 }}>
+                BROWSE
+              </Link>
+            </Box>
+            <Box>
+              <Link href={ROUTES.EDEN_ART.WATCH} style={{ marginLeft: 2 }}>
+                WATCH
+              </Link>
+            </Box>
             {/* <Box
               display="flex"
               alignItems="center"
@@ -53,6 +67,7 @@ export default function IndexPage() {
               flex={1}
             >
               <Box />
+              
               <Box>
                 <Link href={ROUTES.EDEN_DEV.DEV_GARDEN} sx={{ ml: 2 }}>
                   DEV GARDEN
