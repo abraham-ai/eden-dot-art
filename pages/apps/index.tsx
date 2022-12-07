@@ -151,7 +151,7 @@ function EdenIdeasPage() {
             <Typography variant={'h2'}>
               WHAT WILL YOU BUILD WITH EDEN?
             </Typography>
-            <Typography variant={'h4'}>
+            <Typography variant={'h4'} sx={{ color: '#0c163b' }}>
               Compute, Scalability, and Scaffolding made <b>easy</b>.
             </Typography>
             <Button variant={'contained'}>VISIT THE DEVELOPER GARDEN</Button>

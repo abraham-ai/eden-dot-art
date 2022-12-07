@@ -1,8 +1,8 @@
-import { Box, Container, styled, Typography } from '@mui/material';
+import { Box, Container, styled, Typography } from '@mui/material'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo';
-import Link from 'next/link';
+import AppLogo from '@/components/AppLogo'
+import Link from 'next/link'
 
 const FooterWrapper = styled(Container)(
   ({ theme }) => `
@@ -15,9 +15,10 @@ const FooterWrapper = styled(Container)(
     }
     .footer-link {
       padding: 8px 0;
+      color: #0c163b;
     }
-`
-);
+`,
+)
 
 function Footer() {
   return (
@@ -31,7 +32,9 @@ function Footer() {
       >
         <div className="footer-info-section">
           <AppLogo logo="eden" />
-          <Typography variant={'body1'}>Learn</Typography>
+          <Typography variant={'body1'} sx={{ color: '#0c163b' }}>
+            Learn
+          </Typography>
 
           <Link href="/create">
             <Typography className="footer-link" variant={'h4'}>
@@ -106,7 +109,7 @@ function Footer() {
         </div>
       </Box>
     </FooterWrapper>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

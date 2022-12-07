@@ -1,9 +1,9 @@
-import { FC, ReactNode, useState, useContext } from 'react';
-import clsx from 'clsx';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-import NextLink from 'next/link';
+import { FC, ReactNode, useState, useContext } from 'react'
+import clsx from 'clsx'
+import { SidebarContext } from 'src/contexts/SidebarContext'
+import NextLink from 'next/link'
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import {
   Button,
   Tooltip,
@@ -12,20 +12,20 @@ import {
   ListItem,
   styled,
   TooltipProps,
-  tooltipClasses
-} from '@mui/material';
-import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+  tooltipClasses,
+} from '@mui/material'
+import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone'
+import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone'
 
 interface SidebarMenuItemProps {
-  children?: ReactNode;
-  link?: string;
-  icon?: any;
-  badge?: string;
-  badgeTooltip?: string;
-  open?: boolean;
-  active?: boolean;
-  name: string;
+  children?: ReactNode
+  link?: string
+  icon?: any
+  badge?: string
+  badgeTooltip?: string
+  open?: boolean
+  active?: boolean
+  name: string
 }
 
 const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
@@ -33,17 +33,18 @@ const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.colors.alpha.trueWhite[100],
-    color: theme.palette.getContrastText(theme.colors.alpha.trueWhite[100]),
+    color: '#8C7CF0',
+    // theme.palette.getContrastText(theme.colors.alpha.trueWhite[100])
     fontSize: theme.typography.pxToRem(12),
     fontWeight: 'bold',
     borderRadius: theme.general.borderRadiusSm,
     boxShadow:
-      '0 .2rem .8rem rgba(7,9,25,.18), 0 .08rem .15rem rgba(7,9,25,.15)'
+      '0 .2rem .8rem rgba(7,9,25,.18), 0 .08rem .15rem rgba(7,9,25,.15)',
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: theme.colors.alpha.trueWhite[100]
-  }
-}));
+    color: theme.colors.alpha.trueWhite[100],
+  },
+}))
 
 const SidebarMenuItem: FC<SidebarMenuItemProps> = ({
   children,
@@ -56,12 +57,12 @@ const SidebarMenuItem: FC<SidebarMenuItemProps> = ({
   name,
   ...rest
 }) => {
-  const [menuToggle, setMenuToggle] = useState<boolean>(openParent);
-  const { closeSidebar } = useContext(SidebarContext);
+  const [menuToggle, setMenuToggle] = useState<boolean>(openParent)
+  const { closeSidebar } = useContext(SidebarContext)
 
   const toggleMenu = (): void => {
-    setMenuToggle((Open) => !Open);
-  };
+    setMenuToggle(Open => !Open)
+  }
 
   if (children) {
     return (
@@ -91,7 +92,7 @@ const SidebarMenuItem: FC<SidebarMenuItemProps> = ({
         </Button>
         <Collapse in={menuToggle}>{children}</Collapse>
       </ListItem>
-    );
+    )
   }
 
   return (
@@ -121,8 +122,8 @@ const SidebarMenuItem: FC<SidebarMenuItemProps> = ({
         </Button>
       </NextLink>
     </ListItem>
-  );
-};
+  )
+}
 
 SidebarMenuItem.propTypes = {
   children: PropTypes.node,
@@ -132,12 +133,12 @@ SidebarMenuItem.propTypes = {
   badge: PropTypes.string,
   badgeTooltip: PropTypes.string,
   open: PropTypes.bool,
-  name: PropTypes.string.isRequired
-};
+  name: PropTypes.string.isRequired,
+}
 
 SidebarMenuItem.defaultProps = {
   open: false,
-  active: false
-};
+  active: false,
+}
 
-export default SidebarMenuItem;
+export default SidebarMenuItem

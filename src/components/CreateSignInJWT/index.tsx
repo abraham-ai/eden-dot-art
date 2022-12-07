@@ -179,6 +179,8 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
           address,
         })
 
+        // console.log({ data })
+
         try {
           // decode JWT token
           const decodedToken = jwtDecode<AuthTokenType>(data.authToken)

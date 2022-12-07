@@ -34,7 +34,7 @@ import NetworkVector2 from '@/components/NetworkVector2'
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo'
-import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
+// import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
 import Subscribe from '@/components/Subscribe'
 // EdenHeader,
 // FollowUs
@@ -353,8 +353,9 @@ export default function EdenDevFrontPage() {
 
             <Typography
               variant={'h1'}
-              sx={{ fontSize: '2.6rem', pb: 3, color: 'white', zIndex: 50 }}
+              sx={{ fontSize: '2.6rem', pb: 3, color: '#0c163b', zIndex: 50 }}
             >
+              {/* '#8C7CF0 */}
               <div>
                 Garden of{' '}
                 <span className="artificial">
@@ -375,12 +376,18 @@ export default function EdenDevFrontPage() {
                 maxWidth: 700,
                 lineHeight: 2,
                 zIndex: 50,
-                color: 'rgb(166, 166, 166)',
+                color: '#0c163b',
               }}
             >
+              {/* 'rgb(166, 166, 166)' */}
               we are Artworks, Digital Paintings, Apps, Video Clips, Stories,
               and much more. We are your mobile{' '}
-              <span style={{ color: 'white', textDecoration: 'underline' }}>
+              <span
+                style={{
+                  color: '#8C7CF0',
+                  textDecoration: 'underline',
+                }}
+              >
                 AI toolkit
               </span>{' '}
               to help you express yourself and make your everyday more
@@ -757,7 +764,7 @@ export default function EdenDevFrontPage() {
                 sx={{
                   fontSize: '1.5rem',
                   lineHeight: 1.5,
-                  color: 'rgb(166, 166, 166)',
+                  color: '#0C163B',
                   textAlign: 'center',
                   pt: 3,
                 }}
@@ -953,21 +960,21 @@ export default function EdenDevFrontPage() {
         <section className="section-wrapper">
           <div className="info-wrapper">
             <div className="visual-description">
-              <MemoryIcon sx={{ fontSize: 70 }} />
+              <MemoryIcon sx={{ fontSize: 70, color: '#0c163b' }} />
               <span className="separator" />
 
-              <CloudQueueIcon sx={{ fontSize: 70 }} />
+              <CloudQueueIcon sx={{ fontSize: 70, color: '#0c163b' }} />
               <span className="separator" />
 
-              <AppShortcutIcon sx={{ fontSize: 70 }} />
+              <AppShortcutIcon sx={{ fontSize: 70, color: '#0c163b' }} />
             </div>
 
             <div id="description">
               {/* <Text level={5}>Eden is an open project providing</Text> */}
-              <Typography variant={'h3'}>
+              <Typography variant={'h3'} sx={{ color: '#0c163b' }}>
                 Compute, scaling, and scaffolding
               </Typography>
-              <Typography variant={'h3'}>
+              <Typography variant={'h3'} sx={{ color: '#0c163b' }}>
                 for machine learning model creators.
               </Typography>
             </div>
@@ -977,7 +984,11 @@ export default function EdenDevFrontPage() {
         <div className="apps-wrapper">
           <div className="apps-text" style={{ marginBottom: 30 }}>
             <span className="separator" />
-            <Typography className="text" variant={'h3'}>
+            <Typography
+              className="text"
+              variant={'h3'}
+              sx={{ color: '#0c163b' }}
+            >
               Our growing ecosysten of AI Apps and tools
             </Typography>
             <span className="separator" />
@@ -1103,41 +1114,82 @@ export default function EdenDevFrontPage() {
               sx={{ display: 'flex', justifyContent: 'space-between', p: 3 }}
             >
               <Link href="/">
-                <FaTwitter style={{ margin: '10px', fontSize: '1.6rem' }} />
-              </Link>
-              <Link href="/">
-                <AiFillInstagram
-                  style={{ margin: '10px', fontSize: '1.6rem' }}
+                <FaTwitter
+                  style={{
+                    margin: '10px',
+                    fontSize: '1.6rem',
+                    color: '#8C7CF0',
+                  }}
                 />
               </Link>
               <Link href="/">
-                <FaTiktok style={{ margin: '10px', fontSize: '1.6rem' }} />
+                <AiFillInstagram
+                  style={{
+                    margin: '10px',
+                    fontSize: '1.6rem',
+                    color: '#8C7CF0',
+                  }}
+                />
               </Link>
               <Link href="/">
-                <FaDiscord style={{ margin: '10px', fontSize: '1.6rem' }} />
+                <FaTiktok
+                  style={{
+                    margin: '10px',
+                    fontSize: '1.6rem',
+                    color: '#8C7CF0',
+                  }}
+                />
+              </Link>
+              <Link href="/">
+                <FaDiscord
+                  style={{
+                    margin: '10px',
+                    fontSize: '1.6rem',
+                    color: '#8C7CF0',
+                  }}
+                />
               </Link>
             </Box>
 
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ p: 2 }}>
-                <Typography variant={'h4'} sx={{ fontSize: '1.2rem', p: 1 }}>
+                <Typography
+                  variant={'h4'}
+                  sx={{ fontSize: '1.2rem', p: 1, color: '#0c163b' }}
+                >
                   Do you have a press inquiry?
                 </Typography>
-                <Typography variant={'body1'} sx={{ fontSize: '1rem', p: 1 }}>
-                  Email us at <Link href="/">press@eden.art</Link>
+                <Typography
+                  variant={'body1'}
+                  sx={{ fontSize: '1rem', p: 1, color: '#0c163b' }}
+                >
+                  Email us at{' '}
+                  <Link href="/" style={{ color: '#8C7CF0' }}>
+                    press@eden.art
+                  </Link>
                 </Typography>
               </Box>
 
               <Box sx={{ p: 2 }}>
                 <Typography
                   variant={'h4'}
-                  sx={{ fontSize: '1.2rem', p: 1, maxWidth: 300 }}
+                  sx={{
+                    fontSize: '1.2rem',
+                    p: 1,
+                    maxWidth: 300,
+                    color: '#0c163b',
+                  }}
                 >
                   Have an account or product question?
                 </Typography>
                 <Typography
                   variant={'body1'}
-                  sx={{ fontSize: '1rem', p: 1, maxWidth: 300 }}
+                  sx={{
+                    fontSize: '1rem',
+                    p: 1,
+                    maxWidth: 300,
+                    color: '#0c163b',
+                  }}
                 >
                   Check out our <Link href="/">support page</Link>
                 </Typography>
@@ -1166,7 +1218,8 @@ export default function EdenDevFrontPage() {
             maxWidth={1}
             sx={{
               fontSize: '1.5rem',
-              color: 'rgb(166, 166, 166)',
+              color: '#0c163b',
+              // color: 'rgb(166, 166, 166)',
               maxWidth: 600,
               pb: 5,
             }}
@@ -1296,9 +1349,9 @@ export default function EdenDevFrontPage() {
           <Subscribe />
         </Container>
 
-        <section className="splash-wrapper">
+        {/* <section className="splash-wrapper">
           <VectorPerspectiveGrid />
-        </section>
+        </section> */}
 
         {/* <div className="apps-wrapper">
           <div className="apps-text">
