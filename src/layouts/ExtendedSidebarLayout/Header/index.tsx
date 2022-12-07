@@ -9,10 +9,10 @@ import {
   Button,
   Box,
   Backdrop,
-  lighten,
+  // lighten,
   Modal,
   styled,
-  useTheme,
+  // useTheme,
 } from '@mui/material'
 
 // ROUTER
@@ -78,7 +78,7 @@ const HeaderWrapper = styled(Box)(
 
 export default function Header() {
   // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
-  const theme = useTheme()
+  // const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
   const handleCreateOpen = () => setCreateOpen(true)
@@ -93,6 +93,10 @@ export default function Header() {
       display="flex"
       alignItems="center"
       sx={{
+        backgroundColor: 'white',
+      }}
+    >
+      {/* sx={{
         boxShadow:
           theme.palette.mode === 'dark'
             ? `0 1px 0 ${alpha(
@@ -106,8 +110,8 @@ export default function Header() {
                 theme.colors.alpha.black[100],
                 0.1,
               )}`,
-      }}
-    >
+      }} */}
+
       {/* <EdenNavTop /> */}
 
       {/* <Stack

@@ -65,9 +65,8 @@ export default function AppLogo({
   logo = 'abraham',
 }) {
   const abrahamLogo =
-    'https://res.cloudinary.com/react-graphql-store/image/upload/v1637103749/abraham_uuknth.png'
-  const edenLogo =
-    'https://res.cloudinary.com/react-graphql-store/image/upload/v1659514317/eden_logo_transparent_z62wfi.png'
+    'https://eden-art.s3.amazonaws.com/abraham_eth_star_logo.png'
+  const edenLogo = 'https://eden-art.s3.amazonaws.com/eden_logo_transparent.png'
 
   function renderSize(size: string) {
     switch (size) {

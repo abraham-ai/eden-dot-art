@@ -29,8 +29,8 @@ import { useAccount } from 'wagmi'
 
 // COMPONENTS
 import Logo from '@/components/Logo'
-// import SortCreationsBar from '@/components/SortCreationsBar'
 import CreateModal from '@/components/CreateModal'
+// import SortCreationsBar from '@/components/SortCreationsBar'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
@@ -212,12 +212,12 @@ export default function Header() {
           APPS
         </Typography>
       </Link>
-
+      
       <Link href="/faq" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          FAQ
-        </Typography>
-      </Link> */}
+      <Typography variant={'h4'} className="nav-link-text">
+      FAQ
+      </Typography>
+    </Link> */}
 
       <Logo />
 
