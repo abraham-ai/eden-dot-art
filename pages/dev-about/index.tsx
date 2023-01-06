@@ -50,13 +50,14 @@ function DevAboutPage() {
 
         <EdenDevFrontPage />
       </AboutPageStyles>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
 
 DevAboutPage.getLayout = page => (
-  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
+  // <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
+  <>{page}</>
 )
 
 export default DevAboutPage
