@@ -2,8 +2,8 @@ import Head from 'next/head'
 
 // NAV
 import EdenDevFrontPage from '@/components/EdenDevFrontPage'
-import Footer from '@/components/Footer'
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+// import Footer from '@/components/Footer'
+// import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
 import { Container, styled } from '@mui/material'
