@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ROUTING
-import Link from 'next/link'
+// import Link from 'next/link'
 // import { NavLink, Link } from 'react-router-dom';
 
 // UI
@@ -17,15 +17,15 @@ import {
 // import { BuildTwoTone, GithubOutlined } from '@ant-design/icons';
 
 // ICONS
-import { AiFillApi } from 'react-icons/ai'
+// import { AiFillApi } from 'react-icons/ai'
 
-import { FaRobot, FaTiktok, FaDiscord, FaTwitter } from 'react-icons/fa'
-import { AiFillInstagram } from 'react-icons/ai'
+// import { FaRobot, FaTiktok, FaDiscord, FaTwitter } from 'react-icons/fa'
+// import { AiFillInstagram } from 'react-icons/ai'
 
-// COMPONENTS
-import AppLogo from '@/components/AppLogo'
-// import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
-import Subscribe from '@/components/Subscribe'
+// // COMPONENTS
+// import AppLogo from '@/components/AppLogo'
+// // import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
+// import Subscribe from '@/components/Subscribe'
 // EdenHeader,
 // FollowUs
 
