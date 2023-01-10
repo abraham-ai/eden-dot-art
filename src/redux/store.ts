@@ -11,6 +11,8 @@ import {
   addressReducer,
   authReducer,
   tokenReducer,
+  snackbarReducer,
+  modalReducer,
 } from './slices/'
 
 export const store = configureStore({
@@ -24,6 +26,8 @@ export const store = configureStore({
     address: addressReducer,
     auth: authReducer,
     token: tokenReducer,
+    snackbar: snackbarReducer,
+    modal: modalReducer,
   },
 })
 

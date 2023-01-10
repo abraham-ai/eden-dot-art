@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, forwardRef } from 'react'
 
 // REDUX
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 import { batch } from 'react-redux'
+import { setSnackbarVisible } from '@/redux/slices/snackbarSlice'
 import { setAddress } from '@/redux/slices/addressSlice'
 import { setToken } from '@/redux/slices/tokenSlice'
 import {
@@ -24,13 +25,37 @@ import jwtDecode from 'jwt-decode'
 // , { JwtPayload }
 
 // MUI
-import { Backdrop, Button, Box, Typography, Modal, styled } from '@mui/material'
+import {
+  Backdrop,
+  Button,
+  IconButton,
+  Box,
+  Typography,
+  Modal,
+  styled,
+  Snackbar,
+} from '@mui/material'
+import MuiAlert, { AlertProps } from '@mui/material/Alert'
+
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+})
+
+// COMPONENTS
+import AppLogo from '@/components/AppLogo'
+
+// ICONS
+import CloseIcon from '@mui/icons-material/Close'
 
 export default function CreateSignInJWT({ isOpen, onClose }) {
   // retrieve current state of redux store
   const dispatch = useAppDispatch()
 
   const authToken = useAppSelector(state => state.token.value)
+  const isSnackbarVisible = useAppSelector(state => state.snackbar.visible)
   // const appAddress = useAppSelector(state => state.address.value)
   const { address } = useAccount() //  isConnected
   const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
@@ -69,10 +94,11 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
+    width: '480px',
     bgcolor: 'white',
     maxHeight: '90%',
     border: '2px solid #000',
+    borderRadius: '20px',
     boxShadow: 24,
     p: 4,
   }
@@ -444,6 +470,19 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
     signature,
   ])
 
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={() => dispatch(setSnackbarVisible(false))}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  )
+
   return (
     <ModalStyles key="modal-styles">
       <Modal
@@ -461,19 +500,72 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
           <Box
             sx={{
               display: 'flex',
+              flex: 1,
               flexDirection: 'column',
-              alignItems: 'flex-start',
+              alignItems: 'center',
             }}
           >
-            <Button disabled={isLoading} onClick={() => handleAuthJWTClick()}>
-              <Typography variant="button">Sign message</Typography>
-            </Button>
+            <Typography variant="h2" sx={{ color: 'rgb(0 80 30)' }}>
+              Welcome to Eden
+            </Typography>
+            <AppLogo logo="eden" size="x-large" />
+
+            <Typography
+              variant="h3"
+              sx={{ pt: 3, color: 'rgb(0 80 30)', textAlign: 'center' }}
+            >
+              Sign the message in your wallet to continue
+            </Typography>
+
+            <Typography
+              variant="h4"
+              sx={{
+                pt: 1,
+                pb: 3,
+                color: 'rgb(0 80 30)',
+                textAlign: 'center',
+                fontWeight: 'normal',
+              }}
+            >
+              Eden uses this signature to verify that you’re the owner of this
+              Ethereum address.
+            </Typography>
+
+            <Box sx={{ display: 'flex', mt: 3 }}>
+              <Button
+                variant="outlined"
+                disabled={isLoading}
+                onClick={() => onClose()}
+                sx={{ mr: 1 }}
+              >
+                <Typography sx={{ fontWeight: 'bold' }}>CANCEL</Typography>
+              </Button>
+              <Button
+                variant="contained"
+                disabled={isLoading}
+                onClick={() => handleAuthJWTClick()}
+                sx={{ ml: 1 }}
+              >
+                <Typography sx={{ fontWeight: 'bold' }}>SIGN-IN</Typography>
+              </Button>
+            </Box>
+
             {isSuccess && (
               <Typography variant="body1">Signature: {data}</Typography>
             )}
+
             {isError && (
-              <Typography variant="body1">Error signing message</Typography>
+              <Snackbar
+                open={isSnackbarVisible}
+                autoHideDuration={6000}
+                onClose={() => dispatch(setSnackbarVisible(false))}
+                message="Note archived"
+                action={action}
+              >
+                <Alert severity="error">Error signing message</Alert>
+              </Snackbar>
             )}
+
             {isWeb3AuthSuccess && (
               <Typography
                 variant="body1"

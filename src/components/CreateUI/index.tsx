@@ -1,28 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
+
+// WAGMI
+import { useAccount } from 'wagmi'
+
+// FETCH
+import axios from 'axios'
+
+// REDUX
+import {
+  setSnackbarVisible,
+  setSnackbarMessage,
+} from '@/redux/slices/snackbarSlice'
+import { setModalVisible } from '@/redux/slices/modalSlice'
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+// useAppDispatch
+// import { batch } from 'react-redux'
 
 // MUI
 import {
   // alpha,
   // Button,
-  Box,
-  Backdrop,
-  FormControl,
   // InputLabel,
   // lighten,
   // MenuItem,
-  Modal,
   // Select,
   // SelectChangeEvent,
+  // Typography,
+  // useTheme,
+  Box,
+  Backdrop,
+  FormControl,
+  Modal,
   styled,
   TextField,
-  // Typography,
   Button,
-  // useTheme,
+  Snackbar,
 } from '@mui/material'
 
+// ICONS
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close'
+
+// ACCOUNT
+import Blockies from 'react-blockies'
+
 // COMPONENTS
-import CreateTypeSelect from '@/components/CreateTypeSelect'
-import CreateGeneratorTypeSelect from '@/components/CreateGeneratorTypeSelect'
+import EdenTabs from '@/components/EdenTabs'
+// import CreateTypeSelect from '@/components/CreateTypeSelect'
+// import CreateGeneratorTypeSelect from '@/components/CreateGeneratorTypeSelect'
 
 // LAYOUT ICONS
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -33,6 +58,10 @@ import {
 } from 'react-icons/md'
 // import { BsGear } from 'react-icons/bs'
 
+// HTTP
+const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
+
+// STYLES
 const BoxModalStyle = {
   position: 'absolute',
   top: '50%',
@@ -66,11 +95,13 @@ const CreateUIStyles = styled(Box)(
     label {
       color:#536471;
       font-size: 1.2rem;
+      margin-top: 18px;
     }
 
     .divider {
       border: 1px solid lightgray;
-      margin: 10px 0;
+      margin-bottom: 10px;
+      margin-top: -2px;
     }
 
     .create-icon {
@@ -78,21 +109,99 @@ const CreateUIStyles = styled(Box)(
       font-size: 1.3rem;
       margin: 0 8px 0 0;
     }
+
+    .close-icon-wrapper:hover {
+      cursor: pointer;
+      z-index: 50;
+    }
+
+    .close-icon {
+      color: white;
+    }
+
+    .close-icon:hover {
+      cursor: pointer;
+    }
+
+    .x-button-wrapper {
+      display: flex; 
+      justify-content: space-between;
+    }
+
+    .x-button {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+    }
+
+    .account-wrapper {
+      margin-right: 10px;
+    }
+
+    .form-inner-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    #create-text-area {
+      min-height: 100px; 
+      border: none;
+      color: black;
+      font-Size: 1.2rem;
+      margin-top: 30px;
+      font-weight: 500;
+    }
 `,
 )
 
-export default function CreateUI({ isOpen = true, onClose }) {
-  // const [confirmLoading, setConfirmLoading] = useState(false)
-  const [prompt, setPrompt] = useState()
-  // const [creationShape, setCreationShape] = useState('square')
-  // const [creationHeight, setCreationHeight] = useState(1280)
-  // const [creationWidth, setCreationWidth] = useState(1280)
+const GATEWAY_URL_DEV = 'https://app.dev.aws.abraham.fun'
+const GATEWAY_URL = 'https://gateway-test.abraham.ai'
+const MINIO_URL = 'https://minio.aws.abraham.fun'
+const MINIO_BUCKET = 'creations-stg'
+
+export default function CreateUI({ isOpen }) {
+  const [prompt, setPrompt] = useState('')
+  const [creationShape, setCreationShape] = useState('square')
+  const [creationHeight, setCreationHeight] = useState(512)
+  const [creationWidth, setCreationWidth] = useState(512)
   const [maxCharPercent, setMaxCharPercent] = useState(0)
+
+  const dispatch = useAppDispatch()
+
+  const authToken = useAppSelector(state => state.token.value)
+  const appAddress = useAppSelector(state => state.address.value)
+  const isModalVisible = useAppSelector(state => state.modal.isModalVisible)
+  const isSnackbarVisible = useAppSelector(state => state.snackbar.visible)
+  const snackbarMessage = useAppSelector(state => state.snackbar.value)
+
+  const { address } = useAccount()
+
+  const generator_name = 'stable-diffusion'
+
+  // console.log({ authToken })
+
+  // const handleModalClose = (
+  //   event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  // ) => {
+  //   console.log('handleModalClose!')
+  //   console.log(event)
+  //   setModalOpen(false)
+  // }
+
+  // const [confirmLoading, setConfirmLoading] = useState(false)
+
+  // const apiKey = document.querySelector("input[name=apiKey]").value;
+  // const apiSecret = document.querySelector("input[name=apiSecret]").value;
+  // if (!apiKey || !apiSecret) {
+  //   alert("Please enter your API key and secret in the first tab");
+  //   return;
+  // }
+  // const authData = {"apiKey": apiKey, "apiSecret": apiSecret};
 
   // const [generator, setGenerator] = useState('stable-diffusion')
   // const [size, setSize] = useState('square')
-
-  // const [modalOpen, setModalOpen] = useState(isOpen)
 
   // const handleGeneratorChange = (event: SelectChangeEvent) => {
   //   setGenerator(event.target.value as string)
@@ -109,76 +218,233 @@ export default function CreateUI({ isOpen = true, onClose }) {
     // console.log(maxCharPercent)
   }
 
+  const sendNotification = (type, data) => {
+    return Snackbar[type]({
+      ...data,
+      placement: 'bottomRight',
+    })
+  }
+
+  const submitPrediction = useCallback(
+    async (config, resultId) => {
+      const request = {
+        token: authToken,
+        application: 'eden',
+        generator_name: generator_name,
+        config: config,
+        metadata: null,
+      }
+
+      // start prediction
+      const response = await axios.post(GATEWAY_URL + '/request', request)
+      const prediction_id = response.data
+
+      // console.log(`job submitted, task id ${prediction_id}`)
+      // document.querySelector('progressReal2Real')
+
+      // update progress text span
+      // let progress = document.querySelector(`#progress${resultId}`)
+      // progress.innerHTML = `Generating ${prediction_id}...`
+
+      // poll every few seconds for update to the job
+      // var refreshIntervalId = setInterval(async function () {
+      //   let response = await axios.post(GATEWAY_URL + '/fetch', {
+      //     taskIds: [prediction_id],
+      //   })
+      //   let { status, output } = response.data[0]
+
+      //   console.log(response)
+
+      //   if (status === 'complete') {
+      //     let outputUrl = `${MINIO_URL}/${MINIO_BUCKET}/${output}`
+      //     document.querySelector(`#result${resultId}`).src = outputUrl
+      //     let progress = document.querySelector(`#progress${resultId}`)
+      //     progress.innerHTML = `Done: <a href="${outputUrl}">${outputUrl}</a>`
+      //     console.log('done', outputUrl)
+      //     clearInterval(refreshIntervalId)
+      //   } else if (status === 'failed') {
+      //     console.log('failed')
+      //     clearInterval(refreshIntervalId)
+      //   }
+      //   console.log("let's go!", refreshIntervalId)
+      // }, 2000)
+    },
+    [authToken],
+  )
+
+  const handleSubmit = useCallback(
+    async (token, prompt, creationWidth, creationHeight, creationShape) => {
+      // values,
+      // address,
+      // let text_input = values.textInput;
+      // console.log('VALUES')
+      // console.log({ values })
+      // console.log(creationWidth, creationHeight)
+
+      const config = {
+        mode: 'generate',
+        text_input: prompt,
+        seed: 1e8 * Math.random(),
+        sampler: 'euler_ancestral',
+        scale: 12.0,
+        steps: 50,
+        width: creationWidth,
+        height: creationHeight,
+      }
+
+      // eden-clipx
+
+      // console.log('TEXT-INPUT: ' + text_input)
+
+      await submitPrediction(config, 'Generate')
+
+      // const results =
+      await axios // address is parsed from the JWT token
+        .post(serverUrl + '/request_creation', {
+          token: token,
+          source: 'eden',
+          generator_name: generator_name,
+          config: config,
+        })
+        .then(() => {
+          // response
+          //console.log(response)
+          // dispatch(setIsCreationRunningTrue())
+          sendNotification('success', {
+            message: 'Request Submitted.',
+            description: `Eden will dream a ${creationShape} creation: ${prompt}`,
+          })
+        })
+        .catch(error => {
+          // console.log(error)
+          // console.log(error.response)
+          // onReset()
+          setPrompt('')
+          sendNotification('error', {
+            message: 'Failed to Submit Request!',
+            description: `${error.response.data}`,
+          })
+        })
+    },
+    [submitPrediction],
+  )
+
+  const handleSnackbarClick = () => {
+    dispatch(setSnackbarVisible(true))
+  }
+
+  const handleSnackbarClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return
+      dispatch(setSnackbarVisible(false))
+    }
+    dispatch(setSnackbarVisible(false))
+  }
+
+  const action = (
+    <>
+      <Button color="secondary" size="small" onClick={handleSnackbarClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleSnackbarClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  )
+
   return (
     <Modal
+      id="create-modal"
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
-      className="create-modal"
-      open={isOpen}
-      onClose={onClose}
+      open={isModalVisible}
+      onClose={() => dispatch(setModalVisible(false))}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{ timeout: 500 }}
+      sx={{ background: 'rgba(0, 0, 0, 0.65)' }}
     >
       <CreateUIStyles>
-        <Box sx={BoxModalStyle}>
+        <>
+          <EdenTabs />
           <Box
-            key="form-wrapper"
-            className="form-wrapper"
-            sx={{ display: 'flex', flex: 1 }}
+            className="close-icon-wrapper"
+            sx={{
+              position: 'fixed',
+              top: '10px',
+              right: '10px',
+              color: 'black',
+            }}
           >
+            <CloseIcon
+              className="close-icon"
+              fontSize="large"
+              onClick={() => dispatch(setModalVisible(false))}
+            />
+          </Box>
+          <Box sx={BoxModalStyle}>
             <Box
-              sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+              key="form-wrapper"
+              className="form-wrapper"
+              sx={{ display: 'flex', flex: 1 }}
             >
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button
-                  sx={{
-                    borderRadius: '50%',
-                    width: 50,
-                    height: 50,
-                    minWidth: 50,
-                  }}
-                >
-                  X
-                </Button>
-              </Box>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+              >
+                {/* <Box className="x-button-wrapper">
+                  <Button className="x-button">X</Button>
+                </Box> */}
 
-              <Box sx={{ display: 'flex' }}>
-                <Box sx={{ mr: 1 }}>
-                  <AccountCircleIcon style={{ fontSize: '2rem' }} />
-                </Box>
-
-                <Box
-                  className="form-inner-wrapper"
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                  }}
-                >
-                  <Box sx={{ display: 'flex', mb: 2 }}>
-                    <CreateTypeSelect />
+                <Box sx={{ display: 'flex' }}>
+                  <Box
+                    className="account-wrapper"
+                    sx={{
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      minHeight: '48px',
+                      minWidth: '48px',
+                      maxHeight: '48px',
+                      maxWidth: '48px',
+                      m: '25px 0 0 10px',
+                    }}
+                  >
+                    <Blockies seed={appAddress} scale={6} />
                   </Box>
+                  {/* <AccountCircleIcon style={{ fontSize: '2rem' }} /> */}
 
-                  <FormControl sx={{ border: 'none' }}>
-                    <TextField
-                      className="create-text-area"
-                      label="Dream what is on your mind?"
-                      multiline
-                      maxRows={4}
-                      value={prompt}
-                      onChange={onChange}
-                    />
-                  </FormControl>
+                  <Box className="form-inner-wrapper">
+                    {/* <Box sx={{ display: 'flex', mb: 2 }}>
+                    <CreateTypeSelect />
+                  </Box> */}
 
-                  <CreateGeneratorTypeSelect />
+                    <FormControl sx={{ border: 'none' }}>
+                      <TextField
+                        id="create-text-area"
+                        label="Create what is on your mind?"
+                        multiline
+                        maxRows={4}
+                        value={prompt}
+                        onChange={onChange}
+                        variant="filled"
+                      />
+                    </FormControl>
 
-                  <div className="divider"></div>
+                    {/* <CreateGeneratorTypeSelect /> */}
 
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Box sx={{ display: 'flex', flex: 1 }}>
-                      <MdOutlinePhotoSizeSelectLarge className="create-icon" />
-                      {/* <FormControl className="select-size-form" size="small">
+                    <div className="divider"></div>
+
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Box sx={{ display: 'flex', flex: 1 }}>
+                        <MdOutlinePhotoSizeSelectLarge className="create-icon" />
+                        {/* <FormControl className="select-size-form" size="small">
                       <InputLabel id="filter-select-label">Size</InputLabel>
                       <Select
                         labelId="filter-label"
@@ -210,9 +476,9 @@ export default function CreateUI({ isOpen = true, onClose }) {
                       </Select>
                     </FormControl> */}
 
-                      {/* <BsGear className="create-icon" /> */}
+                        {/* <BsGear className="create-icon" /> */}
 
-                      {/* <FormControl className="select-generator-form" size="small">
+                        {/* <FormControl className="select-generator-form" size="small">
                       <InputLabel id="select-label">Generator</InputLabel>
                       <Select
                         labelId="filter-label"
@@ -252,19 +518,42 @@ export default function CreateUI({ isOpen = true, onClose }) {
                         </MenuItem>
                       </Select>
                     </FormControl> */}
+                      </Box>
+
+                      <Box sx={{ mr: 2 }}>{maxCharPercent}</Box>
+
+                      <Button
+                        // type="submit"
+                        disabled={prompt.length > 0 ? false : true}
+                        variant="contained"
+                        onClick={() =>
+                          handleSubmit(
+                            authToken,
+                            prompt,
+                            creationWidth,
+                            creationHeight,
+                            creationShape,
+                          )
+                        }
+                        sx={{ borderRadius: '20px' }}
+                      >
+                        Create
+                      </Button>
                     </Box>
-
-                    <Box sx={{ mr: 2 }}>{maxCharPercent}</Box>
-
-                    <Button variant="contained" sx={{ borderRadius: '20px' }}>
-                      Create
-                    </Button>
                   </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
-        </Box>
+
+          <Snackbar
+            open={isSnackbarVisible}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+            message={snackbarMessage}
+            action={action}
+          />
+        </>
       </CreateUIStyles>
     </Modal>
   )

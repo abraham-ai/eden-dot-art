@@ -107,7 +107,11 @@ export default function LoginButton() {
     <>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ mr: 3 }}>
-          <ConnectButton />
+          <ConnectButton
+            accountStatus="avatar"
+            chainStatus="icon"
+            showBalance={false}
+          />
         </Box>
 
         <Typography variant={'h4'}>Or</Typography>

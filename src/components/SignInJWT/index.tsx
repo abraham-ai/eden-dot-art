@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, forwardRef } from 'react'
 
 // REDUX
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
@@ -30,7 +30,16 @@ import jwtDecode from 'jwt-decode'
 import AppLogo from '@/components/AppLogo'
 
 // MUI
-import { Backdrop, Button, Box, Typography, Modal, styled } from '@mui/material'
+import {
+  styled,
+  Backdrop,
+  Box,
+  Button,
+  Typography,
+  Modal,
+  Snackbar,
+} from '@mui/material'
+import MuiAlert, { AlertProps } from '@mui/material/Alert'
 
 // ICONS
 // import AddModeratorIcon from '@mui/icons-material/AddModerator'
@@ -62,10 +71,23 @@ const ModalStyles = styled('section')(
 `,
 )
 
+// MUI TYPE
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+})
+
+// export interface Snackbar extends SnackbarOrigin {
+//   open: boolean
+// }
+
 export default function SignInJWT() {
   // HOOKS
   const [isClicked, setIsClicked] = useState(false)
   const [localAuth, setLocalAuth] = useState(false)
+  const [snackOpen, setSnackOpen] = useState(false)
   const [isAuthOpen, setIsAuthOpen] = useState(false)
   const handleAuthOpen = () => setIsAuthOpen(true)
   const handleAuthClose = () => setIsAuthOpen(false)
@@ -75,7 +97,7 @@ export default function SignInJWT() {
 
   // retrieve current state of redux store
   const authToken = useAppSelector(state => state.token.value)
-  // const appAddress = useAppSelector(state => state.address.value)
+  const appAddress = useAppSelector(state => state.address.value)
 
   const { address, isConnected } = useAccount()
   const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
@@ -89,6 +111,10 @@ export default function SignInJWT() {
   const [appMessage] = useState(
     `I am ${address} and I would like to create with Eden`,
   )
+
+  // console.log({ address })
+  // console.log({ appAddress })
+  // console.log({ appMessage })
 
   // WAGMI HOOK
   const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
@@ -374,6 +400,40 @@ export default function SignInJWT() {
     [address, appMessage, verifyToken, dispatch],
   )
 
+  // NOTIFICATION
+  const handleSnackClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway' && event) {
+      return
+    }
+
+    setSnackOpen(false)
+  }
+
+  const sendNotification = (type, data) => {
+    // return notification[type]({
+    //   ...data,
+    //   placement: 'bottomRight',
+    // })
+    return (
+      <Snackbar
+        open={snackOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          onClose={handleSnackClose}
+          severity={type}
+          sx={{ width: '100%' }}
+        >
+          {data}
+        </Alert>
+      </Snackbar>
+    )
+  }
+
   useEffect(() => {
     // DEBUG
     // console.log({ authToken, localToken })
@@ -551,23 +611,41 @@ export default function SignInJWT() {
 
               {/* USER AUTH DATA */}
               <Box sx={{ maxWidth: '400px' }}>
-                {isSuccess && (
-                  <Typography variant="body1" sx={{ color: 'black' }}>
-                    Signature:
-                    <div style={{ wordBreak: 'break-all' }}>{data}</div>
-                  </Typography>
-                )}
-                {isError && (
-                  <Typography variant="body1">Error signing message</Typography>
-                )}
-                {isWeb3AuthSuccess && (
-                  <Typography
-                    variant="body1"
-                    sx={{ wordBreak: 'break-word', color: 'black' }}
-                  >
-                    Auth Token: {authToken}
-                  </Typography>
-                )}
+                {isSuccess &&
+                  sendNotification(
+                    'success',
+                    <>
+                      Signature:
+                      <div style={{ wordBreak: 'break-all' }}>{data}</div>
+                    </>,
+                  )}
+
+                {isError &&
+                  sendNotification(
+                    'error',
+                    <>
+                      <Typography variant="body1">
+                        Error signing message
+                      </Typography>
+                    </>,
+                  )}
+
+                {isWeb3AuthSuccess &&
+                  sendNotification(
+                    'info',
+                    <>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          wordBreak: 'break-word',
+                          color: 'black',
+                          fontWeight: 600,
+                        }}
+                      >
+                        Auth Token: {authToken}
+                      </Typography>
+                    </>,
+                  )}
               </Box>
             </Box>
           </Box>

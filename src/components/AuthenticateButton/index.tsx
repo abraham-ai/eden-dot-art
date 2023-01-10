@@ -253,12 +253,13 @@ import CreateSignInJWT from '@/components/CreateSignInJWT'
 // const axios = require('axios')
 // const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
 
-export default function AuthenticateButton({ isOpen = true, onClose }) {
+export default function AuthenticateButton({ onClose }) {
   const { isWeb3AuthSuccess } = useAppSelector(state => state.auth)
+  const { isModalVisible } = useAppSelector(state => state.modal)
 
   return isWeb3AuthSuccess ? (
-    <CreateUI isOpen={isOpen} onClose={onClose} />
+    <CreateUI />
   ) : (
-    <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
+    <CreateSignInJWT isOpen={isModalVisible} onClose={onClose} />
   )
 }

@@ -255,7 +255,7 @@ function EdenArtHomePage() {
 
         <EdenHomeStyles className="main-creations-wrapper">
           <div className="text-input-wrapper">
-            <AppLogo logo="eden" size="large" />
+            {/* <AppLogo logo="eden" size="large" /> */}
             <Autocomplete
               value={value}
               onChange={(_, newValue) => {

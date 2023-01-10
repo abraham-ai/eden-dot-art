@@ -1,22 +1,21 @@
+import React, { useState, forwardRef } from 'react'
 // , useEffect, useCallback
 
-// STYLES
-// import './modalStyles.css'
-
 // MUI
-// import {
-// Backdrop,
-// Box,
-// Button,
-// Modal,
-// Typography,
-// Select,
-// SelectChangeEvent,
-// TextField,
-// styled,
-// useTheme,
-// styled,
-// } from '@mui/material'
+import {
+  // Backdrop,
+  // Box,
+  // Button,
+  // Modal,
+  // Typography,
+  // Select,
+  // SelectChangeEvent,
+  // TextField,
+  // useTheme,
+  // styled,
+  Snackbar,
+} from '@mui/material'
+import MuiAlert, { AlertProps } from '@mui/material/Alert'
 
 // REDUX
 import { useAppSelector } from '@/hooks/hooks'
@@ -56,6 +55,13 @@ import CreateSignInJWT from '@/components/CreateSignInJWT'
 // import { HiChip } from 'react-icons/hi'
 // import { IoMdResize } from 'react-icons/io'
 // import AddIcon from '@mui/icons-material/Add'
+
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+})
 
 // const CreateButtonStyles = styled('section')(
 //   () => `
@@ -254,6 +260,8 @@ import CreateSignInJWT from '@/components/CreateSignInJWT'
 // const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
 
 export default function CreateModal({ isOpen = true, onClose }) {
+  const [open, setOpen] = useState(isOpen)
+
   // REDUX STATE
   // const dispatch = useDispatch()
   const { isWeb3AuthSuccess } = useAppSelector(state => state.auth)
@@ -262,6 +270,7 @@ export default function CreateModal({ isOpen = true, onClose }) {
   //   isConnected,
   // } = useAccount()
 
+  // console.log({ isOpen })
   // console.log({ isWeb3AuthSuccess })
 
   // const address = useSelector(state => state.address.value)
@@ -394,12 +403,42 @@ export default function CreateModal({ isOpen = true, onClose }) {
   //   setVisibleT(true)
   // }
 
-  // const sendNotification = (type, data) => {
-  //   return notification[type]({
-  //     ...data,
-  //     placement: 'bottomRight',
-  //   })
-  // }
+  const handleSnackbarClick = () => {
+    setOpen(true)
+  }
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setOpen(false)
+  }
+
+  const sendNotification = (type, data) => {
+    // return notification[type]({
+    //   ...data,
+    //   placement: 'bottomRight',
+    // })
+    return (
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          {data}
+        </Alert>
+      </Snackbar>
+    )
+  }
 
   // const goToDiscord = () => {
   //   window.location = 'https://discord.gg/4dSYwDT'
@@ -507,9 +546,4 @@ export default function CreateModal({ isOpen = true, onClose }) {
   ) : (
     <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
   )
-}
-
-{
-  // <ModalStyles key="modal-styles">
-  /* </ModalStyles> */
 }
