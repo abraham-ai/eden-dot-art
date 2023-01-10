@@ -1,5 +1,5 @@
 // TYPES
-import { AuthMode } from 'models/types'
+import { AuthMode } from '../../src/models/types'
 import { NextApiRequest, NextApiResponse } from 'next/types'
 
 // UTIL
