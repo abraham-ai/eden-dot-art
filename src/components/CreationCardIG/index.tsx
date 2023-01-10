@@ -125,6 +125,9 @@ export default function CreationCardIG({ creation }) {
           />
 
           <CardContent>
+            <Typography sx={{ fontWeight: 'bold' }} color="text.primary">
+              {'/create'}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               {text_input}
             </Typography>

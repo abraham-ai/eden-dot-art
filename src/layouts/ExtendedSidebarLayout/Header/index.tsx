@@ -31,6 +31,7 @@ import Logo from '@/components/Logo'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { KeyObject } from 'crypto'
 
 const BoxModalStyle = {
   position: 'absolute',
@@ -81,7 +82,10 @@ export default function Header() {
   // const theme = useTheme()
 
   const [createOpen, setCreateOpen] = useState(false)
-  const handleCreateOpen = () => setCreateOpen(true)
+  const handleCreateOpen = () => {
+    alert('HANDLE CREATE OPEN!')
+    setCreateOpen(true)
+  }
   const handleCreateClose = () => setCreateOpen(false)
 
   const [loginOpen, setLoginOpen] = useState(false)
@@ -92,6 +96,7 @@ export default function Header() {
     <HeaderWrapper
       display="flex"
       alignItems="center"
+      className="haeder"
       sx={{
         backgroundColor: 'white',
       }}

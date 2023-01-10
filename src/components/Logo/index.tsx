@@ -1,4 +1,7 @@
+// MUI
 import { Box, styled, Tooltip } from '@mui/material'
+
+// COMPONENTS
 import Link from 'src/components/Link'
 
 // ICONS
@@ -70,7 +73,7 @@ function Logo({ name = 'Eden' }) {
         </LogoSign> */}
       </LogoSignWrapper>
 
-      <Box
+      {/* <Box
         component="span"
         sx={{
           display: { xs: 'none', sm: 'flex' },
@@ -79,11 +82,11 @@ function Logo({ name = 'Eden' }) {
       >
         <LogoTextWrapper>
           <Tooltip title="Private Beta" arrow placement="right">
-            <VersionBadge>Alpha</VersionBadge>
+            <VersionBadge>Beta</VersionBadge>
           </Tooltip>
           <LogoText>{name}</LogoText>
         </LogoTextWrapper>
-      </Box>
+      </Box> */}
     </LogoWrapper>
   )
 }

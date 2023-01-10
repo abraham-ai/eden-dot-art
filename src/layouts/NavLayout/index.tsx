@@ -14,6 +14,7 @@ interface NavLayoutProps {
 const NavLayout: FC<NavLayoutProps> = ({ children }) => {
   return (
     <Box
+      className="nav-layout"
       sx={{
         display: 'flex',
         flex: 1,

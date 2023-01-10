@@ -419,6 +419,9 @@ export default function WatchPage() {
                 }}
               >
                 <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
+                  <Typography sx={{ fontWeight: 'bold' }} color="text.primary">
+                    {'/create'}
+                  </Typography>
                   <Typography
                     variant="h3"
                     color="text.secondary"

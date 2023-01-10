@@ -3,12 +3,12 @@ import { useState } from 'react'
 // STYLES
 import { styled } from '@mui/material/styles'
 
-// COMPONENTS
+// NEXTJS
 import Image from 'next/image'
 
 // MUI COMPONENTS
 import {
-  Avatar,
+  // Avatar,
   Box,
   Card,
   CardActions,
@@ -17,19 +17,26 @@ import {
   CardMedia,
   // Chip,
   // Collapse,
-  IconButton,
+  // IconButton,
   Modal,
   Backdrop,
   // Tooltip,
   Typography,
 } from '@mui/material'
+
+// EDEN COMPONENTS
+import ProfilePopOver from '@/components/ProfilePopOver'
 // import { IconButtonProps } from '@mui/material/IconButton'
+
+// LIBS
+import Blockies from 'react-blockies'
 
 // COLORS
 // import { red } from '@mui/material/colors'
 
 // ICONS
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import CloseIcon from '@mui/icons-material/Close'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IosShareIcon from '@mui/icons-material/IosShare'
 // import { FaDiscord } from 'react-icons/fa'
@@ -65,7 +72,7 @@ const BoxModalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '90%',
+  // width: '90%',
   bgcolor: 'background.paper',
   maxHeight: '90%',
   border: '2px solid #000',
@@ -88,7 +95,9 @@ const CardStyles = styled(Card)(
       cursor: zoom-in;
     }
     #creation-card:hover .creation-content {
-      display: block;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
     }
     #creation-card:hover .creation-actions {
       position: absolute;
@@ -133,6 +142,10 @@ const CardStyles = styled(Card)(
       cursor: pointer;
       // backdrop-filter: blur(16px);
     }
+    .close-icon-wrapper:hover {
+      cursor: pointer;
+      z-index: 50;
+    }
   `,
 )
 
@@ -172,12 +185,18 @@ export default function CreationCardMinimal({ creation }) {
   // const generator_name =
   creation.generator === undefined ? 'none' : creation.generator
 
-  const [cardOpen, setCardOpen] = useState(false)
-  const handleCardOpen = () => setCardOpen(true)
-  const handleCardClose = () => setCardOpen(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const handleModalOpen = () => setModalOpen(true)
+
+  const handleModalClose = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    // console.log('handleCardClose!')
+    // console.log(event)
+    event ? setModalOpen(false) : null
+  }
 
   const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
-
   // const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
 
   const imageFullURL =
@@ -185,7 +204,7 @@ export default function CreationCardMinimal({ creation }) {
       ? 'none'
       : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
 
-  // const [expanded, setExpanded] = React.useState(false)
+  // const [expanded, setExpanded] = useState(false)
 
   // const handleExpandClick = () => {
   //   setExpanded(!expanded)
@@ -197,12 +216,15 @@ export default function CreationCardMinimal({ creation }) {
 
   // const creationTimeAgo = 100
 
-  function randomColor() {
-    const hex = Math.floor(Math.random() * 0xffffff)
-    const color = '#' + hex.toString(16)
+  // function randomColor() {
+  //   const hex = Math.floor(Math.random() * 0xffffff)
+  //   const color = '#' + hex.toString(16)
 
-    return color
-  }
+  //   return color
+  // }
+
+  let displayAddress = address?.substr(0, 6)
+  displayAddress += '...' + address.substr(-4)
 
   // const currentGuildIcon =
   //   guild_name === 'abraham-ai' ? (
@@ -221,12 +243,9 @@ export default function CreationCardMinimal({ creation }) {
 
   return (
     <CardStyles>
-      <Card id="creation-card" onClick={handleCardOpen}>
+      <Card id="creation-card" onClick={handleModalOpen}>
         <Box sx={{ position: 'relative' }}>
-          {/* <Box sx={{ width: 512, height: 512 }}> */}
           <Image
-            // component="img"
-            // image={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
             src={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
             height={512}
             width={512}
@@ -234,7 +253,6 @@ export default function CreationCardMinimal({ creation }) {
             layout="responsive"
             style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
           />
-          {/* </Box> */}
 
           <CardContent className="creation-content">
             <Box
@@ -243,16 +261,40 @@ export default function CreationCardMinimal({ creation }) {
                 m: 1,
                 background: 'rgba(0, 0, 0, 0.5)',
                 backdropFilter: 'blur(16px)',
+                p: 2,
               }}
             >
               <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
                 <Typography
+                  className="prompt-command"
+                  sx={{ fontWeight: 'bold' }}
+                  color="#8C7CF0"
+                  fontFamily={'courier'}
+                >
+                  {'/create'}
+                </Typography>
+                <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ p: 2, color: 'white' }}
+                  sx={{ color: 'white' }}
                 >
                   {text_input}
                 </Typography>
+
+                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                  <Box
+                    sx={{
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      width: '32px',
+                      height: '32px',
+                      mr: 1,
+                    }}
+                  >
+                    <Blockies seed={address} />
+                  </Box>
+                  <Typography>{displayAddress}</Typography>
+                </Box>
               </Box>
             </Box>
 
@@ -262,7 +304,7 @@ export default function CreationCardMinimal({ creation }) {
                 <FaRetweet />
               </IconButton> */}
 
-              <Box
+              {/* <Box
                 sx={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
@@ -292,7 +334,7 @@ export default function CreationCardMinimal({ creation }) {
                 }}
               >
                 <IosShareIcon />
-              </IconButton>
+              </IconButton> */}
 
               {/* <ExpandMore
                 expand={expanded}
@@ -303,7 +345,7 @@ export default function CreationCardMinimal({ creation }) {
                 <ExpandMoreIcon />
               </ExpandMore> */}
 
-              <Box
+              {/* <Box
                 sx={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
@@ -318,7 +360,7 @@ export default function CreationCardMinimal({ creation }) {
                 <IconButton aria-label="settings">
                   <MoreVertIcon />
                 </IconButton>
-              </Box>
+              </Box> */}
             </CardActions>
           </CardContent>
         </Box>
@@ -404,52 +446,108 @@ export default function CreationCardMinimal({ creation }) {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={cardOpen}
-        onClose={handleCardClose}
+        open={modalOpen}
+        onClose={handleModalClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Box sx={BoxModalStyle}>
+        <>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
+              position: 'fixed',
+              top: '10px',
+              right: '10px',
+              color: 'black',
             }}
+            className="close-icon-wrapper"
+            onClick={handleModalClose}
           >
-            <Box sx={{ overflowY: 'auto', display: 'flex' }}>
-              <CardMedia
-                component="img"
-                height="auto"
-                className="creation-card"
-                image={imageFullURL}
-                alt="Card Media"
+            <CloseIcon className="close-icon" fontSize={'large'} />
+          </Box>
+          <Box sx={BoxModalStyle}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+              }}
+            >
+              <Box
                 sx={{
-                  position: 'relative',
-                  maxHeight: '500px',
-                  maxWidth: '500px',
-                  pb: 2,
-                }}
-              />
-
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{
-                  p: 2,
-                  color: '#111',
-                  fontWeight: 600,
-                  fontSize: '1.2rem',
+                  overflowY: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
-                {text_input}
-              </Typography>
-            </Box>
+                <CardMedia
+                  component="img"
+                  height="auto"
+                  className="creation-card"
+                  image={imageFullURL}
+                  alt="Card Media"
+                  sx={{
+                    position: 'relative',
+                    minHeight: '512px',
+                    minWidth: '512px',
+                    maxHeight: '612px',
+                    maxWidth: '612px',
+                    pb: 2,
+                  }}
+                />
 
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    width: '100%',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <Box
+                      sx={{
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        height: '32px',
+                        width: '32px',
+                        mr: 1,
+                      }}
+                    >
+                      <Blockies seed={address} />
+                    </Box>
+
+                    <ProfilePopOver />
+
+                    <Typography
+                      sx={{
+                        color: '#111',
+                        fontWeight: 600,
+                        fontSize: '.8rem',
+                      }}
+                    >
+                      {displayAddress}
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{
+                      pt: 2,
+                      color: '#111',
+                      fontWeight: 600,
+                      fontSize: '1.2rem',
+                    }}
+                  >
+                    {text_input}
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -496,9 +594,9 @@ export default function CreationCardMinimal({ creation }) {
                   <MoreVertIcon />
                 </IconButton>
               </Box>
-            </Box>
+            </Box> */}
 
-            {/* <ExpandMore
+              {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
@@ -507,8 +605,8 @@ export default function CreationCardMinimal({ creation }) {
                 <ExpandMoreIcon />
               </ExpandMore> */}
 
-            <Box>
-              {/* <Chip
+              <Box>
+                {/* <Chip
                 sx={{ m: 0.5 }}
                 avatar={
                   <Avatar
@@ -550,7 +648,7 @@ export default function CreationCardMinimal({ creation }) {
                 variant="outlined"
               /> */}
 
-              {/* {generator_name ? (
+                {/* {generator_name ? (
                 <Tooltip title="Model Name">
                   <Chip
                     sx={{ m: 0.5 }}
@@ -568,7 +666,7 @@ export default function CreationCardMinimal({ creation }) {
                 </Tooltip>
               ) : null} */}
 
-              {/* {currentClipModel ? (
+                {/* {currentClipModel ? (
                 <Tooltip title="Clip Model">
                   <Chip
                     sx={{ m: 0.5 }}
@@ -585,12 +683,13 @@ export default function CreationCardMinimal({ creation }) {
                   />
                 </Tooltip>
               ) : null} */}
+              </Box>
             </Box>
           </Box>
-        </Box>
+        </>
       </Modal>
 
-      <Box className="creation-header">
+      {/* <Box className="creation-header">
         <Box sx={{ display: 'flex' }}>
           <Avatar
             sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
@@ -599,18 +698,17 @@ export default function CreationCardMinimal({ creation }) {
           <Typography
             noWrap={true}
             sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
-          >
-            {/* {address} */}
+          > */}
 
-            {currentUserName}
+      {/* {currentUserName} */}
 
-            {/* {currentUserName === 'none'
+      {/* {currentUserName === 'none'
               ? currentUserName
               : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
-          </Typography>
+      {/* </Typography>
         </Box>
         <span style={{ display: 'none' }}>{cardOpen}</span>
-      </Box>
+      </Box> */}
     </CardStyles>
   )
 }

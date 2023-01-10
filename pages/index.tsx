@@ -2,6 +2,7 @@
 
 // COMPONENTS
 import Head from 'next/head'
+import Footer from '@/components/Footer'
 import Logo from '@/components/Logo'
 
 // NEXT
@@ -43,14 +44,14 @@ export default function IndexPage() {
   return (
     <OverviewWrapper>
       <Head>
-        <title>Eden.Art</title>
+        <title>Eden.Art Test</title>
       </Head>
       <HeaderWrapper>
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
-            <Logo />
+            {/* <Logo /> */}
 
-            <Box>
+            {/* <Box>
               <Link href={ROUTES.EDEN_ART.BROWSE} style={{ marginLeft: 2 }}>
                 BROWSE
               </Link>
@@ -59,7 +60,7 @@ export default function IndexPage() {
               <Link href={ROUTES.EDEN_ART.WATCH} style={{ marginLeft: 2 }}>
                 WATCH
               </Link>
-            </Box>
+            </Box> */}
             {/* <Box
               display="flex"
               alignItems="center"
@@ -134,9 +135,10 @@ export default function IndexPage() {
           </Box>
         </Container>
       </HeaderWrapper>
+
       <EdenArtFrontPage />
+      <Footer />
       {/* <EdenDevFrontPage /> */}
-      {/* <Footer /> */}
     </OverviewWrapper>
   )
 }

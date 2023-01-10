@@ -4,12 +4,13 @@ import { useEffect } from 'react'
 // ROUTER
 // import Link from 'next/link'
 
+// LIBS
+import Blockies from 'react-blockies'
+
 // REDUX
+import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 import { useAppDispatch } from '@/hooks/hooks'
 // useAppSelector
-
-// COMPONENTS
-// import CreateModal from '@/components/CreateModal'
 
 // MUI
 import {
@@ -22,20 +23,44 @@ import {
   // Typography,
 } from '@mui/material'
 
-// WEB3 HOOKS
-import { useAccount } from 'wagmi'
-
-// REDUX
-import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-
 // COMPONENTS
-import Logo from '@/components/Logo'
+// import CreateModal from '@/components/CreateModal'
 // import LoginButton from '@/components/LoginButton'
 // import CreateSignInJWT from '@/components/CreateSignInJWT'
+// import Logo from '@/components/Logo'
 import SignInJWT from '@/components/SignInJWT'
 
-// ICONS
+// WEB3
+import { useAccount, chain, createClient, WagmiProvider } from 'wagmi'
+import { useProvider } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import {
+  RainbowKitProvider,
+  AvatarComponent,
+  apiProvider,
+  configureChains,
+  getDefaultWallets,
+} from '@rainbow-me/rainbowkit'
+
+const { chains, provider } = configureChains(
+  [chain.mainnet, chain.polygon, chain.goerli, chain.polygonMumbai],
+  [apiProvider.fallback()],
+)
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains,
+})
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+})
+
+const CustomAvatar: AvatarComponent = ({ address }) => {
+  return <Blockies seed={address} />
+}
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -106,6 +131,7 @@ export default function Header() {
     <HeaderWrapper
       display="flex"
       alignItems="center"
+      className="header-wrapper"
       sx={{
         boxShadow:
           theme.palette.mode === 'dark'
@@ -123,23 +149,27 @@ export default function Header() {
         backgroundColor: 'white',
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flex: 1,
-        }}
-      >
-        {/* <LoginButton /> */}
-        <Logo name="eden" />
-        {/* {handleAccountNav()} */}
+      <WagmiProvider client={wagmiClient}>
+        <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flex: 1,
+            }}
+          >
+            {/* <LoginButton /> */}
+            {/* <Logo name="eden" /> */}
+            {/* {handleAccountNav()} */}
 
-        <Box sx={{ display: 'flex' }}>
-          <SignInJWT />
-          <ConnectButton />
-        </Box>
-      </Box>
+            <Box sx={{ display: 'flex' }}>
+              <SignInJWT />
+              <ConnectButton />
+            </Box>
+          </Box>
+        </RainbowKitProvider>
+      </WagmiProvider>
     </HeaderWrapper>
   )
 }
