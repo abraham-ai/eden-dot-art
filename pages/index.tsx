@@ -20,20 +20,22 @@ import EdenArtFrontPage from '@/components/EdenArtFrontPage'
 // ROUTES
 import { ROUTES } from '@/const/routes'
 
-const HeaderWrapper = styled(Card)(
+const HeaderWrapperStyles = styled(Card)(
   ({ theme }) => `
   width: 100%;
   display: flex;
+  background-color: white;
   align-items: center;
   height: ${theme.spacing(10)};
   margin-bottom: ${theme.spacing(10)};
 `,
 )
 
-const OverviewWrapper = styled(Box)(
+const OverviewWrapperStyles = styled(Box)(
   ({ theme }) => `
     overflow: auto;
-    background: ${theme.palette.common.white};
+    background-color: white;
+    // background: ${theme.palette.common.white};
     flex: 1;
     overflow-x: hidden;
 `,
@@ -42,12 +44,12 @@ const OverviewWrapper = styled(Box)(
 export default function IndexPage() {
   // { changeTheme, isDarkTheme }
   return (
-    <OverviewWrapper>
+    <OverviewWrapperStyles id="overview-wrapper">
       <Head>
         <title>Eden.Art Test</title>
       </Head>
-      <HeaderWrapper>
-        <Container maxWidth="lg">
+      <HeaderWrapperStyles id="header-wrapper">
+        <Container maxWidth="lg" id="nav-wrapper">
           <Box display="flex" alignItems="center">
             {/* <Logo /> */}
 
@@ -134,12 +136,12 @@ export default function IndexPage() {
             </Box> */}
           </Box>
         </Container>
-      </HeaderWrapper>
+      </HeaderWrapperStyles>
 
       <EdenArtFrontPage />
-      <Footer />
+      {/* <Footer /> */}
       {/* <EdenDevFrontPage /> */}
-    </OverviewWrapper>
+    </OverviewWrapperStyles>
   )
 }
 
