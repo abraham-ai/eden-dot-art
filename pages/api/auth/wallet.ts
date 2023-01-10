@@ -1,5 +1,5 @@
 // NEXT
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next/types'
 
 // FETCH
 import axios from 'axios'
