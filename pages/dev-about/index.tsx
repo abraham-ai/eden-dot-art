@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
 // NAV
-import EdenDevFrontPage from '@/components/EdenDevFrontPage'
-import Footer from '@/components/Footer'
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+import EdenDevFrontPage from '@/components/EdenArtFrontPage'
+// import Footer from '@/components/Footer'
+// import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
 import { Container, styled } from '@mui/material'
@@ -50,13 +50,14 @@ function DevAboutPage() {
 
         <EdenDevFrontPage />
       </AboutPageStyles>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
 
 DevAboutPage.getLayout = page => (
-  <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
+  // <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
+  <>{page}</>
 )
 
 export default DevAboutPage
