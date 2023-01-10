@@ -611,22 +611,22 @@ export default function CreationsPage() {
   // console.log(breakpointCols)
   // console.log(getBreakpointCols)
 
-  const onLoadMore = () =>
-    fetchMore({
-      variables: {
-        offset: 10,
-        limit: 10, //data.length
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev
-        return {
-          creationsForHome: [
-            ...prev.creationsForHome,
-            ...fetchMoreResult.creationsForHome,
-          ],
-        }
-      },
-    })
+  const onLoadMore = () => () => null
+  // fetchMore({
+  //   variables: {
+  //     offset: 10,
+  //     limit: 10, //data.length
+  //   },
+  //   updateQuery: (prev, { fetchMoreResult }) => {
+  //     if (!fetchMoreResult) return prev
+  //     return {
+  //       creationsForHome: [
+  //         ...prev.creationsForHome,
+  //         ...fetchMoreResult.creationsForHome,
+  //       ],
+  //     }
+  //   },
+  // })
 
   // console.log(data)
 
@@ -652,14 +652,14 @@ export default function CreationsPage() {
         {/* breakpointCols */}
         <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
           <Masonry columns={4} spacing={2}>
-            <QueryResult error={error} loading={loading} data={data}>
+            {/* <QueryResult error={error} loading={loading} data={data}>
               {data?.creationsForHome?.map((creation, index) => (
                 <CreationCardMinimal
                   key={`${creation.id}_${index}`}
                   creation={creation}
                 />
               ))}
-            </QueryResult>
+            </QueryResult> */}
           </Masonry>
           <a
             href="#"
