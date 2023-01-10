@@ -6,7 +6,7 @@ import type { NextApiRequest, NextApiResponse } from 'next/types'
 // UTILS
 import { getAuthToken } from '../../src/util/auth'
 import { getGatewayResult } from '../../src/util/eden'
-import { withSessionRoute } from '../../src/util/withSession'
+import { withSession } from '../../src/util/withSession'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -70,4 +70,4 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withSessionRoute(handler)
+export default withSession(handler)

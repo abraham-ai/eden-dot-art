@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 
 // SESSION
-import { withSessionRoute } from 'util/withSession'
+import { withSession } from '../../../src/util/withSession'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -37,4 +37,4 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withSessionRoute(handler)
+export default withSession(handler)
