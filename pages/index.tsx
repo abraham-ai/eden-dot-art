@@ -48,12 +48,12 @@ export default function IndexPage() {
       <Head>
         <title>Eden.Art Test</title>
       </Head>
-      <HeaderWrapperStyles id="header-wrapper">
+      {/* <HeaderWrapperStyles id="header-wrapper">
         <Container maxWidth="lg" id="nav-wrapper">
           <Box display="flex" alignItems="center">
             {/* <Logo /> */}
 
-            {/* <Box>
+      {/* <Box>
               <Link href={ROUTES.EDEN_ART.BROWSE} style={{ marginLeft: 2 }}>
                 BROWSE
               </Link>
@@ -63,7 +63,7 @@ export default function IndexPage() {
                 WATCH
               </Link>
             </Box> */}
-            {/* <Box
+      {/* <Box
               display="flex"
               alignItems="center"
               justifyContent="space-between"
@@ -133,10 +133,11 @@ export default function IndexPage() {
                   To Test Home
                 </Button>
               </Box>
-            </Box> */}
+            </Box>
           </Box>
         </Container>
       </HeaderWrapperStyles>
+       */}
 
       <EdenArtFrontPage />
       {/* <Footer /> */}
