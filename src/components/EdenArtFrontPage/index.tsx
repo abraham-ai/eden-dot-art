@@ -127,7 +127,7 @@ const EdenArtFrontPageStyles = styled('section')(
   }
   /*** INFO-WRAPPER ***/
   .info-wrapper {
-    padding: 50px 0 0 0;
+    // padding: 50px 0 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,7 +144,7 @@ const EdenArtFrontPageStyles = styled('section')(
   @media (max-width: 900px) {
     .info-wrapper .info {
       flex-direction: column;
-      margin-top: 50px;
+      margin-top: 100px;
       width: 100%;
     }
   }
@@ -163,6 +163,8 @@ const EdenArtFrontPageStyles = styled('section')(
     text-align: center;
   }
   .description i {
+    font-size: 1.6rem;
+    font-weight: 600;
     color: #8C7CF0;
   }
   @media (max-width: 900px) {
@@ -189,7 +191,6 @@ const EdenArtFrontPageStyles = styled('section')(
       width: 100%;
       min-height: 300px;
       max-width: unset;
-      background: red;
     }
     .info-wrapper .info.even .eden-splash-video {
       order: 1;
@@ -476,8 +477,14 @@ export default function EdenArtFrontPage() {
           </Box>
         </section>
 
-        <section className="section-wrapper" style={{ marginBottom: 100 }}>
-          <Container className="info-wrapper" sx={{ m: 0, pl: 5, pr: 5 }}>
+        <section
+          className="section-wrapper"
+          style={{ marginBottom: 100, marginTop: 0 }}
+        >
+          <Container
+            className="info-wrapper"
+            sx={{ m: 0, pl: 5, pr: 5, pt: 0 }}
+          >
             <article className="info odd">
               <Box className="description-wrapper" sx={{ pr: 5 }}>
                 <Typography className="description" variant={'h4'}>
