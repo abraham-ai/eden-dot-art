@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react' // useEffect // useState
 
 // ROUTING
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+// import { useRouter } from 'next/router'
+// import Link from 'next/link'
 
 // UI
-import { Box, Menu, MenuItem, styled, Typography } from '@mui/material'
+import { Box, styled } from '@mui/material'
+// Menu, MenuItem, Typography
 
 const DashboardStyles = styled(Box)(
   () => `    
@@ -15,39 +16,39 @@ const DashboardStyles = styled(Box)(
   `,
 )
 
-export default function CreatorDashboard({
-  onFilterChange,
-  onSortChange,
-  creatorAddress = 'test',
-}) {
-  const [route, setRoute] = useState()
-  const [filter, setFilter] = useState('all')
-  const [sort, setSort] = useState('new')
+export default function CreatorDashboard({ creatorAddress = 'test' }) {
+  // onFilterChange,
+  // onSortChange,
 
-  const router = useRouter()
+  // const [route, setRoute] = useState()
+  // const [filter, setFilter] = useState('all')
+  // const [sort, setSort] = useState('new')
 
-  useEffect(() => {
-    setRoute(window.location.pathname)
-  }, [setRoute])
+  // const router = useRouter()
 
-  const [filterVisible, setFilterVisible] = useState(false)
+  // useEffect(() => {
+  //   setRoute(window.location.pathname)
+  // }, [setRoute])
 
-  const changeFilter = evt => {
-    onFilterChange(evt.target.value)
-  }
+  // const [filterVisible, setFilterVisible] = useState(false)
 
-  const changeSort = evt => {
-    onSortChange(evt.target.value)
-  }
+  // const changeFilter = evt => {
+  //   onFilterChange(evt.target.value)
+  // }
 
-  const handleClick = e => {
-    e.preventDefault()
-    router.push(href)
-  }
+  // const changeSort = evt => {
+  //   onSortChange(evt.target.value)
+  // }
+
+  // const handleClick = e => {
+  //   e.preventDefault()
+  //   router.push(href)
+  // }
 
   return (
     <DashboardStyles>
-      <Menu selectedKeys={[route]} mode="horizontal">
+      <div>{creatorAddress}</div>
+      {/* <Menu selectedKeys={[route]} mode="horizontal">
         <MenuItem className="menu-item" key="creations" onChange={changeFilter}>
           <Link
             onClick={() => {
@@ -118,9 +119,9 @@ export default function CreatorDashboard({
         <MenuItem className="menu-item" key="collected" onChange={changeSort}>
           <Link
             onClick={() => {
-              setRoute(``)
+              setRoute('')
             }}
-            to={``}
+            to={''}
             exact
             activeClassName="active"
           >
@@ -129,7 +130,7 @@ export default function CreatorDashboard({
             </span>
           </Link>
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </DashboardStyles>
   )
 }

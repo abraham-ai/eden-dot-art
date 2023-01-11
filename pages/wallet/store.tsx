@@ -1,26 +1,39 @@
-import Head from 'next/head';
-import Footer from '@/components/Footer';
-import { Button, Container } from '@mui/material';
+import Head from 'next/head'
 
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout';
-import { useClaimNFT, useUnclaimedNFTs, useNFTDrop } from '@thirdweb-dev/react';
-import { useAccount, useContractRead } from 'wagmi';
-import { STORE_CONTRACT_ADDRESS } from '@/const/contracts';
-import { NFTDrop } from '@thirdweb-dev/sdk';
+// COMPONENTS
+import Footer from '@/components/Footer'
+
+// MUI
+import { Container } from '@mui/material' //  Button,
+
+// LAYOUTS
+import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+
+// WEB3
+// import { useClaimNFT, useUnclaimedNFTs, useNFTDrop } from '@thirdweb-dev/react'
+// import { NFTDrop } from '@thirdweb-dev/sdk'
+
+// WALLET
+import { useAccount } from 'wagmi' //  useContractRead
+
+// CONTRACT
+// causing type errors
+// import { STORE_CONTRACT_ADDRESS } from '@/const/contracts'
 
 function WalletStorePage() {
-  const { address, isConnected } = useAccount();
-  const nftDrop = useNFTDrop(STORE_CONTRACT_ADDRESS);
-  const { data: unclaimedNfts, isLoading: unclaimedNFTsLoading } =
-    useUnclaimedNFTs(nftDrop, { start: 0, count: 100 });
-  const { mutate: claimNft, isLoading: claimLoading } = useClaimNFT(nftDrop);
+  const { isConnected } = useAccount() // address,
+  // const nftDrop = useNFTDrop(STORE_CONTRACT_ADDRESS)
 
-  const { data: ownerBalance, isLoading: balanceLoading } = useContractRead({
-    addressOrName: STORE_CONTRACT_ADDRESS,
-    functionName: 'balanceOf',
-    contractInterface: NFTDrop.contractAbi,
-    args: [address]
-  });
+  // const { data: unclaimedNfts, isLoading: unclaimedNFTsLoading } =
+  //   useUnclaimedNFTs(nftDrop, { start: 0, count: 100 })
+  // const { mutate: claimNft, isLoading: claimLoading } = useClaimNFT(nftDrop)
+
+  // const { data: ownerBalance, isLoading: balanceLoading } = useContractRead({
+  //   addressOrName: STORE_CONTRACT_ADDRESS,
+  //   functionName: 'balanceOf',
+  //   contractInterface: NFTDrop.contractAbi,
+  //   args: [address],
+  // })
 
   return (
     <>
@@ -31,7 +44,7 @@ function WalletStorePage() {
         {isConnected ? (
           <>
             <h1>Store</h1>
-            {!unclaimedNFTsLoading && unclaimedNfts && (
+            {/* {!unclaimedNFTsLoading && unclaimedNfts && (
               <>
                 <img src={unclaimedNfts[0].image} alt="" />
                 <p>{unclaimedNfts.length} NFTs remaining</p>
@@ -48,7 +61,7 @@ function WalletStorePage() {
                   Mint NFT
                 </Button>
               </>
-            )}
+            )} */}
           </>
         ) : (
           <p>Please connect your wallet</p>
@@ -56,11 +69,11 @@ function WalletStorePage() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
 
-WalletStorePage.getLayout = (page) => (
+WalletStorePage.getLayout = page => (
   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-);
+)
 
-export default WalletStorePage;
+export default WalletStorePage

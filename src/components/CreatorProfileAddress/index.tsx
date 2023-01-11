@@ -10,7 +10,7 @@ import { Box, Skeleton, Typography, styled } from '@mui/material'
 import Blockies from 'react-blockies'
 
 // WALLET
-import { useAccount, useSigner } from 'wagmi'
+// import { useAccount, useSigner } from 'wagmi'
 
 // import { useLookupAddress } from 'eth-hooks/dapps/ens'
 
@@ -47,8 +47,8 @@ const CreatorProfileAddressStyles = styled(Box)(
   - Provide fontSize={fontSize} to change the size of address text
 */
 
-const blockExplorerLink = (address, blockExplorer) =>
-  `${blockExplorer || 'https://etherscan.io/'}${'address/'}${address}`
+// const blockExplorerLink = (address, blockExplorer) =>
+//   `${blockExplorer || 'https://etherscan.io/'}${'address/'}${address}`
 
 export default function CreatorProfileAddress() {
   // const {
@@ -67,7 +67,7 @@ export default function CreatorProfileAddress() {
   const currentAddress = appAddress
   // const ens = useLookupAddress(ensProvider, currentAddress)
 
-  const currentTheme = 'light'
+  // const currentTheme = 'light'
 
   if (!appAddress) {
     return (
@@ -103,7 +103,7 @@ export default function CreatorProfileAddress() {
   //   )
   // }
 
-  let text
+  // let text
   // if (onChange) {
   //   text = (
   //     <Typography>

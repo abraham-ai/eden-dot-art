@@ -1,20 +1,23 @@
+// TYPES
 import type {
   GetServerSidePropsContext,
   NextApiRequest,
-  NextApiResponse
-} from 'next/types';
-import { withIronSession, Session } from 'next-iron-session';
+  NextApiResponse,
+} from 'next/types'
 
-export type NextIronRequest = NextApiRequest & { session: Session };
+// SESSION
+import { withIronSession, Session } from 'next-iron-session'
+
+export type NextIronRequest = NextApiRequest & { session: Session }
 export type NextIronHandler = (
   req: NextIronRequest,
-  res: NextApiResponse
-) => void | Promise<void>;
+  res: NextApiResponse,
+) => void | Promise<void>
 
 export type NextRoute = (
   ctx: GetServerSidePropsContext & { req: { session: Session } },
-  redirect: string
-) => any;
+  redirect: string,
+) => any
 
 export function withSession(handler: NextIronHandler | NextRoute) {
   return withIronSession(handler, {
@@ -24,7 +27,7 @@ export function withSession(handler: NextIronHandler | NextRoute) {
     cookieOptions: {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      httpOnly: true
-    }
-  });
+      httpOnly: true,
+    },
+  })
 }

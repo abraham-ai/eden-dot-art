@@ -1,18 +1,16 @@
 import React, { useState, useCallback } from 'react'
 
 // WAGMI
-import { useAccount } from 'wagmi'
+// import { useAccount } from 'wagmi'
 
 // FETCH
 import axios from 'axios'
 
 // REDUX
-import {
-  setSnackbarVisible,
-  setSnackbarMessage,
-} from '@/redux/slices/snackbarSlice'
+import { setSnackbarVisible } from '@/redux/slices/snackbarSlice'
 import { setModalVisible } from '@/redux/slices/modalSlice'
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+// setSnackbarMessage,
 // useAppDispatch
 // import { batch } from 'react-redux'
 
@@ -50,7 +48,7 @@ import EdenTabs from '@/components/EdenTabs'
 // import CreateGeneratorTypeSelect from '@/components/CreateGeneratorTypeSelect'
 
 // LAYOUT ICONS
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 // import { TbRectangleVertical, TbSquare } from 'react-icons/tb'
 import {
   // MdOutlineCropLandscape,
@@ -156,16 +154,16 @@ const CreateUIStyles = styled(Box)(
 `,
 )
 
-const GATEWAY_URL_DEV = 'https://app.dev.aws.abraham.fun'
-const GATEWAY_URL = 'https://gateway-test.abraham.ai'
-const MINIO_URL = 'https://minio.aws.abraham.fun'
-const MINIO_BUCKET = 'creations-stg'
+// const GATEWAY_URL_DEV = 'https://app.dev.aws.abraham.fun'
+// const GATEWAY_URL = 'https://gateway-test.abraham.ai'
+// const MINIO_URL = 'https://minio.aws.abraham.fun'
+// const MINIO_BUCKET = 'creations-stg'
 
 export default function CreateUI({ isOpen }) {
   const [prompt, setPrompt] = useState('')
-  const [creationShape, setCreationShape] = useState('square')
-  const [creationHeight, setCreationHeight] = useState(512)
-  const [creationWidth, setCreationWidth] = useState(512)
+  const [creationShape] = useState('square') // setCreationShape
+  const [creationHeight] = useState(512) // setCreationHeight
+  const [creationWidth] = useState(512) // setCreationWidth
   const [maxCharPercent, setMaxCharPercent] = useState(0)
 
   const dispatch = useAppDispatch()
@@ -176,7 +174,7 @@ export default function CreateUI({ isOpen }) {
   const isSnackbarVisible = useAppSelector(state => state.snackbar.visible)
   const snackbarMessage = useAppSelector(state => state.snackbar.value)
 
-  const { address } = useAccount()
+  // const { address } = useAccount()
 
   const generator_name = 'stable-diffusion'
 
@@ -227,6 +225,8 @@ export default function CreateUI({ isOpen }) {
 
   const submitPrediction = useCallback(
     async (config, resultId) => {
+      resultId ? resultId : resultId
+
       const request = {
         token: authToken,
         application: 'eden',
@@ -235,9 +235,11 @@ export default function CreateUI({ isOpen }) {
         metadata: null,
       }
 
+      return request
+
       // start prediction
-      const response = await axios.post(GATEWAY_URL + '/request', request)
-      const prediction_id = response.data
+      // const response = await axios.post(GATEWAY_URL + '/request', request)
+      // const prediction_id = response.data
 
       // console.log(`job submitted, task id ${prediction_id}`)
       // document.querySelector('progressReal2Real')
@@ -329,15 +331,15 @@ export default function CreateUI({ isOpen }) {
     [submitPrediction],
   )
 
-  const handleSnackbarClick = () => {
-    dispatch(setSnackbarVisible(true))
-  }
+  // const handleSnackbarClick = () => {
+  //   dispatch(setSnackbarVisible(true))
+  // }
 
   const handleSnackbarClose = (
     event: React.SyntheticEvent | Event,
     reason?: string,
   ) => {
-    if (reason === 'clickaway') {
+    if (reason === 'clickaway' && event) {
       return
       dispatch(setSnackbarVisible(false))
     }
@@ -360,7 +362,7 @@ export default function CreateUI({ isOpen }) {
     </>
   )
 
-  return (
+  return isOpen ? (
     <Modal
       id="create-modal"
       aria-labelledby="transition-modal-title"
@@ -556,5 +558,5 @@ export default function CreateUI({ isOpen }) {
         </>
       </CreateUIStyles>
     </Modal>
-  )
+  ) : null
 }

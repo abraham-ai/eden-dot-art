@@ -258,7 +258,7 @@ export default function AuthenticateButton({ onClose }) {
   const { isModalVisible } = useAppSelector(state => state.modal)
 
   return isWeb3AuthSuccess ? (
-    <CreateUI />
+    <CreateUI isOpen={isModalVisible} />
   ) : (
     <CreateSignInJWT isOpen={isModalVisible} onClose={onClose} />
   )

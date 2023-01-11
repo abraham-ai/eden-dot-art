@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react'
+import React from 'react'
+// , { useEffect, useState, useCallback, useRef }
 
 // NEXT
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 // MUI
 import { Box, Skeleton, styled } from '@mui/material'
@@ -12,7 +13,7 @@ import { Palette } from 'react-palette'
 // COMPONENTS
 import CreatorDashboard from '@/components/CreatorDashboard'
 import CreatorProfileAddress from '@/components/CreatorProfileAddress'
-import CreationCardMinimal from '@/components/CreationCardMinimal'
+// import CreationCardMinimal from '@/components/CreationCardMinimal'
 
 // CONSTANTS
 // import { NETWORKS } from '../../constants'
@@ -105,7 +106,9 @@ const CreatorStyles = styled(Box)(
 // 🔭 block explorer URL
 // const blockExplorer = targetNetwork.blockExplorer
 
-export default function Creator({ creationsState = {} }) {
+export default function Creator() {
+  //props creationsState = {}
+
   // const { url } = useRouteMatch()
   // const { creatorId } = useParams()
   // const location = useLocation()
@@ -142,7 +145,8 @@ export default function Creator({ creationsState = {} }) {
             <span>Creator profile info</span>
           </div>
           <Palette src={img_url}>
-            {({ data, loading, error }) => (
+            {({ data }) => (
+              // loading, error
               <div style={{ color: data.lightVibrant }}>
                 Text with the vibrant color
               </div>
@@ -153,27 +157,39 @@ export default function Creator({ creationsState = {} }) {
         <div className="creator-body">
           <div className="creator-grid-wrapper">
             <div className="creator-dashboard-wrapper">
-              <CreatorDashboard />
-              {/* creatorAddress={creatorId} */}
+              <CreatorDashboard
+                // onFilterChange={() => {
+                //   return null
+                // }}
+                // onSortChange={() => {
+                //   return null
+                // }}
+                creatorAddress={''}
+              />
             </div>
 
             <div className="creator-grid">
-              {Object.keys(creationsState).map((key, index) => (
-                // <span
-                //   index={index}
-                //   to={{
-                //     pathname: `${url}/${slug(creationsState[key].id)}`,
-                //     search: location.search,
-                //   }}
-                //   onClick={console.log('click test!!!')}
-                // >
-                <CreationCardMinimal
-                  className="creation-wrapper"
-                  key={index}
-                  item={creationsState[key]}
-                />
-                // </span>
-              ))}
+              creations
+              {/* {Object.keys(creationsState).map(
+                (key, index = 0) => (
+                  { key } { index }
+                  // <span
+                  //   index={index}
+                  //   to={{
+                  //     pathname: `${url}/${slug(creationsState[key].id)}`,
+                  //     search: location.search,
+                  //   }}
+                  //   onClick={console.log('click test!!!')}
+                  // >
+                  // <CreationCardMinimal
+                  //   // className="creation-wrapper"
+                  //   creation={index}
+                  //   key={index}
+                  //   // item={creationsState[key]}
+                  // />
+                  // </span>
+                ),
+              )} */}
             </div>
           </div>
         </div>

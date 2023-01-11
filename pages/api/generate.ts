@@ -2,16 +2,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next/types'
 
 // UTILS
-import { getGatewayResult } from 'util/eden'
+import { getGatewayResult } from '../../src/util/eden'
 
 // TYPES
-import { AuthMode } from 'models/types'
+import { AuthMode } from '../../src/models/types'
 
 // SESSION
-import { withSessionRoute } from 'util/withSession'
+import { withSession } from '../../src/util/withSession'
 
 // AUTH
-import { getAuthToken } from 'util/auth'
+import { getAuthToken } from '../../src/util/auth'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -54,4 +54,4 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withSessionRoute(handler)
+export default withSession(handler)
