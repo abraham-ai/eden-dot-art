@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 // ROUTER
 // import Link from 'next/link'
 // import { ROUTES } from '@/const/routes'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 // REDUX
 import { setModalVisible } from '@/redux/slices/modalSlice'
@@ -37,7 +37,7 @@ import {
   useAccount,
   chain,
   createClient,
-  useProvider,
+  // useProvider,
   configureChains,
   WagmiConfig,
 } from 'wagmi'
@@ -166,9 +166,9 @@ export default function Header() {
     isConnected,
   } = useAccount()
   const theme = useTheme()
-  const router = useRouter()
+  // const router = useRouter()
 
-  const [createOpen, setCreateOpen] = useState(false)
+  // const [createOpen, setCreateOpen] = useState(false)
 
   const handleCreateOpen = () => {
     // console.log('HANDLE-CREATE OPEN!')
@@ -194,9 +194,9 @@ export default function Header() {
   //   console.log('TRUEEE /WATCH')
   // }
 
-  function getIsActive(route) {
-    return router.asPath === route ? 'active' : ''
-  }
+  // function getIsActive(route) {
+  //   return router.asPath === route ? 'active' : ''
+  // }
 
   return (
     <WagmiConfig client={wagmiClient}>

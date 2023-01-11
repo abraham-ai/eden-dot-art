@@ -24,7 +24,7 @@ import {
 
 // GQL
 // import { useQuery } from '@apollo/client'
-import QueryResult from '@/components/QueryResult'
+// import QueryResult from '@/components/QueryResult'
 
 // NEXT
 import Head from 'next/head'

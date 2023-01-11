@@ -31,20 +31,24 @@ import {
 import SignInJWT from '@/components/SignInJWT'
 
 // WEB3
-import { useAccount, chain, createClient, WagmiProvider } from 'wagmi'
-import { useProvider } from 'wagmi'
+import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi' //  WagmiProvider, chain,
+import { mainnet } from 'wagmi/chains'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
+
+// import { useProvider } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
   RainbowKitProvider,
   AvatarComponent,
-  apiProvider,
-  configureChains,
   getDefaultWallets,
 } from '@rainbow-me/rainbowkit'
 
-const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.goerli, chain.polygonMumbai],
-  [apiProvider.fallback()],
+// apiProvider,
+
+const { provider, chains } = configureChains(
+  [mainnet],
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
 )
 
 const { connectors } = getDefaultWallets({
@@ -149,7 +153,7 @@ export default function Header() {
         backgroundColor: 'white',
       }}
     >
-      <WagmiProvider client={wagmiClient}>
+      <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
           <Box
             sx={{
@@ -169,7 +173,7 @@ export default function Header() {
             </Box>
           </Box>
         </RainbowKitProvider>
-      </WagmiProvider>
+      </WagmiConfig>
     </HeaderWrapper>
   )
 }

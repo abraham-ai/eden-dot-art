@@ -2,14 +2,15 @@
 
 // COMPONENTS
 import Head from 'next/head'
-import Footer from '@/components/Footer'
-import Logo from '@/components/Logo'
+// import Footer from '@/components/Footer'
+// import Logo from '@/components/Logo'
 
 // NEXT
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // MUI
-import { Box, Card, styled, Container } from '@mui/material'
+import { Box, styled } from '@mui/material'
+// Card,  Container
 
 // PAGES
 import EdenArtFrontPage from '@/components/EdenArtFrontPage'
@@ -18,18 +19,18 @@ import EdenArtFrontPage from '@/components/EdenArtFrontPage'
 // import BaseLayout from 'src/layouts/BaseLayout'
 
 // ROUTES
-import { ROUTES } from '@/const/routes'
+// import { ROUTES } from '@/const/routes'
 
-const HeaderWrapperStyles = styled(Card)(
-  ({ theme }) => `
-  width: 100%;
-  display: flex;
-  background-color: white;
-  align-items: center;
-  height: ${theme.spacing(10)};
-  margin-bottom: ${theme.spacing(10)};
-`,
-)
+// const HeaderWrapperStyles = styled(Card)(
+//   ({ theme }) => `
+//   width: 100%;
+//   display: flex;
+//   background-color: white;
+//   align-items: center;
+//   height: ${theme.spacing(10)};
+//   margin-bottom: ${theme.spacing(10)};
+// `,
+// )
 
 const OverviewWrapperStyles = styled(Box)(
   ({ theme }) => `

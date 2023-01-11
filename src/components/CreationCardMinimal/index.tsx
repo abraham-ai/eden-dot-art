@@ -37,8 +37,8 @@ import Blockies from 'react-blockies'
 // ICONS
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import CloseIcon from '@mui/icons-material/Close'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import IosShareIcon from '@mui/icons-material/IosShare'
+// import MoreVertIcon from '@mui/icons-material/MoreVert'
+// import IosShareIcon from '@mui/icons-material/IosShare'
 // import { FaDiscord } from 'react-icons/fa'
 // FaHashtag
 // import { HiOutlineSparkles } from 'react-icons/hi'
@@ -49,8 +49,8 @@ import IosShareIcon from '@mui/icons-material/IosShare'
 // import OpenInFullIcon from '@mui/icons-material/OpenInFull'
 // import MemoryIcon from '@mui/icons-material/Memory'
 // import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
+// import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+// import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 
 // interface ExpandMoreProps extends IconButtonProps {
 //   expand: boolean
@@ -700,7 +700,7 @@ export default function CreationCardMinimal({ creation }) {
             sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
           > */}
 
-      {/* {currentUserName} */}
+      {currentUserName}
 
       {/* {currentUserName === 'none'
               ? currentUserName

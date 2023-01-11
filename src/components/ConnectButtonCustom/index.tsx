@@ -1,10 +1,10 @@
 import React, { useState, MouseEvent } from 'react'
 
 // NEXT
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector } from '@/hooks/hooks' // useAppDispatch
 
 // WAGMI
 import { useAccount } from 'wagmi'
@@ -34,8 +34,9 @@ import ViewColumnIcon from '@mui/icons-material/ViewColumn'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 // CONST CSS
-const animSpeed = '300ms'
-const animCurve = 'cubic-bezier(0.23, 1, 0.32, 1)'
+// const animSpeed = '300ms'
+// const animCurve = 'cubic-bezier(0.23, 1, 0.32, 1)'
+
 const boxShadowRegular =
   '0px 0px 2px rgba(0, 0, 0, 0.15), 0px 4px 7px rgba(0, 0, 0, 0.05), 0px 12px 40px rgba(0, 0, 0, 0.1);'
 const smallTranslate = 'translate3d(0px, -1px, 0px)'
@@ -125,7 +126,7 @@ export const ConnectButtonCustom = () => {
   const walletAddress = address
 
   // REDUX
-  const appAddress = useAppSelector(state => state.address.value)
+  let appAddress = useAppSelector(state => state.address.value)
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -134,6 +135,8 @@ export const ConnectButtonCustom = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  appAddress = address === appAddress ? appAddress : address
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
@@ -151,6 +154,7 @@ export const ConnectButtonCustom = () => {
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setMasonryColumnCount(newValue as number)
+    return event ? event : null
   }
 
   // THEME PROPS

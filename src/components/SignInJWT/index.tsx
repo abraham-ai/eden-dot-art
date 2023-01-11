@@ -261,7 +261,7 @@ export default function SignInJWT() {
 
         // console.log(`AUTH-TOKEN: ${authToken}`)
 
-        if (decodedToken.address !== address) {
+        if (decodedToken.address !== address && appAddress) {
           throw new Error('Connected address and signer missmatch')
         } else {
           await axios
@@ -283,7 +283,7 @@ export default function SignInJWT() {
       // console.log(error.message)
       logoutApp()
     }
-  }, [address, authToken, logoutApp, checkError, verifyToken])
+  }, [address, appAddress, authToken, logoutApp, checkError, verifyToken])
 
   const handleAuthJWT = useCallback(async () => {
     // console.log('🔒 handle sign-in')

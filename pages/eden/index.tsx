@@ -28,7 +28,7 @@ import {
 // ROUTER
 
 // ICONS || ACTIONS
-import AppLogo from '@/components/AppLogo'
+// import AppLogo from '@/components/AppLogo'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import TravelExploreIcon from '@mui/icons-material/TravelExplore'
 import LiveTvIcon from '@mui/icons-material/LiveTv'

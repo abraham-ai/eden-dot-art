@@ -1,12 +1,13 @@
 import {
   Box,
   Tooltip,
-  Badge,
   TooltipProps,
   tooltipClasses,
   styled,
-  useTheme,
 } from '@mui/material'
+// useTheme,
+
+//   Badge,
 import Link from 'src/components/Link'
 
 const LogoWrapper = styled(Link)(
@@ -95,7 +96,7 @@ const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
 }))
 
 function Logo() {
-  const theme = useTheme()
+  // const theme = useTheme()
 
   return (
     <TooltipWrapper title="Eden.Art" arrow>

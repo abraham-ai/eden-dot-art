@@ -1,4 +1,6 @@
 import React from 'react'
+
+// ANT
 import { InboxOutlined } from '@ant-design/icons'
 import type { UploadProps } from 'antd'
 import { message, Upload } from 'antd'
@@ -24,6 +26,7 @@ const props: UploadProps = {
     }
   },
   onDrop(e) {
+    e ? e : null
     // console.log('Dropped files', e.dataTransfer.files)
   },
 }

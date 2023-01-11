@@ -1,21 +1,21 @@
-import React, { useState, forwardRef } from 'react'
+import React from 'react' //  { useState, forwardRef }
 // , useEffect, useCallback
 
 // MUI
-import {
-  // Backdrop,
-  // Box,
-  // Button,
-  // Modal,
-  // Typography,
-  // Select,
-  // SelectChangeEvent,
-  // TextField,
-  // useTheme,
-  // styled,
-  Snackbar,
-} from '@mui/material'
-import MuiAlert, { AlertProps } from '@mui/material/Alert'
+// import {
+// Backdrop,
+// Box,
+// Button,
+// Modal,
+// Typography,
+// Select,
+// SelectChangeEvent,
+// TextField,
+// useTheme,
+// styled,
+// Snackbar,
+// } from '@mui/material'
+// import MuiAlert, { AlertProps } from '@mui/material/Alert'
 
 // REDUX
 import { useAppSelector } from '@/hooks/hooks'
@@ -56,12 +56,12 @@ import CreateSignInJWT from '@/components/CreateSignInJWT'
 // import { IoMdResize } from 'react-icons/io'
 // import AddIcon from '@mui/icons-material/Add'
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
-})
+// const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+//   props,
+//   ref,
+// ) {
+//   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+// })
 
 // const CreateButtonStyles = styled('section')(
 //   () => `
@@ -260,7 +260,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 // const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
 
 export default function CreateModal({ isOpen = true, onClose }) {
-  const [open, setOpen] = useState(isOpen)
+  // const [open, setOpen] = useState(isOpen)
 
   // REDUX STATE
   // const dispatch = useDispatch()
@@ -403,42 +403,42 @@ export default function CreateModal({ isOpen = true, onClose }) {
   //   setVisibleT(true)
   // }
 
-  const handleSnackbarClick = () => {
-    setOpen(true)
-  }
+  // const handleSnackbarClick = () => {
+  //   setOpen(true)
+  // }
 
-  const handleSnackbarClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return
-    }
+  // const handleSnackbarClose = (
+  //   event?: React.SyntheticEvent | Event,
+  //   reason?: string,
+  // ) => {
+  //   if (reason === 'clickaway') {
+  //     return event ? event : null
+  //   }
 
-    setOpen(false)
-  }
+  //   setOpen(false)
+  // }
 
-  const sendNotification = (type, data) => {
-    // return notification[type]({
-    //   ...data,
-    //   placement: 'bottomRight',
-    // })
-    return (
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity="success"
-          sx={{ width: '100%' }}
-        >
-          {data}
-        </Alert>
-      </Snackbar>
-    )
-  }
+  // const sendNotification = (type, data) => {
+  //   // return notification[type]({
+  //   //   ...data,
+  //   //   placement: 'bottomRight',
+  //   // })
+  //   return (
+  //     <Snackbar
+  //       open={open}
+  //       autoHideDuration={6000}
+  //       onClose={handleSnackbarClose}
+  //     >
+  //       <Alert
+  //         onClose={handleSnackbarClose}
+  //         severity="success"
+  //         sx={{ width: '100%' }}
+  //       >
+  //         {data}
+  //       </Alert>
+  //     </Snackbar>
+  //   )
+  // }
 
   // const goToDiscord = () => {
   //   window.location = 'https://discord.gg/4dSYwDT'
@@ -541,8 +541,9 @@ export default function CreateModal({ isOpen = true, onClose }) {
   //   </div>
   // )
 
+  // onClose={onClose}
   return isWeb3AuthSuccess ? (
-    <CreateUI isOpen={isOpen} onClose={onClose} />
+    <CreateUI isOpen={isOpen} />
   ) : (
     <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
   )

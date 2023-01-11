@@ -299,7 +299,7 @@ export default function EdenArtFrontPage() {
           >
             <Typography
               variant={'h1'}
-              sx={{ fontSize: '2.6rem', pb: 3, color: '#0c163b', zIndex: 50 }}
+              sx={{ fontSize: '4rem', pb: 3, color: '#0c163b', zIndex: 50 }}
             >
               {/* '#8C7CF0 */}
               <div>Create, remix, and share AI-generated art</div>

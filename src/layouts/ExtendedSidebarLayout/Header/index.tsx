@@ -31,7 +31,7 @@ import Logo from '@/components/Logo'
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { KeyObject } from 'crypto'
+// import { KeyObject } from 'crypto'
 
 const BoxModalStyle = {
   position: 'absolute',
