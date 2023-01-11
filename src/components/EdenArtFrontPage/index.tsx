@@ -24,7 +24,7 @@ const EdenArtFrontPageStyles = styled('section')(
     justify-content: center;
     width: 100%;
   }
-  /* SECTION */
+  /*** SECTION ***/
   .section-wrapper {
     display: flex;
     justify-content: center;
@@ -49,15 +49,15 @@ const EdenArtFrontPageStyles = styled('section')(
     align-items: center;
     justify-content: center;
   }
-  /* SPLASH TEXT INFO */
+  /*** SPLASH TEXT INFO ***/
   .splash-garden-card {
     opacity: 0.2;
   }
   .splash-garden-card:hover {
     opacity: 1;
+    fontSize: 1.5rem;
   }
-  fontSize: '1.5rem';
-  /* HIGHLIGHT */
+  /*** HIGHLIGHT ***/
   .highlight {
     padding: 50px 0 100px 0;
     background: rgb(171, 254, 44);
@@ -68,7 +68,7 @@ const EdenArtFrontPageStyles = styled('section')(
     width: 100%;
     position: relative;
   }
-  /* SPLASH */
+  /*** SPLASH ***/
   .splash-wrapper {
     overflow: hidden;
     display: block;
@@ -80,26 +80,12 @@ const EdenArtFrontPageStyles = styled('section')(
     position: absolute;
     left: -10px;
   }
-  .info-wrapper {
-    padding: 50px 0 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .info-wrapper .button-wrapper {
-    padding: 50px 0;
-    display: flex;
-    z-index: 20;
-  }
-  .info-wrapper .more-description {
-    max-width: 600px;
-    z-index: 20;
-  }
+  /*** LOGO ***/
   .eden-logotype {
     display: flex;
     justify-content: flex-start;
   }
+
   .slogan {
     position: relative;
   }
@@ -126,6 +112,88 @@ const EdenArtFrontPageStyles = styled('section')(
     width: 100%;
     max-width: 400px;
     padding-bottom: 40px;
+  }
+  /*** CTA BUTTONS ***/
+  .button-wrapper {
+    justify-content: center;
+    flex-direction: row;
+    max-width: 600px;
+  }
+  .cta-button {
+    margin: 10px;
+    min-width: 200px;
+    border-radius: 24px;
+    font-size: 1.2rem;
+  }
+  /*** INFO-WRAPPER ***/
+  .info-wrapper {
+    padding: 50px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .info-wrapper .button-wrapper {
+    padding: 50px 0;
+    display: flex;
+    z-index: 20;
+  }
+  .info-wrapper .info {
+    display: flex;
+  }
+  @media (max-width: 900px) {
+    .info-wrapper .info {
+      flex-direction: column;
+      margin-top: 50px;
+      width: 100%;
+    }
+  }
+  /*** DESCRIPTION ***/
+  .description-wrapper {
+    display: flex;
+    flexDirection: column;
+    justifyContent: center;
+  }
+  .description {
+    max-width: 600px;
+    z-index: 20;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: rgb(166, 166, 166);
+    text-align: center;
+  }
+  .description i {
+    color: #8C7CF0;
+  }
+  @media (max-width: 900px) {
+    .description-wrapper {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .description {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 30px;
+      margin: 0;
+    }
+  }
+  /*** EDEN SPLASH VIDEO ***/
+  .eden-splash-video {
+    maxWidth: 400px;
+    zIndex: 40;
+  }
+  @media (max-width: 900px) {
+    .eden-splash-video {
+      width: 100%;
+      min-height: 300px;
+      max-width: unset;
+      background: red;
+    }
+    .info-wrapper .info.even .eden-splash-video {
+      order: 1;
+    }
   }
   /* OUR APPS */
   .apps-wrapper {
@@ -252,6 +320,19 @@ const EdenArtFrontPageStyles = styled('section')(
     justify-content: center;
     padding: 20px;
   }
+  @media (min-width: 1280px) {
+  }
+  @media (max-width: 600px) {
+    /* CTA BUTTONS */
+    .button-wrapper {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 900px) {
+    .button-wrapper {
+      flex-wrap: wrap;
+    }
+  }
   @media (min-width: 40em) {
     /* .home-wrapper {
       max-width: 600px;
@@ -293,16 +374,35 @@ export default function EdenArtFrontPage() {
     <EdenArtFrontPageStyles>
       <div className="home-wrapper">
         <section className="section-wrapper">
-          <div
+          <Box
             className="section-center-wrapper"
-            style={{ paddingBottom: 100 }}
+            sx={{ p: 2, pb: 10, width: '100%', textAlign: 'center' }}
           >
+            {/* '#8C7CF0 */}
             <Typography
               variant={'h1'}
-              sx={{ fontSize: '4rem', pb: 3, color: '#0c163b', zIndex: 50 }}
+              sx={{
+                fontSize: '3rem',
+                width: '100%',
+                color: '#0c163b',
+                zIndex: 50,
+                wordBreak: 'break',
+              }}
             >
-              {/* '#8C7CF0 */}
-              <div>Create, remix, and share AI-generated art</div>
+              Create, remix, and share
+            </Typography>
+            <Typography
+              variant={'h1'}
+              sx={{
+                fontSize: '3rem',
+                width: '100%',
+                pb: 3,
+                color: '#0c163b',
+                zIndex: 50,
+                wordBreak: 'break',
+              }}
+            >
+              AI-generated art
             </Typography>
 
             <Typography
@@ -331,75 +431,56 @@ export default function EdenArtFrontPage() {
                 padding: 0,
               }}
             >
-              <article
-                className="button-wrapper"
-                style={{ display: 'flex', paddingTop: 50, zIndex: 50 }}
-              >
-                <Box>
-                  <Button
-                    href={'https://examples.eden.art'}
-                    variant="contained"
-                    sx={{ ml: 2, minWidth: '200px' }}
-                  >
-                    Examples
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Button
-                    href={'/garden'}
-                    variant="contained"
-                    sx={{ ml: 2, minWidth: '200px' }}
-                  >
-                    Garden
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Button
-                    href={'https://discord.gg/4dSYwDT'}
-                    variant="contained"
-                    sx={{ ml: 2, minWidth: '200px' }}
-                  >
-                    Discord
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Button
-                    href={'https://twitter.com/eden_dot_art'}
-                    variant="contained"
-                    sx={{ ml: 2, minWidth: '200px' }}
-                  >
-                    Twitter
-                  </Button>
-                </Box>
-              </article>
-            </Container>
-          </div>
-        </section>
-
-        <Container className="section-wrapper" sx={{ mt: 0, pl: 0, pr: 0 }}>
-          <Container className="info-wrapper" sx={{ m: 0, pl: 5, pr: 5 }}>
-            <Box sx={{ p: 5, display: 'flex' }}>
               <Box
+                className="button-wrapper"
                 sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  pr: 5,
+                  pt: 5,
+                  zIndex: 50,
+                  width: '100%',
                 }}
               >
-                <Typography
-                  className="more-description"
-                  variant={'h4'}
-                  sx={{
-                    fontSize: '1.25rem',
-                    lineHeight: 1.5,
-                    textAlign: 'center',
-                    color: 'rgb(166, 166, 166)',
-                  }}
+                <Button
+                  href={'https://examples.eden.art'}
+                  variant="contained"
+                  className="cta-button"
                 >
+                  Examples
+                </Button>
+
+                <Button
+                  href={'/garden'}
+                  variant="contained"
+                  className="cta-button"
+                >
+                  Garden
+                </Button>
+
+                <Button
+                  href={'https://discord.gg/4dSYwDT'}
+                  variant="contained"
+                  className="cta-button"
+                >
+                  Discord
+                </Button>
+
+                <Button
+                  href={'https://twitter.com/eden_dot_art'}
+                  variant="contained"
+                  className="cta-button"
+                >
+                  Twitter
+                </Button>
+              </Box>
+            </Container>
+          </Box>
+        </section>
+
+        <section className="section-wrapper" style={{ marginBottom: 100 }}>
+          <Container className="info-wrapper" sx={{ m: 0, pl: 5, pr: 5 }}>
+            <article className="info odd">
+              <Box className="description-wrapper" sx={{ pr: 5 }}>
+                <Typography className="description" variant={'h4'}>
                   <i>Eden is for artists.</i> Create and share your art, get
                   inspired, and collaborate with other artists. Own your profile
                   and your creations.
@@ -408,25 +489,17 @@ export default function EdenArtFrontPage() {
 
               <CardMedia
                 className="eden-splash-video"
-                sx={{
-                  maxWidth: '400px',
-                  zIndex: 40,
-                }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
                 alt="eden video"
                 // autoPlay
                 // mute
               />
-            </Box>
+            </article>
 
-            <Box sx={{ p: 5, display: 'flex' }}>
+            <article className="info even">
               <CardMedia
                 className="eden-splash-video"
-                sx={{
-                  maxWidth: '400px',
-                  zIndex: 40,
-                }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
                 alt="eden video"
@@ -434,56 +507,19 @@ export default function EdenArtFrontPage() {
                 // mute
               />
 
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  pl: 5,
-                }}
-              >
-                <Typography
-                  className="more-description"
-                  variant={'h4'}
-                  sx={{
-                    fontSize: '1.25rem',
-                    lineHeight: 1.5,
-                    color: 'rgb(166, 166, 166)',
-                    textAlign: 'center',
-                  }}
-                >
+              <Box className="description-wrapper" sx={{ pl: 5 }}>
+                <Typography className="description" variant={'h4'}>
                   <i>Eden is for developers.</i> Build generative AI
                   applications with ease using our API. Bootstrap your
                   application on top of an existing community and ecosystem.
                 </Typography>
               </Box>
-            </Box>
+            </article>
 
-            <Box sx={{ p: 5, display: 'flex' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  pr: 3,
-                }}
-              >
-                <Box
-                  maxWidth={600}
-                  sx={{
-                    pr: 5,
-                  }}
-                >
-                  <Typography
-                    className="more-description"
-                    variant={'h4'}
-                    sx={{
-                      fontSize: '1.25rem',
-                      lineHeight: 1.5,
-                      color: 'rgb(166, 166, 166)',
-                      textAlign: 'center',
-                    }}
-                  >
+            <article className="info odd">
+              <Box sx={{ pr: 3 }}>
+                <Box className="description-wrapper" sx={{ pr: 5 }}>
+                  <Typography className="description" variant={'h4'}>
                     <i>Eden is for researchers.</i> Got a new model or a
                     creative use case of an existing one? Upload it to Eden and
                     see what artists do with it.
@@ -493,19 +529,15 @@ export default function EdenArtFrontPage() {
 
               <CardMedia
                 className="eden-splash-video"
-                sx={{
-                  maxWidth: '400px',
-                  zIndex: 40,
-                }}
                 component="img"
                 image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
                 alt="eden video"
                 // autoPlay
                 // mute
               />
-            </Box>
+            </article>
           </Container>
-        </Container>
+        </section>
       </div>
     </EdenArtFrontPageStyles>
   )
