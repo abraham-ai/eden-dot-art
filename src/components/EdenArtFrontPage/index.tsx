@@ -500,6 +500,7 @@ export default function EdenArtFrontPage() {
                 }}
               >
                 <Button
+                  target="_blank"
                   href={'https://examples.eden.art'}
                   variant="contained"
                   className="cta-button"
@@ -508,6 +509,7 @@ export default function EdenArtFrontPage() {
                 </Button>
 
                 <Button
+                  target="_blank"
                   href={'/garden'}
                   variant="contained"
                   className="cta-button"
@@ -516,6 +518,7 @@ export default function EdenArtFrontPage() {
                 </Button>
 
                 <Button
+                  target="_blank"
                   href={'https://discord.gg/4dSYwDT'}
                   variant="contained"
                   className="cta-button"
@@ -524,7 +527,8 @@ export default function EdenArtFrontPage() {
                 </Button>
 
                 <Button
-                  href={'https://twitter.com/eden_dot_art'}
+                  target="_blank"
+                  href={'https://twitter.com/Eden_Art_'}
                   variant="contained"
                   className="cta-button"
                 >
