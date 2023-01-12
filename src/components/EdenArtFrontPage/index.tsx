@@ -32,6 +32,12 @@ const EdenArtFrontPageStyles = styled('section')(
     position: relative;
     padding: 0;
   }
+  .section-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   @media (min-width: 1280px) {
     .section-wrapper {
       max-width: unset; 
@@ -43,11 +49,24 @@ const EdenArtFrontPageStyles = styled('section')(
       padding-right: 0;
     }
   }
-  .section-center-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  /*** SLOGAN ***/
+  .section-center-wrapper h1 {
+    font-size: 3rem;
+  }
+  .splash-text-description {
+    font-size: 24px;
+  }
+  @media (min-width: 1280px) {
+    .section-center-wrapper h1 {
+      // font-size: 4rem;
+      font-size: 88px;
+    }
+  }
+  @media (min-width: 600px) {
+    .section-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
   /*** SPLASH TEXT INFO ***/
   .splash-garden-card {
@@ -122,12 +141,12 @@ const EdenArtFrontPageStyles = styled('section')(
   .cta-button {
     margin: 10px;
     min-width: 200px;
-    border-radius: 24px;
+    border-radius: 30px;
+    min-height: 60px;
     font-size: 1.2rem;
   }
   /*** INFO-WRAPPER ***/
   .info-wrapper {
-    // padding: 50px 0 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,12 +158,17 @@ const EdenArtFrontPageStyles = styled('section')(
     z-index: 20;
   }
   .info-wrapper .info {
+    padding: 50px 0 0 0;
     display: flex;
+  }
+  .info-wrapper .info:first-child {
+    margin-top: 0;
   }
   @media (max-width: 900px) {
     .info-wrapper .info {
       flex-direction: column;
       margin-top: 100px;
+      padding: 0;
       width: 100%;
     }
   }
@@ -155,22 +179,31 @@ const EdenArtFrontPageStyles = styled('section')(
     justifyContent: center;
   }
   .description {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    font-weight: 500;
     max-width: 600px;
     z-index: 20;
-    font-size: 1.25rem;
     line-height: 1.5;
     color: rgb(166, 166, 166);
     text-align: center;
   }
   .description i {
-    font-size: 1.6rem;
+    font-size: 2rem;
+    padding: 30px 0;
     font-weight: 600;
     color: #8C7CF0;
+  }
+  @media only screen and (max-width:900px) {
+    .description {
+      font-size: 1.2rem;
+    }
   }
   @media (max-width: 900px) {
     .description-wrapper {
       margin: 0;
-      padding: 0;
+      padding-bottom: 50px;
       display: flex;
       justify-content: center;
     }
@@ -179,12 +212,15 @@ const EdenArtFrontPageStyles = styled('section')(
       flex-direction: column;
       padding-bottom: 30px;
       margin: 0;
+      padding: 0;
+      font-size: 1.4rem;
     }
   }
   /*** EDEN SPLASH VIDEO ***/
   .eden-splash-video {
-    maxWidth: 400px;
-    zIndex: 40;
+    max-width: 600px;
+    z-index: 40;
+    border-radius: 24px;
   }
   @media (max-width: 900px) {
     .eden-splash-video {
@@ -377,7 +413,7 @@ export default function EdenArtFrontPage() {
         <section className="section-wrapper">
           <Box
             className="section-center-wrapper"
-            sx={{ p: 2, pb: 10, width: '100%', textAlign: 'center' }}
+            sx={{ p: 2, pb: 0, width: '100%', textAlign: 'center' }}
           >
             {/* '#8C7CF0 */}
             <Typography
@@ -412,7 +448,7 @@ export default function EdenArtFrontPage() {
               sx={{
                 fontSize: '1.3rem',
                 textAlign: 'center',
-                maxWidth: 700,
+                maxWidth: 730,
                 lineHeight: 2,
                 zIndex: 50,
                 color: '#0c163b',
@@ -479,14 +515,14 @@ export default function EdenArtFrontPage() {
 
         <section
           className="section-wrapper"
-          style={{ marginBottom: 100, marginTop: 0 }}
+          style={{ marginTop: 100, marginBottom: 150 }}
         >
           <Container
             className="info-wrapper"
             sx={{ m: 0, pl: 5, pr: 5, pt: 0 }}
           >
             <article className="info odd">
-              <Box className="description-wrapper" sx={{ pr: 5 }}>
+              <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
                   <i>Eden is for artists.</i> Create and share your art, get
                   inspired, and collaborate with other artists. Own your profile
@@ -514,7 +550,7 @@ export default function EdenArtFrontPage() {
                 // mute
               />
 
-              <Box className="description-wrapper" sx={{ pl: 5 }}>
+              <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
                   <i>Eden is for developers.</i> Build generative AI
                   applications with ease using our API. Bootstrap your
@@ -524,8 +560,8 @@ export default function EdenArtFrontPage() {
             </article>
 
             <article className="info odd">
-              <Box sx={{ pr: 3 }}>
-                <Box className="description-wrapper" sx={{ pr: 5 }}>
+              <Box>
+                <Box className="description-wrapper">
                   <Typography className="description" variant={'h4'}>
                     <i>Eden is for researchers.</i> Got a new model or a
                     creative use case of an existing one? Upload it to Eden and
