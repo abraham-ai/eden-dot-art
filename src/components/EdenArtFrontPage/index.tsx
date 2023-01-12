@@ -477,9 +477,9 @@ export default function EdenArtFrontPage() {
               }}
             >
               {/* 'rgb(166, 166, 166)' */}
-              Eden is the garden of artificial delights. We are a community of
-              artists, creative technologists, and machine learners building an
-              open-source social platform for generative AI.
+              Eden is a community of artists, creative technologists, and
+              machine learners building an open-source social platform for
+              generative AI.
             </Typography>
 
             <Container
@@ -547,9 +547,9 @@ export default function EdenArtFrontPage() {
             <article className="info odd">
               <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
-                  <i>Eden is for artists.</i> Create and share your art, get
-                  inspired, and collaborate with other artists. Own your profile
-                  and your creations.
+                  <i>For artists:</i> Create and share your art, get inspired by
+                  and collaborate with other artists. Own your profile and your
+                  creations.
                 </Typography>
               </Box>
 
@@ -575,9 +575,8 @@ export default function EdenArtFrontPage() {
 
               <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
-                  <i>Eden is for developers.</i> Build generative AI
-                  applications with ease using our API. Bootstrap your
-                  application on top of an existing community and ecosystem.
+                  <i>For researchers and devs:</i> Build applications with ease,
+                  connect new techniques and models to a shared ecosystem.
                 </Typography>
               </Box>
             </article>
@@ -586,9 +585,8 @@ export default function EdenArtFrontPage() {
               <Box>
                 <Box className="description-wrapper">
                   <Typography className="description" variant={'h4'}>
-                    <i>Eden is for researchers.</i> Got a new model or a
-                    creative use case of an existing one? Upload it to Eden and
-                    see what artists do with it.
+                    <i>For collectors:</i> Discover, curate, and tell stories
+                    with your collections. Make the garden beautiful.
                   </Typography>
                 </Box>
               </Box>
