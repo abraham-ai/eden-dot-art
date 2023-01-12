@@ -183,6 +183,11 @@ const EdenArtFrontPageStyles = styled('section')(
       width: 100%;
     }
   }
+  @media only screen and (max-width: 900px) {
+    .info-wrapper {
+      padding: 0;
+    }
+  }
   /*** DESCRIPTION ***/
   .description-wrapper {
     display: flex;
@@ -242,6 +247,11 @@ const EdenArtFrontPageStyles = styled('section')(
     }
     .info-wrapper .info.even .eden-splash-video {
       order: 1;
+    }
+  }
+  @media only screen and (max-width: 900px) {
+    .eden-splash-video {
+      border-radius: 0;
     }
   }
   /* OUR APPS */
@@ -529,10 +539,7 @@ export default function EdenArtFrontPage() {
           className="section-wrapper"
           style={{ marginTop: 100, marginBottom: 150 }}
         >
-          <Container
-            className="info-wrapper"
-            sx={{ m: 0, pl: 5, pr: 5, pt: 0 }}
-          >
+          <Container className="info-wrapper" sx={{ m: 0, pt: 0 }}>
             <article className="info odd">
               <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
