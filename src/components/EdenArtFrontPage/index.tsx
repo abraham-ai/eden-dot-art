@@ -68,6 +68,17 @@ const EdenArtFrontPageStyles = styled('section')(
       padding-right: 0;
     }
   }
+  @media only screen and (max-width: 900px) {
+    .splash-text-description {
+      line-height: 1.75;
+    }
+    .section-center-wrapper h1 {
+      font-size: 3.5rem;
+    }
+    .section-center-wrapper h1:nth-child(2) {
+      padding-bottom: 80px;
+    }
+  }
   /*** SPLASH TEXT INFO ***/
   .splash-garden-card {
     opacity: 0.2;
@@ -186,6 +197,7 @@ const EdenArtFrontPageStyles = styled('section')(
     max-width: 600px;
     z-index: 20;
     line-height: 1.5;
+    padding: 0 50px;
     color: rgb(166, 166, 166);
     text-align: center;
   }
@@ -482,7 +494,7 @@ export default function EdenArtFrontPage() {
                   variant="contained"
                   className="cta-button"
                 >
-                  Examples
+                  EXAMPLES
                 </Button>
 
                 <Button
@@ -490,7 +502,7 @@ export default function EdenArtFrontPage() {
                   variant="contained"
                   className="cta-button"
                 >
-                  Garden
+                  GARDEN
                 </Button>
 
                 <Button
@@ -498,7 +510,7 @@ export default function EdenArtFrontPage() {
                   variant="contained"
                   className="cta-button"
                 >
-                  Discord
+                  DISCORD
                 </Button>
 
                 <Button
@@ -506,7 +518,7 @@ export default function EdenArtFrontPage() {
                   variant="contained"
                   className="cta-button"
                 >
-                  Twitter
+                  TWITTER
                 </Button>
               </Box>
             </Container>
