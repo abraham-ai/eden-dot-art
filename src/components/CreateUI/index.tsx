@@ -65,7 +65,8 @@ const BoxModalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  width: 700,
+  height: 300,
   bgcolor: 'white',
   border: '2px solid #000',
   padding: '10px',
@@ -141,6 +142,7 @@ const CreateUIStyles = styled(Box)(
       display: flex;
       flex-direction: column;
       width: 100%;
+      height: 350px;
     }
 
     #create-text-area {
@@ -376,7 +378,6 @@ export default function CreateUI({ isOpen }) {
     >
       <CreateUIStyles>
         <>
-          <EdenTabs />
           <Box
             className="close-icon-wrapper"
             sx={{
@@ -392,6 +393,7 @@ export default function CreateUI({ isOpen }) {
               onClick={() => dispatch(setModalVisible(false))}
             />
           </Box>
+
           <Box sx={BoxModalStyle}>
             <Box
               key="form-wrapper"
@@ -427,7 +429,9 @@ export default function CreateUI({ isOpen }) {
                     <CreateTypeSelect />
                   </Box> */}
 
-                    <FormControl sx={{ border: 'none' }}>
+                    <EdenTabs />
+
+                    {/* <FormControl sx={{ border: 'none' }}>
                       <TextField
                         id="create-text-area"
                         label="Create what is on your mind?"
@@ -437,16 +441,16 @@ export default function CreateUI({ isOpen }) {
                         onChange={onChange}
                         variant="filled"
                       />
-                    </FormControl>
+                    </FormControl> */}
 
                     {/* <CreateGeneratorTypeSelect /> */}
 
-                    <div className="divider"></div>
+                    {/* <div className="divider"></div> */}
 
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Box sx={{ display: 'flex', flex: 1 }}>
-                        <MdOutlinePhotoSizeSelectLarge className="create-icon" />
-                        {/* <FormControl className="select-size-form" size="small">
+                        <MdOutlinePhotoSizeSelectLarge className="create-icon" /> */}
+                    {/* <FormControl className="select-size-form" size="small">
                       <InputLabel id="filter-select-label">Size</InputLabel>
                       <Select
                         labelId="filter-label"
@@ -478,9 +482,9 @@ export default function CreateUI({ isOpen }) {
                       </Select>
                     </FormControl> */}
 
-                        {/* <BsGear className="create-icon" /> */}
+                    {/* <BsGear className="create-icon" /> */}
 
-                        {/* <FormControl className="select-generator-form" size="small">
+                    {/* <FormControl className="select-generator-form" size="small">
                       <InputLabel id="select-label">Generator</InputLabel>
                       <Select
                         labelId="filter-label"
@@ -520,7 +524,7 @@ export default function CreateUI({ isOpen }) {
                         </MenuItem>
                       </Select>
                     </FormControl> */}
-                      </Box>
+                    {/* </Box>
 
                       <Box sx={{ mr: 2 }}>{maxCharPercent}</Box>
 
@@ -540,8 +544,8 @@ export default function CreateUI({ isOpen }) {
                         sx={{ borderRadius: '20px' }}
                       >
                         Create
-                      </Button>
-                    </Box>
+                      </Button> 
+                    </Box> */}
                   </Box>
                 </Box>
               </Box>
