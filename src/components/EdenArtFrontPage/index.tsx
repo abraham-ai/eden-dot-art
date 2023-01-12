@@ -73,7 +73,7 @@ const EdenArtFrontPageStyles = styled('section')(
       line-height: 1.75;
     }
     .section-center-wrapper h1 {
-      font-size: 3.5rem;
+      font-size: 3.4rem;
     }
     .section-center-wrapper h1:nth-child(2) {
       padding-bottom: 80px;
