@@ -547,7 +547,7 @@ export default function EdenArtFrontPage() {
             <article className="info odd">
               <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
-                  <i>For artists:</i> Create and share your art, get inspired by
+                  <i>For artists</i> Create and share your art, get inspired by
                   and collaborate with other artists. Own your profile and your
                   creations.
                 </Typography>
@@ -575,7 +575,7 @@ export default function EdenArtFrontPage() {
 
               <Box className="description-wrapper">
                 <Typography className="description" variant={'h4'}>
-                  <i>For researchers and devs:</i> Build applications with ease,
+                  <i>For researchers and devs</i> Build applications with ease,
                   connect new techniques and models to a shared ecosystem.
                 </Typography>
               </Box>
@@ -585,7 +585,7 @@ export default function EdenArtFrontPage() {
               <Box>
                 <Box className="description-wrapper">
                   <Typography className="description" variant={'h4'}>
-                    <i>For collectors:</i> Discover, curate, and tell stories
+                    <i>For collectors</i> Discover, curate, and tell stories
                     with your collections. Make the garden beautiful.
                   </Typography>
                 </Box>
