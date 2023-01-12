@@ -30,7 +30,7 @@ const GenerateTab = () => {
   const [form] = Form.useForm()
   const width = Form.useWatch('width', form)
   const height = Form.useWatch('height', form)
-  const [resultUrl, setResultUrl] = useState<string>('')
+  const [resultURL, setResultURL] = useState<string>('')
   const [generating, setGenerating] = useState<boolean>(false)
   const [message, setMessage] = useState<string | null>(null)
 
@@ -41,7 +41,7 @@ const GenerateTab = () => {
         ...values,
         authMode: selectedAuthMode,
       })
-      setResultUrl(response.data.outputUrl)
+      setResultURL(response.data.outputUrl)
     } catch (error: any) {
       setMessage(`Error: ${error.response.data.error}`)
     }
@@ -59,7 +59,7 @@ const GenerateTab = () => {
         <Form.Item label="Prompt" name="prompt">
           <Input />
         </Form.Item>
-        <Space>
+        <Space style={{ display: 'flex', alignItems: 'center' }}>
           <Form.Item label="Width" name="width">
             <InputNumber placeholder="Width" min={0} />
           </Form.Item>
@@ -79,7 +79,9 @@ const GenerateTab = () => {
         </Form.Item>
       </Form>
       {message && <p>{message}</p>}
-      <ImageResult width={width} height={height} imageUrl={resultUrl} />
+      {resultURL ? (
+        <ImageResult width={width} height={height} imageUrl={resultURL} />
+      ) : null}
     </>
   )
 }
