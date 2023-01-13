@@ -5,7 +5,7 @@ import { Box, Tab, Tabs, Typography } from '@mui/material'
 
 // COMPONENTS
 import ApiKeyAuth from '@/components/Auth/ApiKeyAuth'
-import AuthSelector from '@/components/Auth/AuthSelector'
+// import AuthSelector from '@/components/Auth/AuthSelector'
 import EthereumAuth from '@/components/Auth/EthereumAuth'
 
 // TYPES
@@ -60,7 +60,7 @@ const Auth = () => {
         >
           <Tab label="Ethereum Auth" {...a11yProps(0)} />
           <Tab label="API Key Auth" {...a11yProps(1)} />
-          <Tab label="Auth Selector" {...a11yProps(2)} />
+          {/* <Tab label="Auth Selector" {...a11yProps(2)} /> */}
         </Tabs>
       </Box>
 
@@ -70,9 +70,9 @@ const Auth = () => {
       <TabPanel value={value} index={1}>
         <ApiKeyAuth />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
         <AuthSelector />
-      </TabPanel>
+      </TabPanel> */}
     </Box>
   )
 }

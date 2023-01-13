@@ -5,7 +5,7 @@ import { Alert, Box, Button, Typography } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
 // CONTEXT
-import { AuthContext } from '../../contexts/AuthContext'
+// import { AuthContext } from '../../contexts/AuthContext'
 
 // FETCH
 import axios from 'axios'
@@ -17,8 +17,8 @@ import { SiweMessage } from 'siwe'
 const EthereumAuth = () => {
   const { chain } = useNetwork()
   const { address, isConnected } = useAccount()
-  const { setSelectedAuthMode, availableAuthModes, setAvailableAuthModes } =
-    useContext(AuthContext)
+  // const { setSelectedAuthMode, availableAuthModes, setAvailableAuthModes } =
+  //   useContext(AuthContext)
 
   const [ethAuthenticating, setEthAuthenticating] = useState(false)
   const [ethMessage, setEthMessage] = useState<string | null>(null)
@@ -32,11 +32,11 @@ const EthereumAuth = () => {
           userAddress: address,
         })
         setEthMessage('Successfully authenticated')
-        setAvailableAuthModes({
-          ...availableAuthModes,
-          ethereum: true,
-        })
-        setSelectedAuthMode('ethereum')
+        // setAvailableAuthModes({
+        //   ...availableAuthModes,
+        //   ethereum: true,
+        // })
+        // setSelectedAuthMode('ethereum')
       } catch (error: any) {
         setEthMessage('Error authenticating')
       }

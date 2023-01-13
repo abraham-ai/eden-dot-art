@@ -1,33 +1,37 @@
-// TYPES
-import type {
+import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
+import {
   GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from 'next/types'
+  GetServerSidePropsResult,
+  NextApiHandler,
+} from 'next'
 
-// SESSION
-import { withIronSession, Session } from 'next-iron-session'
+declare module 'iron-session' {
+  interface IronSessionData {
+    token?: string
+    userId?: string
+  }
+}
 
-export type NextIronRequest = NextApiRequest & { session: Session }
-export type NextIronHandler = (
-  req: NextIronRequest,
-  res: NextApiResponse,
-) => void | Promise<void>
+const sessionOptions = {
+  password: process.env.COOKIE_SECRET as string,
+  cookieName: 'eden_examples',
+  ttl: 15 * 24 * 3600,
+  cookieOptions: {
+    secure: process.env.NODE_ENV === 'production',
+  },
+}
 
-export type NextRoute = (
-  ctx: GetServerSidePropsContext & { req: { session: Session } },
-  redirect: string,
-) => any
+export function withSessionRoute(handler: NextApiHandler) {
+  return withIronSessionApiRoute(handler, sessionOptions)
+}
 
-export function withSession(handler: NextIronHandler | NextRoute) {
-  return withIronSession(handler, {
-    password: process.env.SESSION_COOKIE_SECRET as string,
-    cookieName: 'session',
-    ttl: 15 * 24 * 3600,
-    cookieOptions: {
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      httpOnly: true,
-    },
-  })
+// Theses types are compatible with InferGetStaticPropsType https://nextjs.org/docs/basic-features/data-fetching#typescript-use-getstaticprops
+export function withSessionSsr<
+  P extends { [key: string]: unknown } = { [key: string]: unknown },
+>(
+  handler: (
+    context: GetServerSidePropsContext,
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>,
+) {
+  return withIronSessionSsr(handler, sessionOptions)
 }
