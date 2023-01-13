@@ -599,14 +599,15 @@ export default function EdenArtFrontPage() {
                 // autoPlay
                 // mute
               />
-              <video loop autoPlay muted width="250">
+
+              {/* <video loop autoPlay muted width="250">
                 <source
                   src="https://eden-art.s3.amazonaws.com/real2real/videos/real2real_seed_109_167123988214.webm"
                   type="video/webm"
                 />
 
                 <source src="/media/cc0-videos/flower.mp4" type="video/mp4" />
-              </video>
+              </video> */}
             </article>
           </Container>
         </section>
