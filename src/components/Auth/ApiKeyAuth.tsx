@@ -3,7 +3,8 @@ import React, { useContext, useState } from 'react'
 // CONTEXT
 import { AuthContext } from '../../contexts/AuthContext'
 
-// UI
+// MUI
+import { Alert } from '@mui/material'
 import { Form, Input, Button } from 'antd'
 
 // FETCH
@@ -46,7 +47,7 @@ const ApiKeyAuth = () => {
       initialValues={initialValues}
       onFinish={handleAuthenticate}
     >
-      <h1>Sign in with API Key</h1>
+      <h1>Sign-in with API Key</h1>
       <Form.Item label="API Key" name="apiKey">
         <Input />
       </Form.Item>
@@ -63,7 +64,8 @@ const ApiKeyAuth = () => {
           Authenticate Keypair
         </Button>
       </Form.Item>
-      {message && <p>{message}</p>}
+
+      {message && <Alert severity="error">{message}</Alert>}
     </Form>
   )
 }

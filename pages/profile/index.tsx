@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext, useState } from 'react'
 // , { useEffect, useState, useCallback, useRef }
 
 // NEXT
@@ -106,71 +106,196 @@ const CreatorStyles = styled(Box)(
 // 🔭 block explorer URL
 // const blockExplorer = targetNetwork.blockExplorer
 
-export default function Creator() {
-  //props creationsState = {}
+// UI
+import { Button, Form, Table, InputNumber, Space } from 'antd'
 
-  // const { url } = useRouteMatch()
-  // const { creatorId } = useParams()
-  // const location = useLocation()
+// FETCH
+import axios from 'axios'
 
-  {
-    /* <Link className='cr-main-link'
+// CONTEXT
+import { AuthContext } from '../../src/contexts/AuthContext'
+
+interface MyCreationsFormInputs {
+  datefrom: number
+  dateto: number
+}
+
+const CreatorProfile = () => {
+  const initialValues = {
+    datefrom: '1/1/2023',
+    dateto: '1/12/2023',
+  }
+
+  const { selectedAuthMode } = useContext(AuthContext)
+
+  const [form] = Form.useForm()
+  const [creations, setCreations] = useState<object[]>([])
+  const [generating, setGenerating] = useState<boolean>(false)
+  const [message, setMessage] = useState<string | null>(null)
+
+  const handleGenerate = async (values: MyCreationsFormInputs) => {
+    setGenerating(true)
+    try {
+      const response = await axios.post('/api/mycreations', {
+        ...values,
+        authMode: selectedAuthMode,
+      })
+
+      // console.log(response.data.creations)
+      const data =
+        response.data.creations &&
+        response.data.creations.map((creation: any) => {
+          return {
+            key: creation._id,
+            timestamp: creation.timestamp,
+            prompt: creation.config.text_input,
+            status: creation.status,
+            output: creation.output,
+          }
+        })
+      setCreations(data)
+    } catch (error: any) {
+      setMessage(`Error: ${error.response.data.error}`)
+    }
+    setGenerating(false)
+  }
+
+  const columns = [
+    {
+      title: 'Timestamp',
+      dataIndex: 'timestamp',
+      key: 'timestamp',
+      render: (timestamp: number) => new Date(timestamp).toLocaleString(),
+    },
+    {
+      title: 'Prompt',
+      dataIndex: 'prompt',
+      key: 'prompt',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Output',
+      dataIndex: 'output',
+      key: 'output',
+      render: (output: string) => (
+        <a href={'https://minio.aws.abraham.fun/creations-stg/' + output}>
+          download
+        </a>
+      ),
+    },
+  ]
+
+  return (
+    <>
+      <Form
+        form={form}
+        name="generate"
+        initialValues={initialValues}
+        onFinish={handleGenerate}
+      >
+        <Space>
+          <Form.Item label="From" name="datefrom">
+            <InputNumber placeholder="Date from" />
+          </Form.Item>
+          <Form.Item label="To" name="dateto">
+            <InputNumber placeholder="Date to" />
+          </Form.Item>
+        </Space>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={generating}
+            disabled={generating}
+          >
+            Get My Creations
+          </Button>
+        </Form.Item>
+      </Form>
+      {message && <p>{message}</p>}
+      <Table dataSource={creations} columns={columns} />
+    </>
+  )
+}
+
+export default CreatorProfile
+
+// export default function Creator() {
+//props creationsState = {}
+
+// const { url } = useRouteMatch()
+// const { creatorId } = useParams()
+// const location = useLocation()
+
+{
+  /* <Link className='cr-main-link'
   to={{
     pathname: `/creator/${slug(item.address)}/creation/${slug(item.id)}`,
     search: location.search,
   }}>
 </Link> */
-  }
+}
 
-  const img_url =
-    'https://res.cloudinary.com/react-graphql-store/image/upload/v1637370366/abraham-test-image-2_jroico.jpg'
+// const img_url =
+//   'https://res.cloudinary.com/react-graphql-store/image/upload/v1637370366/abraham-test-image-2_jroico.jpg'
 
-  return (
-    <>
-      <CreatorStyles>
-        <div className="creator-banner">
-          <img src={img_url} />
-          <Skeleton />
-        </div>
+// return (
+//   <>
+//     <CreatorStyles>
+//       <div className="creator-banner">
+//         <img src={img_url} />
+//         <Skeleton />
+//       </div>
 
-        <div className="creator-header">
-          <span className="creator-profile">
-            <CreatorProfileAddress />
-            {/* address={creatorId} */}
-            {/* blockExplorer={blockExplorer} */}
-            <span className="creator-address">{'Creator Address'}</span>
-            {/* creatorId */}
-          </span>
-          <div className="creator-profile-info">
-            <span>Creator profile info</span>
-          </div>
-          <Palette src={img_url}>
-            {({ data }) => (
-              // loading, error
-              <div style={{ color: data.lightVibrant }}>
-                Text with the vibrant color
-              </div>
-            )}
-          </Palette>
-        </div>
+//       <div className="creator-header">
+//         <span className="creator-profile">
+//           <CreatorProfileAddress />
+{
+  /* address={creatorId} */
+}
+{
+  /* blockExplorer={blockExplorer} */
+}
+// <span className="creator-address">{'Creator Address'}</span>
+{
+  /* creatorId */
+}
+//   </span>
+//   <div className="creator-profile-info">
+//     <span>Creator profile info</span>
+//   </div>
+//   <Palette src={img_url}>
+//     {({ data }) => (
+//       // loading, error
+//       <div style={{ color: data.lightVibrant }}>
+//         Text with the vibrant color
+//       </div>
+//     )}
+//   </Palette>
+// </div>
 
-        <div className="creator-body">
-          <div className="creator-grid-wrapper">
-            <div className="creator-dashboard-wrapper">
-              <CreatorDashboard
-                // onFilterChange={() => {
-                //   return null
-                // }}
-                // onSortChange={() => {
-                //   return null
-                // }}
-                creatorAddress={''}
-              />
-            </div>
+// <div className="creator-body">
+//   <div className="creator-grid-wrapper">
+//     <div className="creator-dashboard-wrapper">
+//       <CreatorDashboard
+//         // onFilterChange={() => {
+//         //   return null
+//         // }}
+//         // onSortChange={() => {
+//         //   return null
+//         // }}
+//         creatorAddress={''}
+//       />
+//     </div>
 
-            <div className="creator-grid">
-              creations
-              {/* {Object.keys(creationsState).map(
+// <div className="creator-grid">
+//   creations
+{
+  /* {Object.keys(creationsState).map(
                 (key, index = 0) => (
                   { key } { index }
                   // <span
@@ -189,11 +314,12 @@ export default function Creator() {
                   // />
                   // </span>
                 ),
-              )} */}
-            </div>
-          </div>
-        </div>
-      </CreatorStyles>
-    </>
-  )
+              )} */
 }
+//             </div>
+//           </div>
+//         </div>
+//       </CreatorStyles>
+//     </>
+//   )
+// }
