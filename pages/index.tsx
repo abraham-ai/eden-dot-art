@@ -47,7 +47,7 @@ export default function IndexPage() {
   return (
     <OverviewWrapperStyles id="overview-wrapper">
       <Head>
-        <title>Eden.Art Test</title>
+        <title>Eden.Art</title>
       </Head>
       {/* <HeaderWrapperStyles id="header-wrapper">
         <Container maxWidth="lg" id="nav-wrapper">
