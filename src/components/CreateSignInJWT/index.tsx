@@ -17,12 +17,12 @@ import { useSignMessage, useAccount } from 'wagmi'
 // HTTP
 import axios from 'axios'
 
-const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
-// const serverUrl = 'https://app.dev.aws.abraham.fun'
-
 // AUTH
 import jwtDecode from 'jwt-decode'
 // , { JwtPayload }
+
+// COMPONENTS
+import Auth from '@/components/Auth/Auth'
 
 // MUI
 import {
@@ -36,6 +36,10 @@ import {
   Snackbar,
 } from '@mui/material'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
+
+// CONST
+const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
+// const serverUrl = 'https://app.dev.aws.abraham.fun'
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -101,6 +105,7 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
     borderRadius: '20px',
     boxShadow: 24,
     p: 4,
+    overflow: 'scroll',
   }
 
   const ModalStyles = styled('section')(
@@ -531,7 +536,11 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
               Ethereum address.
             </Typography>
 
-            <Box sx={{ display: 'flex', mt: 3 }}>
+            <Box>
+              <Auth />
+            </Box>
+
+            {/* <Box sx={{ display: 'flex', mt: 3 }}>
               <Button
                 variant="outlined"
                 disabled={isLoading}
@@ -548,7 +557,7 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
               >
                 <Typography sx={{ fontWeight: 'bold' }}>SIGN-IN</Typography>
               </Button>
-            </Box>
+            </Box> */}
 
             {isSuccess && (
               <Typography variant="body1">Signature: {data}</Typography>

@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 
 // MUI
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Alert } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 // WEB3 HOOKS
@@ -19,13 +19,13 @@ type Props = {
 
 export default function SiweButton({ address, chainId, onSuccess }: Props) {
   const { signMessageAsync } = useSignMessage()
-  const [state, setState] = React.useState<{
+  const [state, setState] = useState<{
     error?: Error
     loading?: boolean
     nonce?: string
   }>({})
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchNonce() {
       try {
         const nonceRes = await fetch('/api/nonce')
@@ -39,7 +39,7 @@ export default function SiweButton({ address, chainId, onSuccess }: Props) {
     fetchNonce()
   }, [])
 
-  const handleSignIn = React.useCallback(async () => {
+  const handleSignIn = useCallback(async () => {
     try {
       setState(x => ({ ...x, error: undefined, loading: true }))
       const message = new SiweMessage({
@@ -82,9 +82,7 @@ export default function SiweButton({ address, chainId, onSuccess }: Props) {
         {state.loading ? 'Check Wallet' : 'Sign-In with Ethereum'}
       </LoadingButton>
 
-      {state.error && (
-        <Typography color="red">{state.error.message}</Typography>
-      )}
+      {state.error && <Alert severity="error">{state.error.message}</Alert>}
     </Box>
   )
 }

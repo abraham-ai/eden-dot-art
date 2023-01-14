@@ -35,8 +35,11 @@ import { SidebarProvider } from 'src/contexts/SidebarContext'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 
+// PROVIDERS
+import WalletProvider from '../src/providers/WalletProvider'
+
 // AUTH
-import { WalletProvider } from '@/contexts/WalletContext'
+// import { WalletProvider } from '@/contexts/WalletContext'
 
 // declare module '@mui/material/styles' {
 //   interface Theme {
