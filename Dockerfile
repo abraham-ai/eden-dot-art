@@ -7,7 +7,7 @@ WORKDIR /app
 #COPY package.json yarn.lock ./
 COPY . .
 
-RUN yarn --frozen-lockfile
+RUN yarn
 
 
 FROM node:16-alpine AS builder
