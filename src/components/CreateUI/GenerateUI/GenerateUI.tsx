@@ -9,7 +9,7 @@ const { Item } = Form;
 import axios from 'axios'
 
 // COMPONENTS
-import ImageResult from '@/components/ImageResult'
+import ImageResult from '@/components/ImageResult/ImageResult'
 
 interface GenerateFormInputs {
   prompt: string

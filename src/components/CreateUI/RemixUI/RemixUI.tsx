@@ -8,7 +8,7 @@ import { Button, Form, Input, InputNumber, Space } from 'antd'
 import axios from 'axios'
 
 // COMPONENTS
-import ImageResult from '@/components/ImageResult'
+import ImageResult from '@/components/ImageResult/ImageResult'
 
 interface RemixFormInputs {
   initImageUrl: string

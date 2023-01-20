@@ -7,7 +7,7 @@ import { Button, Form, Input, InputNumber, Space } from 'antd'
 import axios from 'axios'
 
 // COMPONENTS
-import VideoResult from '@/components/VideoResult'
+import VideoResult from '@/components/VideoResult/VideoResult'
 
 interface Real2RealFormInputs {
   initImageUrl1: string

@@ -30,12 +30,12 @@ import AppShortcutIcon from '@mui/icons-material/AppShortcut'
 
 // DESIGN
 import NetworkVector1 from '@/components/NetworkVector1'
-import NetworkVector2 from '@/components/NetworkVector2'
+import NetworkVector2 from '@/components/NetworkVector2/NetworkVector2'
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
 // import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
-import Subscribe from '@/components/Subscribe'
+import Subscribe from '@/components/Subscribe/Subscribe'
 // EdenHeader,
 // FollowUs
 

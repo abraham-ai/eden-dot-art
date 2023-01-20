@@ -13,7 +13,7 @@ import Masonry from '@mui/lab/Masonry'
 
 // COMPONENTS
 import CreationCardMinimal from '@/components/CreationCardMinimal'
-import Loader from '@/components/Loader'
+import Loader from '@/components/Loader/Loader'
 
 // GQL Creations query to retreive all Creations //
 import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
