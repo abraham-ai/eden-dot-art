@@ -1,6 +1,11 @@
+// LIB
 import { stringify } from 'querystring'
+
+// FETCH
 import axios from 'axios'
-import { withSession } from '@/util/withSession'
+
+// ROUTE
+import { withSessionRoute } from '@/util/withSession'
 import { encrypt } from '@/util/crypt'
 
 const OAuthScope = ['identify'].join(' ')
@@ -65,4 +70,4 @@ const handler = async (req, res) => {
   res.redirect('/?r=true')
 }
 
-export default withSession(handler)
+export default withSessionRoute(handler)
