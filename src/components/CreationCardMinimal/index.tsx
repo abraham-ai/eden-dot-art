@@ -24,8 +24,10 @@ import {
   Typography,
 } from '@mui/material'
 
+import { Popover } from 'antd'
+
 // EDEN COMPONENTS
-import ProfilePopOver from '@/components/ProfilePopOver'
+import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 // import { IconButtonProps } from '@mui/material/IconButton'
 
 // LIBS
@@ -255,16 +257,16 @@ export default function CreationCardMinimal({ creation }) {
           />
 
           <CardContent className="creation-content">
-            <Box
-              sx={{
+            <div
+              style={{
                 borderRadius: '15px',
-                m: 1,
+                margin: 10,
                 background: 'rgba(0, 0, 0, 0.5)',
                 backdropFilter: 'blur(16px)',
-                p: 2,
+                padding: 20,
               }}
             >
-              <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
+              <div style={{ overflowY: 'auto', maxHeight: 150 }}>
                 <Typography
                   className="prompt-command"
                   sx={{ fontWeight: 'bold' }}
@@ -281,22 +283,25 @@ export default function CreationCardMinimal({ creation }) {
                   {text_input}
                 </Typography>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                  <Box
-                    sx={{
+                    <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
+                
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+                    <div
+                    style={{
                       borderRadius: '50%',
                       overflow: 'hidden',
                       width: '32px',
                       height: '32px',
-                      mr: 1,
+                      marginRight: 10,
                     }}
-                  >
+                    >
                     <Blockies seed={address} />
-                  </Box>
-                  <Typography>{displayAddress}</Typography>
-                </Box>
-              </Box>
-            </Box>
+                     </div>
+                     <Typography>{displayAddress}</Typography>
+                    </div>
+                </Popover>
+              </div>
+            </div>
 
             <CardActions className="creation-actions" disableSpacing>
               {/* </IconButton>
@@ -699,8 +704,6 @@ export default function CreationCardMinimal({ creation }) {
             noWrap={true}
             sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
           > */}
-
-      {currentUserName}
 
       {/* {currentUserName === 'none'
               ? currentUserName

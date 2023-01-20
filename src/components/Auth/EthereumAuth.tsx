@@ -100,6 +100,8 @@ const EthereumAuth = () => {
         <Button
           type='default'
           color='primary'
+          size='large'
+          shape='round'
           onClick={() => dispatch(setModalVisible(false))}
           style={{ marginRight: 20, fontWeight: 'bold' }}
         >
@@ -107,7 +109,9 @@ const EthereumAuth = () => {
         </Button>
         <Button
           type='primary'
-          color="primary"
+          color='primary'
+          size='large'
+          shape='round'
           onClick={handleSiwe}
           disabled={ethAuthenticating}
           loading={ethAuthenticating}
