@@ -85,6 +85,10 @@ const EditProfileStyles = styled.section`
         /*align-items: flex-end;*/
         height: 90px;
     }
+    /** FORM INFO **/
+    .form-info .ant-form-item-control {
+        min-width: 100%;
+    }
     /*** FORM-ITEM TEXT-AREA ***/
     .form-item.text-area > .ant-form-item-row {
         height: 330px;

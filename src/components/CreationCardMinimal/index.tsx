@@ -169,7 +169,7 @@ export default function CreationCardMinimal({ creation }) {
   // SOURCE
   // const origin = creation.source.origin === undefined ? 'none' : creation.source
 
-  const { origin, author_name, address } = creation.source
+  const { address } = creation.source // origin, author_name, 
 
   // const { origin } =
   //   creation.source.origin === undefined ? 'none' : creation.source

@@ -509,7 +509,6 @@ export default function EdenArtFrontPage() {
                 </Button>
 
                 <Button
-                  target="_blank"
                   href={'/garden'}
                   variant="contained"
                   className="cta-button"
