@@ -5,7 +5,7 @@ import { Box, styled } from '@mui/material' // Tooltip
 import Link from 'src/components/Link'
 
 // ICONS
-import AppLogo from '../AppLogo'
+import AppLogo from '../AppLogo/AppLogo'
 
 const LogoWrapper = styled(Link)(
   ({ theme }) => `

@@ -27,7 +27,7 @@ import jwtDecode from 'jwt-decode'
 // import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo'
+import AppLogo from '@/components/AppLogo/AppLogo'
 
 // MUI
 import {

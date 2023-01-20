@@ -27,7 +27,7 @@ import Auth from '@/components/Auth/Auth'
 // MUI
 import {
   Backdrop,
-  Button,
+  // Button,
   IconButton,
   Box,
   Typography,
@@ -49,7 +49,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 })
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo'
+import AppLogo from '@/components/AppLogo/AppLogo'
 
 // ICONS
 import CloseIcon from '@mui/icons-material/Close'
@@ -70,9 +70,9 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
     `I am ${address} and I would like to create with Eden`,
   )
 
-  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+  const { data, isError, isSuccess, signMessage } = useSignMessage({
     message: appMessage,
-  })
+  }) // isLoading, 
 
   const signature = data
 
@@ -532,8 +532,7 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
                 fontWeight: 'normal',
               }}
             >
-              Eden uses this signature to verify that you’re the owner of this
-              Ethereum address.
+              {'Eden uses this signature to verify that you’re the owner of this Ethereum address.'}
             </Typography>
 
             <Box>

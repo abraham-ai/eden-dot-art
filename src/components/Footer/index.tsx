@@ -1,7 +1,7 @@
 import { Box, Container, styled, Typography } from '@mui/material'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo'
+import AppLogo from '@/components/AppLogo/AppLogo'
 import Link from 'next/link'
 
 const FooterWrapper = styled(Container)(

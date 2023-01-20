@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles'
 import { Box, Typography, SpeedDial } from '@mui/material'
 
 // ICONS
-import CreateIcon from '@/components/CreateIcon'
+import CreateIcon from '@/components/Icons/CreateIcon'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import VideoCallIcon from '@mui/icons-material/VideoCall'

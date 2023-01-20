@@ -1,11 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
-// MUI
-import { Alert, Box, Button, Typography } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
-
-// CONTEXT
-// import { AuthContext } from '../../contexts/AuthContext'
+// ANTD
+import { Alert, Button } from 'antd'
 
 // FETCH
 import axios from 'axios'
@@ -14,14 +10,21 @@ import axios from 'axios'
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
+// REDUX
+import { batch } from 'react-redux'
+import { setModalVisible } from '@/redux/slices/modalSlice'
+import { setIsWeb3AuthSuccess } from '@/redux/slices/authSlice'
+import { useAppDispatch } from '@/hooks/hooks'
+
 const EthereumAuth = () => {
   const { chain } = useNetwork()
   const { address, isConnected } = useAccount()
-  // const { setSelectedAuthMode, availableAuthModes, setAvailableAuthModes } =
-  //   useContext(AuthContext)
 
   const [ethAuthenticating, setEthAuthenticating] = useState(false)
+  const [ethAuthenticated, setEthAuthenticated] = useState(false)
   const [ethMessage, setEthMessage] = useState<string | null>(null)
+    
+  const dispatch = useAppDispatch() 
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -31,14 +34,16 @@ const EthereumAuth = () => {
           signature: data,
           userAddress: address,
         })
-        setEthMessage('Successfully authenticated')
-        // setAvailableAuthModes({
-        //   ...availableAuthModes,
-        //   ethereum: true,
-        // })
-        // setSelectedAuthMode('ethereum')
+          setEthMessage('Successfully authenticated')
+          setEthAuthenticated(true)
+
+          batch(() => {
+            dispatch(setModalVisible(false));
+            dispatch(setIsWeb3AuthSuccess(true));
+          })
       } catch (error: any) {
-        setEthMessage('Error authenticating')
+          setEthMessage('Error authenticating')
+          setEthAuthenticated(false)
       }
       setEthAuthenticating(false)
     },
@@ -62,68 +67,59 @@ const EthereumAuth = () => {
         message: preparedMessage,
       })
     } catch (error: any) {
+      console.log(error)
       setEthMessage('Error authenticating')
-      setEthAuthenticating(false)
+        setEthAuthenticating(false)
+        setEthAuthenticated(false)
     }
   }
-
+    
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
       }}
     >
-      <Typography
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          p: 2,
-          color: 'rgb(0 80 30)',
-          // color: 'gray',
-        }}
-      >
-        Sign-in with Ethereum
-      </Typography>
 
-      <Box
-        sx={{
+      <div
+        style={{
           display: 'flex',
+          alignItems: 'center',
           justifyContent: 'center',
           flex: 1,
         }}
       >
         <Button
-          variant={'outlined'}
-          color="primary"
-          onClick={handleSiwe}
-          sx={{ mr: 2, fontWeight: 'bold' }}
+          type='default'
+          color='primary'
+          onClick={() => dispatch(setModalVisible(false))}
+          style={{ marginRight: 20, fontWeight: 'bold' }}
         >
           CANCEL
         </Button>
-        <LoadingButton
-          variant={'contained'}
+        <Button
+          type='primary'
           color="primary"
           onClick={handleSiwe}
           disabled={ethAuthenticating}
           loading={ethAuthenticating}
-          sx={{ fontWeight: 'bold' }}
+          style={{ fontWeight: 'bold' }}
         >
           SIGN-IN
-        </LoadingButton>
-      </Box>
+        </Button>
+      </div>
 
-      {ethMessage && (
-        <Alert
-          severity="error"
-          sx={{ mt: 2, background: '#FFCCCB', color: 'red', width: '100%' }}
-        >
-          {ethMessage}
+    {ethMessage && (
+        <Alert type={ethAuthenticated ? 'success' : 'error'}
+               message={ethMessage}
+               style={{ width: '100%', height: 50, marginTop: 10 }}>
+          
         </Alert>
       )}
-    </Box>
+    </div>
   )
 }
 

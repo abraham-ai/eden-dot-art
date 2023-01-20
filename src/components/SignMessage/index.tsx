@@ -1,11 +1,18 @@
+import * as React from 'react'
+
+// MUI
 import { Container, Box, Typography, TextField } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+
+// UTILS
 import { verifyMessage } from 'ethers/lib/utils'
-import * as React from 'react'
+
+// WALET
 import { useAccount, useSignMessage } from 'wagmi'
 
-import Account from '@/components/Account'
-import WalletSelector from '@/components/WalletSelector'
+// COMPONENTS
+import Account from '@/components/Account/Account'
+import WalletSelector from '@/components/WalletSelector/WalletSelector'
 
 // ICONS
 import SaveIcon from '@mui/icons-material/Save'
