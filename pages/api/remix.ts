@@ -1,11 +1,10 @@
 // TYPES
-import { AuthMode } from '../../src/models/types'
+import { AuthMode } from '@/models/types'
 import { NextApiRequest, NextApiResponse } from 'next/types'
 
 // UTIL
-import { getAuthToken } from '../../src/util/auth'
-import { getGatewayResult } from '../../src/util/eden'
-import { withSession } from '../../src/util/withSession'
+import { getGatewayResult } from '@/util/eden'
+import { withSessionRoute } from '@/util/withSession'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -17,7 +16,7 @@ interface ApiRequest extends NextApiRequest {
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { initImageUrl, width, height, authMode } = req.body
+  const { initImageUrl, width, height } = req.body
 
   const config = {
     mode: 'remix',
@@ -32,7 +31,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     height: height,
   }
 
-  const authToken = getAuthToken(authMode, req.session)
+  const authToken = req.session.token
 
   if (!authToken) {
     res.status(401).json({ error: 'Not authenticated' })
@@ -55,4 +54,4 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withSession(handler)
+export default withSessionRoute(handler)

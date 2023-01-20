@@ -1,9 +1,12 @@
-import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
+// NEXT
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
   NextApiHandler,
-} from 'next'
+} from 'next/types'
+
+// SESSION
+import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
 
 declare module 'iron-session' {
   interface IronSessionData {
@@ -12,9 +15,11 @@ declare module 'iron-session' {
   }
 }
 
+// console.log(process.env.COOKIE_SECRET)
+
 const sessionOptions = {
   password: process.env.COOKIE_SECRET as string,
-  cookieName: 'eden_examples',
+  cookieName: 'eden_art',
   ttl: 15 * 24 * 3600,
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',

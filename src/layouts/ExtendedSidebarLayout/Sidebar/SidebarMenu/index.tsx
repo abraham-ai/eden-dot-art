@@ -13,7 +13,7 @@ import SidebarMenuItem from './item'
 import { ListSubheader, alpha, Box, List, styled } from '@mui/material'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo'
+import AppLogo from '@/components/AppLogo/AppLogo'
 
 // const AppLogoWrapper = styled(Box)(
 //   () => `

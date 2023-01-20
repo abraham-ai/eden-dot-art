@@ -5,8 +5,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 // WEB3 HOOKS
-import { useAccount, useEnsAvatar, useEnsName } from 'wagmi'
-
+import { useAccount, useEnsName } from 'wagmi' // useEnsAvatar, 
 
 // HOOKS
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -47,10 +46,11 @@ const ProfilePopOver = ({ profileAddress = '' }) => {
         address,
         chainId: 1,
     })
-    const { data: ensAvatarData } = useEnsAvatar({
-        // addressOrName: address,
-        chainId: 1,
-    })
+
+    // const { data: ensAvatarData } = useEnsAvatar({
+    //     // addressOrName: address,
+    //     chainId: 1,
+    // })
 
     if (!address || !isMounted) return null
 

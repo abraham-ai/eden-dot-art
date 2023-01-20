@@ -33,7 +33,7 @@ import NetworkVector1 from '@/components/NetworkVector1'
 import NetworkVector2 from '@/components/NetworkVector2'
 
 // COMPONENTS
-import AppLogo from '@/components/AppLogo'
+import AppLogo from '@/components/AppLogo/AppLogo'
 // import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
 import Subscribe from '@/components/Subscribe'
 // EdenHeader,

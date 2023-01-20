@@ -28,7 +28,7 @@ import {
 
 // COMPONENTS
 import Logo from '@/components/Logo'
-import CreateModal from '@/components/CreateModal'
+import CreateModal from '@/components/CreateModal/CreateModal'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom'
 // import SortCreationsBar from '@/components/SortCreationsBar'
 

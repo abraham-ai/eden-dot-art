@@ -35,7 +35,7 @@ import LiveTvIcon from '@mui/icons-material/LiveTv'
 import SchoolIcon from '@mui/icons-material/School'
 
 // ICONS || CREATE INPUT
-import CreateIcon from '@/components/CreateIcon'
+import CreateIcon from '@/components/Icons/CreateIcon'
 import TuneIcon from '@mui/icons-material/Tune'
 
 // ICONS || CREATE TEMPLATE

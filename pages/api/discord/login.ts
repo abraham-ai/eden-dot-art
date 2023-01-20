@@ -1,4 +1,4 @@
-import { withSession } from '@/util/withSession'
+import { withSessionRoute } from '@/util/withSession'
 
 const OAuthScope = ['identify'].join(' ')
 const OAuthData = new URLSearchParams({
@@ -12,4 +12,4 @@ const handler = async (_, res) => {
   res.redirect(`https://discordapp.com/oauth2/authorize?${OAuthData}`)
 }
 
-export default withSession(handler)
+export default withSessionRoute(handler)

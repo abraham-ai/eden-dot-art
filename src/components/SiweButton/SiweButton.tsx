@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 
 // MUI
-import { Box, Typography, Alert } from '@mui/material'
+import { Box, Alert } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 // WEB3 HOOKS

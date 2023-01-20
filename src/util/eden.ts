@@ -7,54 +7,74 @@ const MINIO_URL = process.env.MINIO_URL
 const MINIO_BUCKET = process.env.MINIO_BUCKET
 
 interface PollResponse {
-  status: string
-  outputUrl: string | null
-  error: string | null
+  status: string;
+  outputUrl: string | null;
+  error: string | null;
 }
 
-export const submitPrediction = async (config: object, authToken: string) => {
+export const submitPrediction = async (config: any, authToken: string) => {
+  const { generatorName, requestConfig } = config;
   const request = {
-    token: authToken,
-    application: 'heartbeat',
-    generator_name: 'stable-diffusion',
-    config: config,
-    metadata: { 'user-agent': 'examples.eden.art' },
-  }
-  const responseR = await axios.post(GATEWAY_URL + '/request', request)
-  const prediction_id = responseR.data
-  return prediction_id
-}
+    generatorName,
+    config: requestConfig,
+  };
+  const responseR = await axios.post(GATEWAY_URL + "/tasks/create", request, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  const prediction_id = responseR.data.taskId;
+  return prediction_id;
+};
 
 export const pollResult = async (
   prediction_id: string,
+  authToken: string
 ): Promise<PollResponse> => {
-  const response = await axios.post(GATEWAY_URL + '/fetch', {
-    taskIds: [prediction_id],
-  })
-  const { status, output } = response.data[0]
-  if (status == 'complete') {
-    const outputUrl = `${MINIO_URL}/${MINIO_BUCKET}/${output}`
-    return { status, outputUrl, error: null }
-  } else if (status == 'failed') {
-    return { status, outputUrl: null, error: 'Prediction failed' }
+  const data = { taskIds: [prediction_id] };
+  const response = await axios.post(GATEWAY_URL + "/tasks/fetch", data, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  const { status, output } = response.data.tasks[0];
+  if (status == "completed") {
+    const finalOutput = output.slice(-1);
+    const outputUrl = `${MINIO_URL}/${MINIO_BUCKET}/${finalOutput}`;
+    return { status, outputUrl, error: null };
+  } else if (status == "failed") {
+    return { status, outputUrl: null, error: "Prediction failed" };
   }
-  return { status, outputUrl: null, error: null }
-}
+  return { status, outputUrl: null, error: null };
+};
 
 export const getGatewayResult = async (
-  config: object,
+  config: any,
   authToken: string,
-  timeout = 2000,
+  timeout = 2000
 ) => {
-  const prediction_id = await submitPrediction(config, authToken)
-  let response = await pollResult(prediction_id)
+  const prediction_id = await submitPrediction(config, authToken);
+  let response = await pollResult(prediction_id, authToken);
   while (
-    response.status == 'pending' ||
-    response.status == 'starting' ||
-    response.status == 'running'
+    response.status == "pending" ||
+    response.status == "starting" ||
+    response.status == "running"
   ) {
-    await new Promise(r => setTimeout(r, timeout))
-    response = await pollResult(prediction_id)
+    await new Promise((r) => setTimeout(r, timeout));
+    response = await pollResult(prediction_id, authToken);
   }
-  return response
-}
+  return response;
+};
+
+export const getMyCreationsResult = async (
+  userId: string | undefined,
+  timeout = 2000
+) => {
+  await new Promise((r) => setTimeout(r, timeout));
+  const response = userId
+    ? await axios.post(GATEWAY_URL + "/fetch", {
+        userIds: [userId],
+      })
+    : { data: [] };
+  return response;
+};

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import {
     Alert,
     Button,
-    Checkbox,
+    // Checkbox,
     Card,
     Form,
     Input,
@@ -12,7 +12,7 @@ import {
     Space,
     Tag,
     Typography,
-    theme,
+    // theme,
     Col,
     Row,
     Upload,
@@ -258,15 +258,15 @@ const EditProfileStyles = styled.section`
 const EditProfile = () => {
 
     const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
-    const [isUsernameAvailable, setIsUsernameAvailable] = useState<boolean>(false);
+    const [isUsernameAvailable] = useState<boolean>(false); // setIsUsernameAvailable
 
-    
     const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
             setComponentDisabled(disabled);
     };
 
     const log = (e: React.MouseEvent<HTMLElement>) => {
-        console.log(e);
+        // console.log(e);
+        return (e ? e : null)
     };
 
         return (
@@ -542,4 +542,4 @@ const EditProfile = () => {
     };
 
     
-export default () => <EditProfile />;  
+export default EditProfile 
