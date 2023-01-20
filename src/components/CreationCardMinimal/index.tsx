@@ -9,18 +9,18 @@ import Image from 'next/image'
 // MUI COMPONENTS
 import {
   // Avatar,
+  // CardHeader,
+  // Chip,
+  // Collapse,
+  // IconButton,
+  // Tooltip,
   Box,
   Card,
   CardActions,
   CardContent,
-  // CardHeader,
   CardMedia,
-  // Chip,
-  // Collapse,
-  // IconButton,
   Modal,
   Backdrop,
-  // Tooltip,
   Typography,
 } from '@mui/material'
 
@@ -213,7 +213,7 @@ export default function CreationCardMinimal({ creation }) {
   // }
 
   // console.log({ creation })
-  const currentUserName = origin === 'discord' ? author_name : address
+  // const currentUserName = origin === 'discord' ? author_name : address
   // console.log({ currentUserName, origin, author_name, address })
 
   // const creationTimeAgo = 100
