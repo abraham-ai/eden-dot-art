@@ -1,4 +1,9 @@
+import { useState } from 'react'
+
+// NEXT
 import Head from 'next/head'
+
+// MUI
 import Footer from '@/components/Footer'
 import {
   Box,
@@ -9,11 +14,15 @@ import {
   Stack,
 } from '@mui/material'
 
+// LAYOUTS
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
+
+// CONSTS
 import { STORE_CONTRACT_ADDRESS } from '@/const/contracts'
+
+// WALLET
 import { useAccount } from 'wagmi'
 import { useContract, useOwnedNFTs } from '@thirdweb-dev/react'
-import { useState } from 'react'
 
 function WalletUsePage() {
   const [selectedIdx, setSelectedIdx] = useState<number | undefined>(0)

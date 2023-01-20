@@ -108,10 +108,8 @@ const CreatorStyles = styled.div`
   }
   @media (min-width: 40em) {
     .creator-grid {
+      display: flex;
       padding: 24px;
-      display: grid;
-      grid-gap: 36px !important;
-      grid-template-columns: repeat(2, 1fr);
       margin-top: 0;
     }
   }
