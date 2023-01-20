@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 
 // LIBS
 import Blockies from 'react-blockies'
-import { Palette } from 'react-palette'
+// import { Palette } from 'react-palette'
 
 // CSS
 import styled from 'styled-components'
@@ -168,7 +168,7 @@ export default function Creator({ profileAddress='0x000', profileName='Custom Na
 </Link>
 }
 
-    const img_url = 'https://ai-everydays.s3.amazonaws.com/everydays/everydays_1.png'
+// const img_url = 'https://ai-everydays.s3.amazonaws.com/everydays/everydays_1.png'
 
 return (
 <>
