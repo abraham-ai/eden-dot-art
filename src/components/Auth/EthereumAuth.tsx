@@ -67,7 +67,6 @@ const EthereumAuth = () => {
         message: preparedMessage,
       })
     } catch (error: any) {
-
       // console.log(error)
       if (error) {
           setEthMessage('Error authenticating')
