@@ -8,7 +8,7 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
 import QuizIcon from '@mui/icons-material/Quiz'
 
 // CREATE ICONS
-import CreateIcon from '@/components/CreateIcon'
+import CreateIcon from '@/components/Icons/CreateIcon'
 
 // SOCIAL
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
