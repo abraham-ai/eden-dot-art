@@ -5,11 +5,11 @@ import Head from 'next/head'
 
 // NAV
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 
 // COMPONENTS
-import ImageListQuilted from '@/components/ImageListQuilted'
-import ImageListStandard from '@/components/ImageListStandard'
+import ImageListQuilted from '@/components/ImageListQuilted/ImageListQuilted'
+import ImageListStandard from '@/components/ImageListStandard/ImageListStandard'
 
 // UI
 import {

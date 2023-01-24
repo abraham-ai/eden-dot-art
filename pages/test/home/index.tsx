@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from '@/components/Link'
 
 // NAV
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI

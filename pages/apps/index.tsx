@@ -1,14 +1,14 @@
 import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
 import { Button, Container, Typography, styled } from '@mui/material'
 
 // COMPONENTS
-import BasicCard from '@/components/BasicCard'
+import BasicCard from '@/components/BasicCard/BasicCard'
 
 const EdenIdeasPageStyles = styled('section')(
   () => `

@@ -18,8 +18,8 @@ import { Box, Container } from '@mui/material'
 import Masonry from '@mui/lab/Masonry'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/CreationCardMinimal'
-import Loader from '@/components/Loader'
+import CreationCardMinimal from '@/components/CreationCardMinimal/CreationCardMinimal'
+import Loader from '@/components/Loader/Loader'
 
 // CONSTS
 // import { DEVICE_WIDTH } from '@/const/device-width'

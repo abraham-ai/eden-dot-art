@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 // NAV
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
 // UI
