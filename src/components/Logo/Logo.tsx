@@ -2,7 +2,7 @@
 import { Box, styled } from '@mui/material' // Tooltip
 
 // COMPONENTS
-import Link from 'src/components/Link'
+import Link from 'src/components/Link/Link'
 
 // ICONS
 import AppLogo from '../AppLogo/AppLogo'
