@@ -14,14 +14,17 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // MUI
 import {
-  Button,
-  Box,
   Popover,
-  styled,
   Slider,
   Switch,
-  Typography,
 } from '@mui/material'
+
+// ANTD
+import { Button, Typography } from 'antd';
+const { Text } = Typography;
+
+// CSS
+import styled from 'styled-components'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -42,8 +45,7 @@ const boxShadowRegular =
 const smallTranslate = 'translate3d(0px, -1px, 0px)'
 
 // STYLES
-const ConnectButtonStyles = styled(Box)(
-  () => `
+const ConnectButtonStyles = styled.section`
   // CONNECT 
   .connect-button-wrapper {
     display: flex;
@@ -115,14 +117,13 @@ const ConnectButtonStyles = styled(Box)(
   .etherscan-link:hover {
     background: gray;
   }
-  `,
-)
+`
 
 export const ConnectButtonCustom = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   // HOOKS
-  const { address } = useAccount()
+  const { address = '' } = useAccount()
   const walletAddress = address
 
   // REDUX
@@ -223,12 +224,11 @@ export const ConnectButtonCustom = () => {
                     <Button
                       className="main-account-button"
                       aria-describedby={id}
-                      variant="contained"
-                      onClick={handleClick}
+                      onClick={() => handleClick}
                     >
-                      <Box className="account-profile-wrapper">
+                      <div className="account-profile-wrapper">
                         <Blockies seed={walletAddress} scale={5} />
-                      </Box>
+                      </div>
                     </Button>
 
                     <Popover
@@ -240,31 +240,30 @@ export const ConnectButtonCustom = () => {
                         vertical: 'bottom',
                         horizontal: 'left',
                       }}
-                      sx={{ borderRadius: '24px', blur: 0 }}
+                      style={{ borderRadius: '24px' }}
                     >
-                      <Box
-                        sx={{
+                      <div
+                        style={{
                           display: 'flex',
                           width: '100%',
                           flexDirection: 'column',
                           alignItems: 'flex-start',
                           backgroundColor: 'white',
-                          p: 1,
+                          padding: 10,
                         }}
                       >
                         <Button
                           className="connect-button-main"
                           onClick={openAccountModal}
-                          type="button"
-                          fullWidth
-                          sx={{
+                          block
+                          style={{
                             display: 'flex',
                             justifyContent: 'flex-start',
                           }}
                         >
-                          <Box
+                          <div
                             className="account-button-wrapper"
-                            sx={{
+                            style={{
                               overflow: 'hidden',
                               borderRadius: '50%',
                               height: '48px',
@@ -272,60 +271,60 @@ export const ConnectButtonCustom = () => {
                             }}
                           >
                             <Blockies seed={walletAddress} scale={6} />
-                          </Box>
+                          </div>
 
-                          <Box
+                          <div
                             className="profile-wrapper"
-                            sx={{
+                            style={{
                               display: 'flex',
                               flexDirection: 'column',
                               alignItems: 'flex-start',
-                              pl: 1,
+                              paddingLeft: 1,
                             }}
                           >
-                            <Typography
-                              sx={{
-                                fontWeigth: 600,
+                            <Text
+                              style={{
+                                fontWeight: 600,
                                 fontSize: '1.2rem',
                               }}
                             >
                               {'Your Name'}
-                            </Typography>
-                            <Typography
-                              sx={{ fontWeigth: 'bold', fontSize: '1rem' }}
+                            </Text>
+                            <Text
+                              style={{ fontWeight: 'bold', fontSize: '1rem' }}
                             >
                               {account.displayName}
-                            </Typography>
-                          </Box>
+                            </Text>
+                          </div>
                         </Button>
 
-                        <Box
+                        <div
                           className="wallet-wrapper"
-                          sx={{
+                          style={{
                             display: 'flex',
                             flex: 1,
-                            p: 1,
+                            padding: 10,
                             border: '1px solid lightgray',
                             borderRadius: '12px',
                           }}
                         >
-                          <Box>
-                            <Typography sx={{ color: 'gray', fontWeight: 600 }}>
+                          <div>
+                            <Text style={{ color: 'gray', fontWeight: 600 }}>
                               {'Wallet Balance'}
-                            </Typography>
-                            <Typography
-                              sx={{
+                            </Text>
+                            <Text
+                              style={{
                                 color: 'black',
                                 fontSize: '1.2rem',
                                 fontWeight: 600,
                               }}
                             >
                               {account.displayBalance}
-                            </Typography>
-                          </Box>
+                            </Text>
+                          </div>
 
-                          <Box
-                            sx={{
+                          <div
+                            style={{
                               display: 'flex',
                               flexDirection: 'column',
                               justifyContent: 'flex-start',
@@ -342,10 +341,10 @@ export const ConnectButtonCustom = () => {
                                 marginLeft: '5px',
                               }}
                             >
-                              <Typography
+                              <Text
                                 className="etherscan-address"
-                                sx={{
-                                  p: 1,
+                                style={{
+                                  padding: 10,
                                   color: 'black',
                                   height: 1,
                                   width: 'auto',
@@ -354,25 +353,24 @@ export const ConnectButtonCustom = () => {
                                   borderRadius: 0.5,
                                   fontSize: '.8rem',
                                   fontFamily: 'courier',
-                                  ml: 3,
+                                  marginLeft: 3,
                                   background: 'rgba(0, 0, 0, 0.05)',
                                 }}
                               >
                                 {displayAddress}
-                              </Typography>
+                              </Text>
                             </a>
 
                             <Button
-                              className="connect-button"
-                              type="button"
+                              className='connect-button'
                               onClick={openChainModal}
-                              sx={{
+                              style={{
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
                                 height: 35,
-                                mt: 0.5,
-                                ml: 0.5,
+                                marginTop: 0.5,
+                                marginLeft: 0.5,
                               }}
                             >
                               {chain.hasIcon && (
@@ -397,65 +395,65 @@ export const ConnectButtonCustom = () => {
                               )}
                               {chain.name}
                             </Button>
-                          </Box>
-                        </Box>
+                          </div>
+                        </div>
 
                         <Button
-                          startIcon={<SettingsIcon />}
-                          fullWidth
-                          sx={{
+                          icon={<SettingsIcon />}
+                          block
+                          style={{
                             display: 'flex',
                             justifyContent: 'flex-start',
-                            mt: 1,
+                            marginTop: 10,
                           }}
                         >
                           Settings
                         </Button>
 
                         <Button
-                          startIcon={<HelpIcon />}
-                          fullWidth
-                          sx={{ display: 'flex', justifyContent: 'flex-start' }}
+                          icon={<HelpIcon />}
+                          block
+                          style={{ display: 'flex', justifyContent: 'flex-start' }}
                         >
                           Help
                         </Button>
 
-                        <Box
-                          sx={{
+                        <div
+                          style={{
                             display: 'flex',
                             justifyContent: 'flex-start',
-                            ml: 1,
+                            marginLeft: 10,
                             alignItems: 'center',
                           }}
                         >
-                          <LightModeIcon sx={{ color: '#8C7CF0' }} />
-                          <Typography
-                            sx={{ color: '#8C7CF0', fontWeight: 600, mr: 4 }}
+                          <LightModeIcon style={{ color: '#8C7CF0' }} />
+                          <Text
+                            style={{ color: '#8C7CF0', fontWeight: 600, marginRight: 40 }}
                           >
                             Theme
-                          </Typography>
+                          </Text>
                           <Switch {...themeLabel} defaultChecked />
-                        </Box>
+                        </div>
 
-                        <Box sx={{ pl: 1, pr: 1, width: '100%' }}>
-                          <Box
-                            sx={{
+                        <div style={{ paddingLeft: 10, paddingRight: 10, width: '100%' }}>
+                          <div
+                            style={{
                               display: 'flex',
                               alignItems: 'center',
                               width: '100%',
                             }}
                           >
-                            <ViewColumnIcon sx={{ color: '#8C7CF0' }} />
-                            <Typography
-                              sx={{
-                                pr: 2,
+                            <ViewColumnIcon style={{ color: '#8C7CF0' }} />
+                            <Text
+                              style={{
+                                paddingRight: 2,
                                 color: '#8C7CF0',
                                 fontWeight: 600,
-                                ml: 1,
+                                marginLeft: 1,
                               }}
                             >
                               Masonry
-                            </Typography>
+                            </Text>
                             <Slider
                               className="masonry-count-slider"
                               aria-label="Column Count"
@@ -467,7 +465,7 @@ export const ConnectButtonCustom = () => {
                               max={12}
                               value={masonryColumnCount}
                               onChange={handleChange}
-                              sx={{ mr: 2, ml: 1 }}
+                              style={{ marginRight: 20, marginLeft: 10 }}
                             />
                             {/* <div
                               className="display-column-count"
@@ -479,17 +477,17 @@ export const ConnectButtonCustom = () => {
                             >
                               {masonryColumnCount}
                             </div> */}
-                          </Box>
-                        </Box>
+                          </div>
+                        </div>
 
                         <Button
-                          startIcon={<LogoutIcon />}
-                          fullWidth
-                          sx={{ display: 'flex', justifyContent: 'flex-start' }}
+                          icon={<LogoutIcon />}
+                          block
+                          style={{ display: 'flex', justifyContent: 'flex-start' }}
                         >
                           Disconnect
                         </Button>
-                      </Box>
+                      </div>
                     </Popover>
                   </>
                 )

@@ -1,22 +1,35 @@
 import React from 'react'
 
-// MUI
+// WALLET
+import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+
+// HOOKS
+import useWindowDimensions from '@/hooks/useWindowDimensions'
+
+// COMPONENTS
+import AppLogo from '@/components/AppLogo/AppLogo'
+
+// ANTD
 import {
   Button,
-  Typography,
-  Box,
-  styled,
-  Container,
-  CardMedia,
-} from '@mui/material'
+  Typography
+} from 'antd'
+const { Title, Text } = Typography;
 
-const EdenArtFrontPageStyles = styled('section')(
-  () => `
+// CSS
+import styled from 'styled-components'
+
+// ICON
+import { TwitterOutlined } from '@ant-design/icons';
+import { FaDiscord } from 'react-icons/fa';
+import { BsTwitter } from 'react-icons/bs';
+
+
+const EdenArtFrontPageStyles = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-top: 50px;
   .home-wrapper {
     display: flex;
     flex: 1;
@@ -24,37 +37,125 @@ const EdenArtFrontPageStyles = styled('section')(
     justify-content: center;
     width: 100%;
   }
-  /*** SECTION ***/
-  .section-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  /*** HEADER ***/
+  .section-wrapper.header {
+    display: flex; 
+    justify-content: space-between;
+    flex: 1;
+    padding: 20px; 
+    width: 100%; 
+    position: fixed; 
+    top: 0;
+    z-index: 100;
+  }
+  /*** ATF SECTION ***/
+  .section-above-the-fold {}
+  @media (max-width: 930px) {
+    .section-above-the-fold {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: 0;
+      z-index: 0;
+      height: 100vh;
+      width: 100%;
+    }
+    .section-above-the-fold .section-wrapper.info-wrapper {
+      height: 100%;
+      justify-content: center;
+    }
+    .section-above-the-fold .section-wrapper .section-center-wrapper {
+      justify-content: space-between;
+      height: 100%;
+      max-width: 700px;
+    }
+  }
+  /*** EDEN SPLASH VIDEO ATF ***/
+  .eden-splash-video-above-the-fold {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+  }
+  @media (max-width: 930px) {
+    .eden-splash-video-above-the-fold {
+      display: block;
+      position: relative;
+      top: 0;
+      height: 100%;
+      width: 240%;
+      z-index: 0;
+    }
+    .eden-splash-video-overlay {
+      position: absolute;
+      background: black;
+      min-height: 100vh;
+      width: 100%;
+      opacity: 0.5;
+      z-index: 10;
+      top: 0;
+      height: 100vh;
+    }
+  }
+  /*** SPLASH TEXT SLOGAN ***/
+  h2.splash-text-slogan {
+    font-size: 5rem;
+    width: 100%;
+    color: #0c163b;
+    z-index: 50;
     padding: 0;
+    margin: 0;
+    line-height: 1;
+    color: #0c163b;
+    z-index: 50;
   }
-  .section-center-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  @media (min-width: 1280px) {
-    .section-wrapper {
-      max-width: unset; 
-    }
-  }
-  @media (min-width: 600px) {
-    .section-wrapper {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-  /*** SLOGAN ***/
   .section-center-wrapper h1 {
-    font-size: 3rem;
   }
-  .splash-text-description {
-    font-size: 24px;
+  .splash-text-accent {
+    font-size: 6rem;
+  }
+  @media only screen and (max-width: 930px) {
+    .splash-text-slogan-wrapper {
+      margin-top: 50px;
+    }
+    h2.splash-text-slogan {
+      font-size: 5.8rem;
+    }
+    .splash-text-accent {
+      padding-left: 10px;
+      color: white;
+      font-size: 5.8rem;
+    }
+  }
+  @media (max-width: 930px) {
+    .splash-text-slogan-wrapper {
+      margin-top: 50px;
+    }
+    h2.splash-text-slogan {
+      color: white;
+      font-size: 5.5rem;
+      line-height: 1;
+    }
+    .splash-text-accent {
+      padding-left: 15px;
+      color: white;
+      font-size: 5.5rem;
+      line-height: 1;
+    }
+  }
+  @media (max-width: 700px) {
+    .splash-text-slogan-wrapper {}
+    h2.splash-text-slogan {
+      color: white;
+      font-size: 3rem;
+      line-height: 1;
+    }
+    .splash-text-accent {
+      padding-left: 15px;
+      font-size: 3rem;
+      line-height: 1;
+    }
   }
   @media (min-width: 1280px) {
     .section-center-wrapper h1 {
@@ -68,15 +169,78 @@ const EdenArtFrontPageStyles = styled('section')(
       padding-right: 0;
     }
   }
-  @media only screen and (max-width: 900px) {
+  /*** DESCRIPTION ***/
+  .splash-text-description {
+    font-size: 2.3rem;
+    text-align: center;
+    max-width: 750px;
+    line-height: 1.1;
+    z-index: 50;
+    color: #0c163b;
+    margin: 0;
+    padding: 0;
+  }
+  @media (max-width: 930px) {
     .splash-text-description {
-      line-height: 1.75;
+      font-size: 2.8rem;
+      max-width: 660px;
+    }
+  }
+  @media only screen and (max-width: 930px) {
+    .splash-text-description {
+      line-height: 1;
+      text-align: start;
+      font-size: 2.8rem;
+      color: white;
     }
     .section-center-wrapper h1 {
-      font-size: 3.4rem;
+      font-size: 2.9rem;
+      font-weight: 600;
+      justify-content: flex-start;
+      text-align: start;
     }
-    .section-center-wrapper h1:nth-child(2) {
-      padding-bottom: 80px;
+  }
+  @media (max-width: 700px) {
+    .splash-text-description {
+      font-size: 2rem;
+    }
+  }
+
+  /*** SECTION ***/
+  .section-wrapper:first-child {
+  }
+  .section-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0;
+  }
+  .section-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // background: lime;
+  }
+  @media (max-width: 930px) {
+    .section-wrapper.video-splash {
+      position: absolute;
+      z-index: 0;
+    }
+    .section-wrapper:first-child {
+      height: 100vh;
+    }
+  }
+  @media (min-width: 1280px) {
+    .section-wrapper {
+      max-width: unset; 
+    }
+  }
+  @media (min-width: 600px) {
+    .section-wrapper {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   /*** SPLASH TEXT INFO ***/
@@ -150,11 +314,43 @@ const EdenArtFrontPageStyles = styled('section')(
     max-width: 600px;
   }
   .cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 10px;
     min-width: 200px;
     border-radius: 30px;
     min-height: 60px;
     font-size: 1.2rem;
+    font-weight: bold;
+    background: #8C7Cf0;
+    color: white;
+    text-decoration: none;
+  }
+  .cta-button:hover {
+    color: white;
+    background: #5f47fa;
+    border-color: white;
+  }
+  .cta-button.accent-link {
+    box-shadow: #8c7cf0 1px 1px 25px 0px;
+  }
+  .cta-button.main-link {
+    box-shadow: #8c7cf0 1px 1px 25px 0px;
+    background: white;
+    color: #0c163b;
+  }
+  .cta-button.main-link:hover {
+    color: #5f47fa;
+    background: rgb(140, 124, 240);
+  }
+  .cta-button.secondary {
+    background: #5f47fa;
+  }
+  .cta-button.icon:hover {
+    color: #8C7CF0;
+    background: #8C7CF0;
+    border-color: #8C7CF0;
   }
   /*** INFO-WRAPPER ***/
   .info-wrapper {
@@ -175,15 +371,26 @@ const EdenArtFrontPageStyles = styled('section')(
   .info-wrapper .info:first-child {
     margin-top: 0;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
+    .button-wrapper {
+      flex-direction: column;
+      margin-top: 20px;
+      padding: 0;
+      max-width: unset;
+      width: 100%;
+    }
+    .cta-button {
+      width: auto;
+    }
     .info-wrapper .info {
       flex-direction: column;
       margin-top: 100px;
       padding: 0;
       width: 100%;
     }
+
   }
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 930px) {
     .info-wrapper {
       padding: 0;
     }
@@ -207,7 +414,7 @@ const EdenArtFrontPageStyles = styled('section')(
     text-align: center;
   }
   .description i {
-    font-size: 2rem;
+    font-size: 3rem;
     padding: 30px 0;
     font-weight: 600;
     color: #8C7CF0;
@@ -217,7 +424,7 @@ const EdenArtFrontPageStyles = styled('section')(
       font-size: 1.2rem;
     }
   }
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
     .description-wrapper {
       margin: 0;
       padding-bottom: 50px;
@@ -233,13 +440,14 @@ const EdenArtFrontPageStyles = styled('section')(
       font-size: 1.4rem;
     }
   }
-  /*** EDEN SPLASH VIDEO ***/
+  /*** EDEN SPLASH VIDEO BTF ***/
   .eden-splash-video {
     max-width: 600px;
     z-index: 40;
     border-radius: 24px;
+    z-index: 0;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
     .eden-splash-video {
       width: 100%;
       min-height: 300px;
@@ -249,7 +457,7 @@ const EdenArtFrontPageStyles = styled('section')(
       order: 1;
     }
   }
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 930px) {
     .eden-splash-video {
       border-radius: 0;
     }
@@ -387,7 +595,7 @@ const EdenArtFrontPageStyles = styled('section')(
       flex-direction: column;
     }
   }
-  @media (max-width: 900px) {
+  @media (max-width: 930px) {
     .button-wrapper {
       flex-wrap: wrap;
     }
@@ -407,196 +615,277 @@ const EdenArtFrontPageStyles = styled('section')(
   }
   @media (min-width: 80em) {
   }
-`,
-)
+`
 
 export function AppLink({ title, description, icon }) {
   return (
     <>
-      <div className="app-link">
-        <span className="icon-wrapper">{icon}</span>
-        <span className="app-link-info-wrapper">
-          <Typography className="title" variant={'h4'}>
+      <div className='app-link'>
+        <span className='icon-wrapper'>{icon}</span>
+        <span className='app-link-info-wrapper'>
+          <Title className='title' level={3}>
             {title}
-          </Typography>
-          <Typography className="tag" variant={'body1'}>
+          </Title>
+          <Text className='tag'>
             {description}
-          </Typography>
+          </Text>
         </span>
       </div>
     </>
   )
 }
 
+export function ButtonLink({ text, link, color = 'white', textColor = 'white', type = '' }) {
+  const { width } = useWindowDimensions()
+
+  return (
+    <Button
+      target="_blank"
+      shape={'round'}
+      href={link}
+      className={`cta-button ${type}`}
+      block={ width < 930 ? true : false }
+      style={{ background: color, color: textColor }}
+    >
+    {text}
+  </Button>
+  )
+}
+
+export function MobileTitle() {
+  return (
+    <div className='splash-text-slogan-wrapper'>
+      <Title
+        className='splash-text-slogan'
+        level={2}
+      >
+        CREATE, REMIX 
+      </Title>
+
+      <Title
+        className='splash-text-slogan'
+        level={2}
+      >
+        & SHARE
+        < Text className='splash-text-accent' italic>AI ART </Text>
+      </ Title>
+    </ div>
+  )
+}
+
 export default function EdenArtFrontPage() {
+  
+  const { width } = useWindowDimensions()
+
+  const videoURL = 'https://eden-art.s3.amazonaws.com/eden-landing-mobile-real2real_seed_7_pass_lantent-blending.mp4'
+
   return (
     <EdenArtFrontPageStyles>
-      <div className="home-wrapper">
-        <section className="section-wrapper">
-          <Box
-            className="section-center-wrapper"
-            sx={{ p: 2, pb: 0, width: '100%', textAlign: 'center' }}
-          >
-            {/* '#8C7CF0 */}
-            <Typography
-              variant={'h1'}
-              sx={{
-                fontSize: '3rem',
-                width: '100%',
-                color: '#0c163b',
-                zIndex: 50,
-                wordBreak: 'break',
-              }}
-            >
-              Create, remix, and share
-            </Typography>
-            <Typography
-              variant={'h1'}
-              sx={{
-                fontSize: '3rem',
-                width: '100%',
-                pb: 3,
-                color: '#0c163b',
-                zIndex: 50,
-                wordBreak: 'break',
-              }}
-            >
-              AI-generated art
-            </Typography>
+      <div className='home-wrapper'>
 
-            <Typography
-              className="splash-text-description"
-              variant={'h3'}
-              sx={{
-                fontSize: '1.3rem',
-                textAlign: 'center',
-                maxWidth: 730,
-                lineHeight: 2,
-                zIndex: 50,
-                color: '#0c163b',
-              }}
-            >
-              {/* 'rgb(166, 166, 166)' */}
-              Eden is a community of artists, creative technologists, and
-              machine learners building an open-source social platform for
-              generative AI.
-            </Typography>
+        <section className='section-wrapper header'>
+          <AppLogo size="medium" logo='eden' />
 
-            <Container
-              sx={{
-                position: 'relative',
-                display: 'flex',
-                justifyContent: 'center',
-                padding: 0,
-              }}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Button className='social-btn' icon={<FaDiscord />} shape='circle' href={'https://discord.gg/4dSYwDT'} 
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            />
+            <Button className='social-btn' icon={<BsTwitter />} shape='circle' href={'https://twitter.com/Eden_Art_'} 
+                    style={{ margin: '0 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            />
+            <ConnectButtonCustom />
+          </div>
+        </section>
+
+        <section className='section-above-the-fold'>
+
+            { width < 930 
+              ?        
+                (<article className="section-wrapper video-splash" >
+                  <div className='eden-splash-video-overlay' style={{ background: 'pink' }} />
+                  <video
+                      className='eden-splash-video-above-the-fold'
+                      src={`${videoURL}`}
+                      preload='auto'
+                      muted={true}
+                      autoPlay={true}
+                      loop={true}
+                      // poster={`${PRD_URL}${
+                      //   intermediate_sha[intermediate_sha.length - 1]
+                      // }`}
+                    />
+                </article>)
+              : 
+                ''
+            }
+
+
+
+          <section className='section-wrapper info-wrapper' style={{ background: 'transparent' }}>
+            <div
+              className='section-center-wrapper'
+              style={{ padding: '100px 0 0 0', paddingBottom: 0, width: '100%', textAlign: 'center' }}
             >
-              <Box
-                className="button-wrapper"
-                sx={{
+              { width < 930 ? <MobileTitle /> : 
+                <>
+                  <Title className='splash-text-slogan' level={2}>
+                    Create, remix, and share
+                  </Title>
+                  <Title className='splash-text-slogan' level={2} style={{ paddingBottom: 30, fontStyle: 'italic', color: '#8C7CF0' }}>
+                    AI-generated art
+                  </Title>
+                </>
+              }
+
+
+              { width < 930 ? 
+                <Text className='splash-text-description'>
+                  {/* 'rgb(166, 166, 166)' */}
+                  Eden is a community of artists, technologist and machine learners building an open-source social platform for
+                  generative AI.
+                </Text> : 
+                  <>
+                    <Text
+                  className='splash-text-description'
+                >
+                  {/* 'rgb(166, 166, 166)' */}
+                  Eden is a community of artists, creative technologists, and
+                  machine learners building an open-source social platform for
+                  generative AI.
+                </Text>
+                  </>
+              }
+              
+
+              
+
+              <article
+                style={{
+                  position: 'relative',
                   display: 'flex',
-                  pt: 5,
-                  zIndex: 50,
-                  width: '100%',
+                  justifyContent: 'center',
+                  padding: 0,
+                  width: '100%'
                 }}
               >
-                <Button
-                  target="_blank"
-                  href={'https://examples.eden.art'}
-                  variant="contained"
-                  className="cta-button"
+                <div
+                  className="button-wrapper"
+                  style={{
+                    display: 'flex',
+                    zIndex: 50,
+                    width: '100%',
+                  }}
                 >
-                  EXAMPLES
-                </Button>
+                  { width < 930 ? 
+                    <>
+        
+                      <ButtonLink text={'GARDEN'} link={'/garden'} color={'white'} textColor={'#0c163b'} type='main-link' />
+                      <ButtonLink text={'EXAMPLES'} link={'https://examples.eden.art'} color={'#0c163b'} />
+                    </> 
+                    : 
+                    <>
+                      <ButtonLink text={'GARDEN'} link={'/garden'} color={'#8C7CF0'} textColor={'white'} type='main-link' />
+                      <ButtonLink text={'EXAMPLES'} link={'https://examples.eden.art'} color={'white'} />
+                      {/* <ButtonLink text={'DISCORD'} link={'https://discord.gg/4dSYwDT'} />
+                      <ButtonLink text={'TWITTER'} link={'https://twitter.com/Eden_Art_'} /> */}
+                    </>
+                  }
 
-                <Button
-                  href={'/garden'}
-                  variant="contained"
-                  className="cta-button"
-                >
-                  GARDEN
-                </Button>
+                  { width < 930 ? 
+                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+                    <Button
+                        className='cta-button icon'
+                        target="_blank"
+                        shape={'circle'}
+                        href={'https://discord.gg/4dSYwDT'}
+                        block={ width < 930 ? true : false }
+                        style={{ background: 'black', minWidth: '50px', minHeight: '50px' }}
+                      >
+                      <FaDiscord style={{ fontSize: '2rem' }}/>
+                    </Button>
 
-                <Button
-                  target="_blank"
-                  href={'https://discord.gg/4dSYwDT'}
-                  variant="contained"
-                  className="cta-button"
-                >
-                  DISCORD
-                </Button>
+                    <Button
+                        className='cta-button icon'
+                        target="_blank"
+                        shape={'circle'}
+                        href={'https://twitter.com/Eden_Art_'}
+                        block={ width < 930 ? true : false }
+                        style={{ background: 'black', minWidth: '50px', minHeight: '50px' }}
+                      >
+                      <TwitterOutlined style={{ fontSize: '2rem' }}/>
+                    </Button>       
+                  </div>
+                    : 
+                    null
+                  }
 
-                <Button
-                  target="_blank"
-                  href={'https://twitter.com/Eden_Art_'}
-                  variant="contained"
-                  className="cta-button"
-                >
-                  TWITTER
-                </Button>
-              </Box>
-            </Container>
-          </Box>
+                </div>
+              </article>
+            </div>
+          </section>
         </section>
+
+
 
         <section
           className="section-wrapper"
           style={{ marginTop: 100, marginBottom: 150 }}
         >
-          <Container className="info-wrapper" sx={{ m: 0, pt: 0 }}>
-            <article className="info odd">
-              <Box className="description-wrapper">
-                <Typography className="description" variant={'h4'}>
+          <div className='info-wrapper' style={{ margin: 0, paddingTop: 0 }}>
+            <article className='info odd'>
+              <span className='description-wrapper'>
+                <Text className='description'>
                   <i>For artists</i> Create and share your art, get inspired by
                   and collaborate with other artists. Own your profile and your
                   creations.
-                </Typography>
-              </Box>
+                </Text>
+              </span>
 
-              <CardMedia
-                className="eden-splash-video"
-                component="img"
-                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
-                alt="eden video"
-                // autoPlay
-                // mute
+              <video
+                className='eden-splash-video'
+                preload='auto'
+                muted={true}
+                autoPlay={true}
+                loop={true}
+                src='https://eden-art.s3.amazonaws.com/eden-real2real_seed_2004_latent-blending.mp4'
               />
             </article>
 
-            <article className="info even">
-              <CardMedia
-                className="eden-splash-video"
-                component="img"
-                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
-                alt="eden video"
-                // autoPlay
-                // mute
+            <article className='info even'>
+              <video
+                className='eden-splash-video'
+                preload='auto'
+                muted={true}
+                autoPlay={true}
+                loop={true}
+                src='https://eden-art.s3.amazonaws.com/eden-real2real_seed_2025_latent-blending.mp4'
               />
 
-              <Box className="description-wrapper">
-                <Typography className="description" variant={'h4'}>
+              <span className='description-wrapper'>
+                <Text className='description'>
                   <i>For researchers and devs</i> Build applications with ease,
                   connect new techniques and models to a shared ecosystem.
-                </Typography>
-              </Box>
+                </Text>
+              </span>
             </article>
 
-            <article className="info odd">
-              <Box>
-                <Box className="description-wrapper">
-                  <Typography className="description" variant={'h4'}>
+            <article className='info odd'>
+              <div>
+                <span className='description-wrapper'>
+                  <Text className='description'>
                     <i>For collectors</i> Discover, curate, and tell stories
                     with your collections. Make the garden beautiful.
-                  </Typography>
-                </Box>
-              </Box>
+                  </Text>
+                </span>
+              </div>
 
-              <CardMedia
-                className="eden-splash-video"
-                component="img"
-                image="https://cdn.discordapp.com/attachments/1004656589124415518/1014148977698013224/916e466ff7cca28f72fdf009ecdf51a0a15d64a17ca848675b0223e496246e84.gif"
-                alt="eden video"
-                // autoPlay
-                // mute
+              <video
+                className='eden-splash-video'
+                preload='auto'
+                muted={true}
+                autoPlay={true}
+                loop={true}
+                src='https://eden-art.s3.amazonaws.com/eden-real2real_seed_2026_latent-blending.mp4'
               />
 
               {/* <video loop autoPlay muted width="250">
@@ -608,7 +897,33 @@ export default function EdenArtFrontPage() {
                 <source src="/media/cc0-videos/flower.mp4" type="video/mp4" />
               </video> */}
             </article>
-          </Container>
+          </div>
+        </section>
+
+        <section
+          className="section-wrapper"
+          style={{ marginTop: 0, marginBottom: 150 }}
+        >
+          <Button 
+            type='primary' 
+            href={'/garden'} 
+            size='large' 
+            shape='round' 
+            style={{ 
+              height: 100, 
+              display: 'flex', 
+              alignItems: 'center', 
+              color: 'white', 
+              background: '#8C7CF0', 
+              fontWeight: 'bold', 
+              margin: 0, 
+              textDecoration: 'none', 
+              borderRadius: '60px', 
+              boxShadow: '#8c7cf0 1px 1px 25px 0px' 
+            }}
+          >
+            <Title style={{ lineHeight: 0, color: 'white', margin: 0 }}>{'VISIT THE GARDEN'}</Title>
+          </Button>
         </section>
       </div>
     </EdenArtFrontPageStyles>

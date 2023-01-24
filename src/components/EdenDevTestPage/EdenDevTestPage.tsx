@@ -30,7 +30,7 @@ import AppShortcutIcon from '@mui/icons-material/AppShortcut'
 
 // DESIGN
 import NetworkVector1 from '@/components/NetworkVector1'
-import NetworkVector2 from '@/components/NetworkVector2/NetworkVector2'
+import NetworkVector2 from '@/components/Vector/NetworkVector2/NetworkVector2'
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'

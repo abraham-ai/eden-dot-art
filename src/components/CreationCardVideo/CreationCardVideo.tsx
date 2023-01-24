@@ -632,7 +632,7 @@ export default function VideoCreation({
           onMouseOut={handleMouseOut}
           style={{ height: 256 }}
         >
-          <VideoCreationStyles id="creation video-creation">
+          <VideoCreationStyles id="creatiåon video-creation">
             <video
               style={{ width: '100%', height: '100%' }}
               preload="auto"
