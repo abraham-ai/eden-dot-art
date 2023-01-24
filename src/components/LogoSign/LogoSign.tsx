@@ -8,7 +8,7 @@ import {
 // useTheme,
 
 //   Badge,
-import Link from 'src/components/Link'
+import Link from 'src/components/Link/Link'
 
 const LogoWrapper = styled(Link)(
   ({ theme }) => `
