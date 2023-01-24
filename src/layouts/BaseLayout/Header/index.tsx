@@ -12,24 +12,23 @@ import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 
 // MUI
 import {
-  alpha,
-  Button,
-  Box,
   Backdrop,
-  lighten,
-  Modal,
-  styled,
-  useTheme,
-  // Typography,
 } from '@mui/material'
 // Fade
 
 // useSignMessage
 
+// ANTD
+import { Button, Modal, theme, Typography } from 'antd'
+const { Text } = Typography
+
+// CSS
+import styled from 'styled-components'
+
 // COMPONENTS
-import Logo from '@/components/Logo'
+import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/CreateModal/CreateModal'
-import ConnectButtonCustom from '@/components/ConnectButtonCustom'
+import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 // import SortCreationsBar from '@/components/SortCreationsBar'
 
 // CONTRACT - WEB3
@@ -104,53 +103,56 @@ const BoxModalStyle = {
   p: 4,
 }
 
-const HeaderWrapper = styled(Box)(
-  ({ theme }) => `
-        height: ${theme.header.height};
-        color: ${theme.header.textColor};
-        padding: ${theme.spacing(0, 2)};
-        right: 0;
-        z-index: 6;
-        background-color: white;
-        backdrop-filter: blur(3px);
-        position: fixed;
-        justify-content: space-between;
-        width: 100%;
-        .nav-link-wrapper {
-          padding: 0 10px;
-        }
-        .nav-link-wrapper:hover {
-          color: white;
-        }
-        .nav-link-text:hover {
-          cursor: pointer;
-          color: white;
-        }
-        .nav-link.active a {
-          font-weight: 600;
-          color: black;
-          margin: 20px;
-          text-decoration: unset;
-          padding-bottom: 3px;
-          border-bottom: 3px solid black
-        }
-        .nav-link a {
-          font-weight: 600;
-          color: gray;
-          margin: 20px;
-          text-decoration: unset;
-          padding-bottom: 3px;
-        }
-        @media (min-width: ${theme.breakpoints.values.lg}px) {
-            // left: ${theme.sidebar.width};
-            left: 0;
-            width: auto;
-        }
-        .menu-item {
-          display: flex;
-        }
-`,
-)
+// height: ${theme.header.height};
+// color: ${theme.header.textColor};
+// padding: ${theme.spacing(0, 2)};
+
+const HeaderWrapper = styled.div`
+  right: 0;
+  z-index: 6;
+  background-color: white;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  justify-content: space-between;
+  width: 100%;
+  .nav-link-wrapper {
+    padding: 0 10px;
+  }
+  .nav-link-wrapper:hover {
+    color: white;
+  }
+  .nav-link-text:hover {
+    cursor: pointer;
+    color: white;
+  }
+  .nav-link.active a {
+    font-weight: 600;
+    color: black;
+    margin: 20px;
+    text-decoration: unset;
+    padding-bottom: 3px;
+    border-bottom: 3px solid black
+  }
+  .nav-link a {
+    font-weight: 600;
+    color: gray;
+    margin: 20px;
+    text-decoration: unset;
+    padding-bottom: 3px;
+  }
+  @media (min-width: 1200px) {
+      left: 0;
+      width: auto;
+      display: flex;
+      padding: 0 20px;
+  }
+  .menu-item {
+    display: flex;
+  }
+`
+
+// @media (min-width: ${theme.breakpoints.values.lg}px) {
+  // left: ${theme.sidebar.width};
 
 export default function Header() {
   // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
@@ -161,13 +163,12 @@ export default function Header() {
   const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
   // isWeb3AuthSuccess, isWeb3AuthSigning,
 
-  const {
-    // address,
-    isConnected,
-  } = useAccount()
-  const theme = useTheme()
-  // const router = useRouter()
+  const { isConnected } = useAccount()
 
+  const { useToken } = theme;
+  const { token } = useToken;
+
+  // const router = useRouter()
   // const [createOpen, setCreateOpen] = useState(false)
 
   const handleCreateOpen = () => {
@@ -206,21 +207,21 @@ export default function Header() {
           justifyContent="space-between"
           alignItems="center"
           id="header-wrapper"
-          sx={{
-            boxShadow:
-              theme.palette.mode === 'dark'
-                ? `0 1px 0 ${alpha(
-                    lighten(theme.colors.primary.main, 0.7),
-                    0.15,
-                  )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
-                : `0px 2px 8px -3px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.2,
-                  )}, 0px 5px 22px -4px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.1,
-                  )}`,
-          }}
+          // sx={{
+          //   boxShadow:
+          //     theme.palette.mode === 'dark'
+          //       ? `0 1px 0 ${alpha(
+          //           lighten(theme.colors.primary.main, 0.7),
+          //           0.15,
+          //         )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
+          //       : `0px 2px 8px -3px ${alpha(
+          //           theme.colors.alpha.black[100],
+          //           0.2,
+          //         )}, 0px 5px 22px -4px ${alpha(
+          //           theme.colors.alpha.black[100],
+          //           0.1,
+          //         )}`,
+          // }}
         >
           {/* <EdenNavTop /> */}
 
@@ -321,7 +322,7 @@ export default function Header() {
 
           {/* <SortCreationsBar /> */}
 
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* {isWeb3WalletConnected ? (
           <Button
             id="create-button"
@@ -373,32 +374,36 @@ export default function Header() {
 
             {isWeb3WalletConnected ? (
               <Button
-                id="create-button"
-                variant="contained"
+                id='create-button'
                 onClick={handleCreateOpen}
-                size="medium"
-                endIcon={<AddIcon className="create-icon" fontSize={'large'} />}
-                sx={{
-                  ml: 1.5,
+                size='middle'
+                icon={<AddIcon className='create-icon' fontSize={'medium'} />}
+                style={{
+                  marginLeft: 1.5,
                   borderRadius: '30px',
                   padding: '10px 20px',
+                  background: '#8C7CF0',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
                   height: 45,
                 }}
               >
-                Create
+                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>Create</Text>
               </Button>
-            ) : null}
+            ) : null }
 
             {/* <Button
-          id="login-button"
-          variant="contained"
-          onClick={handleLoginOpen}
-          size="medium"
-          endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
-          sx={{ mr: 1 }}
-        >
-          Sign-in
-        </Button> */}
+                id="login-button"
+                variant="contained"
+                onClick={handleLoginOpen}
+                size="medium"
+                endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
+                sx={{ mr: 1 }}
+              >
+                Sign-in
+              </Button> 
+            */}
 
             <CreateModal
               isOpen={isModalVisible}
@@ -409,16 +414,16 @@ export default function Header() {
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
               open={loginOpen}
-              onClose={handleLoginClose}
-              closeAfterTransition
+              onCancel={handleLoginClose}
               BackdropComponent={Backdrop}
               BackdropProps={{
                 timeout: 500,
               }}
+              // closeAfterTransition
             >
-              <Box sx={BoxModalStyle}>
-                <Box
-                  sx={{
+              <div style={BoxModalStyle}>
+                <div
+                  style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
@@ -426,14 +431,14 @@ export default function Header() {
                 >
                   <ConnectButton />
                   Or
-                  <Button variant={'contained'}>
+                  <Button>
                     Connect Discord
                     <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
                   </Button>
-                </Box>
-              </Box>
+                </div>
+              </div>
             </Modal>
-          </Box>
+          </div>
 
           {/* <Modal
         aria-labelledby="transition-modal-title"

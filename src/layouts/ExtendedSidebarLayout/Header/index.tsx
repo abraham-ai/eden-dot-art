@@ -22,7 +22,7 @@ import {
 // import { EdenNavTop } from '../../../components';
 
 // COMPONENTS
-import Logo from '@/components/Logo'
+import Logo from '@/components/Logo/Logo'
 
 // ICONS
 // import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'

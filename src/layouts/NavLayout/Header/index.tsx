@@ -28,7 +28,7 @@ import {
 // import LoginButton from '@/components/LoginButton'
 // import CreateSignInJWT from '@/components/CreateSignInJWT'
 // import Logo from '@/components/Logo'
-import SignInJWT from '@/components/SignInJWT'
+import SignInJWT from '@/components/SignInJWT/SigninJWT'
 
 // WEB3
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi' //  WagmiProvider, chain,
@@ -155,8 +155,8 @@ export default function Header() {
     >
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-          <Box
-            sx={{
+          <div
+            style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -167,11 +167,11 @@ export default function Header() {
             {/* <Logo name="eden" /> */}
             {/* {handleAccountNav()} */}
 
-            <Box sx={{ display: 'flex' }}>
+            <div style={{ display: 'flex' }}>
               <SignInJWT />
               <ConnectButton />
-            </Box>
-          </Box>
+            </div>
+          </div>
         </RainbowKitProvider>
       </WagmiConfig>
     </HeaderWrapper>
