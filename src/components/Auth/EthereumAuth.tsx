@@ -115,7 +115,7 @@ const EthereumAuth = () => {
           onClick={handleSiwe}
           disabled={ethAuthenticating}
           loading={ethAuthenticating}
-          style={{ fontWeight: 'bold' }}
+          style={{ fontWeight: 'bold', background: '#8C7CF0' }}
         >
           SIGN-IN
         </Button>
