@@ -10,12 +10,6 @@ import { useState, useEffect } from 'react'
 import { setModalVisible } from '@/redux/slices/modalSlice'
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 
-// MUI
-import {
-  Backdrop,
-} from '@mui/material'
-// Fade
-
 // useSignMessage
 
 // ANTD
@@ -27,7 +21,7 @@ import styled from 'styled-components'
 
 // COMPONENTS
 import Logo from '@/components/Logo/Logo'
-import CreateModal from '@/components/CreateModal/CreateModal'
+import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 // import SortCreationsBar from '@/components/SortCreationsBar'
 
@@ -89,19 +83,6 @@ import { FaDiscord } from 'react-icons/fa'
 import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 
 // VIEW ICONS
-
-const BoxModalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  backgroundColor: 'white',
-  p: 4,
-}
 
 // height: ${theme.header.height};
 // color: ${theme.header.textColor};
@@ -415,13 +396,20 @@ export default function Header() {
               aria-describedby="transition-modal-description"
               open={loginOpen}
               onCancel={handleLoginClose}
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500,
-              }}
               // closeAfterTransition
             >
-              <div style={BoxModalStyle}>
+              <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 400,
+                background: 'pink',
+                border: '2px solid #000',
+                boxShadow: '24px',
+                backgroundColor: 'white',
+                padding: 40
+              }}>
                 <div
                   style={{
                     display: 'flex',
@@ -439,20 +427,6 @@ export default function Header() {
               </div>
             </Modal>
           </div>
-
-          {/* <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={createOpen}
-        onClose={handleCreateClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Box sx={BoxModalStyle}>Create Modal tools, text input, etc here</Box>
-      </Modal> */}
         </HeaderWrapper>
       </RainbowKitProvider>
     </WagmiConfig>
