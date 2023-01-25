@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 
+// NEXT
+import Link from 'next/link'
+
 // ROUTING
-import { useHistory, useParams, NavLink } from 'react-router-dom';
+import { useRouter } from 'next/router'
 import slug from 'slug';
 
 // REDUX
-import { useSelector, useDispatch, batch } from 'react-redux';
-import { setFilter } from '../../../redux/slices/filterSlice';
-import { setPageUpdate, resetPageCreation } from '../../../redux/slices/creationsSlice';
-
-// ICONS
-import { DownOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch, batch } from 'react-redux'
+import { setFilter } from '@/redux/slices/filterSlice'
+import { setSort } from '@/redux/slices/sortSlice'
+import { setPageUpdate, resetPageCreation } from '@/redux/slices/creationsSlice'
 
 // HOOKS
-import { useWindowDimensions } from '../../../hooks';
+import { useWindowDimensions } from '@/hooks';
 
 // CSS
 import styled from 'styled-components';
@@ -24,7 +25,7 @@ const Item = Menu.Item;
 const { Text } = Typography;
 
 // ICONS
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, DownOutlined } from '@ant-design/icons';
 
 const FeedButtonStyles = styled.div`
   width: 100%;
@@ -77,28 +78,37 @@ const FeedButtonStyles = styled.div`
 
 function FilterMobi() {
   const [route, setRoute] = useState();
-  let { param1Id, param2Id } = useParams();
+  
+  // routes
+  const router = useRouter();
+  const { pathname, query, asPath } = router
+
+  // redux
+  const dispatch = useDispatch()
+
+
+  // slices
   const filter_by = useSelector(state => state.filter.value);
   const changeSort = evt => dispatch(setSort(evt));
 
   return (
     <Menu selectedKeys={[param2Id]} mode="horizontal" className="filter-menu-mobi">
       <Item key="new" onClick={() => changeSort('new')}>
-        <NavLink
+        <Link
           onClick={() => {
             setRoute(`/creations/${filter_by}/new`);
           }}
-          to={`/creations/${filter_by}/new`}
+          href={`/creations/${filter_by}/new`}
           exact
           activeClassName="active"
         >
           <span className="sort-text">
             <b>All</b>
           </span>
-        </NavLink>
+        </Link>
       </Item>
       <Item key="praises" onClick={() => changeSort('praises')}>
-        <NavLink
+        <Link
           onClick={() => {
             setRoute(`/creations/${filter_by}/praises`);
           }}
@@ -107,7 +117,7 @@ function FilterMobi() {
           activeClassName="active"
         >
           <span className="sort-text">My Creations</span>
-        </NavLink>
+        </Link>
       </Item>
     </Menu>
   );

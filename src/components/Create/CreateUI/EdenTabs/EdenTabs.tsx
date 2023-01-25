@@ -4,10 +4,10 @@ import React from 'react'
 import { Tabs } from 'antd'
 
 // COMPONENTS
-import GenerateTab from '@/components/CreateUI/GenerateUI/GenerateUI'
-import InterpolateTab from '@/components/CreateUI/InterpolateUI/InterpolateUI'
-import Real2RealTab from '@/components/CreateUI/Real2RealUI/Real2RealUI'
-import RemixTab from '@/components/CreateUI/RemixUI/RemixUI'
+import GenerateTab from '@/components/Create/CreateUI/GenerateUI/GenerateUI'
+import InterpolateTab from '@/components/Create/CreateUI/InterpolateUI/InterpolateUI'
+import Real2RealTab from '@/components/Create/CreateUI/Real2RealUI/Real2RealUI'
+import RemixTab from '@/components/Create/CreateUI/RemixUI/RemixUI'
 
 const tabItems = [
   // {

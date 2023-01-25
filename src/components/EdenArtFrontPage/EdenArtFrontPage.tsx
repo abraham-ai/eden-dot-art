@@ -335,6 +335,7 @@ const EdenArtFrontPageStyles = styled.section`
   .cta-button.accent-link {
     box-shadow: #8c7cf0 1px 1px 25px 0px;
   }
+  /*** CTA MAIN LINK ***/
   .cta-button.main-link {
     box-shadow: #8c7cf0 1px 1px 25px 0px;
     background: white;
@@ -344,13 +345,35 @@ const EdenArtFrontPageStyles = styled.section`
     color: #5f47fa;
     background: rgb(140, 124, 240);
   }
+  /*** CTA SECONDARY LINK ***/
   .cta-button.secondary {
     background: #5f47fa;
   }
+  /*** CTA ICON ***/
   .cta-button.icon:hover {
     color: #8C7CF0;
     background: #8C7CF0;
     border-color: #8C7CF0;
+  }
+  /*** CTA MAIN LINK BOTTOM ***/
+  .cta-btn-main {
+    height: 70px;
+    display: flex; 
+    align-items: center;
+    color: white; 
+    background: #8C7CF0;
+    font-weight: bold;
+    margin: 0;
+    text-decoration: none;
+    border-radius: 60px;
+    box-shadow: #8c7cf0 1px 1px 25px 0px;
+  }
+  .cta-btn-main h2 {
+    line-height: 0; 
+    color: white; 
+    margin: 0; 
+    padding: 0 20px;
+    font-size: 1.4rem;
   }
   /*** INFO-WRAPPER ***/
   .info-wrapper {
@@ -359,11 +382,13 @@ const EdenArtFrontPageStyles = styled.section`
     justify-content: center;
     flex-direction: column;
   }
+  /*** BUTTON-WRAPPER ***/
   .info-wrapper .button-wrapper {
     padding: 50px 0;
     display: flex;
     z-index: 20;
   }
+  /*** INFO ***/
   .info-wrapper .info {
     padding: 50px 0 0 0;
     display: flex;
@@ -905,24 +930,17 @@ export default function EdenArtFrontPage() {
           style={{ marginTop: 0, marginBottom: 150 }}
         >
           <Button 
+            className='cta-btn-main'
             type='primary' 
             href={'/garden'} 
             size='large' 
             shape='round' 
             style={{ 
-              height: 100, 
-              display: 'flex', 
-              alignItems: 'center', 
-              color: 'white', 
-              background: '#8C7CF0', 
-              fontWeight: 'bold', 
-              margin: 0, 
-              textDecoration: 'none', 
-              borderRadius: '60px', 
-              boxShadow: '#8c7cf0 1px 1px 25px 0px' 
             }}
           >
-            <Title style={{ lineHeight: 0, color: 'white', margin: 0 }}>{'VISIT THE GARDEN'}</Title>
+            <Title level={2}>
+              {'VISIT GARDEN'}
+            </Title>
           </Button>
         </section>
       </div>

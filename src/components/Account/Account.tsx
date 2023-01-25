@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-// COMPONENTS
-import { Container, Avatar, Box, Button, Skeleton } from '@mui/material'
+// ANTD
+import { Button, Skeleton, Avatar } from 'antd'
 
 // WEB3 HOOKS
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi'
@@ -30,35 +30,31 @@ export default function Account() {
   const formattedAddress = formatAddress(address)
 
   return (
-    <Container>
-      <Container>
+    <section>
+      <div>
         <Avatar src={ensAvatarData} alt="ENS Avatar">
           {!ensAvatarData}
         </Avatar>
-        <Container>
-          <Box fontSize="large" textAlign={{ xs: 'center', sm: 'left' }}>
+        <article>
+          <div style={{ fontSize: '2rem', textAlign: 'center' }}>
             {ensNameData
               ? `${ensNameData} (${formattedAddress})`
               : formattedAddress}
-          </Box>
-          <Box
-            fontSize="small"
-            color="textSecondary"
-            textAlign={{ xs: 'center', sm: 'left' }}
-            display="flex"
-            gap="1"
+          </div>
+          <div
+            style={{ fontSize: '2rem', textAlign: 'center', gap: 1, display: 'flex' }}
           >
-            Connected to{' '}
+            Connected to {' '}
             <Skeleton animation={!(isMounted && connector) ? 'wave' : false}>
               {isMounted && connector ? connector.name : 'Wallet Name'}
             </Skeleton>
-          </Box>
-        </Container>
-      </Container>
+          </div>
+        </article>
+      </div>
 
-      <Button variant="outlined" onClick={() => disconnect()}>
+      <Button type='secondary' onClick={() => disconnect()}>
         Disconnect
       </Button>
-    </Container>
+    </section>
   )
 }

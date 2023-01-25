@@ -36,8 +36,8 @@ import { useAppSelector } from '@/hooks/hooks'
 // const { TextArea } = Input
 
 // COMPONENTS
-import CreateUI from '@/components/CreateUI/CreateUI'
-import CreateSignInJWT from '@/components/CreateSignInJWT/CreateSignInJWT'
+import CreateUI from '@/components/Create/CreateUI/CreateUI'
+import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT'
 // import AppLogo from '@/components/AppLogo'
 
 // import {

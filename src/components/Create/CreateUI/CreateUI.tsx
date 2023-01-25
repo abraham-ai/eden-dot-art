@@ -43,7 +43,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Blockies from 'react-blockies'
 
 // COMPONENTS
-import EdenTabs from '@/components/CreateUI/EdenTabs/EdenTabs'
+import EdenTabs from '@/components/Create/CreateUI/EdenTabs/EdenTabs'
 // import CreateTypeSelect from '@/components/CreateTypeSelect'
 // import CreateGeneratorTypeSelect from '@/components/CreateGeneratorTypeSelect'
 

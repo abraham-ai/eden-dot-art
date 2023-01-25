@@ -6,6 +6,9 @@ import styled from 'styled-components'
 // NEXTJS
 import Image from 'next/image'
 
+// ROUTER
+import { useRouter } from 'next/router'
+
 // ANTD
 import { Popover, Modal, Typography } from 'antd'
 const { Text } = Typography
@@ -123,6 +126,8 @@ export default function CreationCardMinimal({ creation }) {
   // console.log(creation)
   // add source, width, height
 
+  const router = useRouter()
+
   // MAIN
   // const address = creation.address === undefined ? 'none' : creation.address
   const text_input =
@@ -156,13 +161,17 @@ export default function CreationCardMinimal({ creation }) {
   creation.generator === undefined ? 'none' : creation.generator
 
   const [modalOpen, setModalOpen] = useState(false)
-  const handleModalOpen = () => setModalOpen(true)
+  const handleModalOpen = () => {
+    router.push(`/creation/${creation._id}`, as, { shallow: true })
+    setModalOpen(true)
+  }
 
   const handleModalClose = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     // console.log('handleCardClose!')
     // console.log(event)
+    router.push('/garden')
     event ? setModalOpen(false) : null
   }
 
@@ -405,12 +414,13 @@ export default function CreationCardMinimal({ creation }) {
       </article>
 
       <Modal
+        width='100%'
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={modalOpen}
         mask
         maskClosable
-        onCancel={handleModalClose}
+        onCancel={(e) => handleModalClose(e)}
       >
         <>
           <div
@@ -421,7 +431,7 @@ export default function CreationCardMinimal({ creation }) {
               right: '10px',
               color: 'black',
             }}
-            onClick={handleModalClose}
+            onClick={(e) => handleModalClose(e)}
           >
             <CloseIcon className="close-icon" fontSize={'large'} />
           </div>
@@ -478,7 +488,7 @@ export default function CreationCardMinimal({ creation }) {
                         }}>
                             <Blockies seed={address} />
                         </div>
-                        <Typography
+                        <Text
                           style={{
                             color: '#111',
                             fontWeight: 600,
@@ -486,14 +496,12 @@ export default function CreationCardMinimal({ creation }) {
                           }}
                         >
                           {displayAddress}
-                        </Typography>
+                        </Text>
                       </div>
                     </Popover>
                   </div>
 
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
+                  <Text
                     style={{
                       paddingTop: 20,
                       color: '#111',
@@ -502,7 +510,7 @@ export default function CreationCardMinimal({ creation }) {
                     }}
                   >
                     {text_input}
-                  </Typography>
+                  </Text>
                 </div>
               </div>
 

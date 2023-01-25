@@ -2,7 +2,6 @@ import React from 'react'
 
 // ROUTING
 import Link from 'next/link'
-// import { NavLink, Link } from 'react-router-dom';
 
 // UI
 import {
@@ -29,13 +28,13 @@ import AppShortcutIcon from '@mui/icons-material/AppShortcut'
 // ROUTES
 
 // DESIGN
-import NetworkVector1 from '@/components/NetworkVector1'
+import NetworkVector1 from '@/components/Vector/NetworkVector1/NetworkVector1'
 import NetworkVector2 from '@/components/Vector/NetworkVector2/NetworkVector2'
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
-// import VectorPerspectiveGrid from '@/components/VectorPerspectiveGrid'
 import Subscribe from '@/components/Subscribe/Subscribe'
+// import VectorPerspectiveGrid from '@/components/Vector/VectorPerspectiveGrid'
 // EdenHeader,
 // FollowUs
 

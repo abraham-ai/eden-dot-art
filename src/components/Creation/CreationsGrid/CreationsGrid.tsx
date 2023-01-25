@@ -14,7 +14,7 @@ import Masonry from '@mui/lab/Masonry'
 import styled from 'styled-components'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/CreationCardMinimal/CreationCardMinimal'
+import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
 // GQL Creations query to retreive all Creations //

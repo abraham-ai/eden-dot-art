@@ -20,7 +20,7 @@ import {
   setIsRunningFalse,
   setIsLoader,
   decrementRunningCreationCount,
-} from '../../redux/slices/creationsSlice'
+} from '@/redux/slices/creationsSlice'
 
 // import { setVisible } from '../../redux/slices/snackbarSlice'
 
@@ -84,7 +84,7 @@ interface Creation {
   textInput: string
 }
 
-export default function RunningCreation({
+export default function CreationProgress({
   status,
   status_code,
   _id,

@@ -15,7 +15,7 @@ import {
   decrementRunningCreationCount,
   setIsRunningFalse,
   setIsRunningTrue,
-} from '../../redux/slices/creationsSlice'
+} from '../../../redux/slices/creationsSlice'
 
 // MUI
 // Image, Typography, Card, Button, Modal,
