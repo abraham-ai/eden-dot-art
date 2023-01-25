@@ -36,6 +36,9 @@ import {
 
 // apiProvider,
 
+// STYLES
+import styled from 'styled-components' 
+
 const { provider, chains } = configureChains(
   [mainnet],
   [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],

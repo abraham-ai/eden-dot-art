@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import Scrollbar from '@/components/Scrollbar/Scrollbar';
 
 // CONTEXT
-import { SidebarContext } from 'src/contexts/SidebarContext';
+// import { SidebarContext } from 'src/contexts/SidebarContext';
 
 import { Drawer, Divider } from '@mui/material';
 
