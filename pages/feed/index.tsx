@@ -22,7 +22,7 @@ import { Divider } from 'antd'
 
 // COMPONENTS
 import NavSide from '@/components/Nav/NavSide/NavSide'
-import CreationCardFeed from '@/components/CreationCardFeed/CreationCardFeed'
+import CreationCardFeed from '@/components/Creation/CreationCardFeed/CreationCardFeed'
 import Loader from '@/components/Loader/Loader'
 
 // CONSTS

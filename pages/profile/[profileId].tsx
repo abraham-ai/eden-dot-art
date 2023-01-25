@@ -26,7 +26,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 
 // COMPONENTS
 import CreatorDashboard from '@/components/Profile/ProfileDashboard/ProfileDashboard'
-import CreationsGrid from '@/components/CreationsGrid/CreationsGrid'
+import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // CONSTANTS
 // import { NETWORKS } from '../../constants'

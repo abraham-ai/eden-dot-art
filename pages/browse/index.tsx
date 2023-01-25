@@ -42,7 +42,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import { Box, Container, styled } from '@mui/material'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/CreationCardMinimal/CreationCardMinimal'
+import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Masonry from '@mui/lab/Masonry'
 
 // COMPONENTS
@@ -54,7 +54,7 @@ import Masonry from '@mui/lab/Masonry'
 // } from '../components/abraham'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import DelayingAppearance from '@/components/Loading/Loading'
-import CreationCardVideo from '@/components/CreationCardVideo/CreationCardVideo'
+import CreationCardVideo from '@/components/Creation/CreationCardVideo/CreationCardVideo'
 
 // HTTP
 import axios from 'axios'

@@ -18,7 +18,7 @@ import { Box, Container } from '@mui/material'
 import Masonry from '@mui/lab/Masonry'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/CreationCardMinimal/CreationCardMinimal'
+import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
 // CONSTS

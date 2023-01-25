@@ -1,18 +1,16 @@
-// import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-export async function middleware() {
+export async function middleware(request: NextRequest) {
 
-  // propTypes request: NextRequest
-  // const url = request.nextUrl.clone()
+  const url = request.nextUrl.clone()
 
-  // if (url.pathname == '/') {
-  //   url.pathname = '/creations'
-  //   return NextResponse.rewrite(url)
-  // }
+  if (url.pathname == '/creation') {
+    url.pathname = '/garden'
+    return NextResponse.rewrite(url)
+  }
 
-  // if (url.pathname == '/profile' && req.session.token) {
-
+  // if (url.pathname == '/profile') {
   // }
 
   return NextResponse.next()

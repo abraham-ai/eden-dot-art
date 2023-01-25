@@ -1,42 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+
+// NEXTJS
+import Link from 'next/link'
 
 // ROUTING
-import { Link, useRouteMatch, useLocation } from 'react-router-dom';
-import slug from 'slug';
+import { useRouter } from 'next/router';
 
 // REDUX
-import { useSelector, useDispatch, batch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { batch } from 'react-redux';
 import {
-  incrementRunningCreationCount,
+	incrementRunningCreationCount,
   decrementRunningCreationCount,
   setIsRunningFalse,
   setIsRunningTrue,
-} from '../../../redux/slices/creationsSlice';
+} from '@/redux/slices/creationsSlice';
+
+// CSS
+import styled from 'styled-components';
 
 // COMPONENTS
-import { CreatorAddress, CreationSocial, CreationShare, RunningCreation, CreationOverlay } from '../../abraham';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import CreationSocial from '@/components/Creation/CreationSocial/CreationSocial
+import CreationShare from '@/components/Creation/CreationShare/CreationShare
+import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress
+import CreationOverlay from '@/components/Creation/CreationOverlay/CreationOverlay'
+
+// LIBS
+import Skeleton from 'react-loading-skeleton'; // , { SkeletonTheme } 
 import 'react-loading-skeleton/dist/skeleton.css';
 
 // UI
-import { Image, Typography, Card, Button, Modal } from 'antd';
+import { Image, Typography, Card } from 'antd';
 const { Text } = Typography;
 
 // ICONS
-import { SyncOutlined } from '@ant-design/icons';
+// import { SyncOutlined } from '@ant-design/icons';
 import { HiSparkles } from 'react-icons/hi';
 import { AiFillFire } from 'react-icons/ai';
 
 // CONSTANTS
-import { NETWORKS } from '../../../constants';
+const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
 // HOOKS
-import useWindowDimensions from '../../../hooks/useWindowDimensions';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 // UTILS
-import shaURL from '../../../utils/shaURL';
-import time_ago from '../../../utils/timeAgo';
+import shaURL from '@/util/shaURL';
+// import time_ago from '@/util/time_ago';
 
 const CreationStyle = styled.article`
   padding: 0 0 20px 0;
@@ -319,15 +329,9 @@ const CreationStyle = styled.article`
   }
 `;
 
-/// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
-
-// 🔭 block explorer URL
-const blockExplorer = targetNetwork.blockExplorer;
-
 export default function Creation({
-  onFilterChange = () => null,
-  onMint = () => null,
+//   onFilterChange = () => null,
+//   onMint = () => null,
   item = {
     _id: '123',
     address: '0x49fbd13846F2428c148A4c165a22b4fFA54263a4',
@@ -335,26 +339,30 @@ export default function Creation({
     burns: 0,
     praises: 0,
     img_src: './images/placeholder-image.png',
+		status: 'pending',
+		status_code: 0,
+    sha: 'test'
   },
   size = 'regular',
-  mint,
-  mintButton,
+//   mint,
+//   mintButton,
 }) {
   // hooks
   const { width } = useWindowDimensions();
-  const { url } = useRouteMatch();
-  const location = useLocation();
+  
+	const router = useRouter();
+  const { pathname, query, asPath } = router;
 
   // hover stats
   const [isHovering, setIsHovering] = useState(false);
   const [visible, setVisible] = useState(false);
 
   // redux
-  const dispatch = useDispatch();
-  const { isCreationRunning, isRunning, creations } = useSelector(state => state.creations);
+  const dispatch = useAppDispatch();
+  const { isCreationRunning, isRunning, creations } = useAppSelector(state => state.creations);
 
-  const sort_by = useSelector(state => state.sort.value);
-  const filter_by = useSelector(state => state.filter.value);
+  const sort_by = useAppSelector(state => state.sort.value);
+  const filter_by = useAppSelector(state => state.filter.value);
 
   const handleMouseOver = () => {
     setIsHovering(true);
@@ -445,19 +453,11 @@ export default function Creation({
   return (
     <CreationStyle id="creation">
       <Card className={`cr-card ${size}`}>
-        {/* <span
-                index={index}
-                to={{
-                  pathname: `${url}/${slug(creationsState[key].id)}`,
-                  search: location.search,
-                }}
-                onClick={() => console.log('click test!!!')}
-              ></span> */}
         {sha ? (
           <Link
             className="cr-main-link"
-            to={{
-              pathname: `/creation/${slug(sha)}`,
+            href={{
+              pathname: `/creation/${sha}`,
               search: location.search,
             }}
           />
@@ -466,13 +466,13 @@ export default function Creation({
           {width < 560 ? (
             <Link
               className="cr-account-link"
-              to={{
-                pathname: `${window?.appConfig?.ABRAHAM_MINIO + sha}`,
+              href={{
+                pathname: `${PRD_URL + sha}`,
                 search: location.search,
               }}
             >
               <span className="cr-eth-url">
-                <CreatorAddress address={address} blockExplorer={blockExplorer} />
+                <CreatorAddress address={address} />
               </span>
             </Link>
           ) : null}
