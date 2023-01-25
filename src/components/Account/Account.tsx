@@ -52,7 +52,7 @@ export default function Account() {
         </article>
       </div>
 
-      <Button type='secondary' onClick={() => disconnect()}>
+      <Button onClick={() => disconnect()}>
         Disconnect
       </Button>
     </section>
