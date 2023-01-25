@@ -18,7 +18,7 @@ import {
   bindToggle,
   bindPopper,
 } from 'material-ui-popup-state/hooks'
-import CreatorProfileAddress from '../CreatorProfileAddress/CreatorProfileAddress'
+import CreatorProfileAddress from '../Creator/CreatorProfileAddress/CreatorProfileAddress'
 
 const PopperStyles = styled(Box)(
   () => `
