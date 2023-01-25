@@ -13,7 +13,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
 // useSignMessage
 
 // ANTD
-import { Button, Modal, theme, Typography } from 'antd'
+import { Button, Modal, Typography } from 'antd' // theme,
 const { Text } = Typography
 
 // CSS
@@ -146,8 +146,8 @@ export default function Header() {
 
   const { isConnected } = useAccount()
 
-  const { useToken } = theme;
-  const { token } = useToken;
+  // const { useToken } = theme;
+  // const { token } = useToken;
 
   // const router = useRouter()
   // const [createOpen, setCreateOpen] = useState(false)
@@ -183,173 +183,12 @@ export default function Header() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-        <HeaderWrapper
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          id="header-wrapper"
-          // sx={{
-          //   boxShadow:
-          //     theme.palette.mode === 'dark'
-          //       ? `0 1px 0 ${alpha(
-          //           lighten(theme.colors.primary.main, 0.7),
-          //           0.15,
-          //         )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
-          //       : `0px 2px 8px -3px ${alpha(
-          //           theme.colors.alpha.black[100],
-          //           0.2,
-          //         )}, 0px 5px 22px -4px ${alpha(
-          //           theme.colors.alpha.black[100],
-          //           0.1,
-          //         )}`,
-          // }}
-        >
-          {/* <EdenNavTop /> */}
-
-          {/* <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        alignItems="center"
-        spacing={2}
-      ></Stack> */}
-
-          {/* <Box display="flex" alignItems="center">
-        <Box
-          component="span"
-          sx={{
-            ml: 2,
-            display: { lg: 'none', xs: 'inline-block' },
-          }}
-        >
-          <Tooltip arrow title="Toggle Menu">
-            <IconButton color="primary" onClick={toggleSidebar}>
-              {!sidebarToggle ? (
-                <MenuTwoToneIcon fontSize="small" />
-              ) : (
-                <CloseTwoToneIcon fontSize="small" />
-              )}
-            </IconButton>
-          </Tooltip>
-        </Box>
-      </Box> */}
-
-          {/* <Link href="/garden" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          DEV GARDEN
-        </Typography>
-      </Link>
-
-      <Link href="/ideas" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          IDEAS
-        </Typography>
-      </Link>
-
-      <Link href="/apps" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          APPS
-        </Typography>
-      </Link>
-      
-      <Link href="/faq" className="nav-link-wrapper">
-      <Typography variant={'h4'} className="nav-link-text">
-      FAQ
-      </Typography>
-    </Link> */}
+        <HeaderWrapper id='header-wrapper'>
 
           <Logo />
 
-          {/* <Box sx={{ display: 'flex' }}>
-        <Box className={`nav-link ${getIsActive('/browse')}`}>
-          <Link href={ROUTES.EDEN_ART.BROWSE} style={{ marginLeft: 2 }}>
-            BROWSE
-          </Link>
-        </Box>
-        <Box className={`nav-link ${getIsActive('/watch')}`}>
-          <Link href={ROUTES.EDEN_ART.WATCH} style={{ marginLeft: 2 }}>
-            WATCH
-          </Link>
-        </Box>
-      </Box> */}
-
-          {/* <Link href="/about" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          ABOUT
-        </Typography>
-      </Link> */}
-
-          {/* <Link href="/apps" className="nav-link-wrapper">
-        <Typography variant={'h4'} className="nav-link-text">
-          APPS
-        </Typography>
-      </Link> */}
-
-          {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Box sx={{ pr: 10 }}>
-          <Logo name={'Collage'} />
-        </Box>
-        <Link href="/about-collage" className="nav-link-wrapper">
-          <Typography variant={'h4'} className="nav-link-text" sx={{ pr: 5 }}>
-            ABOUT
-          </Typography>
-        </Link>
-
-        <Link href="/apps" className="nav-link-wrapper">
-          <Typography variant={'h4'} className="nav-link-text">
-            APPS
-          </Typography>
-        </Link>
-      </Box> */}
-
-          {/* <SortCreationsBar /> */}
-
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* {isWeb3WalletConnected ? (
-          <Button
-            id="create-button"
-            variant="outlined"
-            onClick={handleCreateOpen}
-            size="medium"
-            startIcon={
-              <FilterListIcon className="create-icon" fontSize={'large'} />
-            }
-            sx={{ mr: 1 }}
-          >
-            Filter
-          </Button>
-        ) : null} */}
-
-            {/* {isWeb3WalletConnected ? (
-          <Button
-            id="create-button"
-            variant="outlined"
-            onClick={handleCreateOpen}
-            size="medium"
-            startIcon={
-              <ImportExportIcon className="create-icon" fontSize={'large'} />
-            }
-            sx={{ mr: 1 }}
-          >
-            Sort
-          </Button>
-        ) : null} */}
-
-            {/* {isWeb3WalletConnected ? (
-          <Button
-            id="mycreations-button"
-            variant="outlined"
-            onClick={() => null}
-            size="medium"
-            endIcon={
-              <AccountCircleIcon className="account-icon" fontSize={'large'} />
-            }
-            sx={{ mr: 1 }}
-          >
-            My Creations
-          </Button>
-        ) : null} */}
-
-            {CustomAvatar}
+            {/* {CustomAvatar} */}
 
             <ConnectButtonCustom />
 
@@ -374,17 +213,7 @@ export default function Header() {
               </Button>
             ) : null }
 
-            {/* <Button
-                id="login-button"
-                variant="contained"
-                onClick={handleLoginOpen}
-                size="medium"
-                endIcon={<LoginIcon className="signin-icon" fontSize={'large'} />}
-                sx={{ mr: 1 }}
-              >
-                Sign-in
-              </Button> 
-            */}
+
 
             <CreateModal
               isOpen={isModalVisible}
@@ -426,6 +255,8 @@ export default function Header() {
                 </div>
               </div>
             </Modal>
+
+
           </div>
         </HeaderWrapper>
       </RainbowKitProvider>
