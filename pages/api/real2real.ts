@@ -1,5 +1,3 @@
-import { AuthMode } from '@/models/types'
-
 // NEXT
 import type { NextApiRequest, NextApiResponse } from 'next/types'
 
@@ -14,7 +12,6 @@ interface ApiRequest extends NextApiRequest {
     width: number
     height: number
     numFrames: number
-    authMode: AuthMode
   }
 }
 
