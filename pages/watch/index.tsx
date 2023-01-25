@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 // useMemo,
-import React, { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 // REDUX
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
