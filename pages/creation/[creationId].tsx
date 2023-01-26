@@ -20,9 +20,9 @@ import {
 import styled from 'styled-components';
 
 // COMPONENTS
-import CreationSocial from '@/components/Creation/CreationSocial/CreationSocial
-import CreationShare from '@/components/Creation/CreationShare/CreationShare
-import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress
+// import CreationSocial from '@/components/Creation/CreationSocial/CreationSocial'
+// import CreationShare from '@/components/Creation/CreationShare/CreationShare'
+// import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress'
 import CreationOverlay from '@/components/Creation/CreationOverlay/CreationOverlay'
 
 // LIBS
@@ -30,8 +30,7 @@ import Skeleton from 'react-loading-skeleton'; // , { SkeletonTheme }
 import 'react-loading-skeleton/dist/skeleton.css';
 
 // UI
-import { Image, Typography, Card } from 'antd';
-const { Text } = Typography;
+import { Image, Card } from 'antd';
 
 // ICONS
 // import { SyncOutlined } from '@ant-design/icons';
