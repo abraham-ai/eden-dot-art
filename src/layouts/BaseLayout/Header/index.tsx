@@ -96,6 +96,18 @@ const HeaderWrapper = styled.div`
   position: fixed;
   justify-content: space-between;
   width: 100%;
+  /*** CREATE BUTTON ***/
+  #create-button {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin-left: 15px;
+    padding: 10px 20px;
+    color: white;
+    background: #8C7CF0;
+    border-radius: 30px;
+  }
+  /*** NAV LINK ***/
   .nav-link-wrapper {
     padding: 0 10px;
   }
@@ -127,6 +139,7 @@ const HeaderWrapper = styled.div`
       display: flex;
       padding: 0 20px;
   }
+  /*** MENU ITEM ***/
   .menu-item {
     display: flex;
   }
@@ -198,18 +211,10 @@ export default function Header() {
                 onClick={handleCreateOpen}
                 size='middle'
                 icon={<AddIcon className='create-icon' fontSize={'medium'} />}
-                style={{
-                  marginLeft: 1.5,
-                  borderRadius: '30px',
-                  padding: '10px 20px',
-                  background: '#8C7CF0',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: 45,
-                }}
               >
-                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>Create</Text>
+                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
+                  Create
+                </Text>
               </Button>
             ) : null }
 
