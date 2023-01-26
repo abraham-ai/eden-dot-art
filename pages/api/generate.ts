@@ -4,9 +4,6 @@ import type { NextApiRequest, NextApiResponse } from 'next/types'
 // UTILS
 import { getGatewayResult } from '../../src/util/eden'
 
-// TYPES
-import { AuthMode } from '../../src/models/types'
-
 // SESSION
 import { withSessionRoute } from '@/util/withSession'
 
@@ -15,7 +12,6 @@ interface ApiRequest extends NextApiRequest {
     prompt: string
     width: number
     height: number
-    authMode: AuthMode
   }
 }
 

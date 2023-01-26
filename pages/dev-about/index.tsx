@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 // NAV
-import EdenDevFrontPage from '@/components/EdenArtFrontPage'
+import EdenDevFrontPage from '@/components/EdenArtFrontPage/EdenArtFrontPage'
 // import Footer from '@/components/Footer'
 // import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 

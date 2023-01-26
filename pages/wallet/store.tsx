@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 // COMPONENTS
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 
 // MUI
 import { Container } from '@mui/material' //  Button,

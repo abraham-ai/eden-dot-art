@@ -13,7 +13,7 @@ import { Box, styled } from '@mui/material'
 // Card,  Container
 
 // PAGES
-import EdenArtFrontPage from '@/components/EdenArtFrontPage'
+import EdenArtFrontPage from '@/components/EdenArtFrontPage/EdenArtFrontPage'
 
 // CSS
 // import BaseLayout from 'src/layouts/BaseLayout'
@@ -39,6 +39,16 @@ const OverviewWrapperStyles = styled(Box)(
     // background: ${theme.palette.common.white};
     flex: 1;
     overflow-x: hidden;
+
+    ::-moz-selection { /* Code for Firefox */
+      color: red;
+      background: yellow;
+    }
+
+    ::selection {
+      color: red;
+      background: yellow;
+    }
 `,
 )
 
