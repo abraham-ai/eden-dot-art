@@ -730,9 +730,11 @@ export function AppLink({ title, description, icon }) {
 export function ButtonLink({ text, link, color = 'white', textColor = 'white', type = '' }) {
   const { width } = useWindowDimensions()
 
+  const target = text === 'GARDEN' ? '_self' : '_blank';
+
   return (
     <Button
-      target="_blank"
+      target={target}
       shape={'round'}
       href={link}
       className={`cta-button ${type}`}
