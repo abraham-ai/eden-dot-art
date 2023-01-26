@@ -24,7 +24,6 @@ import styled from 'styled-components';
 // import CreationShare from '@/components/Creation/CreationShare/CreationShare'
 // import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress'
 import CreatorAddress from '@/components/Creator/CreatorAddress/CreatorAddress'
-import CreationOverlay from '@/components/Creation/CreationOverlay/CreationOverlay'
 
 // LIBS
 import Skeleton from 'react-loading-skeleton'; // , { SkeletonTheme } 
@@ -508,7 +507,6 @@ export default function Creation({
                 />
               )}
             </>
-            {/* <CreationOverlay creation={item} creatorAddress={address} /> */}
           </div>
         </div>
 
