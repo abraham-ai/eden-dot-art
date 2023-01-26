@@ -162,7 +162,11 @@ export default function CreationCardMinimal({ creation }) {
 
   const [modalOpen, setModalOpen] = useState(false)
   const handleModalOpen = () => {
-    router.push(`/creation/${creation._id}`, as, { shallow: true })
+    router.push(
+      `/creation/${creation._id}`, 
+      `/creation/${creation._id}`, 
+      { shallow: true }
+    )
     setModalOpen(true)
   }
 
@@ -243,7 +247,7 @@ export default function CreationCardMinimal({ creation }) {
                 padding: 20,
               }}
             >
-              <div style={{ overflowY: 'auto', maxHeight: 150 }}>
+              <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
                 <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
                   {'/create'}
                 </Text>
@@ -420,7 +424,7 @@ export default function CreationCardMinimal({ creation }) {
         open={modalOpen}
         mask
         maskClosable
-        onCancel={(e) => handleModalClose(e)}
+        onCancel={handleModalClose}
       >
         <>
           <div
