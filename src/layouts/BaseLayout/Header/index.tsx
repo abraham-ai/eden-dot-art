@@ -88,7 +88,7 @@ import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 // color: ${theme.header.textColor};
 // padding: ${theme.spacing(0, 2)};
 
-const HeaderWrapper = styled.div`
+const HeaderWrapperStyles = styled.div`
   right: 0;
   z-index: 6;
   background-color: white;
@@ -96,6 +96,10 @@ const HeaderWrapper = styled.div`
   position: fixed;
   justify-content: space-between;
   width: 100%;
+  @media (max-width: 930px) {
+    display: flex;
+    padding-left: 10px;
+  }
   /*** CREATE BUTTON ***/
   #create-button {
     display: flex;
@@ -196,7 +200,7 @@ export default function Header() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-        <HeaderWrapper id='header-wrapper'>
+        <HeaderWrapperStyles id='header-wrapper'>
 
           <Logo />
 
@@ -263,7 +267,7 @@ export default function Header() {
 
 
           </div>
-        </HeaderWrapper>
+        </HeaderWrapperStyles>
       </RainbowKitProvider>
     </WagmiConfig>
   )
