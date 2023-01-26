@@ -967,7 +967,7 @@ export default function EdenArtFrontPage() {
 
               <span className='description-wrapper'>
                 <Text className='description'>
-                  <i>For researchers and devs</i> Build applications with ease,
+                  <i>For developers</i> Build applications with ease,
                   connect new techniques and models to a shared ecosystem.
                 </Text>
               </span>

@@ -20,9 +20,6 @@ import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 // LIBS
 import Blockies from 'react-blockies'
 
-// COLORS
-// import { red } from '@mui/material/colors'
-
 // ICONS
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import CloseIcon from '@mui/icons-material/Close'
@@ -419,12 +416,13 @@ export default function CreationCardMinimal({ creation }) {
 
       <Modal
         width='100%'
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        bodyStyle={{ height: '100%' }}
         open={modalOpen}
-        mask
-        maskClosable
-        onCancel={handleModalClose}
+        centered
+        keyboard
+        // mask
+        // maskClosable
+        // onCancel={handleModalClose}
       >
         <>
           <div
@@ -440,221 +438,218 @@ export default function CreationCardMinimal({ creation }) {
             <CloseIcon className="close-icon" fontSize={'large'} />
           </div>
 
-          <div>
-            {/* styles={BoxModalStyle} */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
             <div
               style={{
+                overflowY: 'auto',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'flex-start',
               }}
             >
+              <img
+                className='creation-card'
+                src={imageFullURL}
+                alt="Card Media"
+                style={{
+                  height: 'auto',
+                  position: 'relative',
+                  minHeight: '512px',
+                  minWidth: '512px',
+                  maxHeight: '612px',
+                  maxWidth: '612px',
+                  paddingBottom: 20,
+                }}
+              />
+
               <div
                 style={{
-                  overflowY: 'auto',
                   display: 'flex',
+                  width: '100%',
                   flexDirection: 'column',
+                  alignItems: 'flex-start',
                 }}
               >
-                <img
-                  className='creation-card'
-                  src={imageFullURL}
-                  alt="Card Media"
-                  style={{
-                    height: 'auto',
-                    position: 'relative',
-                    minHeight: '512px',
-                    minWidth: '512px',
-                    maxHeight: '612px',
-                    maxWidth: '612px',
-                    paddingBottom: 20,
-                  }}
-                />
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-
-                    <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
-                      <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-                        <div style={{
-                              borderRadius: '50%',
-                              overflow: 'hidden',
-                              width: '32px',
-                              height: '32px',
-                              marginRight: 10,
-                        }}>
-                            <Blockies seed={address} />
-                        </div>
-                        <Text
-                          style={{
-                            color: '#111',
-                            fontWeight: 600,
-                            fontSize: '.8rem',
-                          }}
-                        >
-                          {displayAddress}
-                        </Text>
+                  <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+                      <div style={{
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            width: '32px',
+                            height: '32px',
+                            marginRight: 10,
+                      }}>
+                          <Blockies seed={address} />
                       </div>
-                    </Popover>
-                  </div>
-
-                  <Text
-                    style={{
-                      paddingTop: 20,
-                      color: '#111',
-                      fontWeight: 600,
-                      fontSize: '1.2rem',
-                    }}
-                  >
-                    {text_input}
-                  </Text>
+                      <Text
+                        style={{
+                          color: '#111',
+                          fontWeight: 600,
+                          fontSize: '.8rem',
+                        }}
+                      >
+                        {displayAddress}
+                      </Text>
+                    </div>
+                  </Popover>
                 </div>
-              </div>
 
-              {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                  padding: 0,
-                  mr: 1,
-                }}
-              >
-                <IconButton aria-label="bookmark" className="arrow-up">
-                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-                <IconButton aria-label="bookmark" className="arrow-down">
-                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-              </Box>
-              <IconButton
-                aria-label="share"
-                sx={{
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '50%',
-                  width: 'auto',
-                  mr: 1,
-                }}
-              >
-                <IosShareIcon />
-              </IconButton>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                }}
-              >
-                <IconButton aria-label="bookmark">
-                  <BookmarkBorderIcon />
-                </IconButton>
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
-            </Box> */}
-
-              {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
+                <Text
+                  style={{
+                    paddingTop: 20,
+                    color: '#111',
+                    fontWeight: 600,
+                    fontSize: '1.2rem',
+                  }}
                 >
-                <ExpandMoreIcon />
-              </ExpandMore> */}
-
-              <div>
-                {/* <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar
-                    alt="generator name"
-                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                  />
-                }
-                label={generator_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={`${width}x${height}`}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                    {currentGuildIcon}
-                  </Avatar>
-                }
-                label={guild_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                    <FaHashtag style={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={channel_name}
-                variant="outlined"
-              /> */}
-
-                {/* {generator_name ? (
-                <Tooltip title="Model Name">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="model name"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                      </Avatar>
-                    }
-                    label={generator_name}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null} */}
-
-                {/* {currentClipModel ? (
-                <Tooltip title="Clip Model">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="clip model"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.clip_model}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null} */}
+                  {text_input}
+                </Text>
               </div>
+            </div>
+
+            {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                background: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(16px)',
+                borderRadius: '25px',
+                width: 'auto',
+                padding: 0,
+                mr: 1,
+              }}
+            >
+              <IconButton aria-label="bookmark" className="arrow-up">
+                <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
+              </IconButton>
+              <IconButton aria-label="bookmark" className="arrow-down">
+                <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
+              </IconButton>
+            </Box>
+            <IconButton
+              aria-label="share"
+              sx={{
+                background: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(16px)',
+                borderRadius: '50%',
+                width: 'auto',
+                mr: 1,
+              }}
+            >
+              <IosShareIcon />
+            </IconButton>
+            <Box
+              sx={{
+                display: 'flex',
+                background: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(16px)',
+                borderRadius: '25px',
+                width: 'auto',
+              }}
+            >
+              <IconButton aria-label="bookmark">
+                <BookmarkBorderIcon />
+              </IconButton>
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            </Box>
+          </Box> */}
+
+            {/* <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+              >
+              <ExpandMoreIcon />
+            </ExpandMore> */}
+
+            <div>
+              {/* <Chip
+              sx={{ m: 0.5 }}
+              avatar={
+                <Avatar
+                  alt="generator name"
+                  src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
+                />
+              }
+              label={generator_name}
+              variant="outlined"
+            />
+            <Chip
+              sx={{ m: 0.5 }}
+              avatar={
+                <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
+                  <OpenInFullIcon sx={{ fontSize: '1rem' }} />
+                </Avatar>
+              }
+              label={`${width}x${height}`}
+              variant="outlined"
+            />
+            <Chip
+              sx={{ m: 0.5 }}
+              avatar={
+                <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
+                  {currentGuildIcon}
+                </Avatar>
+              }
+              label={guild_name}
+              variant="outlined"
+            />
+            <Chip
+              sx={{ m: 0.5 }}
+              avatar={
+                <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
+                  <FaHashtag style={{ fontSize: '1rem' }} />
+                </Avatar>
+              }
+              label={channel_name}
+              variant="outlined"
+            /> */}
+
+              {/* {generator_name ? (
+              <Tooltip title="Model Name">
+                <Chip
+                  sx={{ m: 0.5 }}
+                  avatar={
+                    <Avatar
+                      alt="model name"
+                      src="/static/images/avatar/1.jpg"
+                    >
+                      <MemoryIcon sx={{ fontSize: '1.5rem' }} />
+                    </Avatar>
+                  }
+                  label={generator_name}
+                  variant="outlined"
+                />
+              </Tooltip>
+            ) : null} */}
+
+              {/* {currentClipModel ? (
+              <Tooltip title="Clip Model">
+                <Chip
+                  sx={{ m: 0.5 }}
+                  avatar={
+                    <Avatar
+                      alt="clip model"
+                      src="/static/images/avatar/1.jpg"
+                    >
+                      <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
+                    </Avatar>
+                  }
+                  label={creation.config.clip_model}
+                  variant="outlined"
+                />
+              </Tooltip>
+            ) : null} */}
             </div>
           </div>
         </>
