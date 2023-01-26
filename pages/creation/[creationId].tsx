@@ -23,6 +23,7 @@ import styled from 'styled-components';
 // import CreationSocial from '@/components/Creation/CreationSocial/CreationSocial'
 // import CreationShare from '@/components/Creation/CreationShare/CreationShare'
 // import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress'
+import CreatorAddress from '@/components/Creator/CreatorAddress/CreatorAddress'
 import CreationOverlay from '@/components/Creation/CreationOverlay/CreationOverlay'
 
 // LIBS
@@ -76,6 +77,7 @@ const CreationStyle = styled.article`
     width: 100%;
     height: 100%;
     position: absolute;
+    background: yellow;
     z-index: 0;
     left: 0;
     top: 0;
@@ -452,29 +454,23 @@ export default function Creation({
   return (
     <CreationStyle id="creation">
       <Card className={`cr-card ${size}`}>
-        {sha ? (
-          <Link
-            className="cr-main-link"
-            href={{
-              pathname: `/creation/${sha}`,
-              search: location.search,
-            }}
-          />
-        ) : null}
-        <div className="cr-content">
+        
+        {/* {sha ? (
+          <Link className='cr-main-link'
+            href={`/creation/${sha}`}
+          />) : null } */}
+
+        <div className='cr-content'>
+
           {width < 560 ? (
-            <Link
-              className="cr-account-link"
-              href={{
-                pathname: `${PRD_URL + sha}`,
-                search: location.search,
-              }}
-            >
-              <span className="cr-eth-url">
+            <Link className='cr-account-link' href={`${PRD_URL + sha}`}>
+              <span className='cr-eth-url'>
                 <CreatorAddress address={address} />
               </span>
             </Link>
           ) : null}
+
+
           <div
             className={isHovering ? 'hover cr-img-wrapper' : 'cr-img-wrapper'}
             onMouseOver={handleMouseOver}
@@ -485,9 +481,9 @@ export default function Creation({
                 item.status !== 'failed' ? (
                   <div className="cr-img-wrapper">
                     <Image
-                      className="cr-img"
+                      // className="cr-img"
                       alt={text_input}
-                      style={{ display: 'inline-block' }}
+                      // style={{ display: 'inline-block' }}
                       src={shaURL(item)}
                       preview={{ visible: false }}
                       onClick={() => setVisible(true)}
@@ -512,9 +508,10 @@ export default function Creation({
                 />
               )}
             </>
-            <CreationOverlay creation={item} creatorAddress={address} />
+            {/* <CreationOverlay creation={item} creatorAddress={address} /> */}
           </div>
         </div>
+
       </Card>
       <div className="creation-current-stat">{currentStat(sort_by)}</div>
     </CreationStyle>
