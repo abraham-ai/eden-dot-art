@@ -1,5 +1,5 @@
 // useEffec
-import { useState } from 'react' // useMemo,
+import { useState, useEffect } from 'react' // useMemo,
 import type { ReactElement } from 'react'
 
 // GQL
@@ -30,12 +30,17 @@ import Loader from '@/components/Loader/Loader'
 // GQL Creations query to retreive all Creations //
 import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
 
+import { useInView } from 'react-intersection-observer'
+
 export default function CreationsPage() {
+  const PAGE_LEN = 16
   const [breakpointCols] = useState(3) // setBreakpointCols
+  const [index, setIndex] = useState(PAGE_LEN)
+
   const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
     variables: {
       offset: 0,
-      limit: 16,
+      limit: PAGE_LEN,
     },
   })
 
@@ -46,22 +51,35 @@ export default function CreationsPage() {
   //   console.log({ data })
   // }, [data])
 
-  const onLoadMore = () =>
-    fetchMore({
-      variables: {
-        offset: 10,
-        limit: 10, //data.length
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev
-        return {
-          creationsForHome: [
-            ...prev.creationsForHome,
-            ...fetchMoreResult.creationsForHome,
-          ],
-        }
-      },
-    })
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
+
+  useEffect(() => {
+    const loadMore = () => {
+      fetchMore({
+        variables: {
+          offset: index,
+          limit: PAGE_LEN, //data.length
+        },
+
+        updateQuery: (prev, { fetchMoreResult }) => {
+          setIndex(index + PAGE_LEN)
+          if (!fetchMoreResult) return prev
+          return {
+            creationsForHome: [
+              ...prev.creationsForHome,
+              ...fetchMoreResult.creationsForHome,
+            ],
+          }
+        },
+      })
+    }
+
+    if (inView) {
+      loadMore()
+    }
+  }, [inView, fetchMore, index])
 
   // console.log(data)
 
@@ -97,10 +115,6 @@ export default function CreationsPage() {
   //     // console.log('USE MEMO DEFAULT!!!')
   //   }
   // }, [width])
-
-  // console.log(breakpointCols)
-  // console.log(getBreakpointCols)
-  // console.log({ data })
 
   return (
     <>
@@ -143,17 +157,10 @@ export default function CreationsPage() {
                 ))}
               </QueryResult>
             </Masonry>
-            <a
-              href="#"
-              onClick={onLoadMore}
-              style={{ color: 'black', paddingBottom: 10 }}
-            >
-              Load More
-            </a>
           </Box>
         )}
+        <div ref={ref}></div>
       </Container>
-
       {/* breakpointCols */}
 
       {/* <Container maxWidth="xl">
