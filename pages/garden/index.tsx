@@ -25,12 +25,20 @@ import { useInView } from 'react-intersection-observer'
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
+// STYLES
+import styled from 'styled-components'
+
 // CONSTS
 // import { DEVICE_WIDTH } from '@/const/device-width'
 
 // HOOKS
 // import useWindowDimensions from '@/hooks/useWindowDimensions'
 // WRITE useBreakpoints from '@/hooks/useBreakpoints'
+
+
+const CreationsGridStyles = styled.section`
+  width: 100vw;
+`
 
 
 export default function CreationsPage() {
@@ -118,7 +126,7 @@ export default function CreationsPage() {
         <title>Creations</title>
       </Head>
 
-      <section>
+      <CreationsGridStyles id='creations-grid'>
 
         {data?.creationsForHome.length < 1 ? (
           <div style={{ background: 'yellow', height: '100%' }}>
@@ -144,7 +152,7 @@ export default function CreationsPage() {
           </div>
         )}
         <div ref={ref}></div>
-      </section>
+      </CreationsGridStyles>
     </>
   )
 }
