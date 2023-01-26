@@ -1,12 +1,17 @@
 import { FC, useState, createContext, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material';
 import { themeCreator } from './base';
-import { StylesProvider } from '@mui/styles';
 
-export const ThemeContext = createContext((_themeName: string): void => {});
+// ANTD
+import { ConfigProvider, theme } from 'antd'
+const { defaultAlgorithm, darkAlgorithm } = theme;
+
+export const ThemeContext = createContext((_themeName: string): void => null );
+
 
 const ThemeProviderWrapper: FC = (props) => {
   const [themeName, _setThemeName] = useState('NebulaFighterTheme');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const curThemeName =
@@ -21,11 +26,13 @@ const ThemeProviderWrapper: FC = (props) => {
   };
 
   return (
-    <StylesProvider injectFirst>
+    <ConfigProvider>
       <ThemeContext.Provider value={setThemeName}>
-        <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+        <ThemeProvider theme={theme}>
+          {props.children}
+        </ThemeProvider>
       </ThemeContext.Provider>
-    </StylesProvider>
+    </ConfigProvider>
   );
 };
 

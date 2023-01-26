@@ -2,20 +2,16 @@
 
 // NAV
 import Head from 'next/head'
+import Footer from '@/components/Footer/Footer'
+// import ExtesndedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
 
-// NAV
-import Footer from '@/components/Footer'
-import ExtendedSidebarLayout from '@/layouts/ExtendedSidebarLayout'
-
-// MUI
-import { Container, Typography } from '@mui/material'
-// styled,
-// IconButton,
-// IconButtonProps,
-// Collapse,
-// Box,
+// ANTD
+import { Typography } from 'antd'
+const { Text } = Typography
 
 // ICONS
+import { PlusOutlined } from '@ant-designs/icons'
+
 // import AddIcon from '@mui/icons-material/Add'
 
 // interface ExpandMoreProps extends IconButtonProps {
@@ -45,10 +41,10 @@ function EdenDevFAQPage() {
       <Head>
         <title>Eden.Dev | FAQ</title>
       </Head>
-      <Container maxWidth="lg" sx={{ m: 5 }}>
-        <Typography variant={'h2'} sx={{ mb: 2 }}>
+      <div style={{ margin: 5 }}>
+        <Text style={{ marginBottom: 20 }}>
           FAQ
-        </Typography>
+        </Text>
         {/* {isConnected ? (
           <>
             <Typography variant={'h3'}>
@@ -922,7 +918,7 @@ function EdenDevFAQPage() {
             </Collapse>
           </Box>
         </section> */}
-      </Container>
+      </div>
       <Footer />
     </>
   )

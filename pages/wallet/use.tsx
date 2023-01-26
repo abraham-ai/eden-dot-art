@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 
 // MUI
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer/Footer'
 import {
   Box,
   Button,

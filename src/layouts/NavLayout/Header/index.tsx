@@ -4,31 +4,21 @@ import { useEffect } from 'react'
 // ROUTER
 // import Link from 'next/link'
 
-// LIBS
-import Blockies from 'react-blockies'
-
 // REDUX
 import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
 import { useAppDispatch } from '@/hooks/hooks'
 // useAppSelector
 
-// MUI
-import {
-  alpha,
-  // Button,
-  Box,
-  lighten,
-  styled,
-  useTheme,
-  // Typography,
-} from '@mui/material'
+// LIBS
+import Blockies from 'react-blockies'
 
 // COMPONENTS
 // import CreateModal from '@/components/CreateModal'
 // import LoginButton from '@/components/LoginButton'
 // import CreateSignInJWT from '@/components/CreateSignInJWT'
 // import Logo from '@/components/Logo'
-import SignInJWT from '@/components/SignInJWT'
+import ThemeToggle from '@/components/ThemeToggle'
+import SignInJWT from '@/components/SignInJWT/SigninJWT'
 
 // WEB3
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi' //  WagmiProvider, chain,
@@ -45,6 +35,9 @@ import {
 } from '@rainbow-me/rainbowkit'
 
 // apiProvider,
+
+// STYLES
+import styled from 'styled-components' 
 
 const { provider, chains } = configureChains(
   [mainnet],
@@ -66,41 +59,40 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
   return <Blockies seed={address} />
 }
 
-const HeaderWrapper = styled(Box)(
-  ({ theme }) => `
-        height: ${theme.header.height};
-        color: ${theme.header.textColor};
-        padding: ${theme.spacing(0, 2)};
-        right: 0;
-        z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
-        backdrop-filter: blur(3px);
-        position: fixed;
-        justify-content: space-between;
-        width: 100%;
-        .nav-link-wrapper {
-          padding: 0 10px;
-        }
-        .nav-link-wrapper:hover {
-          color: white;
-        }
-        .nav-link-text:hover {
-          cursor: pointer;
-          color: white;
-        }
-        @media (min-width: ${theme.breakpoints.values.lg}px) {
-            // left: ${theme.sidebar.width};
-            left: 0;
-            width: auto;
-        }
-        .menu-item {
-          display: flex;
-        }
-`,
-)
+const HeaderStyles = styled.section`
+    right: 0;
+    z-index: 6;
+    backdrop-filter: blur(3px);
+    position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    .nav-link-wrapper {
+      padding: 0 10px;
+    }
+    .nav-link-wrapper:hover {
+      color: white;
+    }
+    .nav-link-text:hover {
+      cursor: pointer;
+      color: white;
+    }
+    .menu-item {
+      display: flex;
+    }
+`
+
+// @media (min-width: ${theme.breakpoints.values.lg}px) {
+//   // left: ${theme.sidebar.width};
+//   left: 0;
+//   width: auto;
+// }
+// background-color: ${alpha(theme.header.background, 0.95)};
+// height: ${theme.header.height};
+// color: ${theme.header.textColor};
+// padding: ${theme.spacing(0, 2)};
+
 
 export default function Header() {
-  const theme = useTheme()
 
   // WAGMI HOOKS
   const { isConnected } = useAccount()
@@ -132,31 +124,11 @@ export default function Header() {
   // }, [isWeb3WalletConnected, isWeb3AuthSuccess])
 
   return (
-    <HeaderWrapper
-      display="flex"
-      alignItems="center"
-      className="header-wrapper"
-      sx={{
-        boxShadow:
-          theme.palette.mode === 'dark'
-            ? `0 1px 0 ${alpha(
-                lighten(theme.colors.primary.main, 0.7),
-                0.15,
-              )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
-            : `0px 2px 8px -3px ${alpha(
-                theme.colors.alpha.black[100],
-                0.2,
-              )}, 0px 5px 22px -4px ${alpha(
-                theme.colors.alpha.black[100],
-                0.1,
-              )}`,
-        backgroundColor: 'white',
-      }}
-    >
+    <HeaderStyles className="header-wrapper">
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-          <Box
-            sx={{
+          <div
+            style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -167,13 +139,15 @@ export default function Header() {
             {/* <Logo name="eden" /> */}
             {/* {handleAccountNav()} */}
 
-            <Box sx={{ display: 'flex' }}>
+
+            <div style={{ display: 'flex' }}>
+              <ThemeToggle />
               <SignInJWT />
               <ConnectButton />
-            </Box>
-          </Box>
+            </div>
+          </div>
         </RainbowKitProvider>
       </WagmiConfig>
-    </HeaderWrapper>
+    </HeaderStyles>
   )
 }

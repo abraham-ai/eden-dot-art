@@ -1,6 +1,9 @@
 import { useState } from 'react'
 // , { useEffect, useState, useCallback, useRef }
 
+// TYPES
+import type { ReactElement, ReactNode } from 'react';
+
 // REDUX
 import { useAppSelector } from '@/hooks/hooks'
 
@@ -19,10 +22,11 @@ import Blockies from 'react-blockies'
 
 // CSS
 import styled from 'styled-components'
+import BaseLayout from 'src/layouts/BaseLayout'
 
 // COMPONENTS
 import CreatorDashboard from '@/components/Profile/ProfileDashboard/ProfileDashboard'
-import CreationsGrid from '@/components/CreationsGrid'
+import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // CONSTANTS
 // import { NETWORKS } from '../../constants'
@@ -139,7 +143,7 @@ const CreatorStyles = styled.div`
 
 
 
-export default function Creator({ profileAddress='0x000', profileName='Custom Name' }) {
+export default function CreatorPage({ profileAddress='0x000', profileName='Custom Name' }) {
 
     const [isFollowing, setIsFollowing] = useState(false)
 
@@ -329,3 +333,7 @@ return (
      </>
    )
  }
+
+ CreatorPage.getLayout = function getLayout(page: ReactElement) {
+  return <BaseLayout>{page}</BaseLayout>
+}

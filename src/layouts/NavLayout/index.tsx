@@ -1,9 +1,6 @@
 import { FC, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-// MUI
-import { Box } from '@mui/material'
-
 // LAYOUTS
 import Header from '@/layouts/NavLayout/Header'
 
@@ -13,9 +10,9 @@ interface NavLayoutProps {
 
 const NavLayout: FC<NavLayoutProps> = ({ children }) => {
   return (
-    <Box
+    <div
       className="nav-layout"
-      sx={{
+      style={{
         display: 'flex',
         flex: 1,
         width: '100%',
@@ -24,7 +21,7 @@ const NavLayout: FC<NavLayoutProps> = ({ children }) => {
     >
       <Header />
       {children}
-    </Box>
+    </div>
   )
 }
 

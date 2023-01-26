@@ -18,8 +18,8 @@ import { Box, Container } from '@mui/material'
 import Masonry from '@mui/lab/Masonry'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/CreationCardMinimal'
-import Loader from '@/components/Loader'
+import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+import Loader from '@/components/Loader/Loader'
 
 // CONSTS
 // import { DEVICE_WIDTH } from '@/const/device-width'
@@ -123,14 +123,16 @@ export default function CreationsPage() {
         )} */}
 
         {data?.creationsForHome.length < 1 ? (
-          <Loader />
+          <div style={{ background: 'yellow', height: '100%' }}>
+            <Loader />
+          </div>
         ) : (
           <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
             <Masonry
               id="masonry"
               columns={breakpointCols}
               spacing={2}
-              sx={{ m: 0 }}
+              sx={{ m: 0, alignContent: 'center' }}
             >
               <QueryResult error={error} loading={loading} data={data}>
                 {data?.creationsForHome?.map((creation, index) => (
