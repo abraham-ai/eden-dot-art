@@ -247,7 +247,7 @@ export default function CreationCardMinimal({ creation }) {
                     width={512}
                     alt="Eden Creation"
                     layout="responsive"
-                    style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
+                    // style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
                   />
             
 
