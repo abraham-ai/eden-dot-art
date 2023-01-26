@@ -371,17 +371,18 @@ const EdenArtFrontPageStyles = styled.section`
     border-color: white;
   }
   .cta-button.accent-link {
-    box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #8c7cf0 1px 1px 25px 0px;
   }
   /*** CTA MAIN LINK ***/
   .cta-button.main-link {
-    box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #8c7cf0 1px 1px 25px 0px;
     background: white;
     color: #0c163b;
   }
   .cta-button.main-link:hover {
     color: #5f47fa;
-    background: rgb(140, 124, 240);
+    background: #473ff4 !important;
+    // background: rgb(140, 124, 240);
   }
   @media (max-width: 700px) {
     .cta-button.main-link {
@@ -390,7 +391,7 @@ const EdenArtFrontPageStyles = styled.section`
     .cta-button.main-link:hover {
       color: white;
       background: #473ff4 !important;
-      box-shadow: #8c7cf0 1px 1px 25px 0px !important;
+      // box-shadow: #8c7cf0 1px 1px 25px 0px !important;
     }
   }
   /*** CTA SECONDARY LINK ***/
@@ -414,7 +415,7 @@ const EdenArtFrontPageStyles = styled.section`
     margin: 0;
     text-decoration: none;
     border-radius: 60px;
-    box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #8c7cf0 1px 1px 25px 0px;
   }
   .cta-btn-main.main-link:hover {
     background: #473ff4;
@@ -472,6 +473,7 @@ const EdenArtFrontPageStyles = styled.section`
       margin-top: 100px;
       padding: 0;
       width: 100%;
+      align-items: center;
     }
 
   }
