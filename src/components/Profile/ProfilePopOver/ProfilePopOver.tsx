@@ -36,7 +36,7 @@ const ProfilePopOverStyles = styled.div`
 
 
 
-const ProfilePopOver = ({ profileAddress = '' }) => {
+const ProfilePopOver = ({ profileAddress = '', creationAddress = '' }) => {
     const isMounted = useIsMounted()
     const router = useRouter()
 
@@ -54,7 +54,7 @@ const ProfilePopOver = ({ profileAddress = '' }) => {
 
     if (!address || !isMounted) return null
 
-    const formattedAddress = formatAddress(profileAddress)
+    const formattedAddress = formatAddress(creationAddress)
 
     const handleClick = (e) => {
         e.preventDefault()
