@@ -20,7 +20,10 @@ import { store } from '@/redux/store'
 // ROUTER
 import Router from 'next/router'
 import nProgress from 'nprogress'
+
+// CSS
 import 'nprogress/nprogress.css'
+import 'src/theme/base.css'
 
 // STYLES
 // import { colors, createTheme } from '@mui/material'
