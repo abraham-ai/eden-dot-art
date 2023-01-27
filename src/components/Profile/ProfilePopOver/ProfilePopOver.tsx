@@ -98,7 +98,7 @@ const ProfilePopOver = ({ profileAddress = '', creationAddress = '' }) => {
                      ? <>
                          <Title level={4} style={{ fontWeight: 'bold', margin: 0, padding: 0 }}>{ensNameData}</Title>
                          <span>
-                             <Text style={{ marginRight: 10 }}>{formattedAddress}</Text>
+                             <Text style={{ marginRight: 10, fontWeight: 600 }}>{formattedAddress}</Text>
                              {/*<Text style={{ padding: '5px 10px', fontSize: '11px', borderRadius: '10px', color: 'rgb(83, 100, 113)', background: 'rgb(239, 243, 244)'}}>Follows You</Text>*/}
                          </span>
                        </>
