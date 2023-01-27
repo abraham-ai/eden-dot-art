@@ -513,9 +513,10 @@ export default function CreationCardMinimal({ creation }) {
                         </div>
                         <Text
                           style={{
-                            color: '#111',
+                            // color: '#111',
                             fontWeight: 600,
                             fontSize: '.8rem',
+                            color: 'white'
                           }}
                         >
                           {displayAddress}
