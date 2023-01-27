@@ -1,4 +1,4 @@
-const MINIO_URL = 'https://minio.aws.abraham.fun'
+const MINIO_URL = 'https://minio.aws.abraham.fun/creations-prd'
 
 export default function shaURL(creation) {
     if (creation?.sha) {
