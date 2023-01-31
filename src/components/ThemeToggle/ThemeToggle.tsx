@@ -1,7 +1,8 @@
-// import react from 'react'
+import React from 'react'
 
 // REDUX
-// import { useAppDispatch } from '@/hooks/hooks'
+import { useAppDispatch } from '@/hooks/hooks'
+import { setTheme } from '@/redux/slices/themeSlice'
 
 // ANTD
 import { Switch } from 'antd'
@@ -14,15 +15,16 @@ import { BsFillMoonFill, BsSunFill } from 'react-icons/bs';
 
 export default function ThemeToggle() {
 
-	// const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
 	const onChange = (checked: boolean) => {
-		console.log(`switch to ${checked}`);
+		checked 
+			? 
+				dispatch(setTheme((previousValue) => !previousValue ))
+			: 
+				null
+		// console.log(`switch to ${checked}`);
 	};
-
-	// const handleToggle = () => {
-	// 	dispatch(setTheme((previousValue) => !previousValue ))
-	// }
 
 	return (
 			<Switch 

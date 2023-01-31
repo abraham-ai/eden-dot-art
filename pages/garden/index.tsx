@@ -72,6 +72,7 @@ export default function CreationsPage() {
         updateQuery: (prev, { fetchMoreResult }) => {
           setIndex(index + PAGE_LEN)
           if (!fetchMoreResult) return prev
+          if (typeof prev === 'undefined') return null
           return {
             creationsForHome: [
               ...prev.creationsForHome,

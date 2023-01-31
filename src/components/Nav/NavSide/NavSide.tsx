@@ -7,7 +7,7 @@ import Link from 'next/link'
 import styled from 'styled-components';
 
 // UI
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu, Button, Col } from 'antd';
 import type { MenuProps } from 'antd';
 const { Sider } = Layout;
 
@@ -330,6 +330,71 @@ export default function NavSide() {
                   </div>
                 </Link>
               </Item>
+
+
+              <Col>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Daily Theme</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Abstract</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Environments</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Characters</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Image Prompts</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+                <Item key='/following'>
+                  <Link href='/following'>
+                    <div className='link-wrapper'>
+                      <span className='icon-wrapper'>
+                        <FiUsers />
+                      </span>
+                      {width > 959 ? <span className='nav-link-text'>Multi-Prompts</span> : null}
+                    </div>
+                  </Link>
+                </Item>
+
+              </Col>
 
               {/* {true ? (
                 <>

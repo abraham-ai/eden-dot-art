@@ -5,12 +5,13 @@ import styled from 'styled-components'
 
 // NEXTJS
 import Image from 'next/image'
+import Link from 'next/link'
 
 // ROUTER
 import { useRouter } from 'next/router'
 
 // ANTD
-import { Popover, Modal, Typography } from 'antd'
+import { Popover, Modal, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -28,7 +29,8 @@ import CloseIcon from '@mui/icons-material/Close'
 // import { FaDiscord } from 'react-icons/fa'
 // FaHashtag
 // import { HiOutlineSparkles } from 'react-icons/hi'
-// FaRetweet,
+import { FaRetweet } from 'react-icons/fa'
+
 // import { AiOutlineFire } from 'react-icons/ai'
 
 // META ICONS
@@ -63,7 +65,8 @@ const CardStyles = styled.section`
     }
     #creation-card:hover {
       transform: unset;
-      cursor: zoom-in;
+      cursor: pointer;
+      // cursor: zoom-in;
     }
     #creation-card:hover .creation-content {
       display: flex;
@@ -158,21 +161,27 @@ export default function CreationCardMinimal({ creation }) {
   creation.generator === undefined ? 'none' : creation.generator
 
   const [modalOpen, setModalOpen] = useState(false)
-  const handleModalOpen = () => {
-    router.push(
-      `/creation/${creation._id}`, 
-      `/creation/${creation._id}`, 
-      { shallow: true }
-    )
+
+  // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  const handleModalOpen = (
+   ) => { 
+    // event.preventDefault()
+    // router.push(
+    //   `/creation/[creationId]`,
+    //   `/creation/${creation.id}`,
+    //   { shallow: true }
+    // )
+
     setModalOpen(true)
   }
 
   const handleModalClose = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
+    // event.preventDefault()
     // console.log('handleCardClose!')
     // console.log(event)
-    router.push('/garden')
+    router.push('/garden', undefined, { scroll: false })
     event ? setModalOpen(false) : null
   }
 
@@ -223,34 +232,273 @@ export default function CreationCardMinimal({ creation }) {
 
   return (
     <CardStyles>
-      <article id="creation-card" onClick={handleModalOpen}>
-        <div style={{ position: 'relative' }}>
-          <Image
-            src={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
-            height={512}
-            width={512}
-            alt="Eden Creation"
-            layout="responsive"
-            style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
-          />
+        <article id="creation-card" >
+            <Link 
+              href={`/garden?creationId=${creation.id}`} 
+              as={`/creation/${creation.id}`}
+              scroll={false}>
+          {/* onClick={handleModalOpen} */}
+          <div style={{ position: 'relative' }}>
 
-          <article className="creation-content">
+                <>
+                <Image
+                    src={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
+                    height={512}
+                    width={512}
+                    alt="Eden Creation"
+                    layout="responsive"
+                    // style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
+                  />
+            
+
+                  <article className="creation-content">
+                    <div
+                      style={{
+                        borderRadius: '15px',
+                        margin: 10,
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        backdropFilter: 'blur(16px)',
+                        padding: 20,
+                      }}
+                    >
+                      <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
+                        <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
+                          {'/create'}
+                        </Text>
+                        <Text style={{ color: 'white' }}>
+                          {text_input}
+                        </Text>
+
+                            <Popover content={<ProfilePopOver profileAddress={address} creationAddress={creation.source} />}  placement="bottomLeft">
+                              <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+                                <div style={{
+                                      borderRadius: '50%',
+                                      overflow: 'hidden',
+                                      width: '32px',
+                                      height: '32px',
+                                      marginRight: 10,
+                                }}>
+                                    <Blockies seed={address} />
+                                </div>
+                                <Text>{displayAddress}</Text>
+                              </div>
+                            </Popover>
+                      </div>
+                    </div>
+
+                    <div className='creation-actions'>
+                      {/* <Button>
+                        <FaRetweet />
+                      </Button> */}
+                      {/* </IconButton>
+                      <IconButton aria-label="recreation"> */}
+                      {/* </IconButton> */}
+
+                      {/* <Box
+                        sx={{
+                          display: 'flex',
+                          background: 'rgba(0, 0, 0, 0.5)',
+                          backdropFilter: 'blur(16px)',
+                          borderRadius: '25px',
+                          width: 'auto',
+                          padding: 0,
+                          mr: 1,
+                        }}
+                      >
+                        <IconButton aria-label="bookmark" className="arrow-up">
+                          <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
+                        </IconButton>
+                        <IconButton aria-label="bookmark" className="arrow-down">
+                          <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
+                        </IconButton>
+                      </Box>
+
+                      <IconButton
+                        aria-label="share"
+                        sx={{
+                          background: 'rgba(0, 0, 0, 0.5)',
+                          backdropFilter: 'blur(16px)',
+                          borderRadius: '50%',
+                          width: 'auto',
+                          mr: 1,
+                        }}
+                      >
+                        <IosShareIcon />
+                      </IconButton> */}
+
+                      {/* <ExpandMore
+                        expand={expanded}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                        >
+                        <ExpandMoreIcon />
+                      </ExpandMore> */}
+
+                      {/* <Box
+                        sx={{
+                          display: 'flex',
+                          background: 'rgba(0, 0, 0, 0.5)',
+                          backdropFilter: 'blur(16px)',
+                          borderRadius: '25px',
+                          width: 'auto',
+                        }}
+                      >
+                        <IconButton aria-label="bookmark">
+                          <BookmarkBorderIcon />
+                        </IconButton>
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      </Box> */}
+                    </div>
+                  </article>
+                </>
+
+          </div>
+
+            </ Link>
+
+          {/* COLLAPSE */}
+          {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar
+                    alt="generator name"
+                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
+                  />
+                }
+                label={creation.generator.name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
+                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={`${width}x${height}`}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
+                    {currentGuildIcon}
+                  </Avatar>
+                }
+                label={guild_name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
+                    <FaHashtag style={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={channel_name}
+                variant="outlined"
+              />
+
+              {generator_name ? (
+                <Tooltip title="Model Name">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar alt="model name" src="/static/images/avatar/1.jpg">
+                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
+                      </Avatar>
+                    }
+                    label={creation.config.generator_name}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null}
+
+              {currentClipModel ? (
+                <Tooltip title="Clip Model">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
+                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
+                      </Avatar>
+                    }
+                    label={creation.config.clip_model}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null}
+            </CardContent>
+          </Collapse> */}
+        </article>
+
+        <Modal
+          width='100%'
+          bodyStyle={{ height: '100%' }}
+          open={creation.id === router.query.creationId ? !!router.query.creationId : false}
+          centered
+          keyboard
+          // mask
+          // maskClosable
+          onCancel={handleModalClose}
+        >
+          <>
+            <div
+              className="close-icon-wrapper"
+              style={{
+                position: 'fixed',
+                top: '10px',
+                right: '10px',
+                color: 'black',
+              }}
+              onClick={(e) => handleModalClose(e)}
+            >
+              <CloseIcon className="close-icon" fontSize={'large'} />
+            </div>
+
             <div
               style={{
-                borderRadius: '15px',
-                margin: 10,
-                background: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(16px)',
-                padding: 20,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
               }}
             >
-              <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
-                <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
-                  {'/create'}
-                </Text>
-                <Text style={{ color: 'white' }}>
-                  {text_input}
-                </Text>
+              <div
+                style={{
+                  overflowY: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <img
+                  className='creation-card'
+                  src={imageFullURL}
+                  alt="Card Media"
+                  style={{
+                    height: 'auto',
+                    position: 'relative',
+                    minHeight: '512px',
+                    minWidth: '512px',
+                    maxHeight: '612px',
+                    maxWidth: '612px',
+                    paddingBottom: 20,
+                  }}
+                />
+
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'flex-start' }}>
 
                     <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
                       <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
@@ -263,19 +511,35 @@ export default function CreationCardMinimal({ creation }) {
                         }}>
                             <Blockies seed={address} />
                         </div>
-                        <Text>{displayAddress}</Text>
+                        <Text
+                          style={{
+                            // color: '#111',
+                            fontWeight: 600,
+                            fontSize: '.8rem',
+                            color: 'white'
+                          }}
+                        >
+                          {displayAddress}
+                        </Text>
                       </div>
                     </Popover>
+                  </div>
+
+                  <Text
+                    style={{
+                      paddingTop: 20,
+                      color: '#111',
+                      fontWeight: 600,
+                      fontSize: '1.2rem',
+                    }}
+                  >
+                    {text_input}
+                  </Text>
+                </div>
               </div>
-            </div>
 
-            <div className='creation-actions'>
-              {/* </IconButton>
-              <IconButton aria-label="recreation">
-                <FaRetweet />
-              </IconButton> */}
-
-              {/* <Box
+              {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box
                 sx={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
@@ -293,7 +557,6 @@ export default function CreationCardMinimal({ creation }) {
                   <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
                 </IconButton>
               </Box>
-
               <IconButton
                 aria-label="share"
                 sx={{
@@ -305,18 +568,8 @@ export default function CreationCardMinimal({ creation }) {
                 }}
               >
                 <IosShareIcon />
-              </IconButton> */}
-
-              {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                >
-                <ExpandMoreIcon />
-              </ExpandMore> */}
-
-              {/* <Box
+              </IconButton>
+              <Box
                 sx={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
@@ -331,348 +584,119 @@ export default function CreationCardMinimal({ creation }) {
                 <IconButton aria-label="settings">
                   <MoreVertIcon />
                 </IconButton>
-              </Box> */}
-            </div>
-          </article>
-        </div>
+              </Box>
+            </Box> */}
 
-        {/* COLLAPSE */}
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar
-                  alt="generator name"
-                  src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                />
-              }
-              label={creation.generator.name}
-              variant="outlined"
-            />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                  <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                </Avatar>
-              }
-              label={`${width}x${height}`}
-              variant="outlined"
-            />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                  {currentGuildIcon}
-                </Avatar>
-              }
-              label={guild_name}
-              variant="outlined"
-            />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                  <FaHashtag style={{ fontSize: '1rem' }} />
-                </Avatar>
-              }
-              label={channel_name}
-              variant="outlined"
-            />
-
-            {generator_name ? (
-              <Tooltip title="Model Name">
-                <Chip
-                  sx={{ m: 0.5 }}
-                  avatar={
-                    <Avatar alt="model name" src="/static/images/avatar/1.jpg">
-                      <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                    </Avatar>
-                  }
-                  label={creation.config.generator_name}
-                  variant="outlined"
-                />
-              </Tooltip>
-            ) : null}
-
-            {currentClipModel ? (
-              <Tooltip title="Clip Model">
-                <Chip
-                  sx={{ m: 0.5 }}
-                  avatar={
-                    <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                      <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                    </Avatar>
-                  }
-                  label={creation.config.clip_model}
-                  variant="outlined"
-                />
-              </Tooltip>
-            ) : null}
-          </CardContent>
-        </Collapse> */}
-      </article>
-
-      <Modal
-        width='100%'
-        bodyStyle={{ height: '100%' }}
-        open={modalOpen}
-        centered
-        keyboard
-        // mask
-        // maskClosable
-        // onCancel={handleModalClose}
-      >
-        <>
-          <div
-            className="close-icon-wrapper"
-            style={{
-              position: 'fixed',
-              top: '10px',
-              right: '10px',
-              color: 'black',
-            }}
-            onClick={(e) => handleModalClose(e)}
-          >
-            <CloseIcon className="close-icon" fontSize={'large'} />
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }}
-          >
-            <div
-              style={{
-                overflowY: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <img
-                className='creation-card'
-                src={imageFullURL}
-                alt="Card Media"
-                style={{
-                  height: 'auto',
-                  position: 'relative',
-                  minHeight: '512px',
-                  minWidth: '512px',
-                  maxHeight: '612px',
-                  maxWidth: '612px',
-                  paddingBottom: 20,
-                }}
-              />
-
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-
-                  <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-                      <div style={{
-                            borderRadius: '50%',
-                            overflow: 'hidden',
-                            width: '32px',
-                            height: '32px',
-                            marginRight: 10,
-                      }}>
-                          <Blockies seed={address} />
-                      </div>
-                      <Text
-                        style={{
-                          color: '#111',
-                          fontWeight: 600,
-                          fontSize: '.8rem',
-                        }}
-                      >
-                        {displayAddress}
-                      </Text>
-                    </div>
-                  </Popover>
-                </div>
-
-                <Text
-                  style={{
-                    paddingTop: 20,
-                    color: '#111',
-                    fontWeight: 600,
-                    fontSize: '1.2rem',
-                  }}
+              {/* <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
                 >
-                  {text_input}
-                </Text>
+                <ExpandMoreIcon />
+              </ExpandMore> */}
+
+              <div>
+                {/* <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar
+                    alt="generator name"
+                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
+                  />
+                }
+                label={generator_name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
+                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={`${width}x${height}`}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
+                    {currentGuildIcon}
+                  </Avatar>
+                }
+                label={guild_name}
+                variant="outlined"
+              />
+              <Chip
+                sx={{ m: 0.5 }}
+                avatar={
+                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
+                    <FaHashtag style={{ fontSize: '1rem' }} />
+                  </Avatar>
+                }
+                label={channel_name}
+                variant="outlined"
+              /> */}
+
+                {/* {generator_name ? (
+                <Tooltip title="Model Name">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar
+                        alt="model name"
+                        src="/static/images/avatar/1.jpg"
+                      >
+                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
+                      </Avatar>
+                    }
+                    label={generator_name}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null} */}
+
+                {/* {currentClipModel ? (
+                <Tooltip title="Clip Model">
+                  <Chip
+                    sx={{ m: 0.5 }}
+                    avatar={
+                      <Avatar
+                        alt="clip model"
+                        src="/static/images/avatar/1.jpg"
+                      >
+                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
+                      </Avatar>
+                    }
+                    label={creation.config.clip_model}
+                    variant="outlined"
+                  />
+                </Tooltip>
+              ) : null} */}
               </div>
             </div>
+          </>
+        </Modal>
 
-            {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Box
-              sx={{
-                display: 'flex',
-                background: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(16px)',
-                borderRadius: '25px',
-                width: 'auto',
-                padding: 0,
-                mr: 1,
-              }}
-            >
-              <IconButton aria-label="bookmark" className="arrow-up">
-                <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-              </IconButton>
-              <IconButton aria-label="bookmark" className="arrow-down">
-                <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-              </IconButton>
-            </Box>
-            <IconButton
-              aria-label="share"
-              sx={{
-                background: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(16px)',
-                borderRadius: '50%',
-                width: 'auto',
-                mr: 1,
-              }}
-            >
-              <IosShareIcon />
-            </IconButton>
-            <Box
-              sx={{
-                display: 'flex',
-                background: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(16px)',
-                borderRadius: '25px',
-                width: 'auto',
-              }}
-            >
-              <IconButton aria-label="bookmark">
-                <BookmarkBorderIcon />
-              </IconButton>
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            </Box>
-          </Box> */}
-
-            {/* <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-              >
-              <ExpandMoreIcon />
-            </ExpandMore> */}
-
-            <div>
-              {/* <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar
-                  alt="generator name"
-                  src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                />
-              }
-              label={generator_name}
-              variant="outlined"
+        {/* <Box className="creation-header">
+          <Box sx={{ display: 'flex' }}>
+            <Avatar
+              sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
+              aria-label="username"
             />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                  <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                </Avatar>
-              }
-              label={`${width}x${height}`}
-              variant="outlined"
-            />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                  {currentGuildIcon}
-                </Avatar>
-              }
-              label={guild_name}
-              variant="outlined"
-            />
-            <Chip
-              sx={{ m: 0.5 }}
-              avatar={
-                <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                  <FaHashtag style={{ fontSize: '1rem' }} />
-                </Avatar>
-              }
-              label={channel_name}
-              variant="outlined"
-            /> */}
+            <Typography
+              noWrap={true}
+              sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
+            > */}
 
-              {/* {generator_name ? (
-              <Tooltip title="Model Name">
-                <Chip
-                  sx={{ m: 0.5 }}
-                  avatar={
-                    <Avatar
-                      alt="model name"
-                      src="/static/images/avatar/1.jpg"
-                    >
-                      <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                    </Avatar>
-                  }
-                  label={generator_name}
-                  variant="outlined"
-                />
-              </Tooltip>
-            ) : null} */}
-
-              {/* {currentClipModel ? (
-              <Tooltip title="Clip Model">
-                <Chip
-                  sx={{ m: 0.5 }}
-                  avatar={
-                    <Avatar
-                      alt="clip model"
-                      src="/static/images/avatar/1.jpg"
-                    >
-                      <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                    </Avatar>
-                  }
-                  label={creation.config.clip_model}
-                  variant="outlined"
-                />
-              </Tooltip>
-            ) : null} */}
-            </div>
-          </div>
-        </>
-      </Modal>
-
-      {/* <Box className="creation-header">
-        <Box sx={{ display: 'flex' }}>
-          <Avatar
-            sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
-            aria-label="username"
-          />
-          <Typography
-            noWrap={true}
-            sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
-          > */}
-
-      {/* {currentUserName === 'none'
-              ? currentUserName
-              : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
-      {/* </Typography>
-        </Box>
-        <span style={{ display: 'none' }}>{cardOpen}</span>
-      </Box> */}
+        {/* {currentUserName === 'none'
+                ? currentUserName
+                : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
+        {/* </Typography>
+          </Box>
+          <span style={{ display: 'none' }}>{cardOpen}</span>
+        </Box> */}
     </CardStyles>
   )
 }

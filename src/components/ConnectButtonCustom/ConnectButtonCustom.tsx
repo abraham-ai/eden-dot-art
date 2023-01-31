@@ -12,6 +12,9 @@ import { useAccount } from 'wagmi'
 // WEB3
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
+// HOOKS
+import useWindowDimensions from '@/hooks/useWindowDimensions'
+
 // ANTD
 import { Button, Typography, Popover, Slider } from 'antd';
 const { Text } = Typography;
@@ -388,6 +391,9 @@ export const ConnectButtonCustom = () => {
   // HOOKS
   const { address = '' } = useAccount()
   const walletAddress = address
+  const { width } = useWindowDimensions()
+
+  
 
   // REDUX
   let appAddress = useAppSelector(state => state.address.value)
@@ -457,7 +463,7 @@ export const ConnectButtonCustom = () => {
                       onClick={openConnectModal}
                       type="button"
                     >
-                      Connect Wallet
+                      { width < 930 ? 'Connect' : 'Connect Wallet' }
                     </button>
                   )
                 }
