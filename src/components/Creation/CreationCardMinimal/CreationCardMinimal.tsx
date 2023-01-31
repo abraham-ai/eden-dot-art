@@ -10,6 +10,9 @@ import Link from 'next/link'
 // ROUTER
 import { useRouter } from 'next/router'
 
+// HOOKS
+import useWindowDimensions from '@/hooks/useWindowDimensions'
+
 // ANTD
 import { Popover, Modal, Typography, Button } from 'antd'
 const { Text } = Typography
@@ -28,10 +31,6 @@ import CloseIcon from '@mui/icons-material/Close'
 // import IosShareIcon from '@mui/icons-material/IosShare'
 // import { FaDiscord } from 'react-icons/fa'
 // FaHashtag
-// import { HiOutlineSparkles } from 'react-icons/hi'
-import { FaRetweet } from 'react-icons/fa'
-
-// import { AiOutlineFire } from 'react-icons/ai'
 
 // META ICONS
 // import OpenInFullIcon from '@mui/icons-material/OpenInFull'
@@ -43,6 +42,20 @@ import { FaRetweet } from 'react-icons/fa'
 // interface ExpandMoreProps extends IconButtonProps {
 //   expand: boolean
 // }
+import { FiMoreHorizontal } from 'react-icons/fi'
+import { FaStar, FaRetweet, FaRegStar } from 'react-icons/fa'
+import { SearchOutlined } from '@ant-design/icons';
+import { IoIosShareAlt } from 'react-icons/io'
+// import { SyncOutlined } from '@ant-design/icons';
+// iSparkles, 
+// import { AiFillEye } from 'react-icons/ai'
+// import { AiFillFire } from 'react-icons/ai'
+import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
+import { MdOutlineDateRange } from 'react-icons/md'
+import { BiUserPlus } from 'react-icons/bi'
+import { BsFillBookmarkFill, BsAspectRatio } from 'react-icons/bs'
+import { SlSizeFullscreen } from 'react-icons/sl'
+
 
 // const ExpandMore = styled((props: ExpandMoreProps) => {
 //   const { ...other } = props
@@ -55,11 +68,170 @@ import { FaRetweet } from 'react-icons/fa'
 //   }),
 // }))
 
+
+const CreationSocialsExtraStyles = styled.span`
+  background: pink;
+  border-radius: 25px;
+
+  .cr-social {
+    height: 40px;
+    background: yellow;
+    align-items: center;
+    justify-content:
+  }
+  .cr-social .btn {
+    display: flex;
+    align-items: center;
+    justify-content:
+  }
+`
+
+const CreationSocialsExtra = () => {
+  return (
+    <CreationSocialsExtraStyles>
+      <div className='cr-socials-main'>
+          <span className='cr-social like'>
+            <Button className='btn' shape='round' type='default'>
+              <FaStar className='icon' />
+              <Text className='text'>303</Text>
+            </Button>
+          </span>
+
+          <span className='cr-social remix'>
+            <Button className='btn' shape='round' type='default'>
+              <FaRetweet className='icon' />
+              <Text className='text'>310</Text>
+            </Button>
+          </span>
+
+          {/* <span className='cr-social views'>
+            <Button className='btn' shape='round' type='default'>
+              <AiFillEye className='icon' />
+              <Text className='text'>310</Text>
+            </Button>
+          </span> */}
+
+          <span className='cr-social bookmark'>
+            <Button className='btn' shape='round' type='default'>
+              <BsFillBookmarkFill className='icon' />
+              <Text className='text'>Save</Text>
+            </Button>
+          </span>
+
+          <span className='cr-social share'>
+            <Button className='btn' shape='round' type='default'>
+              <IoIosShareAlt className='icon' />
+              <Text className='text'>Share</Text>
+            </Button>
+          </span>
+      </div>
+    </CreationSocialsExtraStyles>
+  )
+}
+
+const CreationSocialsStyles = styled.div`
+  display: flex;
+  align-items: center;
+  background: lime;
+  justify-content: flex-end;
+
+  .cr-socials-main {
+    display: flex;
+    background: red;
+    align-items: center;
+    // height: 50px;
+    // border: 2px solid black;
+  }
+  .cr-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:
+  }
+  .cr-social .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cr-social .text {
+    color: white;
+  }
+  .cr-social .icon {
+    color: white;
+    height: 15px;
+    background: green;
+  }
+`
+
+const CreationSocials = () => {
+
+  // const { width } = useWindowDimensions()
+
+  return (
+    <CreationSocialsStyles>
+      <div className='cr-socials-main'>
+        {/* <span className='cr-social like'>
+          <Button className='btn' shape='circle' type='default'>
+            <FaStar className='icon' />
+            <Text className='text'>303</Text>
+          </Button>
+        </span> */}
+
+        {/* <span className='cr-social remix'>
+          <Button className='btn' shape='circle' type='default'>
+            <FaRetweet className='icon' />
+            <Text className='text'>310</Text>
+          </Button>
+        </span> */}
+
+        {/* <span className='cr-social views'>
+          <Button className='btn' shape='circle' type='default'>
+            <AiFillEye className='icon' />
+            <Text className='text'>310</Text>
+          </Button>
+        </span> */}
+
+        
+        {/* <span className='cr-social bookmark'>
+          <Button className='btn' shape='circle' type='default'>
+            <BsFillBookmarkFill className='icon' />
+            <Text className='text'>Save</Text>
+          </Button>
+        </span> */}
+
+        {/* <span className='cr-social share'>
+          <Button className='btn' shape='circle' type='default'>
+            <IoIosShareAlt className='icon' />
+            <Text className='text'>Share</Text>
+          </Button>
+        </span> */}
+      </div>
+
+      <div className='cr-socials-extra'>
+        <Popover 
+            placement='topRight'
+            content={<CreationSocialsExtra />}
+          >
+            <span className='cr-social share'>
+              <Button className='btn' shape='circle' type='default'>
+                <FiMoreHorizontal className='icon' />
+              </Button>
+            </span>
+        </Popover>
+      </div>
+    </CreationSocialsStyles>
+  )
+}
+
 const CardStyles = styled.section`
-    max-width: 345px; 
+    // max-width: 345px; 
     position: relative;
     box-shadow: unset !important;
     background: unset;
+    border-radius: 10px;
+    overflow: hidden;
+
     #creation-card {
 
     }
@@ -70,8 +242,12 @@ const CardStyles = styled.section`
     }
     #creation-card:hover .creation-content {
       display: flex;
+      flex-direction: column;
       justify-content: flex-start;
       align-items: flex-end;
+      // padding-right: 50px;
+      width: 100%;
+      background: yellow;
     }
     #creation-card:hover .creation-actions {
       position: absolute;
@@ -251,42 +427,74 @@ export default function CreationCardMinimal({ creation }) {
                   />
             
 
-                  <article className="creation-content">
-                    <div
-                      style={{
-                        borderRadius: '15px',
-                        margin: 10,
-                        background: 'rgba(0, 0, 0, 0.5)',
-                        backdropFilter: 'blur(16px)',
-                        padding: 20,
-                      }}
-                    >
-                      <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
-                        <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
-                          {'/create'}
-                        </Text>
-                        <Text style={{ color: 'white' }}>
-                          {text_input}
-                        </Text>
+                  <article className='creation-content'>
 
-                            <Popover content={<ProfilePopOver profileAddress={address} creationAddress={creation.source} />}  placement="bottomLeft">
-                              <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-                                <div style={{
-                                      borderRadius: '50%',
-                                      overflow: 'hidden',
-                                      width: '32px',
-                                      height: '32px',
-                                      marginRight: 10,
-                                }}>
-                                    <Blockies seed={address} />
-                                </div>
-                                <Text>{displayAddress}</Text>
-                              </div>
-                            </Popover>
+                      <div style={{ display: 'flex', flexDirection: 'column', background: 'lime', margin: 20 }}>
+                      
+                        <span className='cr-social like'>
+                            <Button className='btn' shape='circle' type='default'>
+                              <FaStar className='icon' />
+                              {/* <Text className='text'>303</Text> */}
+                            </Button>
+                        </span>
+
+                        <div style={{ display: 'flex' }}>
+                          <span className='cr-social remix'>
+                            <Button className='btn' shape='circle' type='default'>
+                              <FaRetweet className='icon' />
+                              {/* <Text className='text'>310</Text> */}
+                            </Button>
+                          </span>
+                          
+                          <span className='cr-social bookmark'>
+                            <Button className='btn' shape='circle' type='default'>
+                              <BsFillBookmarkFill className='icon' />
+                              {/* <Text className='text'>Save</Text> */}
+                            </Button>
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                      
+                      <div
+                        style={{
+                          borderRadius: '15px',
+                          margin: 10,
+                          background: 'rgba(0, 0, 0, 0.5)',
+                          backdropFilter: 'blur(16px)',
+                          padding: 20,
+                        }}
+                      >
+                        <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
+                            <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
+                              {'/create'}
+                            </Text>
+                            <Text style={{ color: 'white' }}>
+                              {text_input}
+                            </Text>
 
-                    <div className='creation-actions'>
+                            <div style={{ display: 'flex', background: 'cyan', justifyContent: 'space-between', marginTop: 10 }}>
+                              <Popover content={'test'} placement="bottomLeft">
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                  <div style={{
+                                        borderRadius: '50%',
+                                        overflow: 'hidden',
+                                        width: '32px',
+                                        height: '32px',
+                                        marginRight: 10,
+                                        background: 'orange'
+                                  }}>
+                                      <Blockies seed={address} />
+                                  </div>
+                                  <Text style={{ color: 'white' }}>{displayAddress}</Text>
+                                </div>
+                              </Popover>
+                              <CreationSocials />
+                            </div>
+                            
+                        </div>
+                      </div>
+
+                    {/* <div className='creation-actions'> */}
                       {/* <Button>
                         <FaRetweet />
                       </Button> */}
@@ -351,7 +559,8 @@ export default function CreationCardMinimal({ creation }) {
                           <MoreVertIcon />
                         </IconButton>
                       </Box> */}
-                    </div>
+                    {/* </div> */}
+
                   </article>
                 </>
 
@@ -472,56 +681,67 @@ export default function CreationCardMinimal({ creation }) {
                 style={{
                   overflowY: 'auto',
                   display: 'flex',
-                  flexDirection: 'column',
+                  flexDirection: 'row',
+                  width: '100%'
                 }}
               >
-                <img
-                  className='creation-card'
-                  src={imageFullURL}
-                  alt="Card Media"
-                  style={{
-                    height: 'auto',
-                    position: 'relative',
-                    minHeight: '512px',
-                    minWidth: '512px',
-                    maxHeight: '612px',
-                    maxWidth: '612px',
-                    paddingBottom: 20,
-                  }}
-                />
+                <div 
+                  className='creation-card-wrapper'
+                  style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                  
+                  {/* maxHeight: '612px',
+                  maxWidth: '612px', */}
+
+                  <img
+                    className='creation-card'
+                    src={imageFullURL}
+                    alt="Card Media"
+                    style={{
+                      height: 'auto',
+                      position: 'relative',
+                      minHeight: '512px',
+                      minWidth: '512px'
+                    }}
+                    />
+                </div>
 
                 <div
                   style={{
                     display: 'flex',
-                    width: '100%',
-                    flexDirection: 'column',
                     alignItems: 'flex-start',
                   }}
                 >
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+                  
                   <div style={{ display: 'flex', alignItems: 'flex-start' }}>
 
-                    <Popover content={<ProfilePopOver profileAddress={ address} />}  placement="bottomLeft">
-                      <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-                        <div style={{
-                              borderRadius: '50%',
-                              overflow: 'hidden',
-                              width: '32px',
-                              height: '32px',
-                              marginRight: 10,
-                        }}>
-                            <Blockies seed={address} />
+                    <Popover 
+                      content={
+                        <ProfilePopOver profileAddress={address} />
+                        }  
+                      placement="bottomLeft">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <div style={{
+                                borderRadius: '50%',
+                                overflow: 'hidden',
+                                width: '32px',
+                                height: '32px',
+                                marginRight: 10,
+                          }}>
+                              <Blockies seed={address} />
+                          </div>
+                          <Text
+                            style={{
+                              // color: '#111',
+                              fontWeight: 600,
+                              fontSize: '.8rem',
+                              color: 'white'
+                            }}
+                          >
+                            {displayAddress}
+                          </Text>
                         </div>
-                        <Text
-                          style={{
-                            // color: '#111',
-                            fontWeight: 600,
-                            fontSize: '.8rem',
-                            color: 'white'
-                          }}
-                        >
-                          {displayAddress}
-                        </Text>
-                      </div>
                     </Popover>
                   </div>
 
@@ -535,6 +755,8 @@ export default function CreationCardMinimal({ creation }) {
                   >
                     {text_input}
                   </Text>
+
+                  </div>
                 </div>
               </div>
 
