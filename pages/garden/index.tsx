@@ -25,6 +25,7 @@ import { useInView } from 'react-intersection-observer'
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
+
 // STYLES
 import styled from 'styled-components'
 
@@ -38,6 +39,7 @@ import styled from 'styled-components'
 
 const CreationsGridStyles = styled.section`
   width: 100vw;
+  padding: 0 10px;
 `
 
 
