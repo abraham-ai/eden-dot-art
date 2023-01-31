@@ -1,43 +1,30 @@
-// FETCH
-import axios from "axios";
-
-// TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
-
-// SESSION
-import { withSessionRoute } from '@/util/withSession';
+import { withSessionRoute } from '@/util/withSession'
+import { eden } from '../../src/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {
-    message: string;
-    signature: string;
-    userAddress: string;
-  };
+    message: string
+    signature: string
+    userAddress: string
+  }
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { message, signature, userAddress } = req.body;
-  const GATEWAY_URL = process.env.GATEWAY_URL as string;
+  const { message, signature, userAddress } = req.body
 
   try {
-    const gatewayRes = await axios.post(`${GATEWAY_URL}/auth/login`, {
-      message,
-      signature,
-      address: userAddress,
-    });
+    const token = await eden.loginEth(message, signature, userAddress)
 
-    const { token } = gatewayRes.data;
+    req.session.token = token
+    req.session.userId = userAddress
+    await req.session.save()
 
-    req.session.token = token;
-    req.session.userId = userAddress;
-
-    await req.session.save();
-
-    res.send({ message: "Successfully authenticated key pair" });
+    res.send({ message: 'Successfully authenticated key pair' })
   } catch (error: any) {
-    console.error(error);
-    res.status(500).json({ error: "Error authenticating key pair" });
+    console.error(error)
+    res.status(500).json({ error: 'Error authenticating key pair' })
   }
-};
+}
 
-export default withSessionRoute(handler);
+export default withSessionRoute(handler)
