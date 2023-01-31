@@ -429,7 +429,7 @@ export default function CreationCardMinimal({ creation }) {
 
                   <article className='creation-content'>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', background: 'lime', margin: 20 }}>
+                      <div style={{ display: 'flex', flexDirection: 'row', background: 'lime', margin: 20 }}>
                       
                         <span className='cr-social like'>
                             <Button className='btn' shape='circle' type='default'>
