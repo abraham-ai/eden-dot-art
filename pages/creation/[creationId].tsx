@@ -397,8 +397,9 @@ const CreationStyle = styled.article`
   @media (max-width: 930px) {
     .cr-properties-wrapper {
       display: flex;
-      flex-direction: row;
       // background: orange;
+      flex-direction: column;
+      width: 100%;
     }
   }
   @media only screen and (max-width: 930px) {
