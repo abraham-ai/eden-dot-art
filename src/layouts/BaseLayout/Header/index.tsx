@@ -8,9 +8,8 @@ import { useState, useEffect } from 'react'
 
 // REDUX
 import { setModalVisible } from '@/redux/slices/modalSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-
-// useSignMessage
+import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks' // useSignMessage
 
 // ANTD
 import { Button, Modal, Typography } from 'antd' // theme,
@@ -22,6 +21,7 @@ import styled from 'styled-components'
 // COMPONENTS
 import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
+import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 // import SortCreationsBar from '@/components/SortCreationsBar'
 
@@ -79,26 +79,22 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
 import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 
-// REDUX
-import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-
-// VIEW ICONS
-
 // height: ${theme.header.height};
 // color: ${theme.header.textColor};
 // padding: ${theme.spacing(0, 2)};
 
 const HeaderWrapperStyles = styled.div`
+  position: fixed;
+  width: 100%;
   right: 0;
   z-index: 6;
   background-color: white;
-  backdrop-filter: blur(3px);
-  position: fixed;
   justify-content: space-between;
-  width: 100%;
+  backdrop-filter: blur(3px);
+
   @media (max-width: 930px) {
     display: flex;
-    padding-left: 10px;
+    padding: 0 10px;
   }
   /*** CREATE BUTTON ***/
   #create-button {
@@ -169,11 +165,6 @@ export default function Header() {
   // const router = useRouter()
   // const [createOpen, setCreateOpen] = useState(false)
 
-  const handleCreateOpen = () => {
-    // console.log('HANDLE-CREATE OPEN!')
-    dispatch(setModalVisible(true))
-  }
-
   const handleCreateClose = () => {
     // console.log('HANDLE CREATE CLOSE!')
     dispatch(setModalVisible(false))
@@ -210,16 +201,7 @@ export default function Header() {
             <ConnectButtonCustom />
 
             {isWeb3WalletConnected ? (
-              <Button
-                id='create-button'
-                onClick={handleCreateOpen}
-                size='middle'
-                icon={<AddIcon className='create-icon' fontSize={'medium'} />}
-              >
-                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
-                  Create
-                </Text>
-              </Button>
+              <CreateButton />
             ) : null }
 
 
