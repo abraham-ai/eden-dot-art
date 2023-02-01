@@ -1,45 +1,32 @@
-// NEXT
-import type { NextApiRequest, NextApiResponse } from 'next/types'
-
-// UTILS
-import { getGatewayResult } from '../../src/util/eden'
-
-// SESSION
+import { NextApiRequest, NextApiResponse } from 'next/types'
 import { withSessionRoute } from '@/util/withSession'
+import { eden } from '../../src/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {
-    prompt: string
-    width: number
-    height: number
+    creatorId: string
+    earliestTime: number
+    latestTime: number
+    limit: number
   }
 }
 
-// delete apps, browse, collage, creations, dev-about, dev-garden, dev-pricing, docs, eden, faq, feed, ideas img2img pricing real2real test wallet
-
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { prompt, width, height } = req.body
   const authToken = req.session.token
-
-  const config = {
-    generatorName: 'create',
-    requestConfig: {
-      text_input: prompt,
-      width,
-      height,
-    },
-  }
 
   if (!authToken) {
     return res.status(401).json({ error: 'Not authenticated' })
   }
 
   try {
-    const result = await getGatewayResult(config, authToken)
+    eden.setAuthToken(authToken)
+    //const userId = req.session.userId;
 
-    return res.status(200).json({ outputUrl: result.outputUrl })
+    return res.status(200).json({ tbd: 'TBD' })
   } catch (error: any) {
-    console.error(error)
+    if (error.response.data == 'jwt expired') {
+      return res.status(401).json({ error: 'Authentication expired' })
+    }
     return res.status(500).json({ error: error.response.data })
   }
 }
