@@ -38,7 +38,7 @@ import createEmotionCache from 'src/createEmotionCache'
 
 // NAV
 import Head from 'next/head'
-import { SidebarProvider } from 'src/contexts/SidebarContext'
+// import { SidebarProvider } from 'src/contexts/SidebarContext'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 
@@ -175,16 +175,16 @@ function EdenApp(props: EdenAppProps) {
               content="width=device-width, initial-scale=1, shrink-to-fit=no"
             />
           </Head>
-          <SidebarProvider>
-            <ThemeProvider>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <WalletProvider>
-                  <CssBaseline />
-                  {getLayout(<Component {...pageProps} />)}
-                </WalletProvider>
-              </LocalizationProvider>
-            </ThemeProvider>
-          </SidebarProvider>
+          {/* <SidebarProvider> */}
+          <ThemeProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <WalletProvider>
+                <CssBaseline />
+                {getLayout(<Component {...pageProps} />)}
+              </WalletProvider>
+            </LocalizationProvider>
+          </ThemeProvider>
+          {/* </SidebarProvider> */}
         </ReduxProvider>
       </CacheProvider>
     </ApolloProvider>

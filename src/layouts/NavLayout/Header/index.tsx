@@ -40,9 +40,7 @@ import {
 // ANTD
 
 // STYLES
-import styled from 'styled-components' 
-
-
+import styled from 'styled-components'
 
 const { provider, chains } = configureChains(
   [mainnet],
@@ -65,46 +63,46 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
 }
 
 const HeaderStyles = styled.section`
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  right: 0;
+  padding: 0 20px;
+  background: white;
+  z-index: 100;
+  box-shadow: 0px 1px 1px #0000001f;
+  backdrop-filter: blur(3px);
+
+  > div:first-child {
     width: 100%;
-    right: 0;
-    padding: 0 20px;
-    background: white;
-    z-index: 100;
-    box-shadow: 0px 1px 1px #0000001f;
-    backdrop-filter: blur(3px);
+    height: 100%;
+    // background: lime;
+  }
 
-    > div:first-child {
-      width: 100%;
-      height: 100%;
-      // background: lime;
-    }
+  /*** NAV RIGHT WRAPPER ***/
+  .nav-right-wrapper {
+    display: flex;
+    height: 100%;
+    min-height: 100%;
+    align-items: center;
+    // background: magenta;
+  }
 
-    /*** NAV RIGHT WRAPPER ***/
-    .nav-right-wrapper {
-      display: flex;
-      height: 100%;
-      min-height: 100%;
-      align-items: center;
-      // background: magenta;
-    }
-
-    .nav-link-wrapper {
-      padding: 0 10px;
-    }
-    .nav-link-wrapper:hover {
-      color: white;
-    }
-    .nav-link-text:hover {
-      cursor: pointer;
-      color: white;
-    }
-    .menu-item {
-      display: flex;
-    }
+  .nav-link-wrapper {
+    padding: 0 10px;
+  }
+  .nav-link-wrapper:hover {
+    color: white;
+  }
+  .nav-link-text:hover {
+    cursor: pointer;
+    color: white;
+  }
+  .menu-item {
+    display: flex;
+  }
 `
 
 // @media (min-width: ${theme.breakpoints.values.lg}px) {
@@ -117,21 +115,19 @@ const HeaderStyles = styled.section`
 // color: ${theme.header.textColor};
 // padding: ${theme.spacing(0, 2)};
 
-
 export default function Header() {
-
   // WAGMI HOOKS
   const { isConnected } = useAccount()
 
   // retrieve current state of redux store
   const dispatch = useAppDispatch()
-  const { isModalVisible } = useAppSelector(state => state.modal)
+  // const { isModalVisible } = useAppSelector(state => state.modal)
   const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
 
-  const handleCreateOpen = () => {
-    // console.log('HANDLE-CREATE OPEN!')
-    dispatch(setModalVisible(true))
-  }
+  // const handleCreateOpen = () => {
+  //   // console.log('HANDLE-CREATE OPEN!')
+  //   dispatch(setModalVisible(true))
+  // }
 
   useEffect(() => {
     dispatch(setIsWeb3WalletConnected(isConnected))
@@ -153,7 +149,7 @@ export default function Header() {
   // }, [isWeb3WalletConnected, isWeb3AuthSuccess])
 
   return (
-    <HeaderStyles id='header-wrapper'>
+    <HeaderStyles id="header-wrapper">
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
           <div
@@ -162,27 +158,23 @@ export default function Header() {
               justifyContent: 'space-between',
               alignItems: 'center',
               flex: 1,
-              height: 60
+              height: 60,
             }}
           >
             {/* <LoginButton /> */}
-            <AppLogo logo='eden' size='small' />
+            <AppLogo logo="eden" size="small" />
             {/* {handleAccountNav()} */}
 
-
-            <div className='nav-right-wrapper' style={{ display: 'flex' }}>
-              
+            <div className="nav-right-wrapper" style={{ display: 'flex' }}>
               {/* 
                 <ThemeToggle />
                 <SignInJWT />
                 <ConnectButton /> 
               */}
 
-                <ConnectButtonCustom />
+              <ConnectButtonCustom />
 
-                {isWeb3WalletConnected ? (
-                  <CreateButton />
-                ) : null }
+              {isWeb3WalletConnected ? <CreateButton /> : null}
             </div>
           </div>
         </RainbowKitProvider>
