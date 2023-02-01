@@ -3965,9 +3965,10 @@ eastasianwidth@^0.2.0:
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
-"eden-sdk@https://github.com/abraham-ai/eden-sdk/":
+eden-sdk@^0.1.0:
   version "0.1.0"
-  resolved "https://github.com/abraham-ai/eden-sdk/#4f030779d9baf6b13f9122e058dac12e5b8aa05f"
+  resolved "https://registry.yarnpkg.com/eden-sdk/-/eden-sdk-0.1.0.tgz#4e6c13ba0faacb1dc914cc1b02b8f872f6d7b74b"
+  integrity sha512-s7M1QohWks/LKnn8YikWd6i5C1Q2TP6gIul09XPUxc5/IdIaQ68kS6O+/rQcTA/BPrrbVm5ic6NPCb5ubc1uUQ==
   dependencies:
     axios "^1.2.4"
     dotenv "^16.0.3"
