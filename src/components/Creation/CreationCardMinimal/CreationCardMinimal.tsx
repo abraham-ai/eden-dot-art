@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 
 // STYLES
@@ -45,10 +44,10 @@ import CloseIcon from '@mui/icons-material/Close'
 // }
 import { FiMoreHorizontal } from 'react-icons/fi'
 import { FaStar, FaRetweet, FaRegStar } from 'react-icons/fa'
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons'
 import { IoIosShareAlt } from 'react-icons/io'
 // import { SyncOutlined } from '@ant-design/icons';
-// iSparkles, 
+// iSparkles,
 // import { AiFillEye } from 'react-icons/ai'
 // import { AiFillFire } from 'react-icons/ai'
 import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
@@ -56,7 +55,6 @@ import { MdOutlineDateRange } from 'react-icons/md'
 import { BiUserPlus } from 'react-icons/bi'
 import { BsFillBookmarkFill, BsAspectRatio } from 'react-icons/bs'
 import { SlSizeFullscreen } from 'react-icons/sl'
-
 
 // const ExpandMore = styled((props: ExpandMoreProps) => {
 //   const { ...other } = props
@@ -69,7 +67,6 @@ import { SlSizeFullscreen } from 'react-icons/sl'
 //   }),
 // }))
 
-
 const CreationSocialsExtraStyles = styled.span`
   background: pink;
   border-radius: 25px;
@@ -78,53 +75,53 @@ const CreationSocialsExtraStyles = styled.span`
     height: 40px;
     background: yellow;
     align-items: center;
-    justify-content:
+    justify-content: ;
   }
   .cr-social .btn {
     display: flex;
     align-items: center;
-    justify-content:
+    justify-content: ;
   }
 `
 
 const CreationSocialsExtra = () => {
   return (
     <CreationSocialsExtraStyles>
-      <div className='cr-socials-main'>
-          <span className='cr-social like'>
-            <Button className='btn' shape='round' type='default'>
-              <FaStar className='icon' />
-              <Text className='text'>303</Text>
-            </Button>
-          </span>
+      <div className="cr-socials-main">
+        <span className="cr-social like">
+          <Button className="btn" shape="round" type="default">
+            <FaStar className="icon" />
+            <Text className="text">303</Text>
+          </Button>
+        </span>
 
-          <span className='cr-social remix'>
-            <Button className='btn' shape='round' type='default'>
-              <FaRetweet className='icon' />
-              <Text className='text'>310</Text>
-            </Button>
-          </span>
+        <span className="cr-social remix">
+          <Button className="btn" shape="round" type="default">
+            <FaRetweet className="icon" />
+            <Text className="text">310</Text>
+          </Button>
+        </span>
 
-          {/* <span className='cr-social views'>
+        {/* <span className='cr-social views'>
             <Button className='btn' shape='round' type='default'>
               <AiFillEye className='icon' />
               <Text className='text'>310</Text>
             </Button>
           </span> */}
 
-          <span className='cr-social bookmark'>
-            <Button className='btn' shape='round' type='default'>
-              <BsFillBookmarkFill className='icon' />
-              <Text className='text'>Save</Text>
-            </Button>
-          </span>
+        <span className="cr-social bookmark">
+          <Button className="btn" shape="round" type="default">
+            <BsFillBookmarkFill className="icon" />
+            <Text className="text">Save</Text>
+          </Button>
+        </span>
 
-          <span className='cr-social share'>
-            <Button className='btn' shape='round' type='default'>
-              <IoIosShareAlt className='icon' />
-              <Text className='text'>Share</Text>
-            </Button>
-          </span>
+        <span className="cr-social share">
+          <Button className="btn" shape="round" type="default">
+            <IoIosShareAlt className="icon" />
+            <Text className="text">Share</Text>
+          </Button>
+        </span>
       </div>
     </CreationSocialsExtraStyles>
   )
@@ -147,7 +144,7 @@ const CreationSocialsStyles = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:
+    justify-content: ;
   }
   .cr-social .btn {
     display: flex;
@@ -166,12 +163,11 @@ const CreationSocialsStyles = styled.div`
 `
 
 const CreationSocials = () => {
-
   // const { width } = useWindowDimensions()
 
   return (
     <CreationSocialsStyles>
-      <div className='cr-socials-main'>
+      <div className="cr-socials-main">
         {/* <span className='cr-social like'>
           <Button className='btn' shape='circle' type='default'>
             <FaStar className='icon' />
@@ -193,7 +189,6 @@ const CreationSocials = () => {
           </Button>
         </span> */}
 
-        
         {/* <span className='cr-social bookmark'>
           <Button className='btn' shape='circle' type='default'>
             <BsFillBookmarkFill className='icon' />
@@ -209,16 +204,13 @@ const CreationSocials = () => {
         </span> */}
       </div>
 
-      <div className='cr-socials-extra'>
-        <Popover 
-            placement='topRight'
-            content={<CreationSocialsExtra />}
-          >
-            <span className='cr-social share'>
-              <Button className='btn' shape='circle' type='default'>
-                <FiMoreHorizontal className='icon' />
-              </Button>
-            </span>
+      <div className="cr-socials-extra">
+        <Popover placement="topRight" content={<CreationSocialsExtra />}>
+          <span className="cr-social share">
+            <Button className="btn" shape="circle" type="default">
+              <FiMoreHorizontal className="icon" />
+            </Button>
+          </span>
         </Popover>
       </div>
     </CreationSocialsStyles>
@@ -226,77 +218,76 @@ const CreationSocials = () => {
 }
 
 const CardStyles = styled.section`
-    // max-width: 345px; 
-    position: relative;
-    box-shadow: unset !important;
-    background: unset;
-    border-radius: 10px;
-    overflow: hidden;
+  // max-width: 345px;
+  position: relative;
+  box-shadow: unset !important;
+  background: unset;
+  border-radius: 10px;
+  overflow: hidden;
 
-    #creation-card {
-
-    }
-    #creation-card:hover {
-      transform: unset;
-      cursor: pointer;
-      // cursor: zoom-in;
-    }
-    #creation-card:hover .creation-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
-      // padding-right: 50px;
-      width: 100%;
-      background: yellow;
-    }
-    #creation-card:hover .creation-actions {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      // background: #111633;
-      display: flex;
-      justify-content: flex-end;
-      margin-right: 10px;
-    }
-    #creation-card {
-      // background: yellow;
-    }
-    .creation-content {
-      position: absolute;
-      height: 100%;
-      right: 0;
-      bottom: 0;
-      border-radius: 15px;
-      display: none;
-      margin: 0;
-      padding: 0;
-    }
-    .creation-actions {
-      display: none;
-    }
-    .creation-header {
-      display: inline-block;
-      margin: 8px;
-      padding: 8px;
-    }
-    .creation-header > div {
-      flex: 0;
-      float: left;
-    }
-    .creation-header:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border-radius: 25px;
-      margin: 8px;
-      padding: 8px;
-      cursor: pointer;
-      // backdrop-filter: blur(16px);
-    }
-    .close-icon-wrapper:hover {
-      cursor: pointer;
-      z-index: 50;
-    }
+  #creation-card {
+  }
+  #creation-card:hover {
+    transform: unset;
+    cursor: pointer;
+    // cursor: zoom-in;
+  }
+  #creation-card:hover .creation-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    // padding-right: 50px;
+    width: 100%;
+    background: yellow;
+  }
+  #creation-card:hover .creation-actions {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    // background: #111633;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+  }
+  #creation-card {
+    // background: yellow;
+  }
+  .creation-content {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+  .creation-actions {
+    display: none;
+  }
+  .creation-header {
+    display: inline-block;
+    margin: 8px;
+    padding: 8px;
+  }
+  .creation-header > div {
+    flex: 0;
+    float: left;
+  }
+  .creation-header:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 25px;
+    margin: 8px;
+    padding: 8px;
+    cursor: pointer;
+    // backdrop-filter: blur(16px);
+  }
+  .close-icon-wrapper:hover {
+    cursor: pointer;
+    z-index: 50;
+  }
 `
 
 export default function CreationCardMinimal({ creation }) {
@@ -307,10 +298,10 @@ export default function CreationCardMinimal({ creation }) {
 
   // MAIN
   // const address = creation.address === undefined ? 'none' : creation.address
-  const text_input =
-    creation.text_input === undefined ? 'none' : creation.text_input
-  const intermediate_sha =
-    creation.intermediate_sha === undefined ? [] : creation.intermediate_sha
+  // const text_input =
+  //   creation.text_input === undefined ? 'none' : creation.text_input
+  // const intermediate_sha =
+  //   creation.intermediate_sha === undefined ? [] : creation.intermediate_sha
 
   // DIMENSIONS
   // const width = creation.width === undefined ? 100 : creation.width
@@ -319,7 +310,8 @@ export default function CreationCardMinimal({ creation }) {
   // SOURCE
   // const origin = creation.source.origin === undefined ? 'none' : creation.source
 
-  const { address } = creation.source // origin, author_name, 
+  //const { address } = creation.source // origin, author_name,
+  const { key, address, uri, timestamp, prompt, status, generator } = creation
 
   // const { origin } =
   //   creation.source.origin === undefined ? 'none' : creation.source
@@ -340,8 +332,7 @@ export default function CreationCardMinimal({ creation }) {
   const [modalOpen, setModalOpen] = useState(false)
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  const handleModalOpen = (
-   ) => { 
+  const handleModalOpen = () => {
     // event.preventDefault()
     // router.push(
     //   `/creation/[creationId]`,
@@ -362,13 +353,13 @@ export default function CreationCardMinimal({ creation }) {
     event ? setModalOpen(false) : null
   }
 
-  const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
+  // const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
   // const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
 
-  const imageFullURL =
-    creation.intermediate_sha === undefined
-      ? 'none'
-      : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
+  // const imageFullURL =
+  //   creation.intermediate_sha === undefined
+  //     ? 'none'
+  //     : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
 
   // const [expanded, setExpanded] = useState(false)
 
@@ -409,101 +400,127 @@ export default function CreationCardMinimal({ creation }) {
 
   return (
     <CardStyles>
-        <article id="creation-card" >
-            <Link 
-              href={`/garden?creationId=${creation.id}`} 
-              as={`/creation/${creation.id}`}
-              scroll={false}>
+      <article id="creation-card">
+        <Link
+          href={`/garden?creationId=${creation.id}`}
+          as={`/creation/${creation.id}`}
+          scroll={false}
+        >
           {/* onClick={handleModalOpen} */}
           <div style={{ position: 'relative' }}>
+            <>
+              <Image
+                src={uri}
+                height={512}
+                width={512}
+                alt={prompt}
+                layout="responsive"
+                // style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
+              />
 
-                <>
-                <Image
-                    src={PRD_URL + intermediate_sha[intermediate_sha.length - 1]}
-                    height={512}
-                    width={512}
-                    alt="Eden Creation"
-                    layout="responsive"
-                    // style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
-                  />
-            
+              <article className="creation-content">
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    background: 'lime',
+                    margin: 20,
+                  }}
+                >
+                  <span className="cr-social like">
+                    <Button className="btn" shape="circle" type="default">
+                      <FaStar className="icon" />
+                      {/* <Text className='text'>303</Text> */}
+                    </Button>
+                  </span>
 
-                  <article className='creation-content'>
+                  <div style={{ display: 'flex' }}>
+                    <span className="cr-social remix">
+                      <Button className="btn" shape="circle" type="default">
+                        <FaRetweet className="icon" />
+                        {/* <Text className='text'>310</Text> */}
+                      </Button>
+                    </span>
 
-                      <div style={{ display: 'flex', flexDirection: 'row', background: 'lime', margin: 20 }}>
-                      
-                        <span className='cr-social like'>
-                            <Button className='btn' shape='circle' type='default'>
-                              <FaStar className='icon' />
-                              {/* <Text className='text'>303</Text> */}
-                            </Button>
-                        </span>
+                    <span className="cr-social bookmark">
+                      <Button className="btn" shape="circle" type="default">
+                        <BsFillBookmarkFill className="icon" />
+                        {/* <Text className='text'>Save</Text> */}
+                      </Button>
+                    </span>
+                  </div>
+                </div>
 
-                        <div style={{ display: 'flex' }}>
-                          <span className='cr-social remix'>
-                            <Button className='btn' shape='circle' type='default'>
-                              <FaRetweet className='icon' />
-                              {/* <Text className='text'>310</Text> */}
-                            </Button>
-                          </span>
-                          
-                          <span className='cr-social bookmark'>
-                            <Button className='btn' shape='circle' type='default'>
-                              <BsFillBookmarkFill className='icon' />
-                              {/* <Text className='text'>Save</Text> */}
-                            </Button>
-                          </span>
+                <div
+                  style={{
+                    borderRadius: '15px',
+                    margin: 10,
+                    background: 'rgba(0, 0, 0, 0.5)',
+                    backdropFilter: 'blur(16px)',
+                    padding: 20,
+                  }}
+                >
+                  <div
+                    style={{
+                      overflowY: 'auto',
+                      maxHeight: 150,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <Text
+                      className="prompt-command"
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#8C7CF0',
+                        fontFamily: 'courier',
+                      }}
+                    >
+                      {generator}
+                    </Text>
+                    <Text style={{ color: 'white' }}>{prompt}</Text>
+
+                    <div
+                      style={{
+                        display: 'flex',
+                        background: 'cyan',
+                        justifyContent: 'space-between',
+                        marginTop: 10,
+                      }}
+                    >
+                      <Popover content={'test'} placement="bottomLeft">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <div
+                            style={{
+                              borderRadius: '50%',
+                              overflow: 'hidden',
+                              width: '32px',
+                              height: '32px',
+                              marginRight: 10,
+                              background: 'orange',
+                            }}
+                          >
+                            <Blockies seed={address} />
+                          </div>
+                          <Text style={{ color: 'white' }}>
+                            {displayAddress}
+                          </Text>
                         </div>
-                      </div>
-                      
-                      <div
-                        style={{
-                          borderRadius: '15px',
-                          margin: 10,
-                          background: 'rgba(0, 0, 0, 0.5)',
-                          backdropFilter: 'blur(16px)',
-                          padding: 20,
-                        }}
-                      >
-                        <div style={{ overflowY: 'auto', maxHeight: 150, display: 'flex', flexDirection: 'column' }}>
-                            <Text className='prompt-command' style={{ fontWeight: 'bold', color: '#8C7CF0', fontFamily: 'courier'}}>
-                              {'/create'}
-                            </Text>
-                            <Text style={{ color: 'white' }}>
-                              {text_input}
-                            </Text>
+                      </Popover>
+                      <CreationSocials />
+                    </div>
+                  </div>
+                </div>
 
-                            <div style={{ display: 'flex', background: 'cyan', justifyContent: 'space-between', marginTop: 10 }}>
-                              <Popover content={'test'} placement="bottomLeft">
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                  <div style={{
-                                        borderRadius: '50%',
-                                        overflow: 'hidden',
-                                        width: '32px',
-                                        height: '32px',
-                                        marginRight: 10,
-                                        background: 'orange'
-                                  }}>
-                                      <Blockies seed={address} />
-                                  </div>
-                                  <Text style={{ color: 'white' }}>{displayAddress}</Text>
-                                </div>
-                              </Popover>
-                              <CreationSocials />
-                            </div>
-                            
-                        </div>
-                      </div>
-
-                    {/* <div className='creation-actions'> */}
-                      {/* <Button>
+                {/* <div className='creation-actions'> */}
+                {/* <Button>
                         <FaRetweet />
                       </Button> */}
-                      {/* </IconButton>
+                {/* </IconButton>
                       <IconButton aria-label="recreation"> */}
-                      {/* </IconButton> */}
+                {/* </IconButton> */}
 
-                      {/* <Box
+                {/* <Box
                         sx={{
                           display: 'flex',
                           background: 'rgba(0, 0, 0, 0.5)',
@@ -535,7 +552,7 @@ export default function CreationCardMinimal({ creation }) {
                         <IosShareIcon />
                       </IconButton> */}
 
-                      {/* <ExpandMore
+                {/* <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
                         aria-expanded={expanded}
@@ -544,7 +561,7 @@ export default function CreationCardMinimal({ creation }) {
                         <ExpandMoreIcon />
                       </ExpandMore> */}
 
-                      {/* <Box
+                {/* <Box
                         sx={{
                           display: 'flex',
                           background: 'rgba(0, 0, 0, 0.5)',
@@ -560,17 +577,14 @@ export default function CreationCardMinimal({ creation }) {
                           <MoreVertIcon />
                         </IconButton>
                       </Box> */}
-                    {/* </div> */}
-
-                  </article>
-                </>
-
+                {/* </div> */}
+              </article>
+            </>
           </div>
+        </Link>
 
-            </ Link>
-
-          {/* COLLAPSE */}
-          {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* COLLAPSE */}
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Chip
                 sx={{ m: 0.5 }}
@@ -645,104 +659,111 @@ export default function CreationCardMinimal({ creation }) {
               ) : null}
             </CardContent>
           </Collapse> */}
-        </article>
+      </article>
 
-        <Modal
-          width='100%'
-          bodyStyle={{ height: '100%' }}
-          open={creation.id === router.query.creationId ? !!router.query.creationId : false}
-          centered
-          keyboard
-          // mask
-          // maskClosable
-          onCancel={handleModalClose}
-        >
-          <>
-            <div
-              className="close-icon-wrapper"
-              style={{
-                position: 'fixed',
-                top: '10px',
-                right: '10px',
-                color: 'black',
-              }}
-              onClick={(e) => handleModalClose(e)}
-            >
-              <CloseIcon className="close-icon" fontSize={'large'} />
-            </div>
+      <Modal
+        width="100%"
+        bodyStyle={{ height: '100%' }}
+        open={
+          creation.id === router.query.creationId
+            ? !!router.query.creationId
+            : false
+        }
+        centered
+        keyboard
+        // mask
+        // maskClosable
+        onCancel={handleModalClose}
+      >
+        <>
+          <div
+            className="close-icon-wrapper"
+            style={{
+              position: 'fixed',
+              top: '10px',
+              right: '10px',
+              color: 'black',
+            }}
+            onClick={e => handleModalClose(e)}
+          >
+            <CloseIcon className="close-icon" fontSize={'large'} />
+          </div>
 
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
             <div
               style={{
+                overflowY: 'auto',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
+                flexDirection: 'row',
+                width: '100%',
               }}
             >
               <div
+                className="creation-card-wrapper"
                 style={{
-                  overflowY: 'auto',
                   display: 'flex',
-                  flexDirection: 'row',
-                  width: '100%'
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                <div 
-                  className='creation-card-wrapper'
-                  style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                  
-                  {/* maxHeight: '612px',
+                {/* maxHeight: '612px',
                   maxWidth: '612px', */}
 
-                  <img
-                    className='creation-card'
-                    src={imageFullURL}
-                    alt="Card Media"
-                    style={{
-                      height: 'auto',
-                      position: 'relative',
-                      minHeight: '512px',
-                      minWidth: '512px'
-                    }}
-                    />
-                </div>
-
-                <div
+                <img
+                  className="creation-card"
+                  src={uri}
+                  alt="Card Media"
                   style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
+                    height: 'auto',
+                    position: 'relative',
+                    minHeight: '512px',
+                    minWidth: '512px',
                   }}
-                >
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                />
+              </div>
 
-                  
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-
-                    <Popover 
-                      content={
-                        <ProfilePopOver profileAddress={address} />
-                        }  
-                      placement="bottomLeft">
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <div style={{
-                                borderRadius: '50%',
-                                overflow: 'hidden',
-                                width: '32px',
-                                height: '32px',
-                                marginRight: 10,
-                          }}>
-                              <Blockies seed={address} />
-                          </div>
-                          <Text
-                            style={{
-                              // color: '#111',
-                              fontWeight: 600,
-                              fontSize: '.8rem',
-                              color: 'white'
-                            }}
-                          >
-                            {displayAddress}
-                          </Text>
+                    <Popover
+                      content={<ProfilePopOver profileAddress={address} />}
+                      placement="bottomLeft"
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div
+                          style={{
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            width: '32px',
+                            height: '32px',
+                            marginRight: 10,
+                          }}
+                        >
+                          <Blockies seed={address} />
                         </div>
+                        <Text
+                          style={{
+                            // color: '#111',
+                            fontWeight: 600,
+                            fontSize: '.8rem',
+                            color: 'white',
+                          }}
+                        >
+                          {displayAddress}
+                        </Text>
+                      </div>
                     </Popover>
                   </div>
 
@@ -754,14 +775,13 @@ export default function CreationCardMinimal({ creation }) {
                       fontSize: '1.2rem',
                     }}
                   >
-                    {text_input}
+                    {prompt}
                   </Text>
-
-                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -810,7 +830,7 @@ export default function CreationCardMinimal({ creation }) {
               </Box>
             </Box> */}
 
-              {/* <ExpandMore
+            {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
@@ -819,8 +839,8 @@ export default function CreationCardMinimal({ creation }) {
                 <ExpandMoreIcon />
               </ExpandMore> */}
 
-              <div>
-                {/* <Chip
+            <div>
+              {/* <Chip
                 sx={{ m: 0.5 }}
                 avatar={
                   <Avatar
@@ -862,7 +882,7 @@ export default function CreationCardMinimal({ creation }) {
                 variant="outlined"
               /> */}
 
-                {/* {generator_name ? (
+              {/* {generator_name ? (
                 <Tooltip title="Model Name">
                   <Chip
                     sx={{ m: 0.5 }}
@@ -880,7 +900,7 @@ export default function CreationCardMinimal({ creation }) {
                 </Tooltip>
               ) : null} */}
 
-                {/* {currentClipModel ? (
+              {/* {currentClipModel ? (
                 <Tooltip title="Clip Model">
                   <Chip
                     sx={{ m: 0.5 }}
@@ -897,12 +917,12 @@ export default function CreationCardMinimal({ creation }) {
                   />
                 </Tooltip>
               ) : null} */}
-              </div>
             </div>
-          </>
-        </Modal>
+          </div>
+        </>
+      </Modal>
 
-        {/* <Box className="creation-header">
+      {/* <Box className="creation-header">
           <Box sx={{ display: 'flex' }}>
             <Avatar
               sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
@@ -913,10 +933,10 @@ export default function CreationCardMinimal({ creation }) {
               sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
             > */}
 
-        {/* {currentUserName === 'none'
+      {/* {currentUserName === 'none'
                 ? currentUserName
                 : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
-        {/* </Typography>
+      {/* </Typography>
           </Box>
           <span style={{ display: 'none' }}>{cardOpen}</span>
         </Box> */}
