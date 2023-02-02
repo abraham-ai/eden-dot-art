@@ -73,14 +73,14 @@ const CreationSocialsExtraStyles = styled.span`
 
   .cr-social {
     height: 40px;
-    background: yellow;
+    // background: yellow;
     align-items: center;
     justify-content: ;
   }
   .cr-social .btn {
     display: flex;
     align-items: center;
-    justify-content: ;
+    justify-content: center;
   }
 `
 
@@ -130,12 +130,12 @@ const CreationSocialsExtra = () => {
 const CreationSocialsStyles = styled.div`
   display: flex;
   align-items: center;
-  background: lime;
+  // background: lime;
   justify-content: flex-end;
 
   .cr-socials-main {
     display: flex;
-    background: red;
+    // background: red;
     align-items: center;
     // height: 50px;
     // border: 2px solid black;
@@ -156,9 +156,9 @@ const CreationSocialsStyles = styled.div`
     color: white;
   }
   .cr-social .icon {
-    color: white;
+    // color: white;
     height: 15px;
-    background: green;
+    // background: green;
   }
 `
 
@@ -239,7 +239,7 @@ const CardStyles = styled.section`
     align-items: flex-end;
     // padding-right: 50px;
     width: 100%;
-    background: yellow;
+    // background: yellow;
   }
   #creation-card:hover .creation-actions {
     position: absolute;
@@ -423,19 +423,20 @@ export default function CreationCardMinimal({ creation }) {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    background: 'lime',
-                    margin: 20,
+                    flex: 1,
+                    width: '100%',
+                    justifyContent: 'space-between'
                   }}
                 >
-                  <span className="cr-social like">
+                  <span className='cr-social like' style={{ margin: 10 }}>
                     <Button className="btn" shape="circle" type="default">
                       <FaStar className="icon" />
                       {/* <Text className='text'>303</Text> */}
                     </Button>
                   </span>
 
-                  <div style={{ display: 'flex' }}>
-                    <span className="cr-social remix">
+                  <div style={{ display: 'flex', flexDirection: 'column', margin: 10 }}>
+                    <span className="cr-social remix" style={{ marginBottom: 10 }}>
                       <Button className="btn" shape="circle" type="default">
                         <FaRetweet className="icon" />
                         {/* <Text className='text'>310</Text> */}
@@ -483,7 +484,7 @@ export default function CreationCardMinimal({ creation }) {
                     <div
                       style={{
                         display: 'flex',
-                        background: 'cyan',
+                        // background: 'cyan',
                         justifyContent: 'space-between',
                         marginTop: 10,
                       }}
@@ -676,8 +677,8 @@ export default function CreationCardMinimal({ creation }) {
         onCancel={handleModalClose}
       >
         <>
-          <div
-            className="close-icon-wrapper"
+          <Button
+            className='close-icon-wrapper'
             style={{
               position: 'fixed',
               top: '10px',
@@ -686,8 +687,8 @@ export default function CreationCardMinimal({ creation }) {
             }}
             onClick={e => handleModalClose(e)}
           >
-            <CloseIcon className="close-icon" fontSize={'large'} />
-          </div>
+            <CloseIcon className='close-icon' fontSize={'large'} />
+          </Button>
 
           <div
             style={{
