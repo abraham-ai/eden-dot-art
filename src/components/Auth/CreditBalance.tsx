@@ -1,4 +1,4 @@
-import { useCreditBalance } from "hooks/useCreditBalance";
+import { useCreditBalance } from '@/hooks/useCreditBalance'
 
 const CreditBalance = () => {
   const { balance } = useCreditBalance();
