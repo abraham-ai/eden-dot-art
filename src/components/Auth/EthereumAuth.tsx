@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // ANTD
-import { Button } from 'antd'
+import { Button, Row } from 'antd'
 
 // FETCH
 import axios from 'axios'
@@ -62,21 +62,24 @@ const EthereumAuth = () => {
   return (
     <div style={{ background: 'yellow' }}>
       <h1>Sign in with Ethereum</h1>
+      <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+
       <Button
         type="primary"
         onClick={handleSiwe}
         disabled={ethAuthenticating}
         loading={ethAuthenticating}
-      >
+        >
         Sign In
       </Button>
       <Button
         type='default'
         onClick={handleCancelModal}
         disabled={ethAuthenticating}
-      >
+        >
         Cancel
       </Button>
+        </Row>
       {ethMessage && <p>{ethMessage}</p>}
     </div>
   );
