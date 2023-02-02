@@ -73,9 +73,13 @@ const CreationSocialsExtraStyles = styled.span`
 
   .cr-social {
     height: 40px;
-    // background: yellow;
+    background: yellow;
     align-items: center;
-    justify-content: ;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .cr-social:first-child {
+    margin-top: 0;
   }
   .cr-social .btn {
     display: flex;
@@ -89,7 +93,7 @@ const CreationSocialsExtra = () => {
     <CreationSocialsExtraStyles>
       <div className="cr-socials-main">
         <span className="cr-social like">
-          <Button className="btn" shape="round" type="default">
+          <Button block className="btn" shape="round" type="default">
             <FaStar className="icon" />
             <Text className="text">303</Text>
           </Button>
