@@ -1,5 +1,5 @@
-import useSWR from "swr";
-import { fetcher } from "util/fetcher";
+import useSWR from 'swr'
+import { fetcher } from '@/util/fetcher'
 
 export const useApiKeys = () => {
   const { data, error, isLoading, mutate } = useSWR(
