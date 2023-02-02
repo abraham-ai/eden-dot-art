@@ -24,15 +24,13 @@ import jwtDecode from 'jwt-decode'
 // COMPONENTS
 import Auth from '@/components/Auth/Auth'
 
+// ANTD
+import { Typography, Modal } from 'antd'
+const { Title, Text } = Typography
+
 // MUI
 import {
-  Backdrop,
-  // Button,
   IconButton,
-  Box,
-  Typography,
-  Modal,
-  styled,
   Snackbar,
 } from '@mui/material'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
@@ -54,7 +52,7 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 // ICONS
 import CloseIcon from '@mui/icons-material/Close'
 
-export default function CreateSignInJWT({ isOpen, onClose }) {
+export default function CreateSignInJWT({ isOpen, onModalCancel }) {
   // retrieve current state of redux store
   const dispatch = useAppDispatch()
 
@@ -92,33 +90,14 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
     // })
   }
 
-  // STYLES
-  const BoxModalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '480px',
-    bgcolor: 'white',
-    maxHeight: '90%',
-    border: '2px solid #000',
-    borderRadius: '20px',
-    boxShadow: 24,
-    p: 4,
-    overflow: 'scroll',
-  }
-
-  const ModalStyles = styled('section')(
-    () => `
-    padding: 20px;
-    .ant-form-horizontal .ant-form-item-control {
-      max-width: unset;
-    }
-    .ant-progress-circle .ant-progress-inner {
-      margin-right: 18px;
-    }
-  `,
-  )
+  // const ModalStyles = styled.section`
+  //   .ant-form-horizontal .ant-form-item-control {
+  //     max-width: unset;
+  //   }
+  //   .ant-progress-circle .ant-progress-inner {
+  //     margin-right: 18px;
+  //   }
+  // `
 
   const logoutLocalStorage = () => {
     // console.log('logoutLocalStorage')
@@ -489,102 +468,78 @@ export default function CreateSignInJWT({ isOpen, onClose }) {
   )
 
   return (
-    <ModalStyles key="modal-styles">
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={isOpen}
-        onClose={onClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
+    <Modal
+      open={isOpen}
+      mask
+      maskClosable
+      keyboard
+      onCancel={onModalCancel}
+      style={{
+        width: '480px',
+        background: 'white',
+        border: '2px solid #000',
+        borderRadius: '25px',
+        padding: 0
+      }}
+    >
+    <div
+      style={{
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Title level={2} style={{ color: 'rgb(0 80 30)' }}>
+        Welcome to Eden
+      </Title>
+      <AppLogo logo="eden" size="x-large" />
+
+      <Text
+        style={{ paddingTop: 30, color: 'rgb(0 80 30)', textAlign: 'center', fontSize: '1rem' }}
+      >
+        Sign the message in your wallet to continue
+      </Text>
+
+      <Title
+        level={4}
+        style={{
+          paddingTop: 10,
+          paddingBottom: 30,
+          color: 'rgb(0 80 30)',
+          textAlign: 'center',
+          fontWeight: 'normal',
         }}
       >
-        <Box sx={BoxModalStyle}>
-          <Box
-            sx={{
-              display: 'flex',
-              flex: 1,
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography variant="h2" sx={{ color: 'rgb(0 80 30)' }}>
-              Welcome to Eden
-            </Typography>
-            <AppLogo logo="eden" size="x-large" />
+        {'Eden uses this signature to verify that you’re the owner of this Ethereum address.'}
+      </Title>
 
-            <Typography
-              variant="h3"
-              sx={{ pt: 3, color: 'rgb(0 80 30)', textAlign: 'center' }}
-            >
-              Sign the message in your wallet to continue
-            </Typography>
+      <div>
+        <Auth onModalCancel={onModalCancel} />
+      </div>
 
-            <Typography
-              variant="h4"
-              sx={{
-                pt: 1,
-                pb: 3,
-                color: 'rgb(0 80 30)',
-                textAlign: 'center',
-                fontWeight: 'normal',
-              }}
-            >
-              {'Eden uses this signature to verify that you’re the owner of this Ethereum address.'}
-            </Typography>
+      {isSuccess && <Text>Signature: {data}</Text>}
 
-            <Box>
-              <Auth />
-            </Box>
+      {isError && (
+        <Snackbar
+          open={isSnackbarVisible}
+          autoHideDuration={6000}
+          onClose={() => dispatch(setSnackbarVisible(false))}
+          message="Note archived"
+          action={action}
+        >
+          <Alert severity='error'>Error signing message</Alert>
+        </Snackbar>
+      )}
 
-            {/* <Box sx={{ display: 'flex', mt: 3 }}>
-              <Button
-                variant="outlined"
-                disabled={isLoading}
-                onClick={() => onClose()}
-                sx={{ mr: 1 }}
-              >
-                <Typography sx={{ fontWeight: 'bold' }}>CANCEL</Typography>
-              </Button>
-              <Button
-                variant="contained"
-                disabled={isLoading}
-                onClick={() => handleAuthJWTClick()}
-                sx={{ ml: 1 }}
-              >
-                <Typography sx={{ fontWeight: 'bold' }}>SIGN-IN</Typography>
-              </Button>
-            </Box> */}
-
-            {isSuccess && (
-              <Typography variant="body1">Signature: {data}</Typography>
-            )}
-
-            {isError && (
-              <Snackbar
-                open={isSnackbarVisible}
-                autoHideDuration={6000}
-                onClose={() => dispatch(setSnackbarVisible(false))}
-                message="Note archived"
-                action={action}
-              >
-                <Alert severity="error">Error signing message</Alert>
-              </Snackbar>
-            )}
-
-            {isWeb3AuthSuccess && (
-              <Typography
-                variant="body1"
-                sx={{ wordBreak: 'break-word', color: 'black' }}
-              >
-                Auth Token: {authToken}
-              </Typography>
-            )}
-          </Box>
-        </Box>
-      </Modal>
-    </ModalStyles>
+      {isWeb3AuthSuccess && (
+        <Text
+          style={{ wordBreak: 'break-word', color: 'black' }}
+        >
+          Auth Token: {authToken}
+        </Text>
+      )}
+    </div>
+  </Modal>
   )
 }
