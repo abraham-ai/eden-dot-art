@@ -32,6 +32,10 @@ const EthereumAuth = () => {
     },
   });
 
+  const handleCancelModal = () => {
+    console.log('handle cancel modal!');
+  }
+
   const handleSiwe = async () => {
     if (!isConnected) return;
     setEthAuthenticating(true);
@@ -56,7 +60,7 @@ const EthereumAuth = () => {
   };
 
   return (
-    <div>
+    <div style={{ background: 'yellow' }}>
       <h1>Sign in with Ethereum</h1>
       <Button
         type="primary"
@@ -65,6 +69,13 @@ const EthereumAuth = () => {
         loading={ethAuthenticating}
       >
         Sign In
+      </Button>
+      <Button
+        type='default'
+        onClick={handleCancelModal}
+        disabled={ethAuthenticating}
+      >
+        Cancel
       </Button>
       {ethMessage && <p>{ethMessage}</p>}
     </div>
