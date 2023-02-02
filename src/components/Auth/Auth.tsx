@@ -1,15 +1,11 @@
-// MUI
-import { Box } from '@mui/material'
-
 // COMPONENTS
 import EthereumAuth from '@/components/Auth/EthereumAuth'
 
-const Auth = () => {
+const Auth = ({ onModalCancel }) => {
   return (
-    <Box sx={{ width: '100%' }}>
-
-        <EthereumAuth />
-    </Box>
+    <div style={{ width: '100%' }}>
+        <EthereumAuth onModalCancel={onModalCancel} />
+    </div>
   )
 }
 
