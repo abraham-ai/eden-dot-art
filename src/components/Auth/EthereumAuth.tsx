@@ -1,7 +1,11 @@
 import { useState } from 'react'
 
+// STYLES
+import styled from 'styled-components'
+
 // ANTD
-import { Button, Row } from 'antd'
+import { Button, Row, Typography } from 'antd'
+const { Text } = Typography
 
 // FETCH
 import axios from 'axios'
@@ -10,7 +14,17 @@ import axios from 'axios'
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
-const EthereumAuth = () => {
+const EthereumAuthStyles = styled.section`
+  .auth-btn {
+    margin: 5; 
+    display: flex; 
+    flex: 1; 
+    justify-content: center; 
+    align-items: center;
+  }
+`
+
+const EthereumAuth = ({ onModalCancel }) => {
   const { chain } = useNetwork();
   const { address, isConnected } = useAccount();
   const [ethAuthenticating, setEthAuthenticating] = useState(false);
@@ -33,7 +47,7 @@ const EthereumAuth = () => {
   });
 
   const handleCancelModal = () => {
-    console.log('handle cancel modal!');
+    onModalCancel();
   }
 
   const handleSiwe = async () => {
@@ -60,28 +74,34 @@ const EthereumAuth = () => {
   };
 
   return (
-    <div style={{ background: 'yellow' }}>
+    <EthereumAuthStyles>
       <h1>Sign in with Ethereum</h1>
+      
       <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-      <Button
-        type="primary"
-        onClick={handleSiwe}
-        disabled={ethAuthenticating}
-        loading={ethAuthenticating}
+        <Button
+          className='auth-btn sign-in'
+          type='primary'
+          onClick={handleSiwe}
+          shape='round'
+          size='large'
+          disabled={ethAuthenticating}
+          loading={ethAuthenticating}
         >
-        Sign In
-      </Button>
-      <Button
-        type='default'
-        onClick={handleCancelModal}
-        disabled={ethAuthenticating}
+          <Text strong style={{ fontSize: '1rem', color: 'white' }}>Sign In</Text>
+        </Button>
+        <Button
+          className='auth-btn cancel'
+          type='default'
+          onClick={handleCancelModal}
+          shape='round'
+          size='large'
+          disabled={ethAuthenticating}
         >
-        Cancel
-      </Button>
+          <Text strong style={{ fontSize: '1rem' }}>Cancel</Text>
+        </Button>
         </Row>
       {ethMessage && <p>{ethMessage}</p>}
-    </div>
+    </EthereumAuthStyles>
   );
 };
 
