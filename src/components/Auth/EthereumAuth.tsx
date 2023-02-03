@@ -1,8 +1,5 @@
 import { useState } from 'react'
 
-// STYLES
-import styled from 'styled-components'
-
 // ANTD
 import { Button, Row, Typography } from 'antd'
 const { Text } = Typography
@@ -13,6 +10,13 @@ import axios from 'axios'
 // WEB3 & WALLET
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
+
+// REDUX
+import { useAppDispatch } from '@/hooks/hooks'
+import { setIsWeb3AuthSuccess } from '@/redux/slices/authSlice'
+
+// STYLES
+import styled from 'styled-components'
 
 const EthereumAuthStyles = styled.section`
   .auth-btn {
@@ -25,10 +29,14 @@ const EthereumAuthStyles = styled.section`
 `
 
 const EthereumAuth = ({ onModalCancel }) => {
-  const { chain } = useNetwork();
-  const { address, isConnected } = useAccount();
-  const [ethAuthenticating, setEthAuthenticating] = useState(false);
-  const [ethMessage, setEthMessage] = useState<string | null>(null);
+  const { chain } = useNetwork()
+  const { address, isConnected } = useAccount()
+  const [ethAuthenticating, setEthAuthenticating] = useState(false)
+  const [ethMessage, setEthMessage] = useState<string | null>(null)
+  
+
+  // redux
+  const dispatch = useAppDispatch()
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -38,9 +46,10 @@ const EthereumAuth = ({ onModalCancel }) => {
           signature: data,
           userAddress: address,
         });
-        setEthMessage("Successfully authenticated as " + address);
+        setEthMessage("Successfully authenticated as " + address)
+        dispatch(setIsWeb3AuthSuccess(true))
       } catch (error: any) {
-        setEthMessage("Error authenticating");
+        setEthMessage("Error authenticating")
       }
       setEthAuthenticating(false);
     },
@@ -86,6 +95,7 @@ const EthereumAuth = ({ onModalCancel }) => {
           size='large'
           disabled={ethAuthenticating}
           loading={ethAuthenticating}
+          style={{ marginRight: 5 }}
         >
           <Text strong style={{ fontSize: '1rem', color: 'white' }}>Sign In</Text>
         </Button>
@@ -96,6 +106,7 @@ const EthereumAuth = ({ onModalCancel }) => {
           shape='round'
           size='large'
           disabled={ethAuthenticating}
+          style={{ marginLeft: 5 }}
         >
           <Text strong style={{ fontSize: '1rem' }}>Cancel</Text>
         </Button>

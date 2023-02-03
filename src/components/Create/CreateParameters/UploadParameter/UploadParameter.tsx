@@ -1,6 +1,10 @@
-import { Form, Input, Col, Row, Button } from "antd";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+
+// ANTD
+import { Form, Input, Col, Row, Button } from "antd";
+
+// ICONS
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 
 const StringParameter = (props: {form: any, parameter: any}) => {
   const [value, setValue] = useState(props.parameter.defaultValue);

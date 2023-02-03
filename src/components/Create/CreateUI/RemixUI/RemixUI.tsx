@@ -7,7 +7,8 @@ import { Button, Form, Input, InputNumber, Space } from 'antd'
 // FETCH
 import axios from 'axios'
 
-// COMPONENTS
+// EDEN COMPONENTS
+import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
 import ImageResult from '@/components/ImageResult/ImageResult'
 
 interface RemixFormInputs {
@@ -45,7 +46,8 @@ const RemixTab = () => {
 
   return (
     <>
-      <Form
+      <GeneratorInterface mediaType='image' generatorName='remix' />
+      {/* <Form
         form={form}
         name="remix"
         initialValues={initialValues}
@@ -72,7 +74,7 @@ const RemixTab = () => {
             Generate Remix
           </Button>
         </Form.Item>
-      </Form>
+      </Form> */}
       {message && <p>{message}</p>}
       <ImageResult width={width} height={height} imageUrl={resultUrl} />
     </>

@@ -479,8 +479,10 @@ export default function CreateSignInJWT({ isOpen, onModalCancel }) {
         background: 'white',
         border: '2px solid #000',
         borderRadius: '25px',
-        padding: 0
+        padding: 0,
+        overflow: 'hidden'
       }}
+      footer={<></>}
     >
     <div
       style={{

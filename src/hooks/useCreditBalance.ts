@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { fetcher } from "util/fetcher";
+import { fetcher } from '@/util/fetcher'
 
 export const useCreditBalance = () => {
   const { data, error, isLoading, mutate } = useSWR(

@@ -65,8 +65,10 @@ const BoxModalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 700,
-  height: 300,
+  width: '90%',
+  height: '90%',
+  maxWidth: '90%',
+  maxHeight: '90%',
   bgcolor: 'white',
   border: '2px solid #000',
   padding: '10px',
@@ -142,7 +144,7 @@ const CreateUIStyles = styled(Box)(
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 350px;
+      height: 100%;
     }
 
     #create-text-area {
@@ -390,13 +392,13 @@ export default function CreateUI({ isOpen }) {
           </Box>
 
           <Box sx={BoxModalStyle}>
-            <Box
+            <div
               key="form-wrapper"
               className="form-wrapper"
-              sx={{ display: 'flex', flex: 1 }}
+              style={{ display: 'flex', flex: 1, height: '100%' }}
             >
-              <Box
-                sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+              <div
+                style={{ display: 'flex', flexDirection: 'column', width: '100%', overflow: 'scroll' }}
               >
                 {/* <Box className="x-button-wrapper">
                   <Button className="x-button">X</Button>
@@ -419,7 +421,7 @@ export default function CreateUI({ isOpen }) {
                   </Box>
                   {/* <AccountCircleIcon style={{ fontSize: '2rem' }} /> */}
 
-                  <Box className="form-inner-wrapper">
+                  <div className="form-inner-wrapper">
                     {/* <Box sx={{ display: 'flex', mb: 2 }}>
                     <CreateTypeSelect />
                   </Box> */}
@@ -541,10 +543,10 @@ export default function CreateUI({ isOpen }) {
                         Create
                       </Button> 
                     </Box> */}
-                  </Box>
+                  </div>
                 </Box>
-              </Box>
-            </Box>
+              </div>
+            </div>
           </Box>
 
           <Snackbar

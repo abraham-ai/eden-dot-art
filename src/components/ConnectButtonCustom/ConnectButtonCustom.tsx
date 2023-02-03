@@ -27,6 +27,8 @@ import Blockies from 'react-blockies'
 
 // COMPONENTS
 import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
+import CreditBalance from '@/components/Auth/CreditBalance'
+import ApiKeys from '@/components/ApiKeys/ApiKeys'
 
 // ICONS
 // import SettingsIcon from '@mui/icons-material/Settings'
@@ -215,7 +217,11 @@ export const AccountPopoverContent = ({
           >
             {account.displayBalance}
           </Text>
+          <CreditBalance />
         </div>
+
+        
+        <ApiKeys />
 
         <div
           style={{

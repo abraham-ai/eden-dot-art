@@ -1,5 +1,7 @@
-import { Form, Col, Row, Slider, InputNumber } from "antd";
 import { useState } from "react";
+
+// ANTD
+import { Form, Col, Row, Slider, InputNumber } from "antd";
 
 
 const SliderParameter = (props: {form: any, parameter: any}) => {

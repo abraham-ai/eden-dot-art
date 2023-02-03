@@ -6,7 +6,8 @@ import { Button, Form, Input, InputNumber, Space } from 'antd'
 // FETCH
 import axios from 'axios'
 
-// COMPONENTS
+// EDEN COMPONENTS
+import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
 import VideoResult from '@/components/Media/VideoResult/VideoResult'
 
 interface Real2RealFormInputs {
@@ -45,7 +46,8 @@ const Real2RealTab = () => {
 
   return (
     <>
-      <Form
+      <GeneratorInterface mediaType="video" generatorName="real2real" />
+      {/* <Form
         name="Real2Real"
         initialValues={initialValues}
         onFinish={handleReal2Real}
@@ -77,7 +79,7 @@ const Real2RealTab = () => {
             Generate Real2Real
           </Button>
         </Form.Item>
-      </Form>
+      </Form> */}
       {message && <p>{message}</p>}
       <VideoResult resultUrl={resultUrl} />
     </>
