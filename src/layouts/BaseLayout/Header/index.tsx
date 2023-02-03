@@ -166,7 +166,7 @@ export default function Header() {
   // const [createOpen, setCreateOpen] = useState(false)
 
   const handleCreateClose = () => {
-    // console.log('HANDLE CREATE CLOSE!')
+    console.log('HANDLE CREATE CLOSE!')
     dispatch(setModalVisible(false))
   }
 
@@ -203,7 +203,7 @@ export default function Header() {
 
             <CreateModal
               isOpen={isModalVisible}
-              onClose={() => handleCreateClose}
+              onModalCancel={handleCreateClose}
             />
 
             {/* <Modal

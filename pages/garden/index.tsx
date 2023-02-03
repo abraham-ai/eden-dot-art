@@ -110,12 +110,9 @@ export default function CreationsPage() {
             ))}
           </Masonry>
         </div>
-        {loading && (
-          <p>
-            <Loader />
-          </p>
-        )}
-        ;{message && <p>{message}</p>}
+        {loading && <Loader />}
+        
+        {message && {message}}
         <div ref={ref}></div>
         {/* <Button onClick={getMoreCreations}>Load More</Button> */}
       </CreationsGridStyles>

@@ -3,16 +3,16 @@ import { Button, Form } from "antd";
 import { RightCircleOutlined, UpCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
 import axios from "axios";
 
-import { useGeneratorInfo } from "hooks/useGeneratorInfo";
+import { useGeneratorInfo } from "@/hooks/useGeneratorInfo";
 
-import ImageResult from "components/media/ImageResult";
-import VideoResult from "components/media/VideoResult";
-import AudioResult from "components/media/AudioResult";
+import ImageResult from '@/components/Media/ImageResult/ImageResult'
+import VideoResult from '@/components/Media/VideoResult/VideoResult'
+import AudioResult from '@/components/Media/AudioResult/AudioResult'
 
-import UploadParameter from "components/parameters/UploadParameter";
-import StringParameter from "components/parameters/StringParameter";
-import OptionParameter from "components/parameters/OptionParameter";
-import SliderParameter from "components/parameters/SliderParameter";
+import OptionParameter from '@/components/Parameters/OptionParameter/OptionParameter';
+import UploadParameter from "@/components/Parameters/UploadParameter/UploadParameter";
+import StringParameter from "@/components/Parameters/StringParameter/StringParameter";
+import SliderParameter from "@/components/Parameters/SliderParameter/SliderParameter";
 
 
 const GeneratorInterface = ({ generatorName, mediaType }: { generatorName: string, mediaType: string }) => {

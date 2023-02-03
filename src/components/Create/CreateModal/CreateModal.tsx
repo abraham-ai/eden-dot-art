@@ -259,7 +259,7 @@ import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT
 // const axios = require('axios')
 // const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
 
-export default function CreateModal({ isOpen = true, onClose }) {
+export default function CreateModal({ isOpen = true, onModalCancel }) {
   // const [open, setOpen] = useState(isOpen)
 
   // REDUX STATE
@@ -281,14 +281,6 @@ export default function CreateModal({ isOpen = true, onClose }) {
 
   // const { width } = useWindowDimensions()
 
-  // const layout = {
-  //   labelCol: {
-  //     span: 8,
-  //   },
-  //   wrapperCol: {
-  //     span: 16,
-  //   },
-  // }
 
   // const validateMessages = {
   //   required: '${label} is required!',
@@ -545,6 +537,6 @@ export default function CreateModal({ isOpen = true, onClose }) {
   return isWeb3AuthSuccess ? (
     <CreateUI isOpen={isOpen} />
   ) : (
-    <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
+    <CreateSignInJWT isOpen={isOpen} onModalCancel={onModalCancel} />
   )
 }
