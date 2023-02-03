@@ -76,7 +76,7 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
 // import ImportExportIcon from '@mui/icons-material/ImportExport'
 // import FilterListIcon from '@mui/icons-material/FilterList'
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import AddIcon from '@mui/icons-material/Add'
+// import AddIcon from '@mui/icons-material/Add'
 import { FaDiscord } from 'react-icons/fa'
 
 // height: ${theme.header.height};
@@ -104,7 +104,7 @@ const HeaderWrapperStyles = styled.div`
     margin-left: 15px;
     padding: 10px 20px;
     color: white;
-    background: #8C7CF0;
+    background: #8c7cf0;
     border-radius: 30px;
   }
   /*** NAV LINK ***/
@@ -124,7 +124,7 @@ const HeaderWrapperStyles = styled.div`
     margin: 20px;
     text-decoration: unset;
     padding-bottom: 3px;
-    border-bottom: 3px solid black
+    border-bottom: 3px solid black;
   }
   .nav-link a {
     font-weight: 600;
@@ -134,10 +134,10 @@ const HeaderWrapperStyles = styled.div`
     padding-bottom: 3px;
   }
   @media (min-width: 1200px) {
-      left: 0;
-      width: auto;
-      display: flex;
-      padding: 0 20px;
+    left: 0;
+    width: auto;
+    display: flex;
+    padding: 0 20px;
   }
   /*** MENU ITEM ***/
   .menu-item {
@@ -146,7 +146,7 @@ const HeaderWrapperStyles = styled.div`
 `
 
 // @media (min-width: ${theme.breakpoints.values.lg}px) {
-  // left: ${theme.sidebar.width};
+// left: ${theme.sidebar.width};
 
 export default function Header() {
   // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
@@ -191,8 +191,7 @@ export default function Header() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-        <HeaderWrapperStyles id='header-wrapper'>
-
+        <HeaderWrapperStyles id="header-wrapper">
           <Logo />
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -200,25 +199,22 @@ export default function Header() {
 
             <ConnectButtonCustom />
 
-            {isWeb3WalletConnected ? (
-              <CreateButton />
-            ) : null }
-
-
+            {isWeb3WalletConnected ? <CreateButton /> : null}
 
             <CreateModal
               isOpen={isModalVisible}
               onModalCancel={handleCreateClose}
             />
 
-            <Modal
+            {/* <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
               open={loginOpen}
               onCancel={handleLoginClose}
               // closeAfterTransition
-            >
-              <div style={{
+            > */}
+            <div
+              style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
@@ -228,26 +224,25 @@ export default function Header() {
                 border: '2px solid #000',
                 boxShadow: '24px',
                 backgroundColor: 'white',
-                padding: 40
-              }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <ConnectButton />
-                  Or
-                  <Button>
-                    Connect Discord
-                    <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
-                  </Button>
-                </div>
+                padding: 40,
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <ConnectButton />
+                Or
+                <Button>
+                  Connect Discord
+                  <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
+                </Button>
               </div>
-            </Modal>
-
-
+            </div>
+            {/* </Modal> */}
           </div>
         </HeaderWrapperStyles>
       </RainbowKitProvider>

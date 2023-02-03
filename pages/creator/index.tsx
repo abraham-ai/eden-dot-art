@@ -8,13 +8,13 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import EditProfile from '@/components/Profile/EditProfile/EditProfile'
 
 export default function ProfilePage() {
-    return (
-        <>
-            <EditProfile />
-        </>
-    )
+  return (
+    <>
+      <EditProfile />
+    </>
+  )
 }
 
 ProfilePage.getLayout = function getLayout(page: ReactElement) {
-    return <BaseLayout>{page}</BaseLayout>
+  return <BaseLayout>{page}</BaseLayout>
 }
