@@ -1,6 +1,9 @@
 import { useState } from 'react'
 // useContext, 
 
+// EDEN COMPONENT
+import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+
 // UI
 import { Button, Form, Input, InputNumber, Space } from 'antd'
 const { Item } = Form;
@@ -46,12 +49,14 @@ const GenerateTab = () => {
 
   return (
     <>
-      <Form
+        <GeneratorInterface mediaType='image' generatorName='create' />
+      {/* <Form
         form={form}
         name="generate"
         initialValues={initialValues}
         onFinish={handleGenerate}
       >
+
         <Item label="Prompt" name="prompt" style={{ display: 'flex', alignItems: 'center'}}>
           <Input />
         </Item>
@@ -77,7 +82,7 @@ const GenerateTab = () => {
       {message && <p>{message}</p>}
       {resultURL ? (
         <ImageResult width={width} height={height} imageUrl={resultURL} />
-      ) : null}
+      ) : null} */}
     </>
   )
 }

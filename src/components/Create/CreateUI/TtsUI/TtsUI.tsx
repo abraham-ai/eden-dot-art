@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// useContext
+// useContext, 
 
 // UI
 import { Button, Form, Input, InputNumber, Space } from 'antd'
@@ -9,33 +9,32 @@ import axios from 'axios'
 
 // EDEN COMPONENTS
 import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
-import VideoResult from '@/components/Media/VideoResult/VideoResult'
+import ImageResult from '@/components/ImageResult/ImageResult'
 
-interface InterpolateFormInputs {
-  prompt1: string
-  prompt2: string
+interface RemixFormInputs {
+  initImageUrl: string
   width: number
   height: number
-  numFrames: number
 }
 
-const InterpolateTab = () => {
-  const initialValues: InterpolateFormInputs = {
-    prompt1: '',
-    prompt2: '',
+const RemixTab = () => {
+  const initialValues: RemixFormInputs = {
+    initImageUrl: '',
     width: 512,
     height: 512,
-    numFrames: 30,
   }
 
+  const [form] = Form.useForm()
+  const width = Form.useWatch('width', form)
+  const height = Form.useWatch('height', form)
   const [resultUrl, setResultUrl] = useState<string>('')
   const [generating, setGenerating] = useState<boolean>(false)
   const [message, setMessage] = useState<string | null>(null)
 
-  const handleInterpolate = async (values: InterpolateFormInputs) => {
+  const handleRemix = async (values: RemixFormInputs) => {
     setGenerating(true)
     try {
-      const response = await axios.post('/api/interpolate', {
+      const response = await axios.post('/api/remix', {
         ...values
       })
       setResultUrl(response.data.outputUrl)
@@ -47,17 +46,14 @@ const InterpolateTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="video" generatorName="interpolate" />
-
+      <GeneratorInterface mediaType='audio' generatorName='tts' />
       {/* <Form
-        name="interpolate"
+        form={form}
+        name="remix"
         initialValues={initialValues}
-        onFinish={handleInterpolate}
+        onFinish={handleRemix}
       >
-        <Form.Item label="Prompt 1" name="prompt1">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Prompt 2" name="prompt2">
+        <Form.Item label="Init Image" name="initImageUrl">
           <Input />
         </Form.Item>
         <Space>
@@ -65,9 +61,6 @@ const InterpolateTab = () => {
             <InputNumber min={0} />
           </Form.Item>
           <Form.Item label="Height" name="height">
-            <InputNumber min={0} />
-          </Form.Item>
-          <Form.Item label="Number of Frames" name="numFrames">
             <InputNumber min={0} />
           </Form.Item>
         </Space>
@@ -78,14 +71,14 @@ const InterpolateTab = () => {
             loading={generating}
             disabled={generating}
           >
-            Interpolate
+            Generate Remix
           </Button>
         </Form.Item>
       </Form> */}
       {message && <p>{message}</p>}
-      <VideoResult resultUrl={resultUrl} />
+      <ImageResult width={width} height={height} imageUrl={resultUrl} />
     </>
   )
 }
 
-export default InterpolateTab
+export default RemixTab
