@@ -145,7 +145,6 @@ const CreateUIStyles = styled(Box)(
       flex-direction: column;
       width: 100%;
       height: 100%;
-      overflow: scroll;
     }
 
     #create-text-area {
@@ -399,7 +398,7 @@ export default function CreateUI({ isOpen }) {
               style={{ display: 'flex', flex: 1, height: '100%' }}
             >
               <div
-                style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+                style={{ display: 'flex', flexDirection: 'column', width: '100%', overflow: 'scroll' }}
               >
                 {/* <Box className="x-button-wrapper">
                   <Button className="x-button">X</Button>
