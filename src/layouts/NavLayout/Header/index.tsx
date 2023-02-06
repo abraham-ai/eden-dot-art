@@ -1,22 +1,13 @@
 import { useEffect } from 'react'
 
-// ROUTER
-// import Link from 'next/link'
-
 // REDUX
-import { setModalVisible } from '@/redux/slices/modalSlice'
 import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 
 // LIBS
 import Blockies from 'react-blockies'
 
 // COMPONENTS
-// import CreateModal from '@/components/CreateModal'
-// import LoginButton from '@/components/LoginButton'
-// import CreateSignInJWT from '@/components/CreateSignInJWT'
-// import SignInJWT from '@/components/SignInJWT/SigninJWT'
-// import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import AppLogo from '@/components/AppLogo/AppLogo'
@@ -27,17 +18,11 @@ import { mainnet } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-// import { useProvider } from 'wagmi'
-// import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
   RainbowKitProvider,
   AvatarComponent,
   getDefaultWallets,
 } from '@rainbow-me/rainbowkit'
-
-// apiProvider,
-
-// ANTD
 
 // STYLES
 import styled from 'styled-components'
@@ -105,48 +90,17 @@ const HeaderStyles = styled.section`
   }
 `
 
-// @media (min-width: ${theme.breakpoints.values.lg}px) {
-//   // left: ${theme.sidebar.width};
-//   left: 0;
-//   width: auto;
-// }
-// background-color: ${alpha(theme.header.background, 0.95)};
-// height: ${theme.header.height};
-// color: ${theme.header.textColor};
-// padding: ${theme.spacing(0, 2)};
-
 export default function Header() {
   // WAGMI HOOKS
   const { isConnected } = useAccount()
 
   // retrieve current state of redux store
   const dispatch = useAppDispatch()
-  // const { isModalVisible } = useAppSelector(state => state.modal)
   const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
-
-  // const handleCreateOpen = () => {
-  //   // console.log('HANDLE-CREATE OPEN!')
-  //   dispatch(setModalVisible(true))
-  // }
 
   useEffect(() => {
     dispatch(setIsWeb3WalletConnected(isConnected))
   }, [isConnected, dispatch])
-
-  // const handleAccountNav = useCallback(() => {
-  //   if (!isWeb3WalletConnected) {
-  //     return <ConnectButton />
-  //   } else if (isWeb3WalletConnected && !isWeb3AuthSuccess) {
-  //     return (
-  //       <>
-  //         <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
-  //         <ConnectButton />
-  //       </>
-  //     )
-  //   } else if (isWeb3WalletConnected && isWeb3AuthSuccess) {
-  //     return <ConnectButton />
-  //   }
-  // }, [isWeb3WalletConnected, isWeb3AuthSuccess])
 
   return (
     <HeaderStyles id="header-wrapper">
@@ -161,16 +115,9 @@ export default function Header() {
               height: 60,
             }}
           >
-            {/* <LoginButton /> */}
             <AppLogo logo="eden" size="small" />
-            {/* {handleAccountNav()} */}
 
             <div className="nav-right-wrapper" style={{ display: 'flex' }}>
-              {/* 
-                <ThemeToggle />
-                <SignInJWT />
-                <ConnectButton /> 
-              */}
 
               <ConnectButtonCustom />
 
