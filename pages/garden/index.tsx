@@ -9,7 +9,7 @@ import Head from 'next/head'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 // MUI
-import Masonry from '@mui/lab/Masonry'
+import Masonry from 'react-css-masonry'
 
 // LIBS
 import { useInView } from 'react-intersection-observer'

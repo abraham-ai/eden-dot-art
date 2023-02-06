@@ -8,7 +8,7 @@ import QueryResult from '@/components/QueryResult'
 import Head from 'next/head'
 
 // MUI
-import Masonry from '@mui/lab/Masonry'
+import Masonry from 'react-css-masonry'
 
 // STYLES
 import styled from 'styled-components'
@@ -16,9 +16,6 @@ import styled from 'styled-components'
 // COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
-
-// GQL Creations query to retreive all Creations //
-import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
 
 const CreationsGridStyles = styled.section`
     width: 100%;
@@ -31,29 +28,6 @@ const CreationsGridStyles = styled.section`
 
 export default function CreationsGrid() {
     const [breakpointCols] = useState(3) // setBreakpointCols
-    const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
-        variables: {
-            offset: 0,
-            limit: 16,
-        },
-    })
-
-    const onLoadMore = () =>
-        fetchMore({
-            variables: {
-                offset: 10,
-                limit: 10, //data.length
-            },
-            updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev
-                return {
-                    creationsForHome: [
-                        ...prev.creationsForHome,
-                        ...fetchMoreResult.creationsForHome,
-                    ],
-                }
-            },
-        })
 
     return (
         <>
