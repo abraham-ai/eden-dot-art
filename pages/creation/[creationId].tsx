@@ -61,7 +61,7 @@ import { IoIosShareAlt } from 'react-icons/io'
 // import { AiFillFire } from 'react-icons/ai'
 import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
 import { MdOutlineDateRange } from 'react-icons/md'
-import { BiUserPlus } from 'react-icons/bi'
+// import { BiUserPlus } from 'react-icons/bi'
 import { BsFillBookmarkFill, BsAspectRatio } from 'react-icons/bs'
 import { SlSizeFullscreen } from 'react-icons/sl'
 
@@ -77,9 +77,9 @@ import { formatAddress } from '@/util/address'
 import time_ago from '@/util/time_ago'
 
 // TYPES
-type SizeType = 'default' | 'small' | 'large'
-type ButtonShapeType = 'circle' | 'square' | 'round' | 'default'
-type AvatarShapeType = 'circle' | 'square'
+// type SizeType = 'default' | 'small' | 'large'
+// type ButtonShapeType = 'circle' | 'square' | 'round' | 'default'
+// type AvatarShapeType = 'circle' | 'square'
 
 const CreationStyle = styled.article`
   padding: 0 0 20px 0;

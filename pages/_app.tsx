@@ -60,11 +60,9 @@ function EdenApp(props: EdenAppProps) {
               content="width=device-width, initial-scale=1, shrink-to-fit=no"
             />
           </Head>
-          <ThemeProvider>
-            <WalletProvider>
-              {getLayout(<Component {...pageProps} />)}
-            </WalletProvider>
-          </ThemeProvider>
+          <WalletProvider>
+            {getLayout(<Component {...pageProps} />)}
+          </WalletProvider>
         </ReduxProvider>
       </CacheProvider>
   )
