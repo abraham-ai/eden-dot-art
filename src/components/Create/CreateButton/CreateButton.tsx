@@ -44,7 +44,7 @@ export default function CreateButton() {
                 id='create-button'
                 onClick={handleCreateOpen}
                 size='middle'
-                icon={<AddIcon className='create-icon' fontSize={'medium'} />}
+                icon={'+'}
               >
                 <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
                   Create

@@ -455,14 +455,13 @@ export default function CreateSignInJWT({ isOpen, onModalCancel }) {
 
   const action = (
     <>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
+      <Button
+        size='small'
+        aria-label='close'
+        color='inherit'
+        icon={'close'}
         onClick={() => dispatch(setSnackbarVisible(false))}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
+      />
     </>
   )
 
