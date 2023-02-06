@@ -114,7 +114,6 @@ export default function CreationsPage() {
         
         {message && {message}}
         <div ref={ref}></div>
-        {/* <Button onClick={getMoreCreations}>Load More</Button> */}
       </CreationsGridStyles>
     </>
   )
