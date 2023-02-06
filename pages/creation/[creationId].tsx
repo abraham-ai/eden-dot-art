@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 // import { useRouter } from 'next/router'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { batch } from 'react-redux'
 import {
   incrementRunningCreationCount,

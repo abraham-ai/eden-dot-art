@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { ReactElement, ReactNode } from 'react';
 
 // REDUX
-import { useAppSelector } from '@/hooks/hooks'
+import { useAppSelector } from '@/hooks/redux'
 
 // NEXT
 import { useRouter } from 'next/router'

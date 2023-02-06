@@ -12,10 +12,13 @@ import { useInView } from 'react-intersection-observer'
 import Masonry from 'react-masonry-component'
 import axios from 'axios'
 
+// ANTD
+import { Typography } from 'antd'
+const { Text } = Typography
+
 // COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
-
 
 // STYLES
 import styled from 'styled-components'
@@ -76,11 +79,7 @@ export default function CreationsPage() {
       const earliestTime = Date.parse(lastCreation.timestamp) - 1
       setCutoffTime(earliestTime)
     } catch (error: any) {
-      const errorMessage = error.message
-      const errorName = error.name
-      const errorCode = error.code
-
-      setMessage(`Error: ${errorMessage}`)
+      setMessage(`Error: ${error.message}`)
     }
     setLoading(false)
   }, [creations, cutoffTime, paginate])
@@ -120,7 +119,8 @@ export default function CreationsPage() {
         </div>
         {loading && <Loader />}
         
-        {message}
+        <Text>{message}</Text>
+
         <div ref={ref}></div>
       </CreationsGridStyles>
     </>

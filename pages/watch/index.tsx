@@ -3,7 +3,7 @@ import type { ReactElement } from 'react'
 import { useEffect, useState, useCallback } from 'react'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { batch } from 'react-redux'
 
 // WAGMI
