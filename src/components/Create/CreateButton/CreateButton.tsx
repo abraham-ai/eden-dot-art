@@ -3,7 +3,7 @@ import React from 'react'
 // REDUX
 import { setModalVisible } from '@/redux/slices/modalSlice'
 // import { useAppDispatch } from '@/hooks/redux' // useSignMessage
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from '@/hooks/redux';
 
 
 // ANTD
@@ -32,25 +32,26 @@ const CreateButtonStyles = styled.div`
 export default function CreateButton() {
 
 		// inti redux fetchers/getters
-		const dispatch = useDispatch();
+		const dispatch = useAppDispatch();
 
-    const handleCreateOpen = (event) => {
-			// console.log('HANDLE-CREATE OPEN!')
-			typeof dispatch !== 'undefined' ? dispatch(setModalVisible(true)) : (console.log(`dispatch is ${typeof dispatch}`))
+    const handleCreateOpen = () => {
+      dispatch(setModalVisible(true))
+
+			// typeof dispatch !== 'undefined' ? dispatch(setModalVisible(true)) : (console.log(`dispatch is ${typeof dispatch}`))
 		}
 
     return (
-        <CreateButtonStyles id='create-button-wrapper'>
-            <Button
-                id='create-button'
-                onClick={ (event) => handleCreateOpen(event)}
-                size='middle'
-                icon={'+'}
-              >
-                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
-                  Create
-                </Text>
-            </Button>
-        </CreateButtonStyles>        
+      <CreateButtonStyles id='create-button-wrapper'>
+          <Button
+              id='create-button'
+              onClick={handleCreateOpen}
+              size='middle'
+              icon={'+'}
+            >
+              <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
+                Create
+              </Text>
+          </Button>
+      </CreateButtonStyles>        
     )
 }
