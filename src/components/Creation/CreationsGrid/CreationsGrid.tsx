@@ -1,9 +1,5 @@
 import { useState } from 'react'
 
-// GQL
-import { useQuery } from '@apollo/client'
-import QueryResult from '@/components/QueryResult'
-
 // NEXT
 import Head from 'next/head'
 
