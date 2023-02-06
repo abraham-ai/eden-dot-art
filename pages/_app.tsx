@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app'
 
 // REDUX
 import { Provider as ReduxProvider } from 'react-redux'
-import { store } from '@/redux/store'
+import { wrapper } from '@/redux/store'
 
 // ROUTER
 import Router from 'next/router'
@@ -14,9 +14,6 @@ import nProgress from 'nprogress'
 // CSS
 import 'nprogress/nprogress.css'
 import 'src/theme/base.css'
-
-// STYLES
-import ThemeProvider from 'src/theme/ThemeProvider'
 
 
 // EMOTION
@@ -36,14 +33,17 @@ type NextPageWithLayout = NextPage & {
 }
 
 interface EdenAppProps extends AppProps {
-  emotionCache?: EmotionCache
+  emotionCache?: EmotionCache,
   Component: NextPageWithLayout
 }
 
-function EdenApp(props: EdenAppProps) {
+function EdenApp(props: EdenAppProps, ...rest) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
 
+  const { store } = wrapper.useWrappedStore(rest);
+  
+  // route loading animation
   Router.events.on('routeChangeStart', nProgress.start)
   Router.events.on('routeChangeError', nProgress.done)
   Router.events.on('routeChangeComplete', nProgress.done)
