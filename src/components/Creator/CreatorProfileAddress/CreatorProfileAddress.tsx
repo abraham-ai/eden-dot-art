@@ -4,7 +4,10 @@ import React from 'react'
 import { useAppSelector } from '@/hooks/hooks'
 
 // MUI
-import { Box, Skeleton, Typography, styled } from '@mui/material'
+import { Skeleton, Typography } from 'antd'
+
+// STYLES
+import styled from 'styled-components'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -14,13 +17,10 @@ import Blockies from 'react-blockies'
 
 // import { useLookupAddress } from 'eth-hooks/dapps/ens'
 
-const CreatorProfileAddressStyles = styled(Box)(
-  () => `
+const CreatorProfileAddressStyles = styled.div`
  width: 300px;
  height: 300px;
- background: red;
-`,
-)
+`
 
 // changed value={address} to address={address}
 

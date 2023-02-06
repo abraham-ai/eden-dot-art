@@ -1,43 +1,21 @@
 import React from 'react' // useState, useCallback
 
-// WAGMI
-// import { useAccount } from 'wagmi'
-
-// FETCH
-// import axios from 'axios'
-
 // REDUX
 import { setSnackbarVisible } from '@/redux/slices/snackbarSlice'
 import { setModalVisible } from '@/redux/slices/modalSlice'
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-// setSnackbarMessage,
-// useAppDispatch
-// import { batch } from 'react-redux'
 
-// MUI
+// ANTD
 import {
-  // alpha,
-  // Button,
-  // InputLabel,
-  // lighten,
-  // MenuItem,
-  // Select,
-  // SelectChangeEvent,
-  // Typography,
-  // useTheme,
-  // TextField,
-  // FormControl,
-  Box,
-  Backdrop,
+  Form,
   Modal,
-  styled,
   Button,
   Snackbar,
-} from '@mui/material'
+} from 'antd'
 
 // ICONS
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
+// import IconButton
+// import CloseIcon
 
 // ACCOUNT
 import Blockies from 'react-blockies'
@@ -60,24 +38,9 @@ import {
 // const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
 
 // STYLES
-const BoxModalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  height: '90%',
-  maxWidth: '90%',
-  maxHeight: '90%',
-  bgcolor: 'white',
-  border: '2px solid #000',
-  padding: '10px',
-  borderRadius: '20px',
-  boxShadow: 24,
-}
+import styled from 'styled-components'
 
-const CreateUIStyles = styled(Box)(
-  () => `
+const CreateUIStyles = styled.section`
     background: red;
     
     .filter-select > div {
@@ -155,8 +118,7 @@ const CreateUIStyles = styled(Box)(
       margin-top: 30px;
       font-weight: 500;
     }
-`,
-)
+`
 
 export default function CreateUI({ isOpen }) {
   // const [prompt, setPrompt] = useState('')
@@ -350,48 +312,58 @@ export default function CreateUI({ isOpen }) {
       <Button color="secondary" size="small" onClick={handleSnackbarClose}>
         UNDO
       </Button>
-      <IconButton
+      <Button
         size="small"
         aria-label="close"
         color="inherit"
         onClick={handleSnackbarClose}
+        icon={'close'}
       >
-        <CloseIcon fontSize="small" />
-      </IconButton>
+        
+      </Button>
     </>
   )
 
   return isOpen ? (
     <Modal
-      id="create-modal"
+      className="create-modal"
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={isModalVisible}
-      onClose={() => dispatch(setModalVisible(false))}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{ timeout: 500 }}
-      sx={{ background: 'rgba(0, 0, 0, 0.65)' }}
+      onCancel={() => dispatch(setModalVisible(false))}
+      style={{ background: 'rgba(0, 0, 0, 0.65)' }}
     >
       <CreateUIStyles>
         <>
-          <Box
+          <div
             className="close-icon-wrapper"
-            sx={{
+            style={{
               position: 'fixed',
               top: '10px',
               right: '10px',
               color: 'black',
             }}
           >
-            <CloseIcon
+            <Button
               className="close-icon"
-              fontSize="large"
               onClick={() => dispatch(setModalVisible(false))}
             />
-          </Box>
+          </div>
 
-          <Box sx={BoxModalStyle}>
+          <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '90%',
+                  height: '90%',
+                  maxWidth: '90%',
+                  maxHeight: '90%',
+                  background: 'white',
+                  border: '2px solid #000',
+                  padding: '10px',
+                  borderRadius: '20px',
+                }}>
             <div
               key="form-wrapper"
               className="form-wrapper"
@@ -404,21 +376,21 @@ export default function CreateUI({ isOpen }) {
                   <Button className="x-button">X</Button>
                 </Box> */}
 
-                <Box sx={{ display: 'flex' }}>
-                  <Box
+                <div style={{ display: 'flex' }}>
+                  <div
                     className="account-wrapper"
-                    sx={{
+                    style={{
                       borderRadius: '50%',
                       overflow: 'hidden',
                       minHeight: '48px',
                       minWidth: '48px',
                       maxHeight: '48px',
                       maxWidth: '48px',
-                      m: '25px 0 0 10px',
+                      margin: '25px 0 0 10px',
                     }}
                   >
                     <Blockies seed={appAddress} scale={6} />
-                  </Box>
+                  </div>
                   {/* <AccountCircleIcon style={{ fontSize: '2rem' }} /> */}
 
                   <div className="form-inner-wrapper">
@@ -543,19 +515,19 @@ export default function CreateUI({ isOpen }) {
                         Create
                       </Button> 
                     </Box> */}
+
+                    <Snackbar
+                      open={isSnackbarVisible}
+                      autoHideDuration={6000}
+                      onClose={handleSnackbarClose}
+                      message={snackbarMessage}
+                      action={action}
+                    />
                   </div>
-                </Box>
+                </div>
               </div>
             </div>
-          </Box>
-
-          <Snackbar
-            open={isSnackbarVisible}
-            autoHideDuration={6000}
-            onClose={handleSnackbarClose}
-            message={snackbarMessage}
-            action={action}
-          />
+          </div>
         </>
       </CreateUIStyles>
     </Modal>

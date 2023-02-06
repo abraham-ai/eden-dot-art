@@ -30,10 +30,9 @@ const { Title, Text } = Typography
 
 // MUI
 import {
-  IconButton,
+  Button,
   Snackbar,
-} from '@mui/material'
-import MuiAlert, { AlertProps } from '@mui/material/Alert'
+} from 'antd'
 
 // CONST
 const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
@@ -50,7 +49,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 import AppLogo from '@/components/AppLogo/AppLogo'
 
 // ICONS
-import CloseIcon from '@mui/icons-material/Close'
+// import CloseIcon
 
 export default function CreateSignInJWT({ isOpen, onModalCancel }) {
   // retrieve current state of redux store

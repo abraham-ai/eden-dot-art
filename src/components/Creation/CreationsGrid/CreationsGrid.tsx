@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 
 // MUI
-import Masonry from 'react-css-masonry'
+import Masonry from 'react-masonry-css'
 
 // STYLES
 import styled from 'styled-components'

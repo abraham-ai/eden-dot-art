@@ -13,7 +13,7 @@ const { Text } = Typography
 import styled from 'styled-components'
 
 // ICONS
-import AddIcon from '@mui/icons-material/Add'
+// import AddIcon
 
 const CreateButtonStyles = styled.div`
 	#create-button {

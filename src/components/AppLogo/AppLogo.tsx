@@ -1,11 +1,10 @@
-// CSS
-import { styled } from '@mui/material'
-
 // COMPONENTS
 import Link from 'next/link'
 
-const LogoStyles = styled('div')(
-  () => `
+// STYLES
+import styled from 'styled-components'
+
+const LogoStyles = styled.div`
   flex: 0;
   text-decoration: none !important;
   border: none !important;
@@ -56,8 +55,7 @@ const LogoStyles = styled('div')(
         max-width: 35px !important;
       } */
   }
-`,
-)
+`
 
 export default function AppLogo({
   size = 'medium',
