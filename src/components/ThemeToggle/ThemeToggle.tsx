@@ -1,7 +1,7 @@
 import React from 'react'
 
 // REDUX
-import { useAppDispatch } from '@/hooks/hooks'
+import { useAppDispatch } from '@/hooks/redux'
 import { setTheme } from '@/redux/slices/themeSlice'
 
 // ANTD

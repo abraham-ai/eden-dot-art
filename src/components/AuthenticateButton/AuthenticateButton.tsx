@@ -1,5 +1,5 @@
 // REDUX
-import { useAppSelector } from '@/hooks/hooks'
+import { useAppSelector } from '@/hooks/redux'
 // useAppDispatch
 
 // COMPONENTS

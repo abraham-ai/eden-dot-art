@@ -2,7 +2,8 @@ import React from 'react'
 
 // REDUX
 import { setModalVisible } from '@/redux/slices/modalSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks' // useSignMessage
+// import { useAppDispatch } from '@/hooks/redux' // useSignMessage
+import { useDispatch } from "react-redux";
 
 
 // ANTD
@@ -31,18 +32,18 @@ const CreateButtonStyles = styled.div`
 export default function CreateButton() {
 
 		// inti redux fetchers/getters
-		const dispatch = useAppDispatch();
+		const dispatch = useDispatch();
 
-    const handleCreateOpen = () => {
+    const handleCreateOpen = (event) => {
 			// console.log('HANDLE-CREATE OPEN!')
-			dispatch(setModalVisible(true))
+			typeof dispatch !== 'undefined' ? dispatch(setModalVisible(true)) : (console.log(`dispatch is ${typeof dispatch}`))
 		}
 
     return (
         <CreateButtonStyles id='create-button-wrapper'>
             <Button
                 id='create-button'
-                onClick={handleCreateOpen}
+                onClick={ (event) => handleCreateOpen(event)}
                 size='middle'
                 icon={'+'}
               >

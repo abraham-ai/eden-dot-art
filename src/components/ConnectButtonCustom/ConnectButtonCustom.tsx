@@ -4,7 +4,7 @@ import React, { useState, MouseEvent } from 'react'
 // import Link from 'next/link'
 
 // REDUX
-import { useAppSelector } from '@/hooks/hooks' // useAppDispatch
+import { useAppSelector } from '@/hooks/redux' // useAppDispatch
 
 // WAGMI
 import { useAccount } from 'wagmi'
@@ -119,6 +119,36 @@ const ConnectButtonStyles = styled.section`
     background: gray;
   }
 `
+
+const AccountTest = `<div
+  style={{
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    background: 'pink',
+    border: '2px solid #000',
+    boxShadow: '24px',
+    backgroundColor: 'white',
+    padding: 40,
+  }}
+>
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    }}
+  >
+    <ConnectButton />
+      Or
+    <Button>
+      Connect Discord
+      <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
+    </Button>
+  </div>
+</div>`
 
 export const AccountPopoverContent = ({ 
   openAccountModal, 
@@ -326,7 +356,7 @@ export const AccountPopoverContent = ({
           alignItems: 'center',
         }}
       >
-        <LightModeIcon style={{ color: '#8C7CF0' }} />
+        {/* <LightModeIcon style={{ color: '#8C7CF0' }} /> */}
         <Text
           style={{ color: '#8C7CF0', fontWeight: 600, marginRight: 40 }}
         >
@@ -343,7 +373,7 @@ export const AccountPopoverContent = ({
             width: '100%',
           }}
         >
-          <ViewColumnIcon style={{ color: '#8C7CF0' }} />
+          {/* <ViewColumnIcon style={{ color: '#8C7CF0' }} /> */}
           <Text
             style={{
               paddingRight: 2,
@@ -379,7 +409,7 @@ export const AccountPopoverContent = ({
       </div>
 
       <Button
-        icon={<LogoutIcon />}
+        icon={'Logout'}
         block
         style={{ display: 'flex', justifyContent: 'flex-start' }}
       >
@@ -405,7 +435,7 @@ export const ConnectButtonCustom = () => {
   let appAddress = useAppSelector(state => state.address.value)
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event ? setOpen(!open) : null
+    open ? setOpen(false) : setOpen(true)
     // setAnchorEl(event.currentTarget)
   }
 
@@ -491,7 +521,7 @@ export const ConnectButtonCustom = () => {
                     <Button
                       className="main-account-button"
                       aria-describedby={id}
-                      onClick={() => handleClick}
+                      onClick={(event) => handleClick(event)}
                     >
                       <div className="account-profile-wrapper">
                         <Blockies seed={walletAddress} scale={5} />
@@ -500,23 +530,21 @@ export const ConnectButtonCustom = () => {
 
                     <Popover
                       id={id}
-                      content={<AccountPopoverContent
-                                  openAccountModal={openAccountModal} 
-                                  openChainModal={openChainModal}
-                                  walletAddress={walletAddress} 
-                                  displayAddress={displayAddress}
-                                  chain={chain}
-                                  account={account}
-                                   />
-                                }
+                      content={
+                        <AccountPopoverContent
+                          openAccountModal={openAccountModal} 
+                          openChainModal={openChainModal}
+                          walletAddress={walletAddress} 
+                          displayAddress={displayAddress}
+                          chain={chain}
+                          account={account}/>
+                        }
                       trigger='click'
                       open={open}
                       onOpenChange={() => handleClose()}
                       placement='bottom'
                       style={{ borderRadius: '24px' }}
-                    >
-                      
-                    </Popover>
+                    />
                   </>
                 )
               })()}

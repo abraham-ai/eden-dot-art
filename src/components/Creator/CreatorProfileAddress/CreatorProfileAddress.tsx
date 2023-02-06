@@ -1,7 +1,7 @@
 import React from 'react'
 
 // REDUX
-import { useAppSelector } from '@/hooks/hooks'
+import { useAppSelector } from '@/hooks/redux'
 
 // MUI
 import { Skeleton, Typography } from 'antd'

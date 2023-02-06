@@ -12,7 +12,7 @@ import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
 // REDUX
-import { useAppDispatch } from '@/hooks/hooks'
+import { useAppDispatch } from '@/hooks/redux'
 import { setIsWeb3AuthSuccess } from '@/redux/slices/authSlice'
 
 // STYLES

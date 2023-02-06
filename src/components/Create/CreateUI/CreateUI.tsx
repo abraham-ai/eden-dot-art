@@ -3,7 +3,7 @@ import React from 'react' // useState, useCallback
 // REDUX
 import { setSnackbarVisible } from '@/redux/slices/snackbarSlice'
 import { setModalVisible } from '@/redux/slices/modalSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 
 // ANTD
 import {

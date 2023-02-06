@@ -8,7 +8,7 @@ import React, { useEffect, useState, useRef } from 'react'
 // import slug from 'slug'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { batch } from 'react-redux'
 import {
   incrementRunningCreationCount,

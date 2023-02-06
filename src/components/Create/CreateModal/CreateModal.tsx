@@ -18,7 +18,7 @@ import React from 'react' //  { useState, forwardRef }
 // import MuiAlert, { AlertProps } from '@mui/material/Alert'
 
 // REDUX
-import { useAppSelector } from '@/hooks/hooks'
+import { useAppSelector } from '@/hooks/redux'
 // useAppDispatch
 
 // WALLET
