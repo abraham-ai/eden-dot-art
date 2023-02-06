@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { ReactElement } from 'react'
-import axios from 'axios'
 
 // NEXT
 import Head from 'next/head'
@@ -8,11 +7,10 @@ import Head from 'next/head'
 // NAV
 import BaseLayout from 'src/layouts/BaseLayout'
 
-// MUI
-import Masonry from 'react-masonry-css'
-
 // LIBS
 import { useInView } from 'react-intersection-observer'
+import Masonry from 'react-masonry-component'
+import axios from 'axios'
 
 // COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
@@ -27,14 +25,18 @@ const CreationsGridStyles = styled.section`
   padding: 0 10px;
 `
 
+// CONSTS
 const PAGE_LENGTH = 10
+const masonryOptions = { transitionDuration: 0 };
+const imagesLoadedOptions = { background: '.my-bg-image-el' }
+
 
 export default function CreationsPage() {
   const [creations, setCreations] = useState<object[]>([])
-  const [message, setMessage] = useState<string | null>(null)
+  const [message, setMessage] = useState<string>('')
   const [loading, setLoading] = useState(false)
   const [paginate, setPaginate] = useState(true)
-  const [cutoffTime, setCutoffTime] = useState<number | null>(null)
+  const [cutoffTime, setCutoffTime] = useState<number>(0)
   const [breakpointCols] = useState(3) // setBreakpointCols
 
   const getMoreCreations = useCallback(async () => {
@@ -74,7 +76,11 @@ export default function CreationsPage() {
       const earliestTime = Date.parse(lastCreation.timestamp) - 1
       setCutoffTime(earliestTime)
     } catch (error: any) {
-      setMessage(`Error: ${error}`)
+      const errorMessage = error.message
+      const errorName = error.name
+      const errorCode = error.code
+
+      setMessage(`Error: ${errorMessage}`)
     }
     setLoading(false)
   }, [creations, cutoffTime, paginate])
@@ -99,12 +105,14 @@ export default function CreationsPage() {
       </Head>
       <CreationsGridStyles id="creations-grid">
         <div style={{ width: '100%', minHeight: 393, marginTop: 200 }}>
-          <Masonry
-            id="masonry"
-            columns={breakpointCols}
-            spacing={2}
-            sx={{ m: 0, alignContent: 'center' }}
-          >
+            <Masonry
+              className={'my-gallery-class'} // default ''
+              elementType={'ul'} // default 'div'
+              options={masonryOptions} // default {}
+              disableImagesLoaded={false} // default false
+              updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+              imagesLoadedOptions={imagesLoadedOptions} // default {}
+            >
             {creations.map((creation, index) => (
               <CreationCardMinimal key={index} creation={creation} />
             ))}
@@ -112,7 +120,7 @@ export default function CreationsPage() {
         </div>
         {loading && <Loader />}
         
-        {message && {message}}
+        {message}
         <div ref={ref}></div>
       </CreationsGridStyles>
     </>
