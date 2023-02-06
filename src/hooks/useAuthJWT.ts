@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react'
 
 // REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
+import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 
 import { batch } from 'react-redux'
 import { setToken } from '@/redux/slices/tokenSlice'
