@@ -1,6 +1,3 @@
-import { Eden } from 'eden-sdk'
+import EdenClient from 'eden-sdk'
 
-import dotenv from 'dotenv'
-dotenv.config()
-
-export const eden = new Eden()
+export const eden = new EdenClient()

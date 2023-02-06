@@ -429,18 +429,27 @@ export default function CreationCardMinimal({ creation }) {
                     flexDirection: 'row',
                     flex: 1,
                     width: '100%',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
                   }}
                 >
-                  <span className='cr-social like' style={{ margin: 10 }}>
+                  <span className="cr-social like" style={{ margin: 10 }}>
                     <Button className="btn" shape="circle" type="default">
                       <FaStar className="icon" />
                       {/* <Text className='text'>303</Text> */}
                     </Button>
                   </span>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', margin: 10 }}>
-                    <span className="cr-social remix" style={{ marginBottom: 10 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      margin: 10,
+                    }}
+                  >
+                    <span
+                      className="cr-social remix"
+                      style={{ marginBottom: 10 }}
+                    >
                       <Button className="btn" shape="circle" type="default">
                         <FaRetweet className="icon" />
                         {/* <Text className='text'>310</Text> */}
@@ -483,7 +492,7 @@ export default function CreationCardMinimal({ creation }) {
                     >
                       {generator}
                     </Text>
-                    <Text style={{ color: 'white' }}>{prompt}</Text>
+                    <Text style={{ color: 'white' }}>{key}</Text>
 
                     <div
                       style={{
@@ -682,7 +691,7 @@ export default function CreationCardMinimal({ creation }) {
       >
         <>
           <Button
-            className='close-icon-wrapper'
+            className="close-icon-wrapper"
             style={{
               position: 'fixed',
               top: '10px',
@@ -691,7 +700,7 @@ export default function CreationCardMinimal({ creation }) {
             }}
             onClick={e => handleModalClose(e)}
           >
-            <CloseIcon className='close-icon' fontSize={'large'} />
+            <CloseIcon className="close-icon" fontSize={'large'} />
           </Button>
 
           <div
