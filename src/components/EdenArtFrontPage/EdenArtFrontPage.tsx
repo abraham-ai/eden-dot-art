@@ -10,10 +10,7 @@ import useWindowDimensions from '@/hooks/useWindowDimensions'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
 // ANTD
-import {
-  Button,
-  Typography
-} from 'antd'
+import { Button, Typography } from 'antd'
 const { Title, Text } = Typography;
 
 // CSS
@@ -42,10 +39,10 @@ const EdenArtFrontPageStyles = styled.section`
     display: flex; 
     justify-content: space-between;
     flex: 1;
-    padding: 20px; 
     width: 100%; 
     position: fixed; 
     top: 0;
+    left: 0;
     z-index: 100;
   }
   /*** ATF SECTION ***/

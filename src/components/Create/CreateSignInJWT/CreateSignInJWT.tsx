@@ -18,9 +18,8 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 // ICONS
 // import CloseIcon
 
-export default function CreateSignInJWT({ isOpen, onModalCancel }) {
+export default function CreateSignInJWT({ isOpen }) {
   const { address } = useAccount() //  isConnected
-  // const { isWeb3AuthSuccess } = useAppSelector(state => state.auth)
 
   const [appMessage] = useState(
     `I am ${address} and I would like to create with Eden`,

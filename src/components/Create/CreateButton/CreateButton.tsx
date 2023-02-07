@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useContext } from 'react'
 
 // ANTD
@@ -11,7 +13,7 @@ import styled from 'styled-components'
 import AppContext from '@/components/AppContext/AppContext';
 
 
-const CreateButtonStyles = styled.div`
+const CreateButtonStyles = styled.section`
 	#create-button {
 		display: flex;
 		align-items: center;
@@ -31,20 +33,20 @@ export default function CreateButton() {
 
   const handleCreateOpen = () => {
     console.log('set modal visible!')
-    context.setIsModalVisible(true)
+    setIsModalVisible(true)
   }
 
   return (
     <CreateButtonStyles id='create-button-wrapper'>
       <Button
-          id='create-button'
-          onClick={handleCreateOpen}
-          size='middle'
-          icon={'+'}
-        >
-          <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
-            Create
-          </Text>
+        id='create-button'
+        onClick={() => handleCreateOpen}
+        size='middle'
+        icon={'+'}
+      >
+        <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
+          Create
+        </Text>
       </Button>
     </CreateButtonStyles>        
   )

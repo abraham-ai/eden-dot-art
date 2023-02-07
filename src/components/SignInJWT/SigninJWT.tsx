@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, forwardRef } from 'react'
+import React, { useCallback, useState, forwardRef } from 'react'
 
 // WEB3
 import { useSignMessage, useAccount } from 'wagmi'
@@ -21,9 +21,6 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 
 // MUI
 import {
-  styled,
-  Backdrop,
-  Box,
   Button,
   Typography,
   Modal,
@@ -409,120 +406,6 @@ export default function SignInJWT() {
       </Snackbar>
     )
   }
-
-  useEffect(() => {
-    // DEBUG
-    // console.log({ authToken, localToken })
-
-    let isSubscribed = true
-
-    if (isConnected && !isWeb3WalletConnected) {
-      isSubscribed ? context.setIsWeb3WalletConnected(true)) : nul
-    } else if (isConnected && isWeb3WalletConnected) {
-      if (isWeb3AuthSigning) {
-        // console.log('WEB3 AUTH SIGNING!')
-        if (isWeb3AuthSuccess) {
-          // console.log('WEB3 AUTH SUCCESS!')
-        } else if (!isWeb3AuthSuccess) {
-          // console.log('WEB3 NOT AUTH SUCCESS!')
-          if (isClicked) {
-            // console.log('WEB3 IS-CLICKED!')
-            if (signature) {
-              // console.log('WEB3 SIGNATURE!')
-
-              isSubscribed ? handleAuthToken(signature, authToken) : null
-            }
-
-            // console.log('HANDLE AUTH JWT')
-            isSubscribed ? handleAuthJWT() : null
-          } else if (!isClicked) {
-            // console.log('WEB3 IS-NOT-CLICKED!')
-
-            isSubscribed ? setIsClicked(true) : null
-          }
-        }
-      } else if (!isWeb3AuthSigning) {
-        // console.log('WEB3 NOT AUTH SIGNING!')
-        if (isWeb3AuthSuccess) {
-          // console.log('WEB3 AUTH SUCCESS!')
-        } else if (!isWeb3AuthSuccess) {
-          // console.log('WEB3 NOT AUTH SUCCESS!')
-          if (isClicked) {
-            // console.log('WEB3 IS-CLICKED!')
-            if (localToken !== null) {
-              // console.log('WEB3 LOCAL TOKEN NOT EMPTY!')
-
-              if (localAuth) {
-                // console.log('WEB3 LOCAL AUTH!')
-                // console.log('WEB3 AUTH SIGNING!')
-                isSubscribed ? context.setIsWeb3AuthSigning(true)) : nul
-              } else if (!localAuth) {
-                // console.log('WEB3 NOT LOCAL AUTH!')
-
-                isSubscribed ? setLocalAuth(true) : null
-              }
-            } else if (localToken === null && authToken === '') {
-              // console.log('WEB3 LOCAL NULL, AUTH EMPTY!')
-              // console.log(
-              //   `%c 🔒 PLEASE CLICK SIGN-IN`,
-              //   'background: #222; color: #bada55',
-              // )
-            }
-          } else if (!isClicked) {
-            // console.log('WEB3 IS-NOT-CLICKED!')
-            if (localToken !== null) {
-              // console.log('WEB3 LOCAL TOKEN NOT NULL!')
-
-              if (localAuth) {
-                // console.log('WEB3 LOCAL AUTH!')
-                isSubscribed ? setIsClicked(true) : null
-                // console.log(
-                //   `%c 🔒 ${localToken}`,
-                //   'background: #222; color: #bada55',
-                // )
-                // console.log('WEB3 AUTH SIGNING!')
-                isSubscribed ? context.setIsWeb3AuthSigning(true)) : nul
-              } else if (!localAuth) {
-                // console.log('WEB3 LOCAL NOT AUTH!')
-
-                if (isSubscribed) {
-                  setIsClicked(true)
-                  setLocalAuth(true)
-                }
-              }
-            }
-          }
-        }
-      }
-    } else if (!isConnected && isWeb3WalletConnected) {
-      // console.log('WAGMI WEB3 WALLET NOT CONNECTED!')
-
-      if (isSubscribed) {
-          context.setIsWeb3WalletConnected(false)
-          context.setIsWeb3AuthSuccess(false)
-          context.setIsWeb3AuthSigning(false)
-      }
-    } else if (!isConnected && !isWeb3WalletConnected && isWeb3AuthSuccess) {
-      // console.log('WAGMI WEB3 WALLET NOT CONNECTED!')
-
-      if (isSubscribed) {
-          context.setIsWeb3AuthSuccess(false)
-          context.setIsWeb3AuthSigning(false)
-      }
-    }
-
-    return () => {
-      isSubscribed = false
-    }
-  }, [
-    isConnected,
-    isClicked,
-    signature,
-    localToken,
-    localAuth,
-    handleAuthToken,
-    handleAuthJWT,
-  ])
 
   return (
     <>

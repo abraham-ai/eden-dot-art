@@ -1,6 +1,4 @@
-import React, { useState } from 'react' // useState, useCallback
-
-import { useContext } from 'react'
+import React, { useState, useContext } from 'react' // useState, useCallback
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
@@ -124,11 +122,11 @@ const CreateUIStyles = styled.section`
 `
 
 export default function CreateUI({ isOpen }) {
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
   const snackbarMessage = 'test message'
 
   const context = useContext(AppContext)
+  const { authToken, appAddress, isModalVisible } = context;
 
 
   // const [prompt, setPrompt] = useState('')
@@ -137,10 +135,10 @@ export default function CreateUI({ isOpen }) {
   // const [creationWidth] = useState(512) // setCreationWidth
   // const [maxCharPercent, setMaxCharPercent] = useState(0)
 
-  // const authToken = useAppSelector(state => state.token.value)
-  // const appAddress = useAppSelector(state => state.address.value)
-  // const isModalVisible = useAppSelector(state => state.modal.isModalVisible)
-  // const snackbarMessage = useAppSelector(state => state.snackbar.value)
+  // const  = useAppSelector(state => state.token.value)
+  // const s = useAppSelector(state => state.address.value)
+  // const  = useAppSelector(state => state.modal.isModalVisible)
+  // const  = useAppSelector(state => state.snackbar.value)
 
   const { address } = useAccount()
 

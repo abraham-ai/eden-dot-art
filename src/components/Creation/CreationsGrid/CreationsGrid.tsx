@@ -1,13 +1,15 @@
 import { useState, useEffect, useCallback } from 'react'
-import axios from 'axios'
 
-// MUI
-import Masonry from 'react-masonry-css'
+// ANTD
+import { Typography } from 'antd'
+const { Text } = Typography
 
 // LIBS
+import axios from 'axios'
 import { useInView } from 'react-intersection-observer'
 
 // COMPONENTS
+import Masonry from 'react-masonry-css'
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
@@ -98,29 +100,31 @@ export default function CreationsGrid({ username = null }) {
   return (
     <CreationsGridStyles id="creations-grid">
         <div id='creations-grid-wrapper'>
-            {creations.length < 1 ? (
-                <Loader />
-            ) : (
-                <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
-                    <Masonry
-                        className={'my-gallery-class'} // default ''
-                        elementType={'ul'} // default 'div'
-                        options={masonryOptions} // default {}
-                        disableImagesLoaded={false} // default false
-                        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                        imagesLoadedOptions={imagesLoadedOptions} // default {}
-                        >
-                        {creations.map((creation, index) => (
-                        <CreationCardMinimal key={index} creation={creation} />
-                        ))}
-                    </Masonry>
-                </div>
-            )}
+          {creations.length < 1 ? (
+            <Loader />
+          ) : (
+            <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
+              <Masonry
+                className={'my-gallery-class'} // default ''
+                elementType={'ul'} // default 'div'
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                imagesLoadedOptions={imagesLoadedOptions} // default {}
+                >
+                {creations.map((creation, index) => (
+                <CreationCardMinimal key={index} creation={creation} />
+                ))}
+              </Masonry>
+            </div>
+          )}
         </div>
+
       {loading && <Loader />}
+
       {message}
+
       <div ref={ref}></div>
-      {/* <Button onClick={getMoreCreations}>Load More</Button> */}
     </CreationsGridStyles>
   )
 }

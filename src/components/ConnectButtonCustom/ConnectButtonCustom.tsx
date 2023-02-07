@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, MouseEvent } from 'react'
 
 // NEXT
@@ -127,7 +129,7 @@ export const AccountPopoverContent = ({
 }) => {
   
     // MASONRY SLIDER
-    const [masonryColumnCount, setMasonryColumnCount] = useState<number>(30)
+    const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
 
     const handleChange = (event: Event, newValue: number | number[]) => {
       setMasonryColumnCount(newValue as number)
@@ -480,7 +482,23 @@ export const ConnectButtonCustom = () => {
                 }
 
                 return (
-                  <>
+                  <Popover
+                    id={id}
+                    content={
+                      <AccountPopoverContent
+                        openAccountModal={openAccountModal} 
+                        openChainModal={openChainModal}
+                        walletAddress={walletAddress} 
+                        displayAddress={displayAddress}
+                        chain={chain}
+                        account={account}/>
+                      }
+                    trigger='click'
+                    open={open}
+                    onOpenChange={() => handleClose()}
+                    placement='bottom'
+                    style={{ borderRadius: '24px' }}
+                  >
                     <Button
                       className="main-account-button"
                       aria-describedby={id}
@@ -490,25 +508,7 @@ export const ConnectButtonCustom = () => {
                         <Blockies seed={walletAddress} scale={5} />
                       </div>
                     </Button>
-
-                    <Popover
-                      id={id}
-                      content={
-                        <AccountPopoverContent
-                          openAccountModal={openAccountModal} 
-                          openChainModal={openChainModal}
-                          walletAddress={walletAddress} 
-                          displayAddress={displayAddress}
-                          chain={chain}
-                          account={account}/>
-                        }
-                      trigger='click'
-                      open={open}
-                      onOpenChange={() => handleClose()}
-                      placement='bottom'
-                      style={{ borderRadius: '24px' }}
-                    />
-                  </>
+                  </Popover>
                 )
               })()}
             </div>
