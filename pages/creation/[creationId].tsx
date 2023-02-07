@@ -768,8 +768,7 @@ export default function Creation({
   const [isHovering, setIsHovering] = useState(true)
   // const [visible, setVisible] = useState(true);
 
-  // const sort_by = useAppSelector(state => state.sort.value);
-  // const filter_by = useAppSelector(state => state.filter.value);
+  // const { sort_by, filter_by } = context;
 
   const { text_input } = item
   // source, statistics

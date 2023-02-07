@@ -215,9 +215,7 @@ export default function WatchPage() {
 
 
   // console.log({ creations })
-  // const token = useAppSelector(state => state.token.value)
-  // const sort_by = useAppSelector(state => state.sort.value)
-  // const filter_by = useAppSelector(state => state.filter.value)
+  // const {token, sort_by, filter_by } = context;
 
   // address, myRefreshInterval, creations
 

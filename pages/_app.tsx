@@ -41,6 +41,7 @@ interface EdenAppProps extends AppProps {
 
 function EdenApp(props: EdenAppProps) {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
@@ -62,7 +63,8 @@ function EdenApp(props: EdenAppProps) {
             />
           </Head>
           {/* <SidebarProvider> */}
-          <AppContext.Provider value={{ isModalVisible, setIsModalVisible }}>
+          <AppContext.Provider 
+              value={{ isModalVisible, setIsModalVisible, isWeb3WalletConnected, setIsWeb3WalletConnected }}>
               <WalletProvider>
                 {getLayout(<Component {...pageProps} />)}
               </WalletProvider>
