@@ -74,14 +74,18 @@ const ConnectButtonStyles = styled.section`
     max-width: 48px;
     border-radius: 50%;
     overflow: hidden;
-    padding: 5px;
-    margin: 5px;
+    margin: 0;
+    padding: 0;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.05), 0px 8px 40px rgba(0, 0, 0, 0.04);
     background: white;
+    overflow: hidden;
   }
   .main-account-button:hover {
-    border: 3px solid rgb(112, 99, 192);;
     background: white;
+    min-height: 48px;
+    min-width: 48px;
+    max-height: 48px;
+    max-width: 48px;
   }
   .account-profile-wrapper {
     position: relative;
@@ -96,6 +100,9 @@ const ConnectButtonStyles = styled.section`
     overflow: hidden;
     padding: 5px;
     background-color: white;
+  }
+  .account-profile-wrapper:hover {
+    border: 3px solid rgb(112, 99, 192);
   }
   .account-button-wrapper {
     border-radius: 50%;
@@ -128,16 +135,14 @@ export const ConnectButtonCustom = () => {
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     open ? setOpen(false) : setOpen(true)
-    // setAnchorEl(event.currentTarget)
+    // <setAnchorEl>(event.currentTarget)
   }
 
-  const handleClose = () => {
-    setOpen(false)
-    // setAnchorEl(null)
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen)
   }
 
   // appAddress = address === appAddress ? appAddress : address
-
 
   // const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
@@ -223,19 +228,15 @@ export const ConnectButtonCustom = () => {
                       }
                     trigger='click'
                     open={open}
-                    onOpenChange={() => handleClose()}
+                    onOpenChange={handleOpenChange}
                     placement='bottom'
                     style={{ borderRadius: '24px' }}
                   >
-                    <Button
-                      className="main-account-button"
-                      aria-describedby={id}
-                      onClick={(event) => handleClick(event)}
-                    >
+                    <div className='main-account-button'                    > 
                       <div className="account-profile-wrapper">
                         <Blockies seed={walletAddress} scale={5} />
                       </div>
-                    </Button>
+                    </div>
                   </Popover>
                 )
               })()}
