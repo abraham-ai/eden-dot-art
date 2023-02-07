@@ -1,21 +1,22 @@
 'use client'
 
-import React, { useState, MouseEvent } from 'react'
-
-// WAGMI
-import { useAccount } from 'wagmi'
+import React, { useState, useContext, MouseEvent } from 'react'
 
 // WEB3
+import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // HOOKS
 import useWindowDimensions from '@/hooks/useWindowDimensions'
 
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
+
 // LIBS
 import Blockies from 'react-blockies'
 
 // ANTD
-import { Button, Popover } from 'antd';
+import { Popover } from 'antd';
 
 // EDEN COMPONENTS
 import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
@@ -133,10 +134,14 @@ export const ConnectButtonCustom = () => {
   const walletAddress = address
   const { width } = useWindowDimensions()
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    open ? setOpen(false) : setOpen(true)
-    // <setAnchorEl>(event.currentTarget)
-  }
+  // CONTEXT
+  const context = useContext(AppContext)
+  const { isWeb3WalletConnected } = context
+
+  // const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  //   open ? setOpen(false) : setOpen(true)
+  //   // <setAnchorEl>(event.currentTarget)
+  // }
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen)
@@ -190,19 +195,21 @@ export const ConnectButtonCustom = () => {
               })}
             >
               {(() => {
-                if (!connected) {
+                if (isWeb3WalletConnected) {
+                // if (!connected) {
                   return (
                     <button
                       className="connect-button"
                       onClick={openConnectModal}
                       type="button"
                     >
-                      { width < 930 ? 'Connect' : 'Connect Wallet' }
+                      {/* { width < 930 ? 'Connect' : 'Connect Wallet' } */}
+                      Connect Wallet
                     </button>
                   )
                 }
 
-                if (chain.unsupported) {
+                if (connected && chain.unsupported) {
                   return (
                     <button
                       className="connect-button"
