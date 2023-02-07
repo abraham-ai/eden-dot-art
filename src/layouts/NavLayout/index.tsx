@@ -10,7 +10,7 @@ interface NavLayoutProps {
 
 const NavLayout: FC<NavLayoutProps> = ({ children }) => {
   return (
-    <div
+    <section
       className="nav-layout"
       style={{
         display: 'flex',
@@ -21,7 +21,7 @@ const NavLayout: FC<NavLayoutProps> = ({ children }) => {
     >
       <Header />
       {children}
-    </div>
+    </section>
   )
 }
 

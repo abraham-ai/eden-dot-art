@@ -9,10 +9,6 @@ import { useState, useEffect, useContext } from 'react'
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext';
 
-// ANTD
-import { Button, Modal, Typography } from 'antd' // theme,
-const { Text } = Typography
-
 // CSS
 import styled from 'styled-components'
 
@@ -66,21 +62,6 @@ const wagmiClient = createClient({
 const CustomAvatar: AvatarComponent = ({ address }) => {
   return <Blockies seed={address} />
 }
-
-// ICONS
-// import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
-// import { SidebarContext } from 'src/contexts/SidebarContext'
-// import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
-// import LoginIcon from '@mui/icons-material/Login'
-// import ImportExportIcon from '@mui/icons-material/ImportExport'
-// import FilterListIcon from '@mui/icons-material/FilterList'
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-// import AddIcon from '@mui/icons-material/Add'
-// import { FaDiscord } from 'react-icons/fa'
-
-// height: ${theme.header.height};
-// color: ${theme.header.textColor};
-// padding: ${theme.spacing(0, 2)};
 
 const HeaderWrapperStyles = styled.div`
   position: fixed;
@@ -149,8 +130,8 @@ const HeaderWrapperStyles = styled.div`
 
 export default function Header() {
 
-  // const context = useContext(AppContext)
-  // const { isModalVisible } = context
+  const context = useContext(AppContext)
+  const { isModalVisible, setIsWeb3WalletConnected, isWeb3WalletConnected } = context
 
 
   // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
@@ -165,12 +146,16 @@ export default function Header() {
 
   const handleCreateClose = () => {
     console.log('HANDLE CREATE CLOSE!')
-    context.setIsModalVisible(false)
+    setIsModalVisible(false)
   }
 
   const [loginOpen, setLoginOpen] = useState(false)
   // const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
+
+  useEffect(() => {
+    setIsWeb3WalletConnected(isConnected)
+  }, [isConnected])
 
   // console.log({ createOpen })
   // console.log('ROUTER:', router.asPath)
@@ -193,14 +178,11 @@ export default function Header() {
 
             <ConnectButtonCustom />
 
-            {isConnected 
+            {isWeb3WalletConnected 
               ?     
                 <>
                   <CreateButton />
-                  <CreateModal
-                    isOpen={true}
-                    onModalCancel={handleCreateClose}
-                  />
+                  <CreateModal />
                 </> 
               : null
             }
