@@ -1,99 +1,128 @@
-import { useState } from 'react'
-
-// GQL
-import { useQuery } from '@apollo/client'
-import QueryResult from '@/components/QueryResult'
-
-// NEXT
-import Head from 'next/head'
+import { useState, useEffect, useCallback } from 'react'
+import axios from 'axios'
 
 // MUI
-import Masonry from '@mui/lab/Masonry'
+import Masonry from 'react-masonry-css'
 
-// STYLES
-import styled from 'styled-components'
+// LIBS
+import { useInView } from 'react-intersection-observer'
 
 // COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
-// GQL Creations query to retreive all Creations //
-import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
+// STYLES
+import styled from 'styled-components'
 
 const CreationsGridStyles = styled.section`
-    width: 100%;
-    
-    #creations-grid-wrapper {
-        width: 100%;
-    }
+  width: 100vw;
+  padding: 0 10px;
 `
 
+// CONSTS
+const PAGE_LENGTH = 10
+const masonryOptions = { transitionDuration: 0 };
+const imagesLoadedOptions = { background: '.my-bg-image-el' }
 
-export default function CreationsGrid() {
-    const [breakpointCols] = useState(3) // setBreakpointCols
-    const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
-        variables: {
-            offset: 0,
-            limit: 16,
-        },
-    })
 
-    const onLoadMore = () =>
-        fetchMore({
-            variables: {
-                offset: 10,
-                limit: 10, //data.length
-            },
-            updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev
-                return {
-                    creationsForHome: [
-                        ...prev.creationsForHome,
-                        ...fetchMoreResult.creationsForHome,
-                    ],
-                }
-            },
+export default function CreationsGrid({ username = null }) {
+  const [creations, setCreations] = useState<object[]>([])
+  const [message, setMessage] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [paginate, setPaginate] = useState(true)
+  const [cutoffTime, setCutoffTime] = useState<number | null>(null)
+  const [breakpointCols] = useState(5) // setBreakpointCols
+
+  const getMoreCreations = useCallback(async () => {
+    if (!paginate) return
+
+    setLoading(true)
+
+    try {
+      let filter = {
+        latestTime: cutoffTime,
+        limit: PAGE_LENGTH,
+      }
+
+      if (username != null) {
+        filter = Object.assign(filter, { username })
+      }
+
+      const response = await axios.post('/api/creations', filter)
+
+      const moreCreations =
+        response.data.creations &&
+        response.data.creations.map((creation: any) => {
+          return {
+            key: creation._id,
+            address: creation.user,
+            uri: creation.uri,
+            timestamp: creation.createdAt,
+            prompt: creation.task.config.text_input,
+            status: creation.task.status,
+            generator: creation.task.generator.generatorName,
+          }
         })
 
-    return (
-        <>
-            <Head>
-                <title>Creations</title>
-            </Head>
+      if (moreCreations.length == 0) {
+        setLoading(false)
+        setPaginate(false)
+        return
+      }
 
-            <CreationsGridStyles>
-                <div id='creations-grid-wrapper'>
+      setCreations([...creations, ...moreCreations])
 
-                    {data?.creationsForHome.length < 1 ? (
-                        <Loader />
-                    ) : (
-                        <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
-                            <Masonry
-                                id="masonry"
-                                columns={breakpointCols}
-                                spacing={2}
-                                sx={{ m: 0 }}
-                            >
-                                <QueryResult error={error} loading={loading} data={data}>
-                                    {data?.creationsForHome?.map((creation, index) => (
-                                        <CreationCardMinimal
-                                            key={`${creation.id}_${index}`}
-                                            creation={creation}
-                                        />
-                                    ))}
-                                </QueryResult>
-                            </Masonry>
-                            <a
-                                href="#"
-                                onClick={onLoadMore}
-                                style={{ color: 'black', paddingBottom: 10 }}
-                            >
-                                Load More
-                            </a>
-                        </div>
-                    )}
+      const lastCreation = moreCreations[moreCreations.length - 1]
+      const earliestTime = Date.parse(lastCreation.timestamp) - 1
+      setCutoffTime(earliestTime)
+    } catch (error: any) {
+      console.error(error)
+      setMessage(`Error:`)
+    }
+    setLoading(false)
+  }, [creations, cutoffTime, paginate, username])
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
+
+  useEffect(() => {
+    const loadMore = async () => {
+      await getMoreCreations()
+    }
+    if (inView) {
+      loadMore()
+    }
+  }, [inView, getMoreCreations])
+
+  return (
+    <CreationsGridStyles id="creations-grid">
+        <div id='creations-grid-wrapper'>
+            {creations.length < 1 ? (
+                <Loader />
+            ) : (
+                <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
+                    <Masonry
+                        className={'my-gallery-class'} // default ''
+                        elementType={'ul'} // default 'div'
+                        options={masonryOptions} // default {}
+                        disableImagesLoaded={false} // default false
+                        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                        imagesLoadedOptions={imagesLoadedOptions} // default {}
+                        >
+                        {creations.map((creation, index) => (
+                        <CreationCardMinimal key={index} creation={creation} />
+                        ))}
+                    </Masonry>
                 </div>
-            </CreationsGridStyles>
-        </>
-    )
+            )}
+        </div>
+      {loading && <Loader />}
+      {message}
+      <div ref={ref}></div>
+      {/* <Button onClick={getMoreCreations}>Load More</Button> */}
+    </CreationsGridStyles>
+  )
 }
+
+                

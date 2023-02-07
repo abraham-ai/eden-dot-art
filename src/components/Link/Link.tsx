@@ -2,8 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
-import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
-import { styled } from '@mui/material/styles'
+import styled from 'styled-components'
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled('a')({})
@@ -44,8 +43,7 @@ export type LinkProps = {
   href: NextLinkProps['href']
   linkAs?: NextLinkProps['as'] // Useful when the as prop is shallow by styled().
   noLinkStyle?: boolean
-} & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
-  Omit<MuiLinkProps, 'href'>
+} & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'>
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/api-reference/next/link
@@ -82,8 +80,6 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     if (noLinkStyle) {
       return <Anchor className={className} href={href} ref={ref} {...other} />
     }
-
-    return <MuiLink className={className} href={href} ref={ref} {...other} />
   }
 
   const linkAs = linkAsProp || as
@@ -107,16 +103,6 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       />
     )
   }
-
-  return (
-    <MuiLink
-      component={NextLinkComposed}
-      className={className}
-      ref={ref}
-      {...nextjsProps}
-      {...other}
-    />
-  )
 })
 
 export default Link

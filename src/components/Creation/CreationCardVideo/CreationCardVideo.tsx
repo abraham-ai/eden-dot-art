@@ -7,29 +7,19 @@ import React, { useEffect, useState, useRef } from 'react'
 // import { Link, useRouteMatch, useLocation } from 'react-router-dom'
 // import slug from 'slug'
 
-// REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-import { batch } from 'react-redux'
-import {
-  incrementRunningCreationCount,
-  decrementRunningCreationCount,
-  setIsRunningFalse,
-  setIsRunningTrue,
-} from '../../../redux/slices/creationsSlice'
-
 // MUI
 // Image, Typography, Card, Button, Modal,
 import {
+  Button,
   styled,
   Skeleton,
   Typography,
   Dialog,
   Backdrop,
-  Box,
   CardContent,
   CardActions,
-  IconButton,
-} from '@mui/material'
+} from 'antd'
+const { Text } = Typography
 
 // COMPONENTS
 // import {
@@ -505,11 +495,6 @@ export default function VideoCreation({
   const handleCardOpen = () => setCardOpen(true)
   const handleCardClose = () => setCardOpen(false)
 
-  // redux
-  const dispatch = useAppDispatch()
-  // isCreationRunning,
-  const { isRunning, creations } = useAppSelector(state => state.creations)
-
   // const sort_by = useSelector(state => state.sort.value)
   // const filter_by = useSelector(state => state.filter.value)
 
@@ -568,8 +553,8 @@ export default function VideoCreation({
     ) {
       // console.log(`CREATION COUNT SHOULD INCREASE AND SET TO TRUE!!!!!!`)
 
-      dispatch(setIsRunningTrue(item._id))
-      dispatch(incrementRunningCreationCount())
+      context.setIsRunningTrue(item._id)
+      context.incrementRunningCreationCount()
     } else if (
       item.status_code === 100 &&
       item.status === 'complete' &&
@@ -577,19 +562,17 @@ export default function VideoCreation({
     ) {
       // && isRunning[item._id] === true) {
       // console.log(`CREATION COUNT SHOULD DECREASE AND SET TO FALSE!!!!!!`)
-      batch(() => {
-        dispatch(setIsRunningFalse(item._id))
-        dispatch(decrementRunningCreationCount())
-      })
+        context.setIsRunningFalse(item._id)
+        context.decrementRunningCreationCount()
     }
 
     // else if (item.status_code < 100 && isRunning[item._id] === false) {
     //   batch(() => {
-    //     dispatch(setIsRunningTrue(item._id));
-    //     // dispatch(incrementRunningCreationCount());
+    //     context.setIsRunningTrue(item._id)
+    //     context.incrementRunningCreationCount()
     //   });
     // }
-  }, [item, dispatch, isRunning, creations])
+  }, [item, isRunning, creations])
 
   // DEBUG
   // console.log({ item });
@@ -662,7 +645,7 @@ export default function VideoCreation({
           timeout: 500,
         }}
       >
-        <Box sx={{ position: 'relative' }}>
+        <div sx={{ position: 'relative' }}>
           {/* <Box sx={{ width: 512, height: 512 }}> */}
           <ReactPlayer
             url={`${PRD_URL}${video_sha}.mp4`}
@@ -718,7 +701,7 @@ export default function VideoCreation({
                 <FaRetweet />
               </IconButton> */}
 
-              <Box
+              <div
                 sx={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
@@ -729,38 +712,24 @@ export default function VideoCreation({
                   mr: 1,
                 }}
               >
-                <IconButton aria-label="bookmark" className="arrow-up">
-                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-                <IconButton aria-label="bookmark" className="arrow-down">
-                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-              </Box>
+                <Button aria-label="bookmark" className="arrow-up" icon={<TbArrowBigDown style={{ fontSize: '1.5rem' }} />} />
+                <Button aria-label="bookmark" className="arrow-down" icon={<TbArrowBigTop style={{ fontSize: '1.5rem' }} />} />
+              </div>
 
-              <IconButton
+              <Button
                 aria-label="share"
-                sx={{
+                style={{
                   background: 'rgba(0, 0, 0, 0.5)',
                   backdropFilter: 'blur(16px)',
                   borderRadius: '50%',
                   width: 'auto',
-                  mr: 1,
+                  marginRight: 10,
                 }}
-              >
-                <IosShareIcon />
-              </IconButton>
+                icon={<IosShareIcon />}
+              />
 
-              {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                >
-                <ExpandMoreIcon />
-              </ExpandMore> */}
-
-              <Box
-                sx={{
+              <div
+                style={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
                   backdropFilter: 'blur(16px)',
@@ -768,16 +737,12 @@ export default function VideoCreation({
                   width: 'auto',
                 }}
               >
-                <IconButton aria-label="bookmark">
-                  <BookmarkBorderIcon />
-                </IconButton>
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
+                <Button aria-label="bookmark" icon={<BookmarkBorderIcon />} />
+                <Button aria-label="settings" icon={<MoreVertIcon />} />
+              </div>
             </CardActions>
           </CardContent>
-        </Box>
+        </div>
       </Dialog>
     </>
   )

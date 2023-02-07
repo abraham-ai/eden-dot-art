@@ -2,49 +2,30 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // MUI
-import {
-  Box,
-  Button,
-  Fade,
-  Paper,
-  Popper,
-  styled,
-  // Typography,
-} from '@mui/material'
+import { Button, Popover } from 'antd'
 
-// MUI LIB
-import {
-  usePopupState,
-  bindToggle,
-  bindPopper,
-} from 'material-ui-popup-state/hooks'
+// EDEN COMPONENTS
 import CreatorProfileAddress from '../../Creator/CreatorProfileAddress/CreatorProfileAddress'
 
-const PopperStyles = styled(Box)(
-  () => `
+// STYLES
+import styled from 'styled-components'
+
+const PopperStyles = styled.section`
   .popper-wrapper: {
     padding: 20px,
   },
-  `,
-)
+`
 
 const PopperPopupState = () => {
-  const popupState = usePopupState({ variant: 'popper', popupId: 'demoPopper' })
   return (
     <PopperStyles>
-      <Button variant="contained" {...bindToggle(popupState)}>
+      <Button>
         Avatar
       </Button>
 
-      <Popper {...bindPopper(popupState)} transition>
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper className="popper-wrapper">
-              <CreatorProfileAddress />
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
+      <Popover>
+        <CreatorProfileAddress />
+      </Popover>
     </PopperStyles>
   )
 }

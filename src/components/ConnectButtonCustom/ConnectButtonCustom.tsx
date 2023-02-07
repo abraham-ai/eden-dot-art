@@ -3,9 +3,6 @@ import React, { useState, MouseEvent } from 'react'
 // NEXT
 // import Link from 'next/link'
 
-// REDUX
-import { useAppSelector } from '@/hooks/hooks' // useAppDispatch
-
 // WAGMI
 import { useAccount } from 'wagmi'
 
@@ -33,9 +30,9 @@ import ApiKeys from '@/components/ApiKeys/ApiKeys'
 // ICONS
 // import SettingsIcon from '@mui/icons-material/Settings'
 // import HelpIcon from '@mui/icons-material/Help'
-import LightModeIcon from '@mui/icons-material/LightMode'
-import ViewColumnIcon from '@mui/icons-material/ViewColumn'
-import LogoutIcon from '@mui/icons-material/Logout'
+// import LightModeIcon
+// import ViewColumnIcon
+// import LogoutIcon
 
 // CONST CSS
 // const animSpeed = '300ms'
@@ -326,13 +323,13 @@ export const AccountPopoverContent = ({
           alignItems: 'center',
         }}
       >
-        <LightModeIcon style={{ color: '#8C7CF0' }} />
+        {/* <LightModeIcon style={{ color: '#8C7CF0' }} /> */}
         <Text
           style={{ color: '#8C7CF0', fontWeight: 600, marginRight: 40 }}
         >
           Theme
         </Text>
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
       </div>
 
       <div style={{ paddingLeft: 10, paddingRight: 10, width: '100%' }}>
@@ -343,7 +340,7 @@ export const AccountPopoverContent = ({
             width: '100%',
           }}
         >
-          <ViewColumnIcon style={{ color: '#8C7CF0' }} />
+          {/* <ViewColumnIcon style={{ color: '#8C7CF0' }} /> */}
           <Text
             style={{
               paddingRight: 2,
@@ -379,7 +376,7 @@ export const AccountPopoverContent = ({
       </div>
 
       <Button
-        icon={<LogoutIcon />}
+        icon={<Text>{'Logout'}</Text>}
         block
         style={{ display: 'flex', justifyContent: 'flex-start' }}
       >
@@ -399,13 +396,8 @@ export const ConnectButtonCustom = () => {
   const walletAddress = address
   const { width } = useWindowDimensions()
 
-  
-
-  // REDUX
-  let appAddress = useAppSelector(state => state.address.value)
-
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event ? setOpen(!open) : null
+    open ? setOpen(false) : setOpen(true)
     // setAnchorEl(event.currentTarget)
   }
 
@@ -414,7 +406,8 @@ export const ConnectButtonCustom = () => {
     // setAnchorEl(null)
   }
 
-  appAddress = address === appAddress ? appAddress : address
+  // appAddress = address === appAddress ? appAddress : address
+
 
   // const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
@@ -491,7 +484,7 @@ export const ConnectButtonCustom = () => {
                     <Button
                       className="main-account-button"
                       aria-describedby={id}
-                      onClick={() => handleClick}
+                      onClick={(event) => handleClick(event)}
                     >
                       <div className="account-profile-wrapper">
                         <Blockies seed={walletAddress} scale={5} />
@@ -500,23 +493,21 @@ export const ConnectButtonCustom = () => {
 
                     <Popover
                       id={id}
-                      content={<AccountPopoverContent
-                                  openAccountModal={openAccountModal} 
-                                  openChainModal={openChainModal}
-                                  walletAddress={walletAddress} 
-                                  displayAddress={displayAddress}
-                                  chain={chain}
-                                  account={account}
-                                   />
-                                }
+                      content={
+                        <AccountPopoverContent
+                          openAccountModal={openAccountModal} 
+                          openChainModal={openChainModal}
+                          walletAddress={walletAddress} 
+                          displayAddress={displayAddress}
+                          chain={chain}
+                          account={account}/>
+                        }
                       trigger='click'
                       open={open}
                       onOpenChange={() => handleClose()}
                       placement='bottom'
                       style={{ borderRadius: '24px' }}
-                    >
-                      
-                    </Popover>
+                    />
                   </>
                 )
               })()}

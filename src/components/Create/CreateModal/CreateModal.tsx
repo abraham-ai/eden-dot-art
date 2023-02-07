@@ -1,35 +1,8 @@
 import React from 'react' //  { useState, forwardRef }
 // , useEffect, useCallback
 
-// MUI
-// import {
-// Backdrop,
-// Box,
-// Button,
-// Modal,
-// Typography,
-// Select,
-// SelectChangeEvent,
-// TextField,
-// useTheme,
-// styled,
-// Snackbar,
-// } from '@mui/material'
-// import MuiAlert, { AlertProps } from '@mui/material/Alert'
-
-// REDUX
-import { useAppSelector } from '@/hooks/hooks'
-// useAppDispatch
-
 // WALLET
-// import { useAccount, useSigner } from 'wagmi'
-
-// import {
-//   setIsRunningTrue,
-//   setIsRunningFalse,
-//   setIsLoader,
-//   setIsCreationRunningTrue,
-// } from '../../../redux/slices/creationsSlice'
+import { useAccount } from 'wagmi'
 
 // UI
 // import { message, notification, Form, Progress, Input, Space } from 'antd'
@@ -262,21 +235,13 @@ import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT
 export default function CreateModal({ isOpen = true, onModalCancel }) {
   // const [open, setOpen] = useState(isOpen)
 
-  // REDUX STATE
-  // const dispatch = useDispatch()
-  const { isWeb3AuthSuccess } = useAppSelector(state => state.auth)
-  // const {
-  //   // address,
-  //   isConnected,
-  // } = useAccount()
+  const {
+    // address,
+    isConnected,
+  } = useAccount()
 
   // console.log({ isOpen })
   // console.log({ isWeb3AuthSuccess })
-
-  // const address = useSelector(state => state.address.value)
-  // const token = useSelector(state => state.token.value)
-  // const tokenAmount = useSelector(state => state.token.amount)
-
   // const [visibleT, setVisibleT] = useState(false)
 
   // const { width } = useWindowDimensions()
@@ -329,7 +294,7 @@ export default function CreateModal({ isOpen = true, onModalCancel }) {
   //       })
   //       .then(response => {
   //         //console.log(response)
-  //         dispatch(setIsCreationRunningTrue())
+  //         context.setIsCreationRunningTrue()
   //         sendNotification('success', {
   //           message: 'Request Submitted.',
   //           description: `Abraham will dream a ${creationShape} creation: ${text_input}`,
@@ -383,10 +348,9 @@ export default function CreateModal({ isOpen = true, onModalCancel }) {
   // }
 
   // function onFormSubmit() {
-  //   // handles redux and other form submission functionality
   //   form.submit
   //   setPrompt('')
-  //   dispatch(setIsLoader(true))
+  //   context.setIsLoader(true)
   //   onReset()
   //   closePopup()
   // }
@@ -534,7 +498,7 @@ export default function CreateModal({ isOpen = true, onModalCancel }) {
   // )
 
   // onClose={onClose}
-  return isWeb3AuthSuccess ? (
+  return isConnected ? (
     <CreateUI isOpen={isOpen} />
   ) : (
     <CreateSignInJWT isOpen={isOpen} onModalCancel={onModalCancel} />

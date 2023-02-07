@@ -1,16 +1,15 @@
-// REDUX
-import { useAppSelector } from '@/hooks/hooks'
-// useAppDispatch
+import { useContext } from 'react'
 
 // COMPONENTS
 import CreateUI from '@/components/Create/CreateUI/CreateUI'
 import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT'
 
-export default function AuthenticateButton({ onModalCancel }) {
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
-  // redux
-  const { isWeb3AuthSuccess } = useAppSelector(state => state.auth)
-  const { isModalVisible } = useAppSelector(state => state.modal)
+export default function AuthenticateButton({ onModalCancel }) {
+  const context = useContext(AppContext)
+  const { isWeb3AuthSuccess, isModalVisible } = context
 
   return isWeb3AuthSuccess ? (
     <CreateUI isOpen={isModalVisible} />

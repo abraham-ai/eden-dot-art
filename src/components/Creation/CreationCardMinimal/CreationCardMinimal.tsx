@@ -25,10 +25,10 @@ import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 import Blockies from 'react-blockies'
 
 // ICONS
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import CloseIcon from '@mui/icons-material/Close'
-// import MoreVertIcon from '@mui/icons-material/MoreVert'
-// import IosShareIcon from '@mui/icons-material/IosShare'
+// import ExpandMoreIcon
+// import CloseIcon
+// import MoreVertIcon
+// import IosShareIcon
 // import { FaDiscord } from 'react-icons/fa'
 // FaHashtag
 
@@ -691,7 +691,8 @@ export default function CreationCardMinimal({ creation }) {
             }}
             onClick={e => handleModalClose(e)}
           >
-            <CloseIcon className='close-icon' fontSize={'large'} />
+            {'X'}
+            {/* <CloseIcon className='close-icon' fontSize={'large'} /> */}
           </Button>
 
           <div

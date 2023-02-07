@@ -1,46 +1,27 @@
-import React from 'react' // useState, useCallback
+import React, { useState } from 'react' // useState, useCallback
 
-// WAGMI
-// import { useAccount } from 'wagmi'
+import { useContext } from 'react'
 
-// FETCH
-// import axios from 'axios'
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
-// REDUX
-import { setSnackbarVisible } from '@/redux/slices/snackbarSlice'
-import { setModalVisible } from '@/redux/slices/modalSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-// setSnackbarMessage,
-// useAppDispatch
-// import { batch } from 'react-redux'
-
-// MUI
+// ANTD
 import {
-  // alpha,
-  // Button,
-  // InputLabel,
-  // lighten,
-  // MenuItem,
-  // Select,
-  // SelectChangeEvent,
-  // Typography,
-  // useTheme,
-  // TextField,
-  // FormControl,
-  Box,
-  Backdrop,
+  Form,
   Modal,
-  styled,
   Button,
   Snackbar,
-} from '@mui/material'
+} from 'antd'
 
 // ICONS
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
+// import IconButton
+// import CloseIcon
 
 // ACCOUNT
 import Blockies from 'react-blockies'
+
+// WAGMI
+import { useAccount } from 'wagmi'
 
 // COMPONENTS
 import EdenTabs from '@/components/Create/CreateUI/EdenTabs/EdenTabs'
@@ -60,24 +41,9 @@ import {
 // const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
 
 // STYLES
-const BoxModalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  height: '90%',
-  maxWidth: '90%',
-  maxHeight: '90%',
-  bgcolor: 'white',
-  border: '2px solid #000',
-  padding: '10px',
-  borderRadius: '20px',
-  boxShadow: 24,
-}
+import styled from 'styled-components'
 
-const CreateUIStyles = styled(Box)(
-  () => `
+const CreateUIStyles = styled.section`
     background: red;
     
     .filter-select > div {
@@ -155,25 +121,28 @@ const CreateUIStyles = styled(Box)(
       margin-top: 30px;
       font-weight: 500;
     }
-`,
-)
+`
 
 export default function CreateUI({ isOpen }) {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
+  const snackbarMessage = 'test message'
+
+  const context = useContext(AppContext)
+
+
   // const [prompt, setPrompt] = useState('')
   // const [creationShape] = useState('square') // setCreationShape
   // const [creationHeight] = useState(512) // setCreationHeight
   // const [creationWidth] = useState(512) // setCreationWidth
   // const [maxCharPercent, setMaxCharPercent] = useState(0)
 
-  const dispatch = useAppDispatch()
-
   // const authToken = useAppSelector(state => state.token.value)
-  const appAddress = useAppSelector(state => state.address.value)
-  const isModalVisible = useAppSelector(state => state.modal.isModalVisible)
-  const isSnackbarVisible = useAppSelector(state => state.snackbar.visible)
-  const snackbarMessage = useAppSelector(state => state.snackbar.value)
+  // const appAddress = useAppSelector(state => state.address.value)
+  // const isModalVisible = useAppSelector(state => state.modal.isModalVisible)
+  // const snackbarMessage = useAppSelector(state => state.snackbar.value)
 
-  // const { address } = useAccount()
+  const { address } = useAccount()
 
   // const generator_name = 'stable-diffusion'
 
@@ -310,7 +279,7 @@ export default function CreateUI({ isOpen }) {
   //       .then(() => {
   //         // response
   //         //console.log(response)
-  //         // dispatch(setIsCreationRunningTrue())
+  //         // context.setIsCreationRunningTrue()
   //         sendNotification('success', {
   //           message: 'Request Submitted.',
   //           description: `Eden will dream a ${creationShape} creation: ${prompt}`,
@@ -331,7 +300,7 @@ export default function CreateUI({ isOpen }) {
   // )
 
   // const handleSnackbarClick = () => {
-  //   dispatch(setSnackbarVisible(true))
+  //   context.setSnackbarVisible(true)
   // }
 
   const handleSnackbarClose = (
@@ -340,9 +309,9 @@ export default function CreateUI({ isOpen }) {
   ) => {
     if (reason === 'clickaway' && event) {
       return
-      dispatch(setSnackbarVisible(false))
+      setIsSnackbarVisible(false)
     }
-    dispatch(setSnackbarVisible(false))
+    setIsSnackbarVisible(false)
   }
 
   const action = (
@@ -350,48 +319,56 @@ export default function CreateUI({ isOpen }) {
       <Button color="secondary" size="small" onClick={handleSnackbarClose}>
         UNDO
       </Button>
-      <IconButton
+      <Button
         size="small"
         aria-label="close"
         color="inherit"
         onClick={handleSnackbarClose}
+        icon={'close'}
       >
-        <CloseIcon fontSize="small" />
-      </IconButton>
+        
+      </Button>
     </>
   )
 
   return isOpen ? (
     <Modal
-      id="create-modal"
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
+      className="create-modal"
       open={isModalVisible}
-      onClose={() => dispatch(setModalVisible(false))}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{ timeout: 500 }}
-      sx={{ background: 'rgba(0, 0, 0, 0.65)' }}
+      onCancel={() => setIsModalVisible(false)}
+      style={{ background: 'rgba(0, 0, 0, 0.65)' }}
     >
       <CreateUIStyles>
         <>
-          <Box
+          <div
             className="close-icon-wrapper"
-            sx={{
+            style={{
               position: 'fixed',
               top: '10px',
               right: '10px',
               color: 'black',
             }}
           >
-            <CloseIcon
+            <Button
               className="close-icon"
-              fontSize="large"
-              onClick={() => dispatch(setModalVisible(false))}
+              onClick={() => setIsModalVisible(false)}
             />
-          </Box>
+          </div>
 
-          <Box sx={BoxModalStyle}>
+          <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '90%',
+                  height: '90%',
+                  maxWidth: '90%',
+                  maxHeight: '90%',
+                  background: 'white',
+                  border: '2px solid #000',
+                  padding: '10px',
+                  borderRadius: '20px',
+                }}>
             <div
               key="form-wrapper"
               className="form-wrapper"
@@ -400,162 +377,41 @@ export default function CreateUI({ isOpen }) {
               <div
                 style={{ display: 'flex', flexDirection: 'column', width: '100%', overflow: 'scroll' }}
               >
-                {/* <Box className="x-button-wrapper">
-                  <Button className="x-button">X</Button>
-                </Box> */}
 
-                <Box sx={{ display: 'flex' }}>
-                  <Box
+                <div style={{ display: 'flex' }}>
+                  <div
                     className="account-wrapper"
-                    sx={{
+                    style={{
                       borderRadius: '50%',
                       overflow: 'hidden',
                       minHeight: '48px',
                       minWidth: '48px',
                       maxHeight: '48px',
                       maxWidth: '48px',
-                      m: '25px 0 0 10px',
+                      margin: '25px 0 0 10px',
                     }}
                   >
-                    <Blockies seed={appAddress} scale={6} />
-                  </Box>
+                    <Blockies seed={address} scale={6} />
+                  </div>
                   {/* <AccountCircleIcon style={{ fontSize: '2rem' }} /> */}
 
                   <div className="form-inner-wrapper">
-                    {/* <Box sx={{ display: 'flex', mb: 2 }}>
-                    <CreateTypeSelect />
-                  </Box> */}
 
                     <EdenTabs />
 
-                    {/* <FormControl sx={{ border: 'none' }}>
-                      <TextField
-                        id="create-text-area"
-                        label="Create what is on your mind?"
-                        multiline
-                        maxRows={4}
-                        value={prompt}
-                        onChange={onChange}
-                        variant="filled"
-                      />
-                    </FormControl> */}
-
-                    {/* <CreateGeneratorTypeSelect /> */}
-
-                    {/* <div className="divider"></div> */}
-
-                    {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Box sx={{ display: 'flex', flex: 1 }}>
-                        <MdOutlinePhotoSizeSelectLarge className="create-icon" /> */}
-                    {/* <FormControl className="select-size-form" size="small">
-                      <InputLabel id="filter-select-label">Size</InputLabel>
-                      <Select
-                        labelId="filter-label"
-                        className="filter-select"
-                        value={size}
-                        label={'Size'}
-                        onChange={handleSizeChange}
-                        sx={{ width: 150, display: 'flex', alignItems: 'center' }}
-                      >
-                        <MenuItem value={'all'}>All</MenuItem>
-                        <MenuItem value={'vertical'}>
-                          <TbRectangleVertical className="filter-icon" />
-                          <Typography sx={{ color: 'black' }}>
-                            Vertical 9:16
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem value={'landscape'}>
-                          <MdOutlineCropLandscape className="filter-icon" />
-                          <Typography sx={{ color: 'black' }}>
-                            Landscape 16:9
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem value={'square'}>
-                          <TbSquare className="filter-icon" />
-                          <Typography sx={{ color: 'black' }}>
-                            Square 1:1
-                          </Typography>
-                        </MenuItem>
-                      </Select>
-                    </FormControl> */}
-
-                    {/* <BsGear className="create-icon" /> */}
-
-                    {/* <FormControl className="select-generator-form" size="small">
-                      <InputLabel id="select-label">Generator</InputLabel>
-                      <Select
-                        labelId="filter-label"
-                        className="filter-select"
-                        value={generator}
-                        label={'Generator'}
-                        onChange={handleGeneratorChange}
-                        autoWidth
-                      >
-                        <MenuItem value={'eden-clip-x'}>
-                          <span
-                            style={{
-                              background: 'cyan',
-                              height: 10,
-                              width: 10,
-                              marginRight: 10,
-                              borderRadius: '50%',
-                              position: 'relative',
-                            }}
-                          ></span>
-                          Eden Clip X
-                        </MenuItem>
-                        <MenuItem value={'stable-diffusion'}>
-                          <span
-                            style={{
-                              background: 'red',
-                              height: 10,
-                              width: 10,
-                              marginRight: 10,
-                              borderRadius: '50%',
-                              position: 'relative',
-                            }}
-                          ></span>
-                          <Typography sx={{ color: '#111' }}>
-                            Stable Diffusion
-                          </Typography>
-                        </MenuItem>
-                      </Select>
-                    </FormControl> */}
-                    {/* </Box>
-
-                      <Box sx={{ mr: 2 }}>{maxCharPercent}</Box>
-
-                      <Button
-                        // type="submit"
-                        disabled={prompt.length > 0 ? false : true}
-                        variant="contained"
-                        onClick={() =>
-                          handleSubmit(
-                            authToken,
-                            prompt,
-                            creationWidth,
-                            creationHeight,
-                            creationShape,
-                          )
-                        }
-                        sx={{ borderRadius: '20px' }}
-                      >
-                        Create
-                      </Button> 
-                    </Box> */}
+                
+                    {/* <Snackbar
+                      open={isSnackbarVisible}
+                      autoHideDuration={6000}
+                      onClose={handleSnackbarClose}
+                      message={snackbarMessage}
+                      action={action}
+                    /> */}
                   </div>
-                </Box>
+                </div>
               </div>
             </div>
-          </Box>
-
-          <Snackbar
-            open={isSnackbarVisible}
-            autoHideDuration={6000}
-            onClose={handleSnackbarClose}
-            message={snackbarMessage}
-            action={action}
-          />
+          </div>
         </>
       </CreateUIStyles>
     </Modal>

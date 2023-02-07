@@ -3,11 +3,6 @@ import { useEffect } from 'react'
 // ROUTER
 // import Link from 'next/link'
 
-// REDUX
-import { setModalVisible } from '@/redux/slices/modalSlice'
-import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-
 // LIBS
 import Blockies from 'react-blockies'
 
@@ -119,19 +114,14 @@ export default function Header() {
   // WAGMI HOOKS
   const { isConnected } = useAccount()
 
-  // retrieve current state of redux store
-  const dispatch = useAppDispatch()
-  // const { isModalVisible } = useAppSelector(state => state.modal)
-  const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
-
   // const handleCreateOpen = () => {
   //   // console.log('HANDLE-CREATE OPEN!')
-  //   dispatch(setModalVisible(true))
+  //   context.setModalVisible(true))
   // }
 
   useEffect(() => {
-    dispatch(setIsWeb3WalletConnected(isConnected))
-  }, [isConnected, dispatch])
+    context.setIsWeb3WalletConnected(isConnected))
+  }, [isConnected])
 
   // const handleAccountNav = useCallback(() => {
   //   if (!isWeb3WalletConnected) {
@@ -174,7 +164,7 @@ export default function Header() {
 
               <ConnectButtonCustom />
 
-              {isWeb3WalletConnected ? <CreateButton /> : null}
+              {isConnected ? <CreateButton /> : null}
             </div>
           </div>
         </RainbowKitProvider>

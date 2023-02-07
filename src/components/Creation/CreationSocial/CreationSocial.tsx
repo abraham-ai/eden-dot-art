@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 // CSS
 import styled from 'styled-components';
 
+// WAGMI
+import { useAccount } from 'wagmi'
+
 // COMPONENTS
-import { CreationShare } from '../../../components/abraham';
+import { CreationShare } from '@/components/CreationShare/CreationShare';
 
 // ROUTING
 import { Link } from 'react-router-dom';
-
-// REDUX
-import { useSelector } from 'react-redux';
 
 // UI
 import { Button, Tooltip, Typography } from 'antd';
@@ -264,9 +264,7 @@ export default function CreationSocial({
   const [isPraised, setIsPraised] = useState(praisedByMe);
   const [isBurned, setIsBurned] = useState(burnedByMe);
 
-  // REDUX
-  const address = useSelector(state => state.address.value);
-  const { isWeb3WalletConnected } = useSelector(state => state.auth);
+  const { address } = useAccount();
 
   // DEBUG
   // console.log({ creationTextInput });

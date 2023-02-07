@@ -3,9 +3,6 @@ import React, { useState } from 'react'; // useEffect,
 // CSS
 import styled from 'styled-components';
 
-// REDUX
-// import { useSelector } from 'react-redux';
-
 // UI
 import { Button, Typography } from 'antd'; // Tooltip, 
 import { HiShare, HiOutlineShare } from 'react-icons/hi';
