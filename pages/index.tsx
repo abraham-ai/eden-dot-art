@@ -8,9 +8,8 @@ import Head from 'next/head'
 // NEXT
 // import Link from 'next/link'
 
-// MUI
-import { Box, styled } from '@mui/material'
-// Card,  Container
+// STYLES
+import styled from 'styled-components'
 
 // PAGES
 import EdenArtFrontPage from '@/components/EdenArtFrontPage/EdenArtFrontPage'
@@ -32,11 +31,9 @@ import EdenArtFrontPage from '@/components/EdenArtFrontPage/EdenArtFrontPage'
 // `,
 // )
 
-const OverviewWrapperStyles = styled(Box)(
-  ({ theme }) => `
+const OverviewWrapperStyles = styled.section`
     overflow: auto;
     background-color: white;
-    // background: ${theme.palette.common.white};
     flex: 1;
     overflow-x: hidden;
 
@@ -49,8 +46,7 @@ const OverviewWrapperStyles = styled(Box)(
       color: red;
       background: yellow;
     }
-`,
-)
+`
 
 export default function IndexPage() {
   // { changeTheme, isDarkTheme }

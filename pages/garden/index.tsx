@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { ReactElement } from 'react'
-import axios from 'axios'
 
 // NEXT
 import Head from 'next/head'
@@ -8,16 +7,17 @@ import Head from 'next/head'
 // NAV
 import BaseLayout from 'src/layouts/BaseLayout'
 
-// MUI
-import Masonry from '@mui/lab/Masonry'
-
 // LIBS
 import { useInView } from 'react-intersection-observer'
+import axios from 'axios'
 
-// COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+// ANTD
+import { Typography } from 'antd'
+const { Text } = Typography
+
+// EDEN COMPONENTS
+import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 import Loader from '@/components/Loader/Loader'
-
 
 // STYLES
 import styled from 'styled-components'
@@ -27,14 +27,18 @@ const CreationsGridStyles = styled.section`
   padding: 0 10px;
 `
 
+// CONSTS
 const PAGE_LENGTH = 10
+const masonryOptions = { transitionDuration: 0 };
+const imagesLoadedOptions = { background: '.my-bg-image-el' }
+
 
 export default function CreationsPage() {
   const [creations, setCreations] = useState<object[]>([])
-  const [message, setMessage] = useState<string | null>(null)
+  const [message, setMessage] = useState<string>('')
   const [loading, setLoading] = useState(false)
   const [paginate, setPaginate] = useState(true)
-  const [cutoffTime, setCutoffTime] = useState<number | null>(null)
+  const [cutoffTime, setCutoffTime] = useState<number>(0)
   const [breakpointCols] = useState(3) // setBreakpointCols
 
   const getMoreCreations = useCallback(async () => {
@@ -74,7 +78,7 @@ export default function CreationsPage() {
       const earliestTime = Date.parse(lastCreation.timestamp) - 1
       setCutoffTime(earliestTime)
     } catch (error: any) {
-      setMessage(`Error: ${error}`)
+      setMessage(`Error: ${error.message}`)
     }
     setLoading(false)
   }, [creations, cutoffTime, paginate])
@@ -98,23 +102,7 @@ export default function CreationsPage() {
         <title>Creations</title>
       </Head>
       <CreationsGridStyles id="creations-grid">
-        <div style={{ width: '100%', minHeight: 393, marginTop: 200 }}>
-          <Masonry
-            id="masonry"
-            columns={breakpointCols}
-            spacing={2}
-            sx={{ m: 0, alignContent: 'center' }}
-          >
-            {creations.map((creation, index) => (
-              <CreationCardMinimal key={index} creation={creation} />
-            ))}
-          </Masonry>
-        </div>
-        {loading && <Loader />}
-        
-        {message && {message}}
-        <div ref={ref}></div>
-        {/* <Button onClick={getMoreCreations}>Load More</Button> */}
+        <CreationsGrid />
       </CreationsGridStyles>
     </>
   )

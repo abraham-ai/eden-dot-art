@@ -8,16 +8,6 @@ import { useEffect, useState } from 'react'
 // ROUTING
 // import { useRouter } from 'next/router'
 
-// REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-import { batch } from 'react-redux'
-import {
-  incrementRunningCreationCount,
-  decrementRunningCreationCount,
-  setIsRunningFalse,
-  setIsRunningTrue,
-} from '@/redux/slices/creationsSlice'
-
 // LAYOUTS
 import NavLayout from 'src/layouts/NavLayout'
 
@@ -778,11 +768,6 @@ export default function Creation({
   const [isHovering, setIsHovering] = useState(true)
   // const [visible, setVisible] = useState(true);
 
-  // INIT REDUX
-  const dispatch = useAppDispatch()
-  const { creations, isRunning } = useAppSelector(state => state.creations)
-  // isCreationRunning
-
   // const sort_by = useAppSelector(state => state.sort.value);
   // const filter_by = useAppSelector(state => state.filter.value);
 
@@ -828,47 +813,6 @@ export default function Creation({
   //   }
   //   return currentStat;
   // }
-
-  useEffect(() => {
-    // DEBUG
-    // console.log('useEffect Creation Component');
-    // console.log({ item });
-    // console.log(`PRAISED BY ME: ${item.stats.praised_by_me}`);
-    // console.log(`BURNED BY ME: ${item.stats.burned_by_me}`);
-    // console.log(item.status_code);
-    // console.log(isCreationRunning); // bool
-    // console.log({ isRunning }); // object
-    // console.log(`IS-CREATION-RUNNING: ${isCreationRunning}`);
-    // console.log(`IS-RUNNING: ${isRunning[item._id]}`);
-
-    if (
-      item.status === 'running' &&
-      typeof isRunning[item.id] === 'undefined'
-    ) {
-      //   console.log(`CREATION COUNT SHOULD INCREASE AND SET TO TRUE!!!!!!`);
-
-      dispatch(setIsRunningTrue(item.id))
-      dispatch(incrementRunningCreationCount())
-    } else if (
-      item.status_code === 100 &&
-      item.status === 'complete' &&
-      isRunning[item.id] === true
-    ) {
-      // && isRunning[item._id] === true) {
-      //   console.log(`CREATION COUNT SHOULD DECREASE AND SET TO FALSE!!!!!!`);
-      batch(() => {
-        dispatch(setIsRunningFalse(item.id))
-        dispatch(decrementRunningCreationCount())
-      })
-    }
-
-    // else if (item.status_code < 100 && isRunning[item._id] === false) {
-    //   batch(() => {
-    //     dispatch(setIsRunningTrue(item._id));
-    //     // dispatch(incrementRunningCreationCount());
-    //   });
-    // }
-  }, [item, dispatch, isRunning, creations])
 
   // DEBUG
   // console.log({ item });
