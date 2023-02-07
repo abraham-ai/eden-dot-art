@@ -40,7 +40,7 @@ export default function CreateButton() {
     <CreateButtonStyles id='create-button-wrapper'>
       <Button
         id='create-button'
-        onClick={() => handleCreateOpen}
+        onClick={handleCreateOpen}
         size='middle'
         icon={'+'}
       >
