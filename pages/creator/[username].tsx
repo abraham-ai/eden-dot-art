@@ -22,7 +22,7 @@ import styled from 'styled-components'
 
 // COMPONENTS
 import CreatorDashboard from '@/components/Profile/ProfileDashboard/ProfileDashboard'
-import CreationsViewer from '@/components/CreationsViewer/CreationsViewer'
+import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // CONSTANTS
 // import { NETWORKS } from '../../constants'
@@ -144,7 +144,7 @@ export default function Creator({
 
   // ROUTER
   const router = useRouter()
-  const { profileId } = router.query
+  const { username } = router.query
 
   // REDUX
   const appAddress = useAppSelector(state => state.address.value)
@@ -154,14 +154,14 @@ export default function Creator({
   }
 
   {
-    //  pathname: `/creator/${profileId}/creation/${item.id}`,
+    //  pathname: `/creator/${username}/creation/${item.id}`,
     ;<Link
       className="cr-main-link"
       href={{
-        pathname: `/creator/${profileId}`,
-        query: { slug: profileId },
+        pathname: `/creator/${username}`,
+        query: { slug: username },
       }}
-    ></Link>
+    />
   }
 
   // const img_url = 'https://ai-everydays.s3.amazonaws.com/everydays/everydays_1.png'
@@ -329,7 +329,7 @@ export default function Creator({
                 </Button>
               </div>
             </div>
-            {/* creatorId */}
+            {/* username */}
           </span>
 
           <article
@@ -391,7 +391,7 @@ export default function Creator({
             </div>
 
             <div className="creator-grid">
-              <CreationsViewer creatorId={'63dbe843fff403ccdab03a8e'} />
+              {username && <CreationsGrid username={username} />}
             </div>
           </article>
         </section>

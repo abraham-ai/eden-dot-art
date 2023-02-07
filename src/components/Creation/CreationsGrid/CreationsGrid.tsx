@@ -21,7 +21,7 @@ const CreationsGridStyles = styled.section`
 
 const PAGE_LENGTH = 10
 
-export default function CreationsViewer({ creatorId }) {
+export default function CreationsGrid({ username = null }) {
   const [creations, setCreations] = useState<object[]>([])
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -35,11 +35,16 @@ export default function CreationsViewer({ creatorId }) {
     setLoading(true)
 
     try {
-      const response = await axios.post('/api/creations', {
-        creatorId: '63dc45b15fe0afaf616c8436',
+      let filter = {
         latestTime: cutoffTime,
         limit: PAGE_LENGTH,
-      })
+      }
+
+      if (username != null) {
+        filter = Object.assign(filter, { username })
+      }
+
+      const response = await axios.post('/api/creations', filter)
 
       const moreCreations =
         response.data.creations &&
@@ -67,10 +72,11 @@ export default function CreationsViewer({ creatorId }) {
       const earliestTime = Date.parse(lastCreation.timestamp) - 1
       setCutoffTime(earliestTime)
     } catch (error: any) {
-      setMessage(`Error: ${error}`)
+      console.error(error)
+      setMessage(`Error:`)
     }
     setLoading(false)
-  }, [creations, cutoffTime, paginate])
+  }, [creations, cutoffTime, paginate, username])
 
   const { ref, inView } = useInView({
     threshold: 0,

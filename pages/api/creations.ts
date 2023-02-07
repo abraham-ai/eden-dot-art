@@ -4,7 +4,7 @@ import { eden } from '../../src/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {
-    creatorId: string
+    username: string
     earliestTime: number
     latestTime: number
     limit: number
@@ -12,7 +12,7 @@ interface ApiRequest extends NextApiRequest {
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { creatorId, earliestTime, latestTime, limit } = req.body
+  const { username, earliestTime, latestTime, limit } = req.body
   const authToken = req.session.token
 
   if (!authToken) {
@@ -24,7 +24,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     // const userId = req.session.userId;
 
     const filter = {}
-    Object.assign(filter, creatorId ? { creatorId: creatorId } : {})
+    Object.assign(filter, username ? { username: username } : {})
     Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {})
     Object.assign(filter, latestTime ? { latestTime: latestTime } : {})
     Object.assign(filter, limit ? { limit: limit } : {})
@@ -33,6 +33,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({ creations: creations })
   } catch (error: any) {
+    // console.log(error);
     if (error.response.data == 'jwt expired') {
       return res.status(401).json({ error: 'Authentication expired' })
     }

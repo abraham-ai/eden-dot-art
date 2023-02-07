@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     eden.setAuthToken(authToken)
-    const balance = await eden.getBalance()
+    const balance = await eden.getManna()
     return res.status(200).json({ balance: balance })
   } catch (error: any) {
     console.error(error)

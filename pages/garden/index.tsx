@@ -7,15 +7,15 @@ import Head from 'next/head'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 // COMPONENTS
-import CreationsViewer from '@/components/CreationsViewer/CreationsViewer'
+import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 export default function CreationsPage() {
   return (
     <>
       <Head>
-        <title>Creations</title>
+        <title>Garden of Eden</title>
       </Head>
-      <CreationsViewer />
+      <CreationsGrid />
     </>
   )
 }
