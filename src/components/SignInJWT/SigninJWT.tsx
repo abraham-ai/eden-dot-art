@@ -1,14 +1,4 @@
-import React, { useCallback, useEffect, useState, forwardRef } from 'react'
-
-// REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-import { batch } from 'react-redux'
-import { setToken } from '@/redux/slices/tokenSlice'
-import {
-  setIsWeb3AuthSuccess,
-  setIsWeb3AuthSigning,
-  setIsWeb3WalletConnected,
-} from '@/redux/slices/authSlice'
+import React, { useCallback, useState, forwardRef } from 'react'
 
 // WEB3
 import { useSignMessage, useAccount } from 'wagmi'
@@ -31,15 +21,14 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 
 // MUI
 import {
-  styled,
-  Backdrop,
-  Box,
   Button,
   Typography,
   Modal,
   Snackbar,
-} from '@mui/material'
-import MuiAlert, { AlertProps } from '@mui/material/Alert'
+} from 'antd'
+
+// STYLES
+import styled from 'styled-components'
 
 // ICONS
 // import AddModeratorIcon from '@mui/icons-material/AddModerator'
@@ -92,16 +81,7 @@ export default function SignInJWT() {
   const handleAuthOpen = () => setIsAuthOpen(true)
   const handleAuthClose = () => setIsAuthOpen(false)
 
-  // REDUX setup
-  const dispatch = useAppDispatch()
-
-  // retrieve current state of redux store
-  const authToken = useAppSelector(state => state.token.value)
-  const appAddress = useAppSelector(state => state.address.value)
-
   const { address, isConnected } = useAccount()
-  const { isWeb3AuthSuccess, isWeb3AuthSigning, isWeb3WalletConnected } =
-    useAppSelector(state => state.auth)
 
   // APP LOGOUT
   const logoutLocalStorage = () => localStorage.removeItem('token')
@@ -177,12 +157,10 @@ export default function SignInJWT() {
           // console.log('VERIFY-TOKEN: Auth Tokens match!')
 
           if (authToken === '') {
-            dispatch(setToken(responseToken))
+            context.setToken(responseToken)
           } else if (authToken === localToken) {
-            batch(() => {
-              dispatch(setIsWeb3AuthSigning(false))
-              dispatch(setIsWeb3AuthSuccess(true))
-            })
+              context.setIsWeb3AuthSigning(false)
+              context.setIsWeb3AuthSuccess(true)
             setIsClicked(false)
           }
         } else if (authToken === '' && localToken === null) {
@@ -191,8 +169,8 @@ export default function SignInJWT() {
             localStorage.removeItem('token')
           }
           batch(() => {
-            dispatch(setIsWeb3AuthSigning(false))
-            dispatch(setToken(responseToken))
+            context.setIsWeb3AuthSigning(false)
+            context.setToken(responseToken)
           })
           return 'token empty, set response token'
         }
@@ -200,13 +178,13 @@ export default function SignInJWT() {
         // console.log('Sign-In Success!')
       }
     },
-    [dispatch, isWeb3AuthSigning, isWeb3AuthSuccess, localToken, authToken],
+    [isWeb3AuthSigning, isWeb3AuthSuccess, localToken, authToken],
   )
 
   function handleAuthJWTClick() {
     // console.log('HANDLE-AUTH-JWT-CLICK')
     setIsClicked(true)
-    dispatch(setIsWeb3AuthSigning(true))
+    context.setIsWeb3AuthSigning(true)
     signMessage()
     // handleAuthJWT(isClicked)
   }
@@ -353,7 +331,7 @@ export default function SignInJWT() {
             // console.log(
             //   'HANDLE-AUTH-JWT: LOCAL-TOKEN NOT EMPTY, AUTH TOKEN EMPTY',
             // )
-            dispatch(setToken(localToken))
+            context.setToken(localToken)
           } else if (localToken === null && authToken === '') {
             // console.log('HANDLE-AUTH-JWT: LOCAL-TOKEN EMPTY, AUTH-TOKEN EMPTY')
             handleLocalAuth()
@@ -365,15 +343,10 @@ export default function SignInJWT() {
     }
   }, [
     address,
-    authToken,
     // checkError,
     isClicked,
     localAuth,
-    isWeb3AuthSigning,
-    isWeb3AuthSuccess,
-    isWeb3WalletConnected,
     handleLocalAuth,
-    dispatch,
     // verifyToken,
   ])
 
@@ -388,7 +361,7 @@ export default function SignInJWT() {
 
         // console.log({ data })
         const authToken = data.authToken
-        dispatch(setToken(authToken))
+        context.setToken(authToken)
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', authToken)
         }
@@ -397,7 +370,7 @@ export default function SignInJWT() {
         // address
       }
     },
-    [address, appMessage, verifyToken, dispatch],
+    [address, appMessage, verifyToken],
   )
 
   // NOTIFICATION
@@ -433,129 +406,6 @@ export default function SignInJWT() {
       </Snackbar>
     )
   }
-
-  useEffect(() => {
-    // DEBUG
-    // console.log({ authToken, localToken })
-
-    let isSubscribed = true
-
-    if (isConnected && !isWeb3WalletConnected) {
-      isSubscribed ? dispatch(setIsWeb3WalletConnected(true)) : null
-    } else if (isConnected && isWeb3WalletConnected) {
-      if (isWeb3AuthSigning) {
-        // console.log('WEB3 AUTH SIGNING!')
-        if (isWeb3AuthSuccess) {
-          // console.log('WEB3 AUTH SUCCESS!')
-        } else if (!isWeb3AuthSuccess) {
-          // console.log('WEB3 NOT AUTH SUCCESS!')
-          if (isClicked) {
-            // console.log('WEB3 IS-CLICKED!')
-            if (signature) {
-              // console.log('WEB3 SIGNATURE!')
-
-              isSubscribed ? handleAuthToken(signature, authToken) : null
-            }
-
-            // console.log('HANDLE AUTH JWT')
-            isSubscribed ? handleAuthJWT() : null
-          } else if (!isClicked) {
-            // console.log('WEB3 IS-NOT-CLICKED!')
-
-            isSubscribed ? setIsClicked(true) : null
-          }
-        }
-      } else if (!isWeb3AuthSigning) {
-        // console.log('WEB3 NOT AUTH SIGNING!')
-        if (isWeb3AuthSuccess) {
-          // console.log('WEB3 AUTH SUCCESS!')
-        } else if (!isWeb3AuthSuccess) {
-          // console.log('WEB3 NOT AUTH SUCCESS!')
-          if (isClicked) {
-            // console.log('WEB3 IS-CLICKED!')
-            if (localToken !== null) {
-              // console.log('WEB3 LOCAL TOKEN NOT EMPTY!')
-
-              if (localAuth) {
-                // console.log('WEB3 LOCAL AUTH!')
-                // console.log('WEB3 AUTH SIGNING!')
-                isSubscribed ? dispatch(setIsWeb3AuthSigning(true)) : null
-              } else if (!localAuth) {
-                // console.log('WEB3 NOT LOCAL AUTH!')
-
-                isSubscribed ? setLocalAuth(true) : null
-              }
-            } else if (localToken === null && authToken === '') {
-              // console.log('WEB3 LOCAL NULL, AUTH EMPTY!')
-              // console.log(
-              //   `%c 🔒 PLEASE CLICK SIGN-IN`,
-              //   'background: #222; color: #bada55',
-              // )
-            }
-          } else if (!isClicked) {
-            // console.log('WEB3 IS-NOT-CLICKED!')
-            if (localToken !== null) {
-              // console.log('WEB3 LOCAL TOKEN NOT NULL!')
-
-              if (localAuth) {
-                // console.log('WEB3 LOCAL AUTH!')
-                isSubscribed ? setIsClicked(true) : null
-                // console.log(
-                //   `%c 🔒 ${localToken}`,
-                //   'background: #222; color: #bada55',
-                // )
-                // console.log('WEB3 AUTH SIGNING!')
-                isSubscribed ? dispatch(setIsWeb3AuthSigning(true)) : null
-              } else if (!localAuth) {
-                // console.log('WEB3 LOCAL NOT AUTH!')
-
-                if (isSubscribed) {
-                  setIsClicked(true)
-                  setLocalAuth(true)
-                }
-              }
-            }
-          }
-        }
-      }
-    } else if (!isConnected && isWeb3WalletConnected) {
-      // console.log('WAGMI WEB3 WALLET NOT CONNECTED!')
-
-      if (isSubscribed) {
-        batch(() => {
-          dispatch(setIsWeb3WalletConnected(false))
-          dispatch(setIsWeb3AuthSuccess(false))
-          dispatch(setIsWeb3AuthSigning(false))
-        })
-      }
-    } else if (!isConnected && !isWeb3WalletConnected && isWeb3AuthSuccess) {
-      // console.log('WAGMI WEB3 WALLET NOT CONNECTED!')
-
-      if (isSubscribed) {
-        batch(() => {
-          dispatch(setIsWeb3AuthSuccess(false))
-          dispatch(setIsWeb3AuthSigning(false))
-        })
-      }
-    }
-
-    return () => {
-      isSubscribed = false
-    }
-  }, [
-    isConnected,
-    isClicked,
-    signature,
-    localToken,
-    localAuth,
-    authToken,
-    handleAuthToken,
-    handleAuthJWT,
-    isWeb3WalletConnected,
-    isWeb3AuthSigning,
-    isWeb3AuthSuccess,
-    dispatch,
-  ])
 
   return (
     <>

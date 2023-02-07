@@ -1,9 +1,6 @@
-import React from 'react'
+'use client'
 
-// REDUX
-import { setModalVisible } from '@/redux/slices/modalSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks' // useSignMessage
-
+import React, { useContext } from 'react'
 
 // ANTD
 import { Button, Typography } from 'antd'
@@ -12,10 +9,11 @@ const { Text } = Typography
 // STYLES
 import styled from 'styled-components'
 
-// ICONS
-import AddIcon from '@mui/icons-material/Add'
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext';
 
-const CreateButtonStyles = styled.div`
+
+const CreateButtonStyles = styled.section`
 	#create-button {
 		display: flex;
 		align-items: center;
@@ -30,26 +28,26 @@ const CreateButtonStyles = styled.div`
 
 export default function CreateButton() {
 
-		// inti redux fetchers/getters
-		const dispatch = useAppDispatch();
+  const context = useContext(AppContext)
+  const { setIsModalVisible } = context
 
-    const handleCreateOpen = () => {
-			// console.log('HANDLE-CREATE OPEN!')
-			dispatch(setModalVisible(true))
-		}
+  const handleCreateOpen = () => {
+    console.log('set modal visible!')
+    setIsModalVisible(true)
+  }
 
-    return (
-        <CreateButtonStyles id='create-button-wrapper'>
-            <Button
-                id='create-button'
-                onClick={handleCreateOpen}
-                size='middle'
-                icon={<AddIcon className='create-icon' fontSize={'medium'} />}
-              >
-                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
-                  Create
-                </Text>
-            </Button>
-        </CreateButtonStyles>        
-    )
+  return (
+    <CreateButtonStyles id='create-button-wrapper'>
+      <Button
+        id='create-button'
+        onClick={handleCreateOpen}
+        size='middle'
+        icon={'+'}
+      >
+        <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
+          Create
+        </Text>
+      </Button>
+    </CreateButtonStyles>        
+  )
 }

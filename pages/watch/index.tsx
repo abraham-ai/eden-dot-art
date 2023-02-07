@@ -1,26 +1,8 @@
 import type { ReactElement } from 'react'
-// useMemo,
 import { useEffect, useState, useCallback } from 'react'
-
-// REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-import { batch } from 'react-redux'
 
 // WAGMI
 import { useAccount } from 'wagmi'
-
-// REDUX
-import {
-  incrementPageCreation,
-  // addCreations,
-  // setPageUpdate,
-  replaceCreations,
-  // setLatestCreation,
-  // setIsCreationRunningTrue,
-  // setIsCreationRunningFalse,
-} from '../../src/redux/slices/creationsSlice'
-// import { setSort } from '../../src/redux/slices/sortSlice'
-// import { setFilter } from '../../src/redux/slices/filterSlice'
 
 // COLORS
 // import { red } from '@mui/material/colors'
@@ -47,7 +29,8 @@ import {
   Typography,
   // CardContent,
   Avatar,
-} from '@mui/material'
+} from 'antd'
+const { Text } = Typography
 
 // UTILS
 import time_ago from '@/util/time_ago'
@@ -230,17 +213,9 @@ export default function WatchPage() {
   // const { slug } = router.query
   // console.log(slug)
 
-  // redux utils and data
-  const dispatch = useAppDispatch()
-  // pageUpdate,  isCreationRunning
-  const { page, creations } = useAppSelector(state => state.creations)
-  // isWeb3AuthSuccess, isWeb3AuthSigning
-  // const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
 
   // console.log({ creations })
-  // const token = useAppSelector(state => state.token.value)
-  // const sort_by = useAppSelector(state => state.sort.value)
-  // const filter_by = useAppSelector(state => state.filter.value)
+  // const {token, sort_by, filter_by } = context;
 
   // address, myRefreshInterval, creations
 
@@ -259,15 +234,15 @@ export default function WatchPage() {
   //   if (sort_url !== sort_by && filter_url !== filter_by) {
   //     console.log('Update setSort setFilter')
   //     batch(() => {
-  //       dispatch(setSort(sort_url))
-  //       dispatch(setFilter(filter_url))
+  //       context.setSort(sort_url)
+  //       context.setFilter(filter_url)
   //     })
   //   } else if (sort_url !== sort_by) {
   //     console.log('Update setSort')
-  //     dispatch(setSort(sort_url))
+  //     context.setSort(sort_url)
   //   } else if (filter_url !== filter_by) {
   //     console.log('Update setFilter')
-  //     dispatch(setFilter(filter_url))
+  //     context.setFilter(filter_url)
   //   }
 
   //   console.log(`%c CREATIONS USE-EFFECT`, 'background: #222; color: #fc0ce8')
@@ -449,7 +424,6 @@ export default function WatchPage() {
     return newCreationsArray
   }, [])
 
-  // SYNC REDUX CREATIONS WITH LOCAL STORIES
   useEffect(() => {
     // console.log({ creations })
     // console.log({ page })
@@ -571,13 +545,13 @@ export default function WatchPage() {
           // console.log(creations.length)
           if (page === 0 && context === 'onAllStoriesEnd') {
             batch(() => {
-              dispatch(replaceCreations(response.data))
-              dispatch(incrementPageCreation(page))
+              context.replaceCreations(response.data)
+              context.incrementPageCreation(page)
             })
           } else if (page > 0 && context === 'onAllStoriesEnd') {
             batch(() => {
-              dispatch(replaceCreations(response.data))
-              dispatch(incrementPageCreation(page))
+              context.replaceCreations(response.data)
+              context.incrementPageCreation(page)
             })
           } else if (
             page === 0 &&
@@ -590,8 +564,8 @@ export default function WatchPage() {
             // console.log(response.data)
 
             batch(() => {
-              dispatch(replaceCreations(response.data))
-              dispatch(incrementPageCreation(page))
+              context.replaceCreations(response.data)
+              context.incrementPageCreation(page)
             })
           }
 
@@ -601,8 +575,8 @@ export default function WatchPage() {
           //   ) {
           //   // &&
           //   // creations.length === 16
-          //   dispatch(replaceCreations(response.data))
-          //   dispatch(incrementPageCreation())
+          //   context.replaceCreations(response.data)
+          //   context.incrementPageCreation()
           // }
 
           // else if (page > 0 && pageUpdateType === 'replace') {
@@ -611,13 +585,13 @@ export default function WatchPage() {
           //   // console.log(`pageUpdate ADD: ${pageUpdate}`)
 
           //   batch(() => {
-          //     dispatch(incrementPageCreation())
-          //     dispatch(addCreations(response.data))
+          //     context.incrementPageCreation()
+          //     context.addCreations(response.data)
           //   })
           // } else if (pageUpdate === 'replace') {
           //   // console.log(`pageUpdate REPLACE: ${pageUpdate}`)
           //   // console.log(response.data)
-          //   dispatch(replaceCreations(response.data))
+          //   context.replaceCreations(response.data)
           // }
         })
         .catch(error => {
@@ -636,7 +610,6 @@ export default function WatchPage() {
     [
       address,
       creations.length,
-      dispatch,
       // isWeb3WalletConnected,
       page,
       // pageUpdate,
@@ -695,7 +668,7 @@ export default function WatchPage() {
   //           }
 
   //           if (responseLatestCreationStatusCode === 'complete') {
-  //             dispatch(setIsCreationRunningFalse())
+  //             context.setIsCreationRunningFalse()
   //           }
 
   //           if (
@@ -704,17 +677,13 @@ export default function WatchPage() {
   //             typeof latestCreationStatusCode !== 'undefined'
   //             // typeof latestCreationStatusCode !== 'null'
   //           ) {
-  //             // console.log('Dispatch Unshift SetLatestCreation')
-  //             dispatch(
-  //               setLatestCreation({ data: response.data[0], type: 'unshift' }),
+  //             context.  //               setLatestCreation({ data: response.data[0], type: 'unshift' }),
   //             )
   //           } else if (
   //             latestCreationID === responseLatestCreationID &&
   //             responseLatestCreationStatus === 'running'
   //           ) {
-  //             // console.log('Dispatch Replace SetLatestCreation')
-  //             dispatch(
-  //               setLatestCreation({ data: response.data[0], type: 'replace' }),
+  //             context.  //               setLatestCreation({ data: response.data[0], type: 'replace' }),
   //             )
   //           } else if (
   //             typeof responseLatestCreationStatusCode !== 'undefined' &&
@@ -722,9 +691,7 @@ export default function WatchPage() {
   //             latestCreationID === responseLatestCreationID &&
   //             responseLatestCreationStatusCode > latestCreationStatusCode
   //           ) {
-  //             // console.log('Dispatch Replace SetLatestCreation')
-  //             dispatch(
-  //               setLatestCreation({ data: response.data[0], type: 'replace' }),
+  //             context.  //               setLatestCreation({ data: response.data[0], type: 'replace' }),
   //             )
   //           }
   //         }
@@ -749,7 +716,7 @@ export default function WatchPage() {
   //       setMyRefreshInterval(refreshMinInterval)
   //     }
   //   },
-  //   [dispatch],
+  //   [],
   // )
 
   function updateStories(newPage) {
@@ -762,7 +729,7 @@ export default function WatchPage() {
     // console.log({ page })
     // console.log({ newPage })
 
-    // dispatch(incrementPageCreation())
+    // context.incrementPageCreation()
     getCreations(newPage + 1, 'replace', 'onAllStoriesEnd')
   }
 

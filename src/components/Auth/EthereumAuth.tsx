@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // ANTD
 import { Button, Row, Typography } from 'antd'
@@ -11,9 +14,6 @@ import axios from 'axios'
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
-// REDUX
-import { useAppDispatch } from '@/hooks/hooks'
-import { setIsWeb3AuthSuccess } from '@/redux/slices/authSlice'
 
 // STYLES
 import styled from 'styled-components'
@@ -34,9 +34,7 @@ const EthereumAuth = ({ onModalCancel }) => {
   const [ethAuthenticating, setEthAuthenticating] = useState(false)
   const [ethMessage, setEthMessage] = useState<string | null>(null)
   
-
-  // redux
-  const dispatch = useAppDispatch()
+  const context = useContext(AppContext)
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -47,7 +45,7 @@ const EthereumAuth = ({ onModalCancel }) => {
           userAddress: address,
         });
         setEthMessage("Successfully authenticated as " + address)
-        dispatch(setIsWeb3AuthSuccess(true))
+        context.setIsWeb3AuthSuccess(true)
       } catch (error: any) {
         setEthMessage("Error authenticating")
       }

@@ -1,10 +1,6 @@
-// useEffec
+// useEffect
 import { useState } from 'react' // useMemo,
 import type { ReactElement } from 'react'
-
-// GQL
-import { useQuery } from '@apollo/client'
-import QueryResult from '@/components/QueryResult'
 
 // NEXT
 import Head from 'next/head'
@@ -13,31 +9,26 @@ import Head from 'next/head'
 // import Footer from '@/components/Footer'
 import BaseLayout from 'src/layouts/BaseLayout'
 
-// MUI
-import { Box, Container } from '@mui/material'
-import Masonry from '@mui/lab/Masonry'
+// LIBS
+import Masonry from 'react-masonry-css'
 
 // COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 
-// CONSTS
-// import { DEVICE_WIDTH } from '@/const/device-width'
-
 // HOOKS
 // import useWindowDimensions from '@/hooks/useWindowDimensions'
 
-// GQL Creations query to retreive all Creations //
-import { GET_CREATIONS as GQL_GET_CREATIONS } from '@/graphql/queries'
+// CONSTS
+const PAGE_LENGTH = 10
+// import { DEVICE_WIDTH } from '@/const/device-width'
+const masonryOptions = { transitionDuration: 0 };
+const imagesLoadedOptions = { background: '.my-bg-image-el' }
+
 
 export default function CreationsPage() {
+  const [creations, setCreations] = useState<object[]>([])
   const [breakpointCols] = useState(3) // setBreakpointCols
-  const { loading, error, data, fetchMore } = useQuery(GQL_GET_CREATIONS, {
-    variables: {
-      offset: 0,
-      limit: 16,
-    },
-  })
 
   // CUSTOM HOOKS
   // const { width } = useWindowDimensions()
@@ -45,23 +36,6 @@ export default function CreationsPage() {
   // useEffect(() => {
   //   console.log({ data })
   // }, [data])
-
-  const onLoadMore = () =>
-    fetchMore({
-      variables: {
-        offset: 10,
-        limit: 10, //data.length
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev
-        return {
-          creationsForHome: [
-            ...prev.creationsForHome,
-            ...fetchMoreResult.creationsForHome,
-          ],
-        }
-      },
-    })
 
   // console.log(data)
 
@@ -108,90 +82,29 @@ export default function CreationsPage() {
         <title>Creations</title>
       </Head>
 
-      <Container maxWidth="xl">
-        {/* {isConnected ? (
-          <>
-            <Typography variant={'h3'}>
-              You are connected with you wallet!
-            </Typography>
-            <Typography variant={'body1'}>{address}</Typography>
-          </>
-        ) : (
-          <Button variant={'contained'}>
-            <p>Please connect your Wallet</p>
-          </Button>
-        )} */}
-
-        {data?.creationsForHome.length < 1 ? (
+      <section>
+        {creations.length < 1 ? (
           <Loader />
         ) : (
-          <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
+          <div style={{ width: '100%', minHeight: 393, mt: 20 }}>
             <Masonry
-              id="masonry"
-              columns={breakpointCols}
-              spacing={2}
-              sx={{ m: 0 }}
-            >
-              <QueryResult error={error} loading={loading} data={data}>
-                {data?.creationsForHome?.map((creation, index) => (
-                  <CreationCardMinimal
-                    key={`${creation.id}_${index}`}
-                    creation={creation}
-                  />
-                ))}
-              </QueryResult>
+                className={'my-gallery-class'} // default ''
+                elementType={'ul'} // default 'div'
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                imagesLoadedOptions={imagesLoadedOptions} // default {}
+              >
+              {creations.map((creation, index) => (
+                <CreationCardMinimal key={index} creation={creation} />
+              ))}
             </Masonry>
-            <a
-              href="#"
-              onClick={onLoadMore}
-              style={{ color: 'black', paddingBottom: 10 }}
-            >
-              Load More
-            </a>
-          </Box>
+          </div>
         )}
-      </Container>
-
-      {/* breakpointCols */}
-
-      {/* <Container maxWidth="xl">
-          {isConnected ? (
-          <>
-            <Typography variant={'h3'}>
-              You are connected with you wallet!
-            </Typography>
-            <Typography variant={'body1'}>{address}</Typography>
-          </>
-        ) : (
-          <Button variant={'contained'}>
-            <p>Please connect your Wallet</p>
-          </Button>
-        )}
-
-          <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
-            <Masonry columns={4} spacing={2}>
-              {GET_CREATIONS.map((creation, index) => {
-                const rand = Math.random()
-                if (rand > 0.5) {
-                  return <CreationCardMinimal key={index} creation={creation} />
-                } else {
-                  return <CreationCardMinimal key={index} creation={creation} />
-                  // return <CreationCardMedia key={index} creation={creation} />;
-                }
-              })}
-            </Masonry>
-          </Box>
-        </Container> */}
-      {/* <Footer /> */}
+      </section>
     </>
   )
 }
-
-// CreationsPage.getLayout = page => (
-//   <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
-// )
-
-// export default CreationsPage
 
 CreationsPage.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>

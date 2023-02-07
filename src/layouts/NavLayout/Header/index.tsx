@@ -1,15 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 
 // ROUTER
 // import Link from 'next/link'
 
-// REDUX
-import { setModalVisible } from '@/redux/slices/modalSlice'
-import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-
 // LIBS
 import Blockies from 'react-blockies'
+
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // COMPONENTS
 // import CreateModal from '@/components/CreateModal'
@@ -69,7 +67,7 @@ const HeaderStyles = styled.section`
   justify-content: space-between;
   width: 100%;
   right: 0;
-  padding: 0 20px;
+  left: 0;
   background: white;
   z-index: 100;
   box-shadow: 0px 1px 1px #0000001f;
@@ -105,54 +103,22 @@ const HeaderStyles = styled.section`
   }
 `
 
-// @media (min-width: ${theme.breakpoints.values.lg}px) {
-//   // left: ${theme.sidebar.width};
-//   left: 0;
-//   width: auto;
-// }
-// background-color: ${alpha(theme.header.background, 0.95)};
-// height: ${theme.header.height};
-// color: ${theme.header.textColor};
-// padding: ${theme.spacing(0, 2)};
-
 export default function Header() {
-  // WAGMI HOOKS
+
   const { isConnected } = useAccount()
 
-  // retrieve current state of redux store
-  const dispatch = useAppDispatch()
-  // const { isModalVisible } = useAppSelector(state => state.modal)
-  const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
-
-  // const handleCreateOpen = () => {
-  //   // console.log('HANDLE-CREATE OPEN!')
-  //   dispatch(setModalVisible(true))
-  // }
+  const context = useContext(AppContext)
+  const { setIsWeb3WalletConnected, isWeb3WalletConnected } = context
 
   useEffect(() => {
-    dispatch(setIsWeb3WalletConnected(isConnected))
-  }, [isConnected, dispatch])
-
-  // const handleAccountNav = useCallback(() => {
-  //   if (!isWeb3WalletConnected) {
-  //     return <ConnectButton />
-  //   } else if (isWeb3WalletConnected && !isWeb3AuthSuccess) {
-  //     return (
-  //       <>
-  //         <CreateSignInJWT isOpen={isOpen} onClose={onClose} />
-  //         <ConnectButton />
-  //       </>
-  //     )
-  //   } else if (isWeb3WalletConnected && isWeb3AuthSuccess) {
-  //     return <ConnectButton />
-  //   }
-  // }, [isWeb3WalletConnected, isWeb3AuthSuccess])
+    setIsWeb3WalletConnected(isConnected)
+  }, [isConnected])
 
   return (
     <HeaderStyles id="header-wrapper">
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-          <div
+          <section
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -161,22 +127,13 @@ export default function Header() {
               height: 60,
             }}
           >
-            {/* <LoginButton /> */}
             <AppLogo logo="eden" size="small" />
-            {/* {handleAccountNav()} */}
 
             <div className="nav-right-wrapper" style={{ display: 'flex' }}>
-              {/* 
-                <ThemeToggle />
-                <SignInJWT />
-                <ConnectButton /> 
-              */}
-
               <ConnectButtonCustom />
-
               {isWeb3WalletConnected ? <CreateButton /> : null}
             </div>
-          </div>
+          </section>
         </RainbowKitProvider>
       </WagmiConfig>
     </HeaderStyles>

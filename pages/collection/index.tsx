@@ -125,30 +125,20 @@ export default function CreationsPage() {
         {data?.creationsForHome.length < 1 ? (
           <Loader />
         ) : (
-          <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
+          <div style={{ width: '100%', minHeight: 393, marginTop: 200 }}>
             <Masonry
-              id="masonry"
-              columns={breakpointCols}
-              spacing={2}
-              sx={{ m: 0 }}
-            >
-              <QueryResult error={error} loading={loading} data={data}>
-                {data?.creationsForHome?.map((creation, index) => (
-                  <CreationCardMinimal
-                    key={`${creation.id}_${index}`}
-                    creation={creation}
-                  />
-                ))}
-              </QueryResult>
+                className={'my-gallery-class'} // default ''
+                elementType={'ul'} // default 'div'
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                imagesLoadedOptions={imagesLoadedOptions} // default {}
+              >
+              {creations.map((creation, index) => (
+                <CreationCardMinimal key={index} creation={creation} />
+              ))}
             </Masonry>
-            <a
-              href="#"
-              onClick={onLoadMore}
-              style={{ color: 'black', paddingBottom: 10 }}
-            >
-              Load More
-            </a>
-          </Box>
+          </div>
         )}
       </Container>
 
@@ -169,16 +159,17 @@ export default function CreationsPage() {
         )}
 
           <Box sx={{ width: '100%', minHeight: 393, mt: 20 }}>
-            <Masonry columns={4} spacing={2}>
-              {GET_CREATIONS.map((creation, index) => {
-                const rand = Math.random()
-                if (rand > 0.5) {
-                  return <CreationCardMinimal key={index} creation={creation} />
-                } else {
-                  return <CreationCardMinimal key={index} creation={creation} />
-                  // return <CreationCardMedia key={index} creation={creation} />;
-                }
-              })}
+            <Masonry
+                className={'my-gallery-class'} // default ''
+                elementType={'ul'} // default 'div'
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                imagesLoadedOptions={imagesLoadedOptions} // default {}
+              >
+              {creations.map((creation, index) => (
+                <CreationCardMinimal key={index} creation={creation} />
+              ))}
             </Masonry>
           </Box>
         </Container> */}

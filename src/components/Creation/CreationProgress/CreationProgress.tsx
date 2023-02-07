@@ -2,35 +2,22 @@ import React, { useEffect } from 'react'
 //  useState, useReducer
 
 // UI
-import { Box, styled, Typography } from '@mui/material'
-import CircularProgress, {
-  CircularProgressProps,
-} from '@mui/material/CircularProgress'
+import { Typography } from 'antd'
+import Progress, {
+  ProgressProps,
+} from 'antd'
 
-// REDUX
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks'
-import { batch } from 'react-redux'
-import {
-  // addCreations,
-  // setRunningCreationCount,
-  // setNewCreationReady,
-  // incrementRunningCreationCount,
-  setCreationsProgress,
-  setIsRunningTrue,
-  setIsRunningFalse,
-  setIsLoader,
-  decrementRunningCreationCount,
-} from '@/redux/slices/creationsSlice'
+// STYLES
+import styled from 'styled-components'
 
-// import { setVisible } from '../../redux/slices/snackbarSlice'
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
 ) {
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-      <CircularProgress variant="determinate" {...props} />
-      <Box
+    <div sx={{ position: 'relative', display: 'inline-flex' }}>
+      <Progress variant="determinate" {...props} />
+      <div
         sx={{
           top: 0,
           left: 0,
@@ -47,30 +34,27 @@ function CircularProgressWithLabel(
           component="div"
           color="text.secondary"
         >{`${Math.round(props.value)}%`}</Typography>
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 
-const RunningCreationStyles = styled(Box)(
-  () =>
-    `
+const RunningCreationStyles = styled.div`
   .ant-progress-circle .ant-progress-text {
     font-size: 0.85em;
   }
   .ant-progress-inner.ant-progress-circle-gradient {
     font-size: 12px;
   }
-`,
-)
+`
 
 // function runningReducer(state, action) {
 //   switch (action.type) {
 //     case 'start':
-//       dispatch(setIsLoader(true))
+//       context.setIsLoader(true)
 //     // return { ...state, isRunning: true };
 //     case 'stop':
-//       dispatch(setIsLoader(false))
+//       context.setIsLoader(false)
 //     // return { ...state, isRunning: false };
 //     default:
 //       throw new Error()
@@ -93,16 +77,6 @@ export default function CreationProgress({
   // const [stateReducer, setReducer] = useReducer(runningReducer, {})
   // console.log({ creation });
 
-  // redux
-  const dispatch = useAppDispatch()
-  const {
-    // creations,
-    // newCreationReady,
-    // runningCreationCount,
-    creationsProgress,
-    isRunning,
-  } = useAppSelector(state => state.creations)
-
   // useEffect function checking running queue
   // const runStatusChecker = async (taskId, textInput) => {
   //   const results = await axios.post(serverUrl + 'get_status', {
@@ -111,7 +85,7 @@ export default function CreationProgress({
   //   });
   //   creations[taskId] = results.data;
   //   creations[taskId].textInput = textInput;
-  //   dispatch(addCreations({ ...creations }));
+  //   context.addCreations({ ...creations }))
   //   if (Object.keys(creations).length > 0) {
   //     // showButtonSB();
   //     console.log('creations > than 0');
@@ -154,18 +128,16 @@ export default function CreationProgress({
     ) {
       // console.log('New creation running!')
       batch(() => {
-        dispatch(setIsRunningTrue(_id))
-        dispatch(setCreationsProgress(0))
-        // dispatch(incrementRunningCreationCount());
+        context.setIsRunningTrue(_id)
+        context.setCreationsProgress(0)
+        // context.incrementRunningCreationCount())
       })
     } else if (status === 'running' && isRunning[_id] === false) {
       // console.log('Creation is running!')
       // console.log({ status, status_code, _id })
-      batch(() => {
-        dispatch(setCreationsProgress(status_code))
-        dispatch(setIsRunningTrue(_id))
-        // dispatch(incrementRunningCreationCount());
-      })
+        context.setCreationsProgress(status_code)
+        context.setIsRunningTrue(_id)
+        // context.incrementRunningCreationCount())
     } else if (
       status === 'running' &&
       isRunning[_id] === true &&
@@ -173,40 +145,32 @@ export default function CreationProgress({
     ) {
       // console.log('Creation is running and increasing progress!')
       // console.log({ status, status_code, _id })
-      batch(() => {
-        dispatch(decrementRunningCreationCount())
-        dispatch(setIsRunningFalse(_id))
-        dispatch(setCreationsProgress(status_code))
-      })
+        context.decrementRunningCreationCount()
+        context.setIsRunningFalse(_id)
+        context.setCreationsProgress(status_code)
     } else if (status === 'running' && isRunning[_id] === true) {
       // console.log('Creation is running and increasing progress!')
       // console.log({ status, status_code, _id })
-      batch(() => {
-        dispatch(setCreationsProgress(status_code))
-      })
+        context.setCreationsProgress(status_code)
     } else if (status === 'queued') {
       // console.log('Creation is queued')
       // console.log({ status, status_code, _id })
       batch(() => {
-        // dispatch(incrementRunningCreationCount());
-        dispatch(setIsRunningFalse(_id))
+        // context.incrementRunningCreationCount())
+        context.setIsRunningFalse(_id)
       })
     } else if (status === 'complete' && isRunning[_id] === true) {
       // console.log('Creation is complete')
-      batch(() => {
-        dispatch(decrementRunningCreationCount())
-        dispatch(setIsRunningFalse(_id))
-        dispatch(setIsLoader(false))
-      })
+        context.decrementRunningCreationCount()
+        context.setIsRunningFalse(_id)
+        context.setIsLoader(false)
     } else if (status === 'failed') {
       // console.log('Running Creation progress failed!!')
-      batch(() => {
-        dispatch(setIsRunningFalse(_id))
-        dispatch(decrementRunningCreationCount())
-        dispatch(setIsLoader(false))
-      })
+        context.setIsRunningFalse(_id)
+        context.decrementRunningCreationCount()
+        context.setIsLoader(false)
     }
-  }, [status, status_code, _id, dispatch, isRunning])
+  }, [status, status_code, _id, isRunning])
 
   // console.log(`RUNNING-CREATION-COUNT: ${runningCreationCount}`);
   // console.log(`CREATIONS-PROGRESS: ${creationsProgress}`);

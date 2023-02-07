@@ -1,8 +1,7 @@
 import React from 'react'
 
-// REDUX
-import { useAppDispatch } from '@/hooks/hooks'
-import { setTheme } from '@/redux/slices/themeSlice'
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext';
 
 // ANTD
 import { Switch } from 'antd'
@@ -15,12 +14,13 @@ import { BsFillMoonFill, BsSunFill } from 'react-icons/bs';
 
 export default function ThemeToggle() {
 
-	const dispatch = useAppDispatch();
+	const context = useContext(AppContext)
+	const { setTheme } = context
 
 	const onChange = (checked: boolean) => {
 		checked 
 			? 
-				dispatch(setTheme((previousValue) => !previousValue ))
+				context.setTheme((previousValue) => !previousValue )
 			: 
 				null
 		// console.log(`switch to ${checked}`);

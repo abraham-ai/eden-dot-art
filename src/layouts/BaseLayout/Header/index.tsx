@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 // useContext,
 
 // ROUTER
@@ -6,14 +6,8 @@ import { useState, useEffect } from 'react'
 // import { ROUTES } from '@/const/routes'
 // import { useRouter } from 'next/router'
 
-// REDUX
-import { setModalVisible } from '@/redux/slices/modalSlice'
-import { setIsWeb3WalletConnected } from '@/redux/slices/authSlice'
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks' // useSignMessage
-
-// ANTD
-import { Button, Modal, Typography } from 'antd' // theme,
-const { Text } = Typography
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext';
 
 // CSS
 import styled from 'styled-components'
@@ -34,6 +28,7 @@ import {
   configureChains,
   WagmiConfig,
 } from 'wagmi'
+
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 import { publicProvider } from 'wagmi/providers/public'
@@ -67,21 +62,6 @@ const wagmiClient = createClient({
 const CustomAvatar: AvatarComponent = ({ address }) => {
   return <Blockies seed={address} />
 }
-
-// ICONS
-// import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone'
-// import { SidebarContext } from 'src/contexts/SidebarContext'
-// import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
-// import LoginIcon from '@mui/icons-material/Login'
-// import ImportExportIcon from '@mui/icons-material/ImportExport'
-// import FilterListIcon from '@mui/icons-material/FilterList'
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-// import AddIcon from '@mui/icons-material/Add'
-import { FaDiscord } from 'react-icons/fa'
-
-// height: ${theme.header.height};
-// color: ${theme.header.textColor};
-// padding: ${theme.spacing(0, 2)};
 
 const HeaderWrapperStyles = styled.div`
   position: fixed;
@@ -149,13 +129,15 @@ const HeaderWrapperStyles = styled.div`
 // left: ${theme.sidebar.width};
 
 export default function Header() {
-  // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
 
-  // retrieve current state of redux store
-  const dispatch = useAppDispatch()
-  const { isModalVisible } = useAppSelector(state => state.modal)
-  const { isWeb3WalletConnected } = useAppSelector(state => state.auth)
-  // isWeb3AuthSuccess, isWeb3AuthSigning,
+  const context = useContext(AppContext)
+  const { isModalVisible, 
+          setIsModalVisible,
+          setIsWeb3WalletConnected, 
+          isWeb3WalletConnected } = context
+
+
+  const [loginOpen, setLoginOpen] = useState(false)
 
   const { isConnected } = useAccount()
 
@@ -167,16 +149,15 @@ export default function Header() {
 
   const handleCreateClose = () => {
     console.log('HANDLE CREATE CLOSE!')
-    dispatch(setModalVisible(false))
+    setIsModalVisible(false)
   }
 
-  const [loginOpen, setLoginOpen] = useState(false)
   // const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
   useEffect(() => {
-    dispatch(setIsWeb3WalletConnected(isConnected))
-  }, [isConnected, dispatch])
+    setIsWeb3WalletConnected(isConnected)
+  }, [isConnected])
 
   // console.log({ createOpen })
   // console.log('ROUTER:', router.asPath)
@@ -187,6 +168,8 @@ export default function Header() {
   // function getIsActive(route) {
   //   return router.asPath === route ? 'active' : ''
   // }
+
+  console.log({ isWeb3WalletConnected, isConnected })
 
   return (
     <WagmiConfig client={wagmiClient}>
@@ -199,50 +182,15 @@ export default function Header() {
 
             <ConnectButtonCustom />
 
-            {isWeb3WalletConnected ? <CreateButton /> : null}
+            {isWeb3WalletConnected 
+              ?     
+                <>
+                  <CreateButton />
+                  <CreateModal />
+                </> 
+              : null
+            }
 
-            <CreateModal
-              isOpen={isModalVisible}
-              onModalCancel={handleCreateClose}
-            />
-
-            {/* <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              open={loginOpen}
-              onCancel={handleLoginClose}
-              // closeAfterTransition
-            > */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: 400,
-                background: 'pink',
-                border: '2px solid #000',
-                boxShadow: '24px',
-                backgroundColor: 'white',
-                padding: 40,
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <ConnectButton />
-                Or
-                <Button>
-                  Connect Discord
-                  <FaDiscord style={{ fontSize: '2rem', paddingLeft: 10 }} />
-                </Button>
-              </div>
-            </div>
-            {/* </Modal> */}
           </div>
         </HeaderWrapperStyles>
       </RainbowKitProvider>

@@ -1,26 +1,23 @@
 import React from 'react'
 
-// REDUX
-import { useAppSelector } from '@/hooks/hooks'
+// ANTD
+import { Skeleton, Typography } from 'antd'
 
-// MUI
-import { Box, Skeleton, Typography, styled } from '@mui/material'
+// STYLES
+import styled from 'styled-components'
 
 // LIBS
 import Blockies from 'react-blockies'
 
 // WALLET
-// import { useAccount, useSigner } from 'wagmi'
+import { useAccount, useSigner } from 'wagmi'
 
 // import { useLookupAddress } from 'eth-hooks/dapps/ens'
 
-const CreatorProfileAddressStyles = styled(Box)(
-  () => `
+const CreatorProfileAddressStyles = styled.div`
  width: 300px;
  height: 300px;
- background: red;
-`,
-)
+`
 
 // changed value={address} to address={address}
 
@@ -63,13 +60,13 @@ export default function CreatorProfileAddress() {
   // fontSize,
   // onChange,
 
-  const appAddress = useAppSelector(state => state.address.value)
-  const currentAddress = appAddress
+  const { address } = useAccount()
+  const currentAddress = address
   // const ens = useLookupAddress(ensProvider, currentAddress)
 
   // const currentTheme = 'light'
 
-  if (!appAddress) {
+  if (!address) {
     return (
       <span>
         <Skeleton />
