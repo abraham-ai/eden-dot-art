@@ -804,7 +804,7 @@ export default function EdenArtFrontPage() {
             <Button className='social-btn' icon={<BsTwitter />} shape='circle' href={'https://twitter.com/Eden_Art_'} 
                     style={{ margin: '0 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             />
-            <ConnectButtonCustom />
+            {/* <ConnectButtonCustom /> */}
           </div>
         </section>
 
@@ -848,8 +848,6 @@ export default function EdenArtFrontPage() {
                 </>
               }
 
-
-{/* 'rgb(166, 166, 166)' */}
               { width < 930 ? 
                 <Text className='splash-text-description'>
                   Eden is a community of artists, technologist and machine learners building an open-source social platform for
