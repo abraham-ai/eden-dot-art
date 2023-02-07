@@ -131,10 +131,13 @@ const HeaderWrapperStyles = styled.div`
 export default function Header() {
 
   const context = useContext(AppContext)
-  const { isModalVisible, setIsWeb3WalletConnected, isWeb3WalletConnected } = context
+  const { isModalVisible, 
+          setIsModalVisible,
+          setIsWeb3WalletConnected, 
+          isWeb3WalletConnected } = context
 
 
-  // const { sidebarToggle, toggleSidebar } = useContext(SidebarContext)
+  const [loginOpen, setLoginOpen] = useState(false)
 
   const { isConnected } = useAccount()
 
@@ -149,7 +152,6 @@ export default function Header() {
     setIsModalVisible(false)
   }
 
-  const [loginOpen, setLoginOpen] = useState(false)
   // const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
@@ -166,6 +168,8 @@ export default function Header() {
   // function getIsActive(route) {
   //   return router.asPath === route ? 'active' : ''
   // }
+
+  console.log({ isWeb3WalletConnected, isConnected })
 
   return (
     <WagmiConfig client={wagmiClient}>
