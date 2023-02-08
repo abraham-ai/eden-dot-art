@@ -3,11 +3,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 
 // WEB3
-import { useAccount } from 'wagmi'
+import { useAccount, useDisconnect } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-
-// HOOKS
-// import useWindowDimensions from '@/hooks/useWindowDimensions'
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
@@ -21,6 +18,9 @@ const { Text } = Typography
 
 // EDEN COMPONENTS
 import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
+
+// UTILS
+import { withSessionRoute } from '@/util/withSession'
 
 // CSS
 import styled from 'styled-components'
@@ -128,16 +128,20 @@ export const ConnectButtonCustom = () => {
 
   // HOOKS
   const { address = '', isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
   const walletAddress = address
 
   // CONTEXT
   const context = useContext(AppContext)
 
   const {
+    authToken,
     isModalVisible,
     isWeb3WalletConnected,
     isWeb3AuthSuccess,
+    setAuthToken,
     setIsWeb3WalletConnected,
+    setIsWeb3AuthSuccess,
   } = context
 
   // const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -163,13 +167,18 @@ export const ConnectButtonCustom = () => {
     : walletAddress
 
   console.log({ isModalVisible })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
+  console.log({ authToken })
+  console.log({ isConnected, isWeb3WalletConnected, isWeb3AuthSuccess })
 
   useEffect(() => {
     if (isWeb3WalletConnected === false && isConnected === true) {
       setIsWeb3WalletConnected(isConnected)
+    } else if (typeof isConnected === 'undefined' || isConnected === false) {
+      setIsWeb3WalletConnected(false)
+      setIsWeb3AuthSuccess(false)
+      setAuthToken('')
     }
-  }, [isWeb3WalletConnected, isConnected])
+  }, [isConnected])
 
   return (
     <ConnectButtonStyles>
@@ -193,7 +202,7 @@ export const ConnectButtonCustom = () => {
             (!authenticationStatus || authenticationStatus === 'authenticated')
 
           {
-            console.log({ connected, isWeb3WalletConnected })
+            console.log({ connected, isWeb3WalletConnected, isWeb3AuthSuccess })
           }
 
           return (
@@ -245,6 +254,7 @@ export const ConnectButtonCustom = () => {
                         displayAddress={displayAddress}
                         chain={chain}
                         account={account}
+                        disconnect={disconnect}
                       />
                     }
                     trigger="click"
@@ -268,5 +278,7 @@ export const ConnectButtonCustom = () => {
     </ConnectButtonStyles>
   )
 }
+
+// export default withSessionRoute(ConnectButtonCustom)
 
 export default ConnectButtonCustom
