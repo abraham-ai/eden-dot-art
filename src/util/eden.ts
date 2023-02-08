@@ -1,3 +1,3 @@
-import EdenClient from 'eden-sdk'
+import { EdenClient } from 'eden-sdk'
 
 export const eden = new EdenClient()
