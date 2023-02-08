@@ -94,17 +94,17 @@ export default function CreateUI() {
   const context = useContext(AppContext)
   const {
     authToken,
-    appAddress,
     isModalVisible,
     setIsModalVisible,
-    isWeb3WalletConnect,
+    isWeb3WalletConnected,
     isWeb3AuthSuccess,
   } = context
 
   const { address } = useAccount()
 
   console.log({ isModalVisible })
-  console.log({ isWeb3WalletConnect, isWeb3AuthSuccess })
+  console.log({ authToken })
+  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
   return isModalVisible ? (
     <Modal
