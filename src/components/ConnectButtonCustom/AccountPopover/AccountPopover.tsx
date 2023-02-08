@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+// WEB3
+import { useAccount } from 'wagmi'
 
 // ANTD
 import { Button, Typography, Slider } from 'antd';
@@ -14,7 +16,7 @@ import styled from 'styled-components'
 import Blockies from 'react-blockies'
 
 // COMPONENTS
-import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
+// import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 import CreditBalance from '@/components/Auth/CreditBalance'
 import ApiKeys from '@/components/ApiKeys/ApiKeys'
 
@@ -28,6 +30,8 @@ export const AccountPopover = ({
     displayAddress 
   }) => {
     
+      const { isConnected } = useAccount()
+
       // MASONRY SLIDER
       const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
   
@@ -37,7 +41,8 @@ export const AccountPopover = ({
       }
   
     return (
-      <div
+      isConnected ? (
+        <div
         style={{
           display: 'flex',
           width: '100%',
@@ -255,6 +260,8 @@ export const AccountPopover = ({
           Disconnect
         </Button>
       </div>
+      ) : <Text>{'Not Connected'}</Text>
+      
     )
   }
 

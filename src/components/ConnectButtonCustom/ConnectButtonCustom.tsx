@@ -1,13 +1,13 @@
-'use client'
+"use client"
 
-import React, { useState, useContext, MouseEvent } from 'react'
+import React, { useState, useContext, useEffect, MouseEvent } from 'react'
 
 // WEB3
 import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // HOOKS
-import useWindowDimensions from '@/hooks/useWindowDimensions'
+// import useWindowDimensions from '@/hooks/useWindowDimensions'
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
@@ -16,7 +16,8 @@ import AppContext from '@/components/AppContext/AppContext'
 import Blockies from 'react-blockies'
 
 // ANTD
-import { Popover } from 'antd';
+import { Popover, Typography, Button } from 'antd'
+const { Text } = Typography
 
 // EDEN COMPONENTS
 import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
@@ -130,13 +131,17 @@ export const ConnectButtonCustom = () => {
 
 
   // HOOKS
-  const { address = '' } = useAccount()
+  const { address = '', isConnected } = useAccount()
   const walletAddress = address
-  const { width } = useWindowDimensions()
+  // const { width } = useWindowDimensions()
 
   // CONTEXT
   const context = useContext(AppContext)
-  const { isWeb3WalletConnected } = context
+
+  const { isModalVisible, 
+          isWeb3WalletConnected, 
+          isWeb3AuthSuccess, 
+          setIsWeb3WalletConnected } = context
 
   // const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
   //   open ? setOpen(false) : setOpen(true)
@@ -160,6 +165,16 @@ export const ConnectButtonCustom = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
+
+  console.log({ isModalVisible })
+  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
+
+  useEffect(() => {
+    if (isWeb3WalletConnected === false && isConnected === true) {
+      setIsWeb3WalletConnected(isConnected)
+    }
+  }, [isWeb3WalletConnected, isConnected])
+
   return (
     <ConnectButtonStyles>
       <ConnectButton.Custom>
@@ -173,14 +188,17 @@ export const ConnectButtonCustom = () => {
           mounted,
         }) => {
           
+          
           // Note: If your app doesn't use authentication, you
           // can remove all 'authenticationStatus' checks
           const ready = mounted && authenticationStatus !== 'loading'
           const connected =
-            ready &&
-            account &&
-            chain &&
-            (!authenticationStatus || authenticationStatus === 'authenticated')
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus || authenticationStatus === 'authenticated')
+          
+          { console.log({ connected, isWeb3WalletConnected })}
 
           return (
             <div
@@ -195,17 +213,16 @@ export const ConnectButtonCustom = () => {
               })}
             >
               {(() => {
-                if (isWeb3WalletConnected) {
-                // if (!connected) {
+                if (!isWeb3WalletConnected && !connected) {
                   return (
-                    <button
+                    <Button
                       className="connect-button"
                       onClick={openConnectModal}
                       type="button"
                     >
                       {/* { width < 930 ? 'Connect' : 'Connect Wallet' } */}
-                      Connect Wallet
-                    </button>
+                      <Text style={{ color: 'white' }}>Connect Wallet</Text>
+                    </Button>
                   )
                 }
 

@@ -31,23 +31,23 @@ export default function CreateButton() {
   const context = useContext(AppContext)
   const { setIsModalVisible } = context
 
-  const handleCreateOpen = () => {
+  const handleCreateOpen = (e: MouseEvent) => {
     console.log('set modal visible!')
-    setIsModalVisible(true)
+    e ? setIsModalVisible(true) : null
   }
 
   return (
     <CreateButtonStyles id='create-button-wrapper'>
-      <Button
+      <button
         id='create-button'
-        onClick={handleCreateOpen}
+        onClick={(e) => handleCreateOpen(e)}
         size='middle'
         icon={'+'}
       >
         <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
           Create
         </Text>
-      </Button>
+      </button>
     </CreateButtonStyles>        
   )
 }

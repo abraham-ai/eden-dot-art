@@ -49,14 +49,6 @@ const CreateUIStyles = styled.section`
       align-items: center;
     }
 
-    .Mui-focused {
-      border: 0 !important;
-    }
-
-    label.Mui-focused {
-      border: none;
-    }
-
     label {
       color:#536471;
       font-size: 1.2rem;
@@ -121,12 +113,12 @@ const CreateUIStyles = styled.section`
     }
 `
 
-export default function CreateUI({ isOpen }) {
+export default function CreateUI() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
   const snackbarMessage = 'test message'
 
   const context = useContext(AppContext)
-  const { authToken, appAddress, isModalVisible } = context;
+  const { authToken, appAddress, isModalVisible, setIsModalVisible, isWeb3WalletConnect, isWeb3AuthSuccess } = context;
 
 
   // const [prompt, setPrompt] = useState('')
@@ -312,24 +304,27 @@ export default function CreateUI({ isOpen }) {
     setIsSnackbarVisible(false)
   }
 
-  const action = (
-    <>
-      <Button color="secondary" size="small" onClick={handleSnackbarClose}>
-        UNDO
-      </Button>
-      <Button
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleSnackbarClose}
-        icon={'close'}
-      >
+  // const action = (
+  //   <>
+  //     <Button color="secondary" size="small" onClick={handleSnackbarClose}>
+  //       UNDO
+  //     </Button>
+  //     <Button
+  //       size="small"
+  //       aria-label="close"
+  //       color="inherit"
+  //       onClick={handleSnackbarClose}
+  //       icon={'close'}
+  //     >
         
-      </Button>
-    </>
-  )
+  //     </Button>
+  //   </>
+  // )
 
-  return isOpen ? (
+  console.log({ isModalVisible })
+  console.log({ isWeb3WalletConnect, isWeb3AuthSuccess })
+
+  return isModalVisible ? (
     <Modal
       className="create-modal"
       open={isModalVisible}

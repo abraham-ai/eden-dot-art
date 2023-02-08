@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useContext } from 'react'
 
 // CONTEXT
@@ -39,15 +41,15 @@ const EthereumAuth = ({ onModalCancel }) => {
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
       try {
-        await axios.post("/api/login", {
+        await axios.post('/api/login', {
           message: variables.message,
           signature: data,
           userAddress: address,
         });
-        setEthMessage("Successfully authenticated as " + address)
+        setEthMessage('Successfully authenticated as ' + address)
         context.setIsWeb3AuthSuccess(true)
       } catch (error: any) {
-        setEthMessage("Error authenticating")
+        setEthMessage('Error authenticating')
       }
       setEthAuthenticating(false);
     },
@@ -64,9 +66,9 @@ const EthereumAuth = ({ onModalCancel }) => {
       const message = new SiweMessage({
         domain: window.location.host,
         address,
-        statement: "Sign in with Ethereum to the app.",
+        statement: 'Sign in with Ethereum to the app.',
         uri: window.location.origin,
-        version: "1",
+        version: '1',
         chainId: chain?.id,
         nonce: Date.now().toString(),
       });
@@ -75,7 +77,7 @@ const EthereumAuth = ({ onModalCancel }) => {
         message: preparedMessage,
       });
     } catch (error: any) {
-      setEthMessage("Error authenticating");
+      setEthMessage('Error authenticating');
       setEthAuthenticating(false);
     }
   };
