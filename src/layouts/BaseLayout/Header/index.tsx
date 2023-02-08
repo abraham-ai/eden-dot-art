@@ -134,7 +134,9 @@ export default function Header() {
   const { isModalVisible, 
           setIsModalVisible,
           setIsWeb3WalletConnected, 
-          isWeb3WalletConnected } = context
+          isWeb3WalletConnected,
+          isWeb3AuthSuccess
+        } = context
 
 
   const [loginOpen, setLoginOpen] = useState(false)
@@ -169,7 +171,7 @@ export default function Header() {
   //   return router.asPath === route ? 'active' : ''
   // }
 
-  console.log({ isWeb3WalletConnected, isConnected })
+  console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
 
   return (
     <WagmiConfig client={wagmiClient}>
