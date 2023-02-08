@@ -28,9 +28,13 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
 
     req.session.token = token
     req.session.userId = userAddress
+
     await req.session.save()
 
-    res.send({ message: 'Successfully authenticated key pair' })
+    res.send({
+      message: 'Successfully authenticated key pair',
+      token,
+    })
   } catch (error: any) {
     console.error(error)
     res.status(500).json({ error: 'Error authenticating key pair' })
