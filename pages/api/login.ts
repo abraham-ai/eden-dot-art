@@ -1,5 +1,13 @@
+// FETCH
+import axios from 'axios'
+
+// TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
+
+// SESSION
 import { withSessionRoute } from '@/util/withSession'
+
+// LIBS
 import { eden } from '@/util/eden'
 
 interface ApiRequest extends NextApiRequest {
@@ -12,6 +20,8 @@ interface ApiRequest extends NextApiRequest {
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { message, signature, userAddress } = req.body
+
+  console.log({ req })
 
   try {
     const token = await eden.loginEth(message, signature, userAddress)
