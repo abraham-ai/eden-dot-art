@@ -24,6 +24,7 @@ export const AccountPopover = ({
   walletAddress,
   chain,
   account,
+  disconnect,
   openChainModal,
   displayAddress,
 }) => {
@@ -48,10 +49,10 @@ export const AccountPopover = ({
         padding: 10,
       }}
     >
-      <Button
+      <button
         className="connect-button-main"
         onClick={openAccountModal}
-        block
+        // block
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
@@ -90,7 +91,7 @@ export const AccountPopover = ({
             {account.displayName}
           </Text>
         </div>
-      </Button>
+      </button>
 
       <div
         className="wallet-wrapper"
@@ -102,7 +103,7 @@ export const AccountPopover = ({
           borderRadius: '12px',
         }}
       >
-        <div>
+        {/* <div>
           <Text style={{ color: 'gray', fontWeight: 600 }}>
             {'Wallet Balance'}
           </Text>
@@ -118,7 +119,7 @@ export const AccountPopover = ({
           <CreditBalance />
         </div>
 
-        <ApiKeys />
+        <ApiKeys /> */}
 
         <div
           style={{
@@ -158,7 +159,7 @@ export const AccountPopover = ({
             </Text>
           </a>
 
-          <Button
+          <button
             className="connect-button"
             onClick={openChainModal}
             style={{
@@ -191,7 +192,7 @@ export const AccountPopover = ({
               </div>
             )}
             {chain.name}
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -249,13 +250,14 @@ export const AccountPopover = ({
         </div>
       </div>
 
-      <Button
+      <button
+        onClick={disconnect}
         icon={<Text>{'Logout'}</Text>}
-        block
+        // block
         style={{ display: 'flex', justifyContent: 'flex-start' }}
       >
         Disconnect
-      </Button>
+      </button>
     </div>
   ) : (
     <Text>{'Not Connected'}</Text>
