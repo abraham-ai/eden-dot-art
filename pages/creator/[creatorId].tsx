@@ -1,12 +1,12 @@
 import { useState } from 'react'
 // , { useEffect, useState, useCallback, useRef }
 
-// REDUX
-import { useAppSelector } from '@/hooks/hooks'
-
 // NEXT
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+
+// WEB3
+import { useAccount } from 'wagmi'
 
 // ANTD
 import { Typography, Popover, Avatar, Divider, Button } from 'antd'
@@ -144,13 +144,11 @@ export default function Creator({ profileAddress='0x000', profileName='Custom Na
     const [isFollowing, setIsFollowing] = useState(false)
 
 
+    const { address } = useAccount()
+
     // ROUTER
     const router = useRouter()
     const { profileId } = router.query
-
-    // REDUX
-    const appAddress = useAppSelector(state => state.address.value)
-
 
     const handleFollow = () => {
         isFollowing ? setIsFollowing(false) : setIsFollowing(true)
@@ -227,7 +225,7 @@ return (
                                 </Button>
                             </Popover>
 
-                            {appAddress === profileAddress
+                            {address === profileAddress
                                 ? null
                                 : <Button className='follow-button'
                                     type={isFollowing ? 'default' : 'primary'}
@@ -238,7 +236,7 @@ return (
                                      {isFollowing ? 'Following' : 'Follow'}
                                 </Button>}
 
-                            {appAddress === profileAddress
+                            {address === profileAddress
                                 ? 
                                 <Link href='/profile'>
                                     <Button shape='round' size='large' style={{ marginLeft: 20 }}>Edit Profile</Button>

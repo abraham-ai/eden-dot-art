@@ -4,12 +4,12 @@ import { useState } from 'react'
 // TYPES
 import type { ReactElement, ReactNode } from 'react';
 
-// REDUX
-import { useAppSelector } from '@/hooks/hooks'
-
 // NEXT
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+
+// WEB3
+import { useAccount } from 'wagmi'
 
 // ANTD
 import { Typography, Popover, Avatar, Divider, Button } from 'antd'
@@ -148,12 +148,12 @@ export default function CreatorPage({ profileAddress='0x000', profileName='Custo
     const [isFollowing, setIsFollowing] = useState(false)
 
 
+    const { address } = useAccount()
+
+
     // ROUTER
     const router = useRouter()
     const { profileId } = router.query
-
-    // REDUX
-    const appAddress = useAppSelector(state => state.address.value)
 
 
     const handleFollow = () => {
@@ -231,7 +231,7 @@ return (
                                 </Button>
                             </Popover>
 
-                            {appAddress === profileAddress
+                            {address === profileAddress
                                 ? null
                                 : <Button className='follow-button'
                                     type={isFollowing ? 'default' : 'primary'}
@@ -242,13 +242,13 @@ return (
                                      {isFollowing ? 'Following' : 'Follow'}
                                 </Button>}
 
-                            {appAddress === profileAddress
+                            {address === profileAddress
                                 ? <Button shape='round'>Edit Profile</Button>
                                 : null}
                             <Link href='/profile'>
-                            <Button shape='round' size='large' style={{ marginLeft: 20 }}>
-                                Edit Profile
-                            </Button>
+                              <Button shape='round' size='large' style={{ marginLeft: 20 }}>
+                                  Edit Profile
+                              </Button>
                             </Link>
                         </div>
 
