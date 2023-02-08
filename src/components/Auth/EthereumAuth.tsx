@@ -26,6 +26,14 @@ const EthereumAuthStyles = styled.section`
     flex: 1;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+  }
+  .auth-btn.sign-in {
+    background-color: #7d7de4;
+    margin-right: 5px;
+  }
+  .auth-btn.cancel {
+    margin-left: 5px;
   }
 `
 
@@ -59,6 +67,8 @@ const EthereumAuth = ({ onModalCancel }) => {
   }
 
   const handleSiwe = async () => {
+    console.log(window.location.host)
+
     if (!isConnected) return
     setEthAuthenticating(true)
     try {
@@ -86,33 +96,31 @@ const EthereumAuth = ({ onModalCancel }) => {
       <h1>Sign in with Ethereum</h1>
 
       <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button
+        <button
           className="auth-btn sign-in"
           type="primary"
           onClick={handleSiwe}
           shape="round"
           size="large"
-          disabled={ethAuthenticating}
-          loading={ethAuthenticating}
-          style={{ marginRight: 5 }}
+          // disabled={ethAuthenticating}
+          // loading={ethAuthenticating}
         >
           <Text strong style={{ fontSize: '1rem', color: 'white' }}>
             Sign In
           </Text>
-        </Button>
-        <Button
+        </button>
+        <button
           className="auth-btn cancel"
           type="default"
           onClick={handleCancelModal}
           shape="round"
           size="large"
-          disabled={ethAuthenticating}
-          style={{ marginLeft: 5 }}
+          // disabled={ethAuthenticating}
         >
           <Text strong style={{ fontSize: '1rem' }}>
             Cancel
           </Text>
-        </Button>
+        </button>
       </Row>
       {ethMessage && <p>{ethMessage}</p>}
     </EthereumAuthStyles>
