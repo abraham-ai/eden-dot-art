@@ -4690,7 +4690,7 @@ __metadata:
     cross-env: 5.0.5
     date-fns: 2.28.0
     dotenv: ^16.0.3
-    eden-sdk: ^0.1.0
+    eden-sdk: ^0.2.3
     eslint: 8.17.0
     eslint-config-next: latest
     eslint-config-prettier: 8.5.0
@@ -4736,14 +4736,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"eden-sdk@npm:^0.1.0":
-  version: 0.1.26
-  resolution: "eden-sdk@npm:0.1.26"
+"eden-sdk@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "eden-sdk@npm:0.2.3"
   dependencies:
     axios: ^1.2.4
     dotenv: ^16.0.3
     fs: ^0.0.1-security
-  checksum: 68e171d73772664cc152bac3de1719e6a6474209325f9bd8b4c36855b77e890acf137432aaf92dd4bb622da2aa170bb61a33c580ddcda1492aa2346ca9e537d9
+  checksum: 2a7212b101c43dc2fc2b465219d569f44901e826a50cd98b83cddfa4e40602342c626802d6ee3dad6ee5c957d54a31a8782bcd3e01139bd0da05201c3caa145f
   languageName: node
   linkType: hard
 
