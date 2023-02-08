@@ -4,7 +4,7 @@ import { eden } from '../../src/util/eden'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const generatorName = req.query.name
+    const generatorName = req.query.name as string
     if (generatorName) {
       const generatorVersion = await eden.getGenerator(generatorName)
       return res.status(200).json({ generatorVersion: generatorVersion })
@@ -12,7 +12,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).json({ error: 'Missing generator name' })
     }
   } catch (error: any) {
-    console.error(error)
     return res.status(500).json({ error: error.response.data })
   }
 }
