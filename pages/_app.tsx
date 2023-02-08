@@ -4,7 +4,6 @@ import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-
 // ROUTER
 import Router from 'next/router'
 import nProgress from 'nprogress'
@@ -43,6 +42,7 @@ function EdenApp(props: EdenAppProps) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
   const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
+  const [authToken, setAuthToken] = useState('')
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
@@ -52,34 +52,35 @@ function EdenApp(props: EdenAppProps) {
   Router.events.on('routeChangeComplete', nProgress.done)
 
   const contextValues = {
-    isModalVisible, 
-    setIsModalVisible, 
+    authToken,
+    isModalVisible,
     isWeb3AuthSuccess,
+    isWeb3WalletConnected,
+    setAuthToken,
+    setIsModalVisible,
     setIsWeb3AuthSuccess,
-    isWeb3WalletConnected, 
-    setIsWeb3WalletConnected
+    setIsWeb3WalletConnected,
   }
 
   return (
-      <CacheProvider value={emotionCache}>
-          <Head>
-            <title>
-              Eden.Art | Compute, Scalablity, and Scaffolding for ML Model
-              Creators
-            </title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-          </Head>
-          {/* <SidebarProvider> */}
-          <AppContext.Provider value={contextValues}>
-              <WalletProvider>
-                {getLayout(<Component {...pageProps} />)}
-              </WalletProvider>
-          </AppContext.Provider>
-          {/* </SidebarProvider> */}
-      </CacheProvider>
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>
+          Eden.Art | Compute, Scalablity, and Scaffolding for ML Model Creators
+        </title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+      </Head>
+      {/* <SidebarProvider> */}
+      <AppContext.Provider value={contextValues}>
+        <WalletProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </WalletProvider>
+      </AppContext.Provider>
+      {/* </SidebarProvider> */}
+    </CacheProvider>
   )
 }
 
