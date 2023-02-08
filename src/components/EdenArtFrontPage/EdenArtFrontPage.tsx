@@ -1,4 +1,4 @@
-import React from 'react'
+import React,  { useState, useEffect } from 'react'
 
 // WALLET
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
@@ -725,9 +725,14 @@ export function AppLink({ title, description, icon }) {
 }
 
 export function ButtonLink({ text, link, color = 'white', textColor = 'white', type = '' }) {
-  const { width } = useWindowDimensions()
+  const [windowWidth, setWindowWidth] = useState(0)
+  const { width = 0 } = useWindowDimensions()
 
   const target = text === 'GARDEN' ? '_self' : '_blank';
+
+  useEffect(() => {
+    setWindowWidth(width)
+  }, [width])
 
   return (
     <Button
@@ -735,7 +740,7 @@ export function ButtonLink({ text, link, color = 'white', textColor = 'white', t
       shape={'round'}
       href={link}
       className={`cta-button ${type}`}
-      block={ width < 930 ? true : false }
+      block={ windowWidth < 930 ? true : false }
       style={{ background: color, color: textColor }}
     >
     {text}
@@ -786,7 +791,13 @@ export function MobileTitle() {
 
 export default function EdenArtFrontPage() {
   
-  const { width } = useWindowDimensions()
+  const [windowWidth, setWindowWidth] = useState(0)
+  const { width = 0 } = useWindowDimensions()
+
+
+  useEffect(() => {
+    setWindowWidth(width)
+  }, [width])
 
   const videoURL = 'https://eden-art.s3.amazonaws.com/eden-landing-mobile-real2real_seed_7_pass_lantent-blending.mp4'
 
@@ -810,7 +821,7 @@ export default function EdenArtFrontPage() {
 
         <section className='section-above-the-fold'>
 
-            { width < 930 
+            { windowWidth < 930 
               ?        
                 (<article className="section-wrapper video-splash" >
                   <div className='eden-splash-video-overlay' />
@@ -837,7 +848,7 @@ export default function EdenArtFrontPage() {
               className='section-center-wrapper'
               style={{ padding: '100px 0 0 0', paddingBottom: 0, width: '100%', textAlign: 'center' }}
             >
-              { width < 930 ? <MobileTitle /> : 
+              { windowWidth < 930 ? <MobileTitle /> : 
                 <>
                   <Title className='splash-text-slogan' level={2}>
                     Create, remix, and share
@@ -848,7 +859,7 @@ export default function EdenArtFrontPage() {
                 </>
               }
 
-              { width < 930 ? 
+              { windowWidth < 930 ? 
                 <Text className='splash-text-description'>
                   Eden is a community of artists, technologist and machine learners building an open-source social platform for
                   generative AI.
@@ -885,7 +896,7 @@ export default function EdenArtFrontPage() {
                     width: '100%',
                   }}
                 >
-                  { width < 930 ? 
+                  { windowWidth < 930 ? 
                     <>
                       <ButtonLink text={'GARDEN'} link={'/garden'} color={'#8c7cf0'} textColor={'white'} type='main-link' />
                       <ButtonLink text={'EXAMPLES'} link={'https://examples.eden.art'} color={'#0c163b'} type='accent-link' />
@@ -896,34 +907,6 @@ export default function EdenArtFrontPage() {
                       <ButtonLink text={'EXAMPLES'} link={'/garden'} color={'#8C7CF0'} textColor={'white'} />
                     </>
                   }
-
-                  {/* { width < 930 ? 
-                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-                    <Button
-                        className='cta-button icon'
-                        target="_blank"
-                        shape={'circle'}
-                        href={'https://discord.gg/4dSYwDT'}
-                        block={ width < 930 ? true : false }
-                        style={{ background: 'black', minWidth: '50px', minHeight: '50px' }}
-                      >
-                      <FaDiscord style={{ fontSize: '2rem' }}/>
-                    </Button>
-
-                    <Button
-                        className='cta-button icon'
-                        target="_blank"
-                        shape={'circle'}
-                        href={'https://twitter.com/Eden_Art_'}
-                        block={ width < 930 ? true : false }
-                        style={{ background: 'black', minWidth: '50px', minHeight: '50px' }}
-                      >
-                      <TwitterOutlined style={{ fontSize: '2rem' }}/>
-                    </Button>       
-                  </div>
-                    : 
-                    null
-                  } */}
 
                 </div>
               </article>
@@ -990,15 +973,6 @@ export default function EdenArtFrontPage() {
                 loop={true}
                 src='https://eden-art.s3.amazonaws.com/eden-real2real_seed_2026_latent-blending.mp4'
               />
-
-              {/* <video loop autoPlay muted width="250">
-                <source
-                  src="https://eden-art.s3.amazonaws.com/real2real/videos/real2real_seed_109_167123988214.webm"
-                  type="video/webm"
-                />
-
-                <source src="/media/cc0-videos/flower.mp4" type="video/mp4" />
-              </video> */}
             </div>
           </article>
         </section>
