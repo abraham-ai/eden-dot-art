@@ -48,13 +48,21 @@ const EthereumAuth = ({ onModalCancel }) => {
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
       try {
-        await axios.post('/api/login', {
+        const resp = await axios.post('/api/login', {
           message: variables.message,
           signature: data,
           userAddress: address,
         })
-        setEthMessage('Successfully authenticated as ' + address)
+
+        console.log({ resp })
+        const { token } = resp.data
+
+        context.setAuthToken(token.token)
         context.setIsWeb3AuthSuccess(true)
+
+        setEthMessage(
+          'Successfully authenticated as ' + address + ', Token' + token.token,
+        )
       } catch (error: any) {
         setEthMessage('Error authenticating')
       }
