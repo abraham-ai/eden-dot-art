@@ -3,13 +3,10 @@ import React, { useEffect } from 'react'
 
 // UI
 import { Typography } from 'antd'
-import Progress, {
-  ProgressProps,
-} from 'antd'
+import Progress, { ProgressProps } from 'antd'
 
 // STYLES
 import styled from 'styled-components'
-
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
@@ -135,9 +132,9 @@ export default function CreationProgress({
     } else if (status === 'running' && isRunning[_id] === false) {
       // console.log('Creation is running!')
       // console.log({ status, status_code, _id })
-        context.setCreationsProgress(status_code)
-        context.setIsRunningTrue(_id)
-        // context.incrementRunningCreationCount())
+      context.setCreationsProgress(status_code)
+      context.setIsRunningTrue(_id)
+      // context.incrementRunningCreationCount())
     } else if (
       status === 'running' &&
       isRunning[_id] === true &&
@@ -145,13 +142,13 @@ export default function CreationProgress({
     ) {
       // console.log('Creation is running and increasing progress!')
       // console.log({ status, status_code, _id })
-        context.decrementRunningCreationCount()
-        context.setIsRunningFalse(_id)
-        context.setCreationsProgress(status_code)
+      context.decrementRunningCreationCount()
+      context.setIsRunningFalse(_id)
+      context.setCreationsProgress(status_code)
     } else if (status === 'running' && isRunning[_id] === true) {
       // console.log('Creation is running and increasing progress!')
       // console.log({ status, status_code, _id })
-        context.setCreationsProgress(status_code)
+      context.setCreationsProgress(status_code)
     } else if (status === 'queued') {
       // console.log('Creation is queued')
       // console.log({ status, status_code, _id })
@@ -161,14 +158,14 @@ export default function CreationProgress({
       })
     } else if (status === 'complete' && isRunning[_id] === true) {
       // console.log('Creation is complete')
-        context.decrementRunningCreationCount()
-        context.setIsRunningFalse(_id)
-        context.setIsLoader(false)
+      context.decrementRunningCreationCount()
+      context.setIsRunningFalse(_id)
+      context.setIsLoader(false)
     } else if (status === 'failed') {
       // console.log('Running Creation progress failed!!')
-        context.setIsRunningFalse(_id)
-        context.decrementRunningCreationCount()
-        context.setIsLoader(false)
+      context.setIsRunningFalse(_id)
+      context.decrementRunningCreationCount()
+      context.setIsLoader(false)
     }
   }, [status, status_code, _id, isRunning])
 

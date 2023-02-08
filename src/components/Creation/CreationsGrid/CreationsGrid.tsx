@@ -23,9 +23,8 @@ const CreationsGridStyles = styled.section`
 
 // CONSTS
 const PAGE_LENGTH = 10
-const masonryOptions = { transitionDuration: 0 };
+const masonryOptions = { transitionDuration: 0 }
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
-
 
 export default function CreationsGrid({ username = null }) {
   const [creations, setCreations] = useState<object[]>([])
@@ -99,26 +98,26 @@ export default function CreationsGrid({ username = null }) {
 
   return (
     <CreationsGridStyles id="creations-grid">
-        <div id='creations-grid-wrapper'>
-          {creations.length < 1 ? (
-            <Loader />
-          ) : (
-            <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
-              <Masonry
-                className={'my-gallery-class'} // default ''
-                elementType={'ul'} // default 'div'
-                options={masonryOptions} // default {}
-                disableImagesLoaded={false} // default false
-                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                imagesLoadedOptions={imagesLoadedOptions} // default {}
-                >
-                {creations.map((creation, index) => (
+      <div id="creations-grid-wrapper">
+        {creations.length < 1 ? (
+          <Loader />
+        ) : (
+          <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
+            <Masonry
+              className={'my-gallery-class'} // default ''
+              elementType={'ul'} // default 'div'
+              options={masonryOptions} // default {}
+              disableImagesLoaded={false} // default false
+              updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+              imagesLoadedOptions={imagesLoadedOptions} // default {}
+            >
+              {creations.map((creation, index) => (
                 <CreationCardMinimal key={index} creation={creation} />
-                ))}
-              </Masonry>
-            </div>
-          )}
-        </div>
+              ))}
+            </Masonry>
+          </div>
+        )}
+      </div>
 
       {loading && <Loader />}
 
@@ -128,5 +127,3 @@ export default function CreationsGrid({ username = null }) {
     </CreationsGridStyles>
   )
 }
-
-                

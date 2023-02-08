@@ -1,27 +1,27 @@
-import { Button, Form, Table, DatePicker, Space } from "antd";
-import axios from "axios";
-import { useState } from "react";
-import type { DatePickerProps } from 'antd';
+import { Button, Form, Table, DatePicker, Space } from 'antd'
+import axios from 'axios'
+import { useState } from 'react'
+import type { DatePickerProps } from 'antd'
 
 interface MyCreationsFormInputs {
-  datefrom: number;
-  dateto: number;
+  datefrom: number
+  dateto: number
 }
 
 const Profile = () => {
-
-  const [form] = Form.useForm();
-  const [creations, setCreations] = useState<object[]>([]);
-  const [generating, setGenerating] = useState<boolean>(false);
-  const [message, setMessage] = useState<string | null>(null);
+  const [form] = Form.useForm()
+  const [creations, setCreations] = useState<object[]>([])
+  const [generating, setGenerating] = useState<boolean>(false)
+  const [message, setMessage] = useState<string | null>(null)
 
   const handleGenerate = async (values: MyCreationsFormInputs) => {
-    setGenerating(true);
+    setGenerating(true)
     try {
-      const response = await axios.post("/api/creations", {
+      const response = await axios.post('/api/creations', {
         ...values,
-      });
-      const data = response.data.creations &&
+      })
+      const data =
+        response.data.creations &&
         response.data.creations.map((creation: any) => {
           return {
             key: creation._id,
@@ -29,15 +29,14 @@ const Profile = () => {
             prompt: creation.task.config.text_input,
             status: creation.task.status,
             output: creation.uri,
-          };
-        }
-      );
-      setCreations(data);
+          }
+        })
+      setCreations(data)
     } catch (error: any) {
-      setMessage(`Error: ${error}`);
+      setMessage(`Error: ${error}`)
     }
-    setGenerating(false);
-  };
+    setGenerating(false)
+  }
 
   const columns = [
     {
@@ -62,12 +61,12 @@ const Profile = () => {
       key: 'output',
       render: (output: string) => <a href={output}>download</a>,
     },
-  ];
-  
+  ]
+
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-  
+    console.log(date, dateString)
+  }
+
   return (
     <>
       <Form
@@ -98,7 +97,7 @@ const Profile = () => {
       {message && <p>{message}</p>}
       <Table dataSource={creations} columns={columns} />
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

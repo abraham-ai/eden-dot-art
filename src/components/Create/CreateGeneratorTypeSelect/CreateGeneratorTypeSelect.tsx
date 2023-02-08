@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 
 // COMPONENTS
-// import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
-// import FormHelperText from '@mui/material/FormHelperText'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
@@ -11,10 +9,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { BsGear } from 'react-icons/bs'
 
 // MUI
-import { styled } from '@mui/material'
+import styled from 'styled-components'
 
-const CreateGeneretorTypeSelectStyles = styled('div')(
-  () => `
+const CreateGeneretorTypeSelectStyles = styled.section`
   > div {
     border-radius: 20px;
     margin: 20px 0 0 0;
@@ -24,28 +21,27 @@ const CreateGeneretorTypeSelectStyles = styled('div')(
     align-items: center;
   }
   #select-creation-type {
-    margin: 0; 
+    margin: 0;
     display: flex;
     align-items: center;
     font-weight: 600;
     justify-content: flex-start;
-    color: #8C7CF0;
+    color: #8c7cf0;
   }
-  
+
   #select-creation-type > div {
     padding: 0 0 0 10px;
     display: flex;
     align-items: center;
   }
-  
+
   div > div > svg {
     height: 100%;
     position: relative;
-    color: #8C7CF0;
+    color: #8c7cf0;
     margin: 0 0 0 8px;
   }
-`,
-)
+`
 
 export default function CreateGeneratorTypeSelect() {
   const [generatorType, setGeneratorType] = useState('1')

@@ -1,13 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
-// useContext,
-
-// ROUTER
-// import Link from 'next/link'
-// import { ROUTES } from '@/const/routes'
-// import { useRouter } from 'next/router'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext';
+import AppContext from '@/components/AppContext/AppContext'
 
 // CSS
 import styled from 'styled-components'
@@ -17,14 +11,12 @@ import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
-// import SortCreationsBar from '@/components/SortCreationsBar'
 
 // CONTRACT - WEB3
 import {
   useAccount,
   chain,
   createClient,
-  // useProvider,
   configureChains,
   WagmiConfig,
 } from 'wagmi'
@@ -129,47 +121,29 @@ const HeaderWrapperStyles = styled.div`
 // left: ${theme.sidebar.width};
 
 export default function Header() {
-
   const context = useContext(AppContext)
-  const { isModalVisible, 
-          setIsModalVisible,
-          setIsWeb3WalletConnected, 
-          isWeb3WalletConnected,
-          isWeb3AuthSuccess
-        } = context
-
+  const {
+    isModalVisible,
+    setIsModalVisible,
+    setIsWeb3WalletConnected,
+    isWeb3WalletConnected,
+    isWeb3AuthSuccess,
+  } = context
 
   const [loginOpen, setLoginOpen] = useState(false)
 
   const { isConnected } = useAccount()
-
-  // const { useToken } = theme;
-  // const { token } = useToken;
-
-  // const router = useRouter()
-  // const [createOpen, setCreateOpen] = useState(false)
 
   const handleCreateClose = () => {
     console.log('HANDLE CREATE CLOSE!')
     setIsModalVisible(false)
   }
 
-  // const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
   useEffect(() => {
     setIsWeb3WalletConnected(isConnected)
   }, [isConnected])
-
-  // console.log({ createOpen })
-  // console.log('ROUTER:', router.asPath)
-  // if (router.asPath === '/watch') {
-  //   console.log('TRUEEE /WATCH')
-  // }
-
-  // function getIsActive(route) {
-  //   return router.asPath === route ? 'active' : ''
-  // }
 
   console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
 
@@ -184,15 +158,12 @@ export default function Header() {
 
             <ConnectButtonCustom />
 
-            {isWeb3WalletConnected 
-              ?     
-                <>
-                  <CreateButton />
-                  <CreateModal />
-                </> 
-              : null
-            }
-
+            {isWeb3WalletConnected ? (
+              <>
+                <CreateButton />
+                <CreateModal />
+              </>
+            ) : null}
           </div>
         </HeaderWrapperStyles>
       </RainbowKitProvider>

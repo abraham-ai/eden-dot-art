@@ -10,24 +10,22 @@ const { Text } = Typography
 import styled from 'styled-components'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext';
-
+import AppContext from '@/components/AppContext/AppContext'
 
 const CreateButtonStyles = styled.section`
-	#create-button {
-		display: flex;
-		align-items: center;
-		height: 45px;
-		margin-left: 15px;
-		padding: 10px 20px;
-		color: white;
-		background: #8C7CF0;
-		border-radius: 30px;
-	}
+  #create-button {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin-left: 15px;
+    padding: 10px 20px;
+    color: white;
+    background: #8c7cf0;
+    border-radius: 30px;
+  }
 `
 
 export default function CreateButton() {
-
   const context = useContext(AppContext)
   const { setIsModalVisible } = context
 
@@ -37,17 +35,24 @@ export default function CreateButton() {
   }
 
   return (
-    <CreateButtonStyles id='create-button-wrapper'>
+    <CreateButtonStyles id="create-button-wrapper">
       <button
-        id='create-button'
-        onClick={(e) => handleCreateOpen(e)}
-        size='middle'
+        id="create-button"
+        onClick={e => handleCreateOpen(e)}
+        size="middle"
         icon={'+'}
       >
-        <Text style={{ fontWeight: 'bold', color: 'white', fontSize: '1rem', marginLeft: 10 }}>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: '1rem',
+            marginLeft: 10,
+          }}
+        >
           Create
         </Text>
       </button>
-    </CreateButtonStyles>        
+    </CreateButtonStyles>
   )
 }

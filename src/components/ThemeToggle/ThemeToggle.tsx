@@ -1,38 +1,41 @@
 import React from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext';
+import AppContext from '@/components/AppContext/AppContext'
 
 // ANTD
 import { Switch } from 'antd'
 
 // ICONS
-import { BsFillMoonFill, BsSunFill } from 'react-icons/bs';
+import { BsFillMoonFill, BsSunFill } from 'react-icons/bs'
 
-  // THEME PROPS
-  const themeLabel = { inputProps: { 'aria-label': 'Switch demo' } }
+// THEME PROPS
+const themeLabel = { inputProps: { 'aria-label': 'Switch demo' } }
 
 export default function ThemeToggle() {
+  const context = useContext(AppContext)
+  const { setTheme } = context
 
-	const context = useContext(AppContext)
-	const { setTheme } = context
+  const onChange = (checked: boolean) => {
+    checked ? context.setTheme(previousValue => !previousValue) : null
+    // console.log(`switch to ${checked}`);
+  }
 
-	const onChange = (checked: boolean) => {
-		checked 
-			? 
-				context.setTheme((previousValue) => !previousValue )
-			: 
-				null
-		// console.log(`switch to ${checked}`);
-	};
-
-	return (
-			<Switch 
-				{...themeLabel}
-				defaultChecked 
-				onChange={onChange}
-				checkedChildren={<div style={{ marginTop: 2 }}><BsSunFill /></div>}
-				unCheckedChildren={<div><BsFillMoonFill /></div>}
-			/>
-	)
+  return (
+    <Switch
+      {...themeLabel}
+      defaultChecked
+      onChange={onChange}
+      checkedChildren={
+        <div style={{ marginTop: 2 }}>
+          <BsSunFill />
+        </div>
+      }
+      unCheckedChildren={
+        <div>
+          <BsFillMoonFill />
+        </div>
+      }
+    />
+  )
 }

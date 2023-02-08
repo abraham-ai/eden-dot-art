@@ -15,8 +15,8 @@ import { useAccount, useSigner } from 'wagmi'
 // import { useLookupAddress } from 'eth-hooks/dapps/ens'
 
 const CreatorProfileAddressStyles = styled.div`
- width: 300px;
- height: 300px;
+  width: 300px;
+  height: 300px;
 `
 
 // changed value={address} to address={address}

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'; // useEffect, 
+import React, { useState } from 'react' // useEffect,
 
 // CSS
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // UI
-import { Button, Typography } from 'antd'; // Tooltip, 
-import { HiShare, HiOutlineShare } from 'react-icons/hi';
+import { Button, Typography } from 'antd' // Tooltip,
+import { HiShare, HiOutlineShare } from 'react-icons/hi'
 
 // HOOKS
 // import useWindowDimensions from '@/hooks/useWindowDimensions';
@@ -16,7 +16,7 @@ import { HiShare, HiOutlineShare } from 'react-icons/hi';
 // const MINIO_BUCKET = process.env.MINIO_BUCKET
 const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
-const { Paragraph } = Typography;
+const { Paragraph } = Typography
 
 const CreationShareStyles = styled.div`
   display: flex;
@@ -173,13 +173,13 @@ const CreationShareStyles = styled.div`
       font-size: 24px;
     }
   }
-`;
+`
 
 export default function CreationSocial({ creationSha }) {
-//   const { width } = useWindowDimensions();
-//   const navMode = width < 718 ? 'inline' : 'horizontal';
+  //   const { width } = useWindowDimensions();
+  //   const navMode = width < 718 ? 'inline' : 'horizontal';
 
-  const [isShared, setIsShared] = useState(false);
+  const [isShared, setIsShared] = useState(false)
 
   return (
     <CreationShareStyles id="cr-share-wrapper">
@@ -188,12 +188,15 @@ export default function CreationSocial({ creationSha }) {
           <Paragraph
             copyable={{
               text: `${PRD_URL}/creation/${creationSha}`,
-              icon: [<HiOutlineShare key="copy-icon" size="36px" />, <HiShare key="copied-icon" />],
+              icon: [
+                <HiOutlineShare key="copy-icon" size="36px" />,
+                <HiShare key="copied-icon" />,
+              ],
               tooltips: ['copy link', 'link copied!'],
             }}
           />
         </Button>
       </span>
     </CreationShareStyles>
-  );
+  )
 }

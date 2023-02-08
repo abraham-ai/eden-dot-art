@@ -5,7 +5,7 @@ export const useGeneratorInfo = (generatorName: any) => {
   const { data, error, isLoading, mutate } = useSWR(
     `/api/generators?name=${generatorName}`,
     fetcher,
-  );
+  )
 
   if (isLoading) {
     return {
@@ -15,16 +15,16 @@ export const useGeneratorInfo = (generatorName: any) => {
       isLoading,
       error,
       mutate,
-    };
+    }
   }
 
   const requiredParameters = data?.generatorVersion.parameters.filter(
-    (parameter: { optional: boolean; }) => !parameter.optional
-  );
+    (parameter: { optional: boolean }) => !parameter.optional,
+  )
 
   const optionalParameters = data?.generatorVersion.parameters.filter(
-    (parameter: { optional: boolean; }) => parameter.optional
-  );
+    (parameter: { optional: boolean }) => parameter.optional,
+  )
 
   return {
     versionId: data?.generatorVersion.versionId,
@@ -33,5 +33,5 @@ export const useGeneratorInfo = (generatorName: any) => {
     isLoading,
     error,
     mutate,
-  };
-};
+  }
+}

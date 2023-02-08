@@ -1,13 +1,13 @@
-import { Image } from "antd";
+import { Image } from 'antd'
 
 const ImageResult = ({
   resultUrl,
   width,
   height,
 }: {
-  resultUrl: string;
-  width: number;
-  height: number;
+  resultUrl: string
+  width: number
+  height: number
 }) => {
   return (
     <Image
@@ -18,7 +18,7 @@ const ImageResult = ({
       fallback="placeholder.png"
       preview={false}
     />
-  );
-};
+  )
+}
 
-export default ImageResult;
+export default ImageResult

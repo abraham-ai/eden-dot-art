@@ -10,7 +10,6 @@ import Real2RealTab from '@/components/Create/CreateUI/Real2RealUI/Real2RealUI'
 import RemixTab from '@/components/Create/CreateUI/RemixUI/RemixUI'
 import TtsTab from '@/components/Create/CreateUI/TtsUI/TtsUI'
 
-
 const tabItems = [
   // {
   //   label: 'Authenticate',

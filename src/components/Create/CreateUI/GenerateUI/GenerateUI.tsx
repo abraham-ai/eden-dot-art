@@ -1,12 +1,12 @@
 import { useState } from 'react'
-// useContext, 
+// useContext,
 
 // EDEN COMPONENT
 import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
 
 // UI
 import { Button, Form, Input, InputNumber, Space } from 'antd'
-const { Item } = Form;
+const { Item } = Form
 
 // FETCH
 import axios from 'axios'
@@ -38,7 +38,7 @@ const GenerateTab = () => {
     setGenerating(true)
     try {
       const response = await axios.post('/api/generate', {
-        ...values
+        ...values,
       })
       setResultURL(response.data.outputUrl)
     } catch (error: any) {
@@ -49,40 +49,12 @@ const GenerateTab = () => {
 
   return (
     <>
-        <GeneratorInterface mediaType='image' generatorName='create' />
-      {/* <Form
-        form={form}
-        name="generate"
-        initialValues={initialValues}
-        onFinish={handleGenerate}
-      >
+      <GeneratorInterface mediaType="image" generatorName="create" />
 
-        <Item label="Prompt" name="prompt" style={{ display: 'flex', alignItems: 'center'}}>
-          <Input />
-        </Item>
-        <Space style={{ display: 'flex', alignItems: 'center' }}>
-          <Item label="Width" name="width" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-            <InputNumber style={{ margin: 0}} placeholder="Width" min={0} />
-          </Item>
-          <Item label="Height" name="height" style={{ display: 'flex', alignItems: 'center', margin: 0 }} >
-            <InputNumber style={{ margin: 0, display: 'flex', alignItems: 'center' }}  placeholder="Height" min={0} />
-          </Item>
-        </Space>
-        <Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={generating}
-            disabled={generating}
-          >
-            Generate
-          </Button>
-        </Item>
-      </Form>
-      {message && <p>{message}</p>}
+      {message}
       {resultURL ? (
         <ImageResult width={width} height={height} imageUrl={resultURL} />
-      ) : null} */}
+      ) : null}
     </>
   )
 }

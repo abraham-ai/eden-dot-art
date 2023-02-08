@@ -19,9 +19,7 @@ const PopperStyles = styled.section`
 const PopperPopupState = () => {
   return (
     <PopperStyles>
-      <Button>
-        Avatar
-      </Button>
+      <Button>Avatar</Button>
 
       <Popover>
         <CreatorProfileAddress />
