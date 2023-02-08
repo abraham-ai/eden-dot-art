@@ -36,7 +36,7 @@ const InterpolateTab = () => {
     setGenerating(true)
     try {
       const response = await axios.post('/api/interpolate', {
-        ...values
+        ...values,
       })
       setResultUrl(response.data.outputUrl)
     } catch (error: any) {
@@ -49,40 +49,7 @@ const InterpolateTab = () => {
     <>
       <GeneratorInterface mediaType="video" generatorName="interpolate" />
 
-      {/* <Form
-        name="interpolate"
-        initialValues={initialValues}
-        onFinish={handleInterpolate}
-      >
-        <Form.Item label="Prompt 1" name="prompt1">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Prompt 2" name="prompt2">
-          <Input />
-        </Form.Item>
-        <Space>
-          <Form.Item label="Width" name="width">
-            <InputNumber min={0} />
-          </Form.Item>
-          <Form.Item label="Height" name="height">
-            <InputNumber min={0} />
-          </Form.Item>
-          <Form.Item label="Number of Frames" name="numFrames">
-            <InputNumber min={0} />
-          </Form.Item>
-        </Space>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={generating}
-            disabled={generating}
-          >
-            Interpolate
-          </Button>
-        </Form.Item>
-      </Form> */}
-      {message && <p>{message}</p>}
+      {message}
       <VideoResult resultUrl={resultUrl} />
     </>
   )

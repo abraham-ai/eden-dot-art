@@ -20,12 +20,7 @@ import jwtDecode from 'jwt-decode'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
 // MUI
-import {
-  Button,
-  Typography,
-  Modal,
-  Snackbar,
-} from 'antd'
+import { Button, Typography, Modal, Snackbar } from 'antd'
 
 // STYLES
 import styled from 'styled-components'
@@ -159,8 +154,8 @@ export default function SignInJWT() {
           if (authToken === '') {
             context.setToken(responseToken)
           } else if (authToken === localToken) {
-              context.setIsWeb3AuthSigning(false)
-              context.setIsWeb3AuthSuccess(true)
+            context.setIsWeb3AuthSigning(false)
+            context.setIsWeb3AuthSuccess(true)
             setIsClicked(false)
           }
         } else if (authToken === '' && localToken === null) {

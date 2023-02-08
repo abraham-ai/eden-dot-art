@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
 // CSS
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // WAGMI
 import { useAccount } from 'wagmi'
 
 // COMPONENTS
-import { CreationShare } from '@/components/CreationShare/CreationShare';
+import { CreationShare } from '@/components/CreationShare/CreationShare'
 
 // ROUTING
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 // UI
-import { Button, Tooltip, Typography } from 'antd';
-import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
-import { ShareAltOutlined } from '@ant-design/icons';
-import { HiSparkles, HiOutlineSparkles, HiShare, HiOutlineShare } from 'react-icons/hi';
-import { AiFillFire, AiOutlineFire } from 'react-icons/ai';
+import { Button, Tooltip, Typography } from 'antd'
+import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
+import { ShareAltOutlined } from '@ant-design/icons'
+import {
+  HiSparkles,
+  HiOutlineSparkles,
+  HiShare,
+  HiOutlineShare,
+} from 'react-icons/hi'
+import { AiFillFire, AiOutlineFire } from 'react-icons/ai'
 
-const { Paragraph } = Typography;
+const { Paragraph } = Typography
 
 // CONSTANTS
-import { NETWORKS } from '../../../constants';
+import { NETWORKS } from '../../../constants'
 
 // HOOKS
-import useWindowDimensions from '../../../hooks/useWindowDimensions';
+import useWindowDimensions from '../../../hooks/useWindowDimensions'
 
 // HTTP
-const axios = require('axios');
-const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY;
+const axios = require('axios')
+const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
 
 const CreationSocialStyles = styled.nav`
   display: flex;
@@ -242,7 +247,7 @@ const CreationSocialStyles = styled.nav`
       padding-right: 16px;
     }
   }
-`;
+`
 
 export default function CreationSocial({
   creatorAddress,
@@ -254,17 +259,17 @@ export default function CreationSocial({
   praisedByMe,
   burnedByMe,
 }) {
-  const { width } = useWindowDimensions();
+  const { width } = useWindowDimensions()
 
-//   const navMode = width < 718 ? 'inline' : 'horizontal';
+  //   const navMode = width < 718 ? 'inline' : 'horizontal';
 
-  const [burns, setBurns] = useState(creationBurns);
-  const [praises, setPraises] = useState(creationPraises);
-  const [isShared, setIsShared] = useState(false);
-  const [isPraised, setIsPraised] = useState(praisedByMe);
-  const [isBurned, setIsBurned] = useState(burnedByMe);
+  const [burns, setBurns] = useState(creationBurns)
+  const [praises, setPraises] = useState(creationPraises)
+  const [isShared, setIsShared] = useState(false)
+  const [isPraised, setIsPraised] = useState(praisedByMe)
+  const [isBurned, setIsBurned] = useState(burnedByMe)
 
-  const { address } = useAccount();
+  const { address } = useAccount()
 
   // DEBUG
   // console.log({ creationTextInput });
@@ -276,81 +281,81 @@ export default function CreationSocial({
   // console.log({ isBurned });
 
   useEffect(() => {
-    setIsBurned(burnedByMe);
-    setIsPraised(praisedByMe);
-    setBurns(creationBurns);
-    setPraises(creationPraises);
-  }, [praisedByMe, burnedByMe, creationBurns, creationPraises]);
+    setIsBurned(burnedByMe)
+    setIsPraised(praisedByMe)
+    setBurns(creationBurns)
+    setPraises(creationPraises)
+  }, [praisedByMe, burnedByMe, creationBurns, creationPraises])
 
   async function praiseHandler() {
     if (!address) {
-      return;
+      return
     }
-    console.log(' Praise Handler ');
-    let praiseOpperation = '';
-    console.log({ isPraised });
+    console.log(' Praise Handler ')
+    let praiseOpperation = ''
+    console.log({ isPraised })
 
     if (isPraised === true && praises > 0) {
-      setPraises(praises - 1);
-      praiseOpperation = 'decrease';
-      setIsPraised(false);
+      setPraises(praises - 1)
+      praiseOpperation = 'decrease'
+      setIsPraised(false)
     } else if (isPraised === false) {
-      setPraises(praises + 1);
-      praiseOpperation = 'increase';
-      setIsPraised(true);
+      setPraises(praises + 1)
+      praiseOpperation = 'increase'
+      setIsPraised(true)
     }
 
-    console.log({ praiseOpperation });
+    console.log({ praiseOpperation })
 
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
       stat: 'praise',
       opperation: praiseOpperation,
       address: address,
-    });
+    })
 
-    console.log({ results });
-    setPraises(results.data.praise);
+    console.log({ results })
+    setPraises(results.data.praise)
   }
 
   async function burnHandler() {
     if (!address) {
-      return;
+      return
     }
-    console.log('Burn Handler');
-    let burnOpperation = '';
-    console.log({ isBurned });
+    console.log('Burn Handler')
+    let burnOpperation = ''
+    console.log({ isBurned })
 
     if (isBurned === true && burns > 0) {
-      setBurns(burns - 1);
-      burnOpperation = 'decrease';
-      setIsBurned(false);
+      setBurns(burns - 1)
+      burnOpperation = 'decrease'
+      setIsBurned(false)
     } else if (isBurned === false) {
-      setBurns(burns + 1);
-      burnOpperation = 'increase';
-      setIsBurned(true);
+      setBurns(burns + 1)
+      burnOpperation = 'increase'
+      setIsBurned(true)
     }
 
-    console.log({ burnOpperation });
+    console.log({ burnOpperation })
 
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
       stat: 'burn',
       opperation: burnOpperation,
       address: address,
-    });
+    })
 
-    console.log({ results });
-    setBurns(results.data.burn);
+    console.log({ results })
+    setBurns(results.data.burn)
   }
 
-  let praiseClasses, burnClasses;
+  let praiseClasses, burnClasses
   if (isWeb3WalletConnected) {
-    praiseClasses = isPraised ? 'cr-praise is-active' : 'cr-praise';
-    burnClasses = isBurned ? 'cr-burn is-active' : 'cr-burn';
+    praiseClasses = isPraised ? 'cr-praise is-active' : 'cr-praise'
+    burnClasses = isBurned ? 'cr-burn is-active' : 'cr-burn'
   } else {
-    praiseClasses = 'cr-praise disabled';
-    burnClasses = 'cr-burn disabled';
+    praiseClasses = 'cr-praise disabled'
+    burnClasses = 'cr-burn disabled'
   }
 
   // DEBUG
@@ -359,26 +364,39 @@ export default function CreationSocial({
   // console.log({ praiseClasses });
   // console.log({ burnClasses });
 
-  const isTooltipVisible = isWeb3WalletConnected ? null : false;
+  const isTooltipVisible = isWeb3WalletConnected ? null : false
 
-  let burnCount, praiseCount;
+  let burnCount, praiseCount
   if ((isWeb3WalletConnected && isPraised) || isBurned) {
     // console.log('show social based on address count');
-    burnCount = burns > 1 ? <span className="social-icon-count">{burns}</span> : null;
-    praiseCount = praises > 1 ? <span className="social-icon-count">{praises}</span> : null;
+    burnCount =
+      burns > 1 ? <span className="social-icon-count">{burns}</span> : null
+    praiseCount =
+      praises > 1 ? <span className="social-icon-count">{praises}</span> : null
   } else {
     // console.log('show social based on public count');
-    burnCount = burns > 0 ? <span className="social-icon-count">{burns}</span> : null;
-    praiseCount = praises > 0 ? <span className="social-icon-count">{praises}</span> : null;
+    burnCount =
+      burns > 0 ? <span className="social-icon-count">{burns}</span> : null
+    praiseCount =
+      praises > 0 ? <span className="social-icon-count">{praises}</span> : null
   }
 
   return (
     <CreationSocialStyles id="social-buttons">
       <div className="single-button-wrapper">
-        <Tooltip placement="bottom" title={'praise'} defaultVisible={isTooltipVisible} mouseEnterDelay={0.8}>
+        <Tooltip
+          placement="bottom"
+          title={'praise'}
+          defaultVisible={isTooltipVisible}
+          mouseEnterDelay={0.8}
+        >
           <Button className={praiseClasses} onClick={() => praiseHandler()}>
             <span className="social-icon">
-              {isPraised ? <HiSparkles size="36px" /> : <HiOutlineSparkles size="36px" />}
+              {isPraised ? (
+                <HiSparkles size="36px" />
+              ) : (
+                <HiOutlineSparkles size="36px" />
+              )}
             </span>
           </Button>
         </Tooltip>
@@ -386,9 +404,16 @@ export default function CreationSocial({
       </div>
 
       <div className="single-button-wrapper">
-        <Tooltip placement="bottom" title={'burn'} defaultVisible={isTooltipVisible} mouseEnterDelay={0.8}>
+        <Tooltip
+          placement="bottom"
+          title={'burn'}
+          defaultVisible={isTooltipVisible}
+          mouseEnterDelay={0.8}
+        >
           <Button className={burnClasses} onClick={() => burnHandler()}>
-            <span className="social-icon">{isBurned ? <AiFillFire /> : <AiOutlineFire />}</span>
+            <span className="social-icon">
+              {isBurned ? <AiFillFire /> : <AiOutlineFire />}
+            </span>
           </Button>
         </Tooltip>
         {burnCount}
@@ -407,5 +432,5 @@ export default function CreationSocial({
         </Button>
       </span> */}
     </CreationSocialStyles>
-  );
+  )
 }

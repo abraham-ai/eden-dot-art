@@ -1,8 +1,5 @@
 import { useEffect, useContext } from 'react'
 
-// ROUTER
-// import Link from 'next/link'
-
 // LIBS
 import Blockies from 'react-blockies'
 
@@ -10,32 +7,21 @@ import Blockies from 'react-blockies'
 import AppContext from '@/components/AppContext/AppContext'
 
 // COMPONENTS
-// import CreateModal from '@/components/CreateModal'
-// import LoginButton from '@/components/LoginButton'
-// import CreateSignInJWT from '@/components/CreateSignInJWT'
-// import SignInJWT from '@/components/SignInJWT/SigninJWT'
-// import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
 // WEB3
-import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi' //  WagmiProvider, chain,
+import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-// import { useProvider } from 'wagmi'
-// import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
   RainbowKitProvider,
   AvatarComponent,
   getDefaultWallets,
 } from '@rainbow-me/rainbowkit'
-
-// apiProvider,
-
-// ANTD
 
 // STYLES
 import styled from 'styled-components'
@@ -104,7 +90,6 @@ const HeaderStyles = styled.section`
 `
 
 export default function Header() {
-
   const { isConnected } = useAccount()
 
   const context = useContext(AppContext)

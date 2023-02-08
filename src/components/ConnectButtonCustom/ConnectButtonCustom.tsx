@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import React, { useState, useContext, useEffect, MouseEvent } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 // WEB3
 import { useAccount } from 'wagmi'
@@ -25,10 +25,9 @@ import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/Acco
 // CSS
 import styled from 'styled-components'
 
-
 // ICONS
-// import SettingsIcon from '@mui/icons-material/Settings'
-// import HelpIcon from '@mui/icons-material/Help'
+// import SettingsIcon'
+// import HelpIcon
 // import LightModeIcon
 // import ViewColumnIcon
 // import LogoutIcon
@@ -43,11 +42,10 @@ const smallTranslate = 'translate3d(0px, -1px, 0px)'
 
 // STYLES
 const ConnectButtonStyles = styled.section`
-  // CONNECT 
+  // CONNECT
   .connect-button-wrapper {
     display: flex;
     align-items: center;
-    
   }
   .connect-button {
     height: 48px;
@@ -65,7 +63,7 @@ const ConnectButtonStyles = styled.section`
   .profile-button-main {
     background-color: white;
   }
-  // ACCOUNT 
+  // ACCOUNT
   .main-account-button {
     display: flex;
     align-items: center;
@@ -78,7 +76,8 @@ const ConnectButtonStyles = styled.section`
     overflow: hidden;
     margin: 0;
     padding: 0;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.05), 0px 8px 40px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.05),
+      0px 8px 40px rgba(0, 0, 0, 0.04);
     background: white;
     overflow: hidden;
   }
@@ -123,25 +122,23 @@ const ConnectButtonStyles = styled.section`
   }
 `
 
-
-
 export const ConnectButtonCustom = () => {
   // const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(false)
 
   // HOOKS
   const { address = '', isConnected } = useAccount()
   const walletAddress = address
-  // const { width } = useWindowDimensions()
 
   // CONTEXT
   const context = useContext(AppContext)
 
-  const { isModalVisible, 
-          isWeb3WalletConnected, 
-          isWeb3AuthSuccess, 
-          setIsWeb3WalletConnected } = context
+  const {
+    isModalVisible,
+    isWeb3WalletConnected,
+    isWeb3AuthSuccess,
+    setIsWeb3WalletConnected,
+  } = context
 
   // const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
   //   open ? setOpen(false) : setOpen(true)
@@ -165,7 +162,6 @@ export const ConnectButtonCustom = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
-
   console.log({ isModalVisible })
   console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
@@ -187,18 +183,18 @@ export const ConnectButtonCustom = () => {
           authenticationStatus,
           mounted,
         }) => {
-          
-          
           // Note: If your app doesn't use authentication, you
           // can remove all 'authenticationStatus' checks
           const ready = mounted && authenticationStatus !== 'loading'
           const connected =
-          ready &&
-          account &&
-          chain &&
-          (!authenticationStatus || authenticationStatus === 'authenticated')
-          
-          { console.log({ connected, isWeb3WalletConnected })}
+            ready &&
+            account &&
+            chain &&
+            (!authenticationStatus || authenticationStatus === 'authenticated')
+
+          {
+            console.log({ connected, isWeb3WalletConnected })
+          }
 
           return (
             <div
@@ -243,20 +239,21 @@ export const ConnectButtonCustom = () => {
                     id={id}
                     content={
                       <AccountPopover
-                        openAccountModal={openAccountModal} 
+                        openAccountModal={openAccountModal}
                         openChainModal={openChainModal}
-                        walletAddress={walletAddress} 
+                        walletAddress={walletAddress}
                         displayAddress={displayAddress}
                         chain={chain}
-                        account={account}/>
-                      }
-                    trigger='click'
+                        account={account}
+                      />
+                    }
+                    trigger="click"
                     open={open}
                     onOpenChange={handleOpenChange}
-                    placement='bottom'
+                    placement="bottom"
                     style={{ borderRadius: '24px' }}
                   >
-                    <div className='main-account-button'                    > 
+                    <div className="main-account-button">
                       <div className="account-profile-wrapper">
                         <Blockies seed={walletAddress} scale={5} />
                       </div>

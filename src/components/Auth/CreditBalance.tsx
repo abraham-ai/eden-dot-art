@@ -1,7 +1,7 @@
 import { useCreditBalance } from '@/hooks/useCreditBalance'
 
 const CreditBalance = () => {
-  const { balance } = useCreditBalance();
+  const { balance } = useCreditBalance()
 
   return (
     <>
@@ -12,7 +12,7 @@ const CreditBalance = () => {
         <p>Your credit balance is 0.</p>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CreditBalance;
+export default CreditBalance

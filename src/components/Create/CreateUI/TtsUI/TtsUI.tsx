@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// useContext, 
+// useContext,
 
 // UI
 import { Button, Form, Input, InputNumber, Space } from 'antd'
@@ -35,7 +35,7 @@ const RemixTab = () => {
     setGenerating(true)
     try {
       const response = await axios.post('/api/remix', {
-        ...values
+        ...values,
       })
       setResultUrl(response.data.outputUrl)
     } catch (error: any) {
@@ -46,35 +46,8 @@ const RemixTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType='audio' generatorName='tts' />
-      {/* <Form
-        form={form}
-        name="remix"
-        initialValues={initialValues}
-        onFinish={handleRemix}
-      >
-        <Form.Item label="Init Image" name="initImageUrl">
-          <Input />
-        </Form.Item>
-        <Space>
-          <Form.Item label="Width" name="width">
-            <InputNumber min={0} />
-          </Form.Item>
-          <Form.Item label="Height" name="height">
-            <InputNumber min={0} />
-          </Form.Item>
-        </Space>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={generating}
-            disabled={generating}
-          >
-            Generate Remix
-          </Button>
-        </Form.Item>
-      </Form> */}
+      <GeneratorInterface mediaType="audio" generatorName="tts" />
+
       {message && <p>{message}</p>}
       <ImageResult width={width} height={height} imageUrl={resultUrl} />
     </>
