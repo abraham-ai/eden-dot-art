@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { withSessionRoute } from '@/util/withSession'
-import { eden } from '../../src/util/eden'
+import { eden } from '@/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {

@@ -42,6 +42,7 @@ interface EdenAppProps extends AppProps {
 function EdenApp(props: EdenAppProps) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
+  const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
@@ -49,6 +50,15 @@ function EdenApp(props: EdenAppProps) {
   Router.events.on('routeChangeStart', nProgress.start)
   Router.events.on('routeChangeError', nProgress.done)
   Router.events.on('routeChangeComplete', nProgress.done)
+
+  const contextValues = {
+    isModalVisible, 
+    setIsModalVisible, 
+    isWeb3AuthSuccess,
+    setIsWeb3AuthSuccess,
+    isWeb3WalletConnected, 
+    setIsWeb3WalletConnected
+  }
 
   return (
       <CacheProvider value={emotionCache}>
@@ -63,8 +73,7 @@ function EdenApp(props: EdenAppProps) {
             />
           </Head>
           {/* <SidebarProvider> */}
-          <AppContext.Provider 
-              value={{ isModalVisible, setIsModalVisible, isWeb3WalletConnected, setIsWeb3WalletConnected }}>
+          <AppContext.Provider value={contextValues}>
               <WalletProvider>
                 {getLayout(<Component {...pageProps} />)}
               </WalletProvider>
