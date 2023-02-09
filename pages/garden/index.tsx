@@ -25,14 +25,12 @@ const CreationsGridStyles = styled.section`
 export default function CreationsPage() {
   return (
     <>
-      <Text>{'GARDEN TEST'}</Text>
-
-      {/* <Head>
+      <Head>
         <title>Creations</title>
       </Head>
       <CreationsGridStyles id="creations-grid">
         <CreationsGrid />
-      </CreationsGridStyles> */}
+      </CreationsGridStyles>
     </>
   )
 }
