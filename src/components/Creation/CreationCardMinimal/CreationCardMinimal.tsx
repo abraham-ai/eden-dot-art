@@ -19,7 +19,6 @@ const { Text } = Typography
 
 // EDEN COMPONENTS
 import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
-// import { IconButtonProps } from '@mui/material/IconButton'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -294,7 +293,7 @@ const CardStyles = styled.section`
   }
 `
 
-export default function CreationCardMinimal({ creation }) {
+export default function CreationCardMinimal({ index, creation }) {
   // console.log(creation)
   // add source, width, height
 
@@ -315,6 +314,8 @@ export default function CreationCardMinimal({ creation }) {
   // const origin = creation.source.origin === undefined ? 'none' : creation.source
 
   //const { address } = creation.source // origin, author_name,
+
+  console.log({ creation })
   const { key, address, uri, timestamp, prompt, status, generator } = creation
 
   // const { origin } =
@@ -406,8 +407,8 @@ export default function CreationCardMinimal({ creation }) {
     <CardStyles>
       <article id="creation-card">
         <Link
-          href={`/garden?creationId=${creation.id}`}
-          as={`/creation/${creation.id}`}
+          href={`/garden?creationId=${creation.key}`}
+          as={`/creation/${creation.key}`}
           scroll={false}
         >
           {/* onClick={handleModalOpen} */}
@@ -679,7 +680,7 @@ export default function CreationCardMinimal({ creation }) {
         width="100%"
         bodyStyle={{ height: '100%' }}
         open={
-          creation.id === router.query.creationId
+          creation.key === router.query.creationId
             ? !!router.query.creationId
             : false
         }
