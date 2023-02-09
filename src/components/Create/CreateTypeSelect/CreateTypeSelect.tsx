@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
-// COMPONENTS
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+// ANTD
+import { Form, Menu, Select } from 'antd'
+const { Item } = Menu
 
-// MUI
+// STYLES
 import styled from 'styled-components'
 
 const CreateTypeSelectStyles = styled.section`
@@ -41,16 +40,13 @@ const CreateTypeSelectStyles = styled.section`
 export default function SelectLabels() {
   const [creationType, setCreationType] = useState('1')
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = event => {
     setCreationType(event.target.value)
   }
 
   return (
     <CreateTypeSelectStyles>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        {/* <InputLabel id="demo-simple-select-helper-label">
-          Creation Type
-        </InputLabel> */}
+      <Form style={{ margin: 10, minWidth: 120 }}>
         <Select
           labelId="select-creation-type"
           id="select-creation-type"
@@ -58,12 +54,11 @@ export default function SelectLabels() {
           label="" // Creation Type
           onChange={handleChange}
         >
-          <MenuItem value={1}>Text 2 Image</MenuItem>
-          <MenuItem value={2}>Text 2 Video</MenuItem>
-          <MenuItem value={3}>Image 2 Image</MenuItem>
+          <Item value={1}>Text 2 Image</Item>
+          <Item value={2}>Text 2 Video</Item>
+          <Item value={3}>Image 2 Image</Item>
         </Select>
-        {/* <FormHelperText>With label + helper text</FormHelperText> */}
-      </FormControl>
+      </Form>
     </CreateTypeSelectStyles>
   )
 }

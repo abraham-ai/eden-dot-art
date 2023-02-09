@@ -1,12 +1,14 @@
-import { Box, Container, styled, Typography } from '@mui/material'
+import { Typography } from 'antd'
+const { Text } = Typography
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
 import Link from 'next/link'
 
-const FooterWrapper = styled(Container)(
-  ({ theme }) => `
-    margin-top: ${theme.spacing(4)};
+// STYLES
+import styled from 'styled-components'
+
+const FooterWrapper = styled.section`
     .footer-info-section {
       padding: 10px;
       display: flex;
@@ -23,91 +25,86 @@ const FooterWrapper = styled(Container)(
 function Footer() {
   return (
     <FooterWrapper className="footer-wrapper">
-      <Box
-        pb={4}
-        display={{ xs: 'block', md: 'flex' }}
-        alignItems="center"
-        textAlign={{ xs: 'center', md: 'left' }}
-        justifyContent="space-between"
-      >
+      <div
+        style={{ paddingBottom: 40, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'space-between' }} >
         <div className="footer-info-section">
           <AppLogo logo="eden" />
-          <Typography variant={'body1'} sx={{ color: '#0c163b' }}>
+          <Text style={{ color: '#0c163b' }}>
             Learn
-          </Typography>
+          </Text>
 
           <Link href="/create">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Create
-            </Typography>
+            </Text>
           </Link>
           <Link href="/collect">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Collect
-            </Typography>
+            </Text>
           </Link>
           <Link href="/docs">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Documentation
-            </Typography>
+            </Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
+          <Text className="footer-link">
             Company
-          </Typography>
+          </Text>
 
           <Link href="/dev-about">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               About
-            </Typography>
+            </Text>
           </Link>
           <Link href="/help">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Help Center
-            </Typography>
+            </Text>
           </Link>
           <Link href="/subscribe">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Subscribe
-            </Typography>
+            </Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
+          <Text className="footer-link">
             Connect
-          </Typography>
+          </Text>
           <Link href="twitter.com">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Twitter
-            </Typography>
+            </Text>
           </Link>
           <Link href="instagram.com">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Instagram
-            </Typography>
+            </Text>
           </Link>
           <Link href="discord.com">
-            <Typography className="footer-link" variant={'h4'}>
+            <Text className="footer-link">
               Discord
-            </Typography>
+            </Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
+          <Text className="footer-link">
             Privacy Policy
-          </Typography>
+          </Text>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
+          <Text className="footer-link">
             Terms of Service
-          </Typography>
+          </Text>
         </div>
-      </Box>
+      </div>
     </FooterWrapper>
   )
 }
