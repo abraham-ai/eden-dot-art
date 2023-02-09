@@ -1,11 +1,8 @@
 import { FC, useState, createContext, useEffect } from 'react'
-import { ThemeProvider } from '@mui/material'
 import { themeCreator } from './base'
 
 // ANTD
-// import { ConfigProvider, theme } from 'antd'
 import { ConfigProvider } from 'antd'
-// const { defaultAlgorithm, darkAlgorithm } = theme;
 
 export const ThemeContext = createContext((_themeName: string): void => null)
 
@@ -28,7 +25,7 @@ const ThemeProviderWrapper: FC = props => {
   return (
     <ConfigProvider>
       <ThemeContext.Provider value={setThemeName}>
-        <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+        <ConfigProvider theme={theme}>{props.children}</ConfigProvider>
       </ThemeContext.Provider>
     </ConfigProvider>
   )
