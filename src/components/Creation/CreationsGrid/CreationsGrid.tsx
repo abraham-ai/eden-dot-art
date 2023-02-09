@@ -42,8 +42,6 @@ const CreationsGridStyles = styled.section`
 
 // CONSTS
 const PAGE_LENGTH = 10
-const masonryOptions = { transitionDuration: 0 }
-const imagesLoadedOptions = { background: '.my-bg-image-el' }
 
 const breakpointColumnsObj = {
   default: 3,
