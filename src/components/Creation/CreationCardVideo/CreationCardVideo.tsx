@@ -1,17 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 
-// NEXT
-// import { useRouter } from 'next/router'
-
-// ROUTING
-// import { Link, useRouteMatch, useLocation } from 'react-router-dom'
-// import slug from 'slug'
-
-// MUI
-// Image, Typography, Card, Button, Modal,
+// ANTD
 import {
   Button,
-  styled,
   Skeleton,
   Typography,
   Dialog,
@@ -22,40 +13,23 @@ import {
 const { Text } = Typography
 
 // COMPONENTS
-// import {
-//   CreatorAddress,
-//   CreationSocial,
-//   CreationShare,
-//   RunningCreation,
-//   VideoCreationOverlay,
-// } from '../../abraham'
-// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import ReactPlayer from 'react-player'
-// import 'react-loading-skeleton/dist/skeleton.css'
 
 // ICONS
+import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 // SyncOutlined,
-import { PlayCircleTwoTone } from '@mui/icons-material'
+// PlayCircleTwoTone
 // import { HiSparkles } from 'react-icons/hi'
 // import { AiFillFire } from 'react-icons/ai'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import IosShareIcon from '@mui/icons-material/IosShare'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
+// import MoreVertIcon
+// import IosShareIcon
+// import BookmarkBorderIcon
 
-// HOOKS
-// import useWindowDimensions from '../../hooks/useWindowDimensions'
+// STYLES
+import styled from 'styled-components'
+import shaURL from '@/util/shaURL'
 
-// HTTP
-const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
-
-// UTILS
-// import shaURL from '../../utils/shaURL'
-// import time_ago from '../../utils/timeAgo'
-// import { IoTerminal } from 'react-icons/io5'
-
-const VideoCreationStyles = styled('article')(
-  () => `
+const VideoCreationStyles = styled.article`
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
@@ -337,55 +311,9 @@ const VideoCreationStyles = styled('article')(
       padding-right: 16px;
     }
   }
-`,
-)
-
-// export function VideoWrapper({ children }) {
-//   const [isPlaying, setIsPlaying] = useState(false)
-//   const [isHovering, setIsHovering] = useState(false)
-
-//   const router = useRouter()
-
-//   const handleMouseOver = () => {
-//     // console.log('setIsPlaying TRUE')
-//     setIsHovering(true)
-//     setIsPlaying(true)
-//   }
-
-//   const handleMouseOut = () => {
-//     // console.log('setIsPlaying FALSE')
-//     setIsHovering(false)
-//     setIsPlaying(false)
-//   }
-
-//   return (
-//     <div
-//       className={isHovering ? 'hover cr-img-wrapper' : 'cr-img-wrapper'}
-//       onMouseOver={handleMouseOver}
-//       onMouseOut={handleMouseOut}
-//     >
-//       {children}
-//     </div>
-//   )
-// }
-
-// const BoxModalStyle = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: '90%',
-//   bgcolor: 'background.paper',
-//   maxHeight: '90%',
-//   border: '2px solid #000',
-//   boxShadow: 24,
-//   p: 4,
-//   backgroundColor: 'white',
-// }
+`
 
 export default function VideoCreation({
-  // onFilterChange = () => {},
-  // onMint = () => {},
   item = {
     _id: '634b05ae2e7cdbe5f5348a70',
     date: '2022-10-15T19:10:38.356Z',
@@ -457,15 +385,7 @@ export default function VideoCreation({
     video_sha:
       'a0812a502beb388082dfdd0004a5f8c2ba9ef61349f82c78c11c610049cdf067',
   },
-  // size = 'regular',
-  // mint,
-  // mintButton,
 }) {
-  // hooks
-  // const { width } = useWindowDimensions()
-  // const { url } = useRouteMatch()
-  // const location = useLocation()
-
   // REF
   const videoRef = useRef<HTMLVideoElement>()
 
@@ -495,112 +415,7 @@ export default function VideoCreation({
   const handleCardOpen = () => setCardOpen(true)
   const handleCardClose = () => setCardOpen(false)
 
-  // const sort_by = useSelector(state => state.sort.value)
-  // const filter_by = useSelector(state => state.filter.value)
-
-  // const handleDuration = seconds => {
-  //   // console.log('SECONDS:' + seconds)
-  //   // console.log('handle DURATION')
-  //   setDuration(seconds)
-  // }
-
-  // function currentStat(sort_by) {
-  //   let currentStatrea
-  //   switch (sort_by) {
-  //     case 'new':
-  //       currentStat = null
-  //       break
-  //     case 'burn':
-  //       currentStat = (
-  //         <div className="current-stat">
-  //           <span className="social-icon burn">
-  //             <AiFillFire size="24px" />
-  //           </span>
-  //           <span className="count">{stats.burn_count}</span>
-  //         </div>
-  //       )
-  //       break
-  //     case 'praise':
-  //       currentStat = (
-  //         <div className="current-stat">
-  //           <span className="social-icon praise">
-  //             <HiSparkles size="24px" />
-  //           </span>
-  //           <span className="count">{stats.praise_count}</span>
-  //         </div>
-  //       )
-
-  //       break
-  //   }
-  //   return currentStat
-  // }
-
-  useEffect(() => {
-    // DEBUG
-    // console.log('useEffect Creation Component');
-    // console.log({ item });
-    // console.log(`PRAISED BY ME: ${item.stats.praised_by_me}`);
-    // console.log(`BURNED BY ME: ${item.stats.burned_by_me}`);
-    // console.log(item.status_code);
-    // console.log(isCreationRunning); // bool
-    // console.log({ isRunning }); // object
-    // console.log(`IS-CREATION-RUNNING: ${isCreationRunning}`);
-    // console.log(`IS-RUNNING: ${isRunning[item._id]}`);
-
-    if (
-      item.status === 'running' &&
-      typeof isRunning[item._id] === 'undefined'
-    ) {
-      // console.log(`CREATION COUNT SHOULD INCREASE AND SET TO TRUE!!!!!!`)
-
-      context.setIsRunningTrue(item._id)
-      context.incrementRunningCreationCount()
-    } else if (
-      item.status_code === 100 &&
-      item.status === 'complete' &&
-      isRunning[item._id] === true
-    ) {
-      // && isRunning[item._id] === true) {
-      // console.log(`CREATION COUNT SHOULD DECREASE AND SET TO FALSE!!!!!!`)
-        context.setIsRunningFalse(item._id)
-        context.decrementRunningCreationCount()
-    }
-
-    // else if (item.status_code < 100 && isRunning[item._id] === false) {
-    //   batch(() => {
-    //     context.setIsRunningTrue(item._id)
-    //     context.incrementRunningCreationCount()
-    //   });
-    // }
-  }, [item, isRunning, creations])
-
-  // DEBUG
-  // console.log({ item });
-  // console.log(`${window?.appConfig?.ABRAHAM_IPFS}/${item.sha}/${item.eden_task_id}`);
-  // console.log(item.text_input);
-  // console.log(item.stats.burned_by_me);
-  // console.log(item.stats.praised_by_me);
-  // console.log(item);
-  // console.log(item.sha);
-
-  // const isAvailable = item =>
-  //   item.status === 'pending' ||
-  //   (item.status === 'running' && item.status_code === 0)
-  //     ? false
-  //     : true
-
-  const {
-    intermediate_sha,
-    text_input,
-    // address,
-    // stats,
-    // _id,
-    video_sha,
-    source,
-  } = item
-
-  // console.log(`${PRD_URL}${intermediate_sha[intermediate_sha.length - 1]}`)
-  // console.log({ isPlaying })
+  const { text_input, source } = item
 
   if (source.origin === 'discord' && username === '') {
     setUsername(source.author_name)
@@ -619,19 +434,16 @@ export default function VideoCreation({
             <video
               style={{ width: '100%', height: '100%' }}
               preload="auto"
-              // autoPlay
-              poster={`${PRD_URL}${intermediate_sha[0]}`}
-              // onPlay={() => setIsPlaying(true)}
+              poster={shaURL(item)}
               loop={true}
               muted={true}
               ref={videoRef}
             >
-              <source src={`${PRD_URL}${video_sha}.mp4`} type="video/mp4" />
+              <source src={shaURL(item)} type="video/mp4" />
             </video>
           </VideoCreationStyles>
         </div>
         <Typography>{username}</Typography>
-        {/* <span>{address}</span> */}
       </article>
 
       <Dialog
@@ -646,74 +458,62 @@ export default function VideoCreation({
         }}
       >
         <div sx={{ position: 'relative' }}>
-          {/* <Box sx={{ width: 512, height: 512 }}> */}
           <ReactPlayer
-            url={`${PRD_URL}${video_sha}.mp4`}
+            url={shaURL(item)}
             loop={true}
-            playIcon={<PlayCircleTwoTone style={{ fontSize: '48px' }} />}
+            playIcon={'Play'}
             playing={isPlaying}
             muted={true}
-            light={`${PRD_URL}${intermediate_sha[intermediate_sha.length - 1]}`}
+            light={'Light'}
             onClickPreview={() => {
               handleCardOpen()
               setIsPlaying(true)
             }}
-            // onDuration={seconds => handleDuration(seconds)}
             width="100%"
             height="100%"
             fallback={
               <Skeleton variant="rectangular" width={256} height={256} />
             }
           />
-          {/* <video
-            src={`${PRD_URL}${video_sha}.mp4`}
-            preload="auto"
-            autoPlay={isPlaying}
-            poster={`${PRD_URL}${
-              intermediate_sha[intermediate_sha.length - 1]
-            }`}
-          ></video> */}
-          {/* </Box> */}
 
           <CardContent className="creation-content">
-            <Box
-              sx={{
+            <div
+              style={{
                 borderRadius: '15px',
-                m: 1,
+                margin: 10,
                 background: 'rgba(0, 0, 0, 0.5)',
                 backdropFilter: 'blur(16px)',
               }}
             >
-              <Box sx={{ overflowY: 'auto', maxHeight: 150 }}>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ p: 2, color: 'white' }}
-                >
+              <div style={{ overflowY: 'auto', maxHeight: 150 }}>
+                <Text style={{ padding: 20, color: 'white' }}>
                   {text_input}
-                </Typography>
-              </Box>
-            </Box>
+                </Text>
+              </div>
+            </div>
 
             <CardActions className="creation-actions" disableSpacing>
-              {/* </IconButton>
-              <IconButton aria-label="recreation">
-                <FaRetweet />
-              </IconButton> */}
-
               <div
-                sx={{
+                style={{
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
                   backdropFilter: 'blur(16px)',
                   borderRadius: '25px',
                   width: 'auto',
                   padding: 0,
-                  mr: 1,
+                  marginRight: 1,
                 }}
               >
-                <Button aria-label="bookmark" className="arrow-up" icon={<TbArrowBigDown style={{ fontSize: '1.5rem' }} />} />
-                <Button aria-label="bookmark" className="arrow-down" icon={<TbArrowBigTop style={{ fontSize: '1.5rem' }} />} />
+                <Button
+                  aria-label="bookmark"
+                  className="arrow-up"
+                  icon={<TbArrowBigDown style={{ fontSize: '1.5rem' }} />}
+                />
+                <Button
+                  aria-label="bookmark"
+                  className="arrow-down"
+                  icon={<TbArrowBigTop style={{ fontSize: '1.5rem' }} />}
+                />
               </div>
 
               <Button
@@ -725,7 +525,7 @@ export default function VideoCreation({
                   width: 'auto',
                   marginRight: 10,
                 }}
-                icon={<IosShareIcon />}
+                icon={'Share'}
               />
 
               <div
@@ -737,8 +537,8 @@ export default function VideoCreation({
                   width: 'auto',
                 }}
               >
-                <Button aria-label="bookmark" icon={<BookmarkBorderIcon />} />
-                <Button aria-label="settings" icon={<MoreVertIcon />} />
+                <Button aria-label="bookmark" icon={<div>{'Share'}</div>} />
+                <Button aria-label="settings" icon={<div>{'More'}</div>} />
               </div>
             </CardActions>
           </CardContent>
@@ -747,94 +547,3 @@ export default function VideoCreation({
     </>
   )
 }
-
-// SORT OUT CODE
-{
-  /* <Card className={`cr-card ${size}`}>
-        {/* <span
-                index={index}
-                to={{
-                  pathname: `${url}/${slug(creationsState[key].id)}`,
-                  search: location.search,
-                }}
-                onClick={() => console.log('click test!!!')}
-              ></span> */
-}
-//   {sha ? (
-//     <Link
-//       className="cr-main-link"
-//       to={{
-//         pathname: `/creation/${slug(sha[0])}`,
-//         search: location.search,
-//       }}
-//     />
-//   ) : null}
-//   <div className="cr-content">
-//     {width < 560 ? (
-//       <Link
-//         className="cr-account-link"
-//         to={{
-//           pathname: `${window?.appConfig?.ABRAHAM_MINIO + sha}`,
-//           search: location.search,
-//         }}
-//       >
-//         <span className="cr-eth-url">
-//           <CreatorAddress address={address} blockExplorer={blockExplorer} />
-//         </span>
-//       </Link>
-//     ) : null}
-//     <div
-//       className={isHovering ? 'hover cr-img-wrapper' : 'cr-img-wrapper'}
-//       onMouseOver={handleMouseOver}
-//       onMouseOut={handleMouseOut}
-//     >
-//       <>
-//         {isAvailable(item) ? (
-//           item.status !== 'failed' ? (
-//             <>
-//               <div className="cr-img-wrapper">
-//                 <Image
-//                   className="cr-img"
-//                   alt={text_input}
-//                   style={{ display: 'inline-block' }}
-//                   src={shaURL(item)}
-//                   preview={{ visible: false }}
-//                   onClick={() => setVisible(true)}
-//                 />
-//               </div>
-//               {item?.video_sha ? (
-//                 <ReactPlayer
-//                   url={item.video_sha}
-//                   loop={true}
-//                   playIcon={<PlayCircleTwoTone style={{ fontSize: '48px' }} />}
-//                   playing={isPlaying}
-//                   light={item.sha[0]}
-//                   onClickPreview={() => setIsPlaying(true)}
-//                   // fallback={item.sha[0]}
-//                 />
-//               ) : null}
-//             </>
-//           ) : (
-//             <Image
-//               className="cr-img"
-//               alt={text_input}
-//               src="error"
-//               fallback="data:image/png;base64,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"
-//             />
-//           )
-//         ) : (
-//           <Skeleton
-//             circle={false}
-//             height="100%"
-//             className="avatar-skeleton"
-//             borderRadius={0}
-//             baseColor="#dfdfdf"
-//             highlightColor="#ececec"
-//           />
-//         )}
-//       </>
-//       <VideoCreationOverlay creation={item} creatorAddress={address} />
-//     </div>
-//   </div>
-// </Card>
-// <div className="creation-current-stat">{currentStat(sort_by)}</div> */}
