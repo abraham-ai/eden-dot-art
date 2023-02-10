@@ -257,7 +257,7 @@ export default function CreationCardMinimal({ index, creation }) {
   console.log({ creation })
   const { key, address, uri, timestamp, prompt, status, generator } = creation
 
-  const [undefined, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   // const handleModalOpen = () => {
@@ -276,7 +276,7 @@ export default function CreationCardMinimal({ index, creation }) {
     // event.preventDefault()
     // console.log('handleCardClose!')
     // console.log(event)
-    router.push('/garden', undefined, { scroll: false })
+    router.push('/garden', false, { scroll: false })
     event ? setModalOpen(false) : null
   }
 
@@ -401,6 +401,10 @@ export default function CreationCardMinimal({ index, creation }) {
                     </div>
                   </div>
                 </div>
+
+                <span>{key}</span>
+                <span>{timestamp}</span>
+                <span>{status}</span>
               </article>
             </>
           </div>

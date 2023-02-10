@@ -9,32 +9,22 @@ import { useAccount } from 'wagmi'
 // COMPONENTS
 import { CreationShare } from '@/components/CreationShare/CreationShare'
 
-// ROUTING
-import { Link } from 'react-router-dom'
+// ANTD
+import { Button, Tooltip } from 'antd'
 
-// UI
-import { Button, Tooltip, Typography } from 'antd'
-import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
-import { ShareAltOutlined } from '@ant-design/icons'
-import {
-  HiSparkles,
-  HiOutlineSparkles,
-  HiShare,
-  HiOutlineShare,
-} from 'react-icons/hi'
+// ICONS
 import { AiFillFire, AiOutlineFire } from 'react-icons/ai'
-
-const { Paragraph } = Typography
-
-// CONSTANTS
-import { NETWORKS } from '../../../constants'
+import { HiSparkles, HiOutlineSparkles } from 'react-icons/hi'
+// HiShare, HiOutlineShare,
+// import { ShareAltOutlined } from '@ant-design/icons'
+// import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
 
 // HOOKS
 import useWindowDimensions from '../../../hooks/useWindowDimensions'
 
 // HTTP
 const axios = require('axios')
-const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
+const serverUrl = process.env.EDEN_API_URL
 
 const CreationSocialStyles = styled.nav`
   display: flex;

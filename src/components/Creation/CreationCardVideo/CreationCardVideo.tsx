@@ -5,7 +5,6 @@ import {
   Button,
   Skeleton,
   Typography,
-  Dialog,
   Backdrop,
   CardContent,
   CardActions,
@@ -443,21 +442,16 @@ export default function VideoCreation({
             </video>
           </VideoCreationStyles>
         </div>
-        <Typography>{username}</Typography>
+        <Text>{username}</Text>
       </article>
 
-      <Dialog
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={cardOpen}
-        onClose={handleCardClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+      <div
+      // aria-labelledby="transition-modal-title"
+      // aria-describedby="transition-modal-description"
+      // open={cardOpen}
+      // onClose={handleCardClose}
       >
-        <div sx={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           <ReactPlayer
             url={shaURL(item)}
             loop={true}
@@ -543,7 +537,7 @@ export default function VideoCreation({
             </CardActions>
           </CardContent>
         </div>
-      </Dialog>
+      </div>
     </>
   )
 }

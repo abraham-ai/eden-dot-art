@@ -1,5 +1,4 @@
 import { FC, useState, createContext, useEffect } from 'react'
-import { themeCreator } from './base'
 
 // ANTD
 import { ConfigProvider } from 'antd'
@@ -16,7 +15,7 @@ const ThemeProviderWrapper: FC = props => {
     _setThemeName(curThemeName)
   }, [])
 
-  const theme = themeCreator(themeName)
+  const theme = themeName
   const setThemeName = (themeName: string): void => {
     window.localStorage.setItem('appTheme', themeName)
     _setThemeName(themeName)
