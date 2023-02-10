@@ -1,15 +1,13 @@
 import React from 'react'
 
 // CSS
-import { styled } from '@mui/material'
+import styled from 'styled-components'
 
-const CreateIconStyles = styled('div')(
-  () => `
+const CreateIconStyles = styled.div`
   display: flex !important;
   align-items: center;
   justify-content: center;
-  `,
-)
+`
 
 export default function CreateIcon() {
   return (

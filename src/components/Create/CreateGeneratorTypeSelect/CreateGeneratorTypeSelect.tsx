@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
-// COMPONENTS
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+// ANTD
+import { Form, Select, Menu } from 'antd'
+const { item } = Menu
 
 // ICONS
 import { BsGear } from 'react-icons/bs'
 
-// MUI
+// STYLES
 import styled from 'styled-components'
 
 const CreateGeneretorTypeSelectStyles = styled.section`
@@ -46,32 +45,27 @@ const CreateGeneretorTypeSelectStyles = styled.section`
 export default function CreateGeneratorTypeSelect() {
   const [generatorType, setGeneratorType] = useState('1')
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = event => {
     setGeneratorType(event.target.value)
   }
 
   return (
     <CreateGeneretorTypeSelectStyles>
-      <FormControl sx={{ m: 1, minWidth: 120, display: 'flex' }}>
-        {/* <InputLabel id="demo-simple-select-helper-label">
-          Creation Type
-        </InputLabel> */}
-
+      <Form style={{ margin: 10, minWidth: 120, display: 'flex' }}>
         <BsGear className="create-icon" />
 
         <Select
           labelId="select-generator-type"
           id="select-generator-type"
           value={generatorType}
-          label="" // Creation Type
+          label="Creation Type"
           onChange={handleChange}
         >
-          <MenuItem value={1}>Stable Diffusion</MenuItem>
-          <MenuItem value={2}>Stable Diffusion V2</MenuItem>
-          <MenuItem value={3}>Eden Clip-X</MenuItem>
+          <item value={1}>Stable Diffusion</item>
+          <item value={2}>Stable Diffusion V2</item>
+          <item value={3}>Eden Clip-X</item>
         </Select>
-        {/* <FormHelperText>With label + helper text</FormHelperText> */}
-      </FormControl>
+      </Form>
     </CreateGeneretorTypeSelectStyles>
   )
 }

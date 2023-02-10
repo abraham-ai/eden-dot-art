@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
-// STYLES
-import styled from 'styled-components'
+import React, { useState } from 'react'
 
 // NEXTJS
 import Image from 'next/image'
@@ -9,9 +6,6 @@ import Link from 'next/link'
 
 // ROUTER
 import { useRouter } from 'next/router'
-
-// HOOKS
-import useWindowDimensions from '@/hooks/useWindowDimensions'
 
 // ANTD
 import { Popover, Modal, Typography, Button } from 'antd'
@@ -24,47 +18,13 @@ import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 import Blockies from 'react-blockies'
 
 // ICONS
-// import ExpandMoreIcon
-// import CloseIcon
-// import MoreVertIcon
-// import IosShareIcon
-// import { FaDiscord } from 'react-icons/fa'
-// FaHashtag
-
-// META ICONS
-// import OpenInFullIcon from '@mui/icons-material/OpenInFull'
-// import MemoryIcon from '@mui/icons-material/Memory'
-// import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
-// import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-// import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
-
-// interface ExpandMoreProps extends IconButtonProps {
-//   expand: boolean
-// }
 import { FiMoreHorizontal } from 'react-icons/fi'
-import { FaStar, FaRetweet, FaRegStar } from 'react-icons/fa'
-import { SearchOutlined } from '@ant-design/icons'
+import { FaStar, FaRetweet } from 'react-icons/fa'
+import { BsFillBookmarkFill } from 'react-icons/bs'
 import { IoIosShareAlt } from 'react-icons/io'
-// import { SyncOutlined } from '@ant-design/icons';
-// iSparkles,
-// import { AiFillEye } from 'react-icons/ai'
-// import { AiFillFire } from 'react-icons/ai'
-import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
-import { MdOutlineDateRange } from 'react-icons/md'
-import { BiUserPlus } from 'react-icons/bi'
-import { BsFillBookmarkFill, BsAspectRatio } from 'react-icons/bs'
-import { SlSizeFullscreen } from 'react-icons/sl'
 
-// const ExpandMore = styled((props: ExpandMoreProps) => {
-//   const { ...other } = props
-//   return <IconButton {...other} />
-// })(({ theme, expand }) => ({
-//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-//   marginLeft: 'auto',
-//   transition: theme.transitions.create('transform', {
-//     duration: theme.transitions.duration.shortest,
-//   }),
-// }))
+// STYLES
+import styled from 'styled-components'
 
 const CreationSocialsExtraStyles = styled.span`
   background: pink;
@@ -166,8 +126,6 @@ const CreationSocialsStyles = styled.div`
 `
 
 const CreationSocials = () => {
-  // const { width } = useWindowDimensions()
-
   return (
     <CreationSocialsStyles>
       <div className="cr-socials-main">
@@ -294,59 +252,23 @@ const CardStyles = styled.section`
 `
 
 export default function CreationCardMinimal({ index, creation }) {
-  // console.log(creation)
-  // add source, width, height
-
   const router = useRouter()
-
-  // MAIN
-  // const address = creation.address === undefined ? 'none' : creation.address
-  // const text_input =
-  //   creation.text_input === undefined ? 'none' : creation.text_input
-  // const intermediate_sha =
-  //   creation.intermediate_sha === undefined ? [] : creation.intermediate_sha
-
-  // DIMENSIONS
-  // const width = creation.width === undefined ? 100 : creation.width
-  // const height = creation.height === undefined ? 100 : creation.height
-
-  // SOURCE
-  // const origin = creation.source.origin === undefined ? 'none' : creation.source
-
-  //const { address } = creation.source // origin, author_name,
 
   console.log({ creation })
   const { key, address, uri, timestamp, prompt, status, generator } = creation
 
-  // const { origin } =
-  //   creation.source.origin === undefined ? 'none' : creation.source
-  // const { author_name } =
-  //   creation.source.author_name === undefined
-  //     ? 'none'
-  //     : creation.source.author_name
-  // // const author_name = creation.source.author_name === undefined ? 'none' : creation.source
-  // // const channel_name = creation.source.channel_name === undefined ? 'none' : creation.source
-  // // const guild_name = creation.source.guild_name === undefined ? 'none' : creation.source
-  // const { address } =
-  //   creation.source.address === undefined ? 'none' : creation.source
-
-  // GENERATOR
-  // const generator_name =
-  creation.generator === undefined ? 'none' : creation.generator
-
   const [modalOpen, setModalOpen] = useState(false)
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  const handleModalOpen = () => {
-    // event.preventDefault()
-    // router.push(
-    //   `/creation/[creationId]`,
-    //   `/creation/${creation.id}`,
-    //   { shallow: true }
-    // )
-
-    setModalOpen(true)
-  }
+  // const handleModalOpen = () => {
+  // event.preventDefault()
+  // router.push(
+  //   `/creation/[creationId]`,
+  //   `/creation/${creation.id}`,
+  //   { shallow: true }
+  // )
+  // setModalOpen(true)
+  // }
 
   const handleModalClose = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -354,58 +276,16 @@ export default function CreationCardMinimal({ index, creation }) {
     // event.preventDefault()
     // console.log('handleCardClose!')
     // console.log(event)
-    router.push('/garden', undefined, { scroll: false })
+    router.push('/garden', false, { scroll: false })
     event ? setModalOpen(false) : null
   }
-
-  // const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
-  // const STG_URL = 'https://minio.aws.abraham.fun/creations-stg/'
-
-  // const imageFullURL =
-  //   creation.intermediate_sha === undefined
-  //     ? 'none'
-  //     : PRD_URL + intermediate_sha[intermediate_sha.length - 1]
-
-  // const [expanded, setExpanded] = useState(false)
-
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded)
-  // }
-
-  // console.log({ creation })
-  // const currentUserName = origin === 'discord' ? author_name : address
-  // console.log({ currentUserName, origin, author_name, address })
-
-  // const creationTimeAgo = 100
-
-  // function randomColor() {
-  //   const hex = Math.floor(Math.random() * 0xffffff)
-  //   const color = '#' + hex.toString(16)
-
-  //   return color
-  // }
 
   let displayAddress = address?.substr(0, 6)
   displayAddress += '...' + address.substr(-4)
 
-  // const currentGuildIcon =
-  //   guild_name === 'abraham-ai' ? (
-  //     <FaDiscord style={{ fontSize: '1.2rem' }} />
-  //   ) : (
-  //     // <SiEthereum />
-  //     <FaDiscord />
-  //     // <AppLogo style={{ width: 10 }} size={'icon-small'} />
-  //   )
-
-  // console.log(address)
-  // console.log(cardOpen)
-  // console.log(creation)
-
-  // const currentClipModel = clip_model !== null ? clip_model : null
-
   return (
     <CardStyles>
-      <article id="creation-card">
+      <article id="creation-card" key={index}>
         <Link
           href={`/garden?creationId=${creation.key}`}
           as={`/creation/${creation.key}`}
@@ -420,7 +300,6 @@ export default function CreationCardMinimal({ index, creation }) {
                 width={512}
                 alt={prompt}
                 layout="responsive"
-                // style={{ position: 'relative', maxWidth: '100%', height: 'auto' }}
               />
 
               <article className="creation-content">
@@ -436,7 +315,6 @@ export default function CreationCardMinimal({ index, creation }) {
                   <span className="cr-social like" style={{ margin: 10 }}>
                     <Button className="btn" shape="circle" type="default">
                       <FaStar className="icon" />
-                      {/* <Text className='text'>303</Text> */}
                     </Button>
                   </span>
 
@@ -453,14 +331,12 @@ export default function CreationCardMinimal({ index, creation }) {
                     >
                       <Button className="btn" shape="circle" type="default">
                         <FaRetweet className="icon" />
-                        {/* <Text className='text'>310</Text> */}
                       </Button>
                     </span>
 
                     <span className="cr-social bookmark">
                       <Button className="btn" shape="circle" type="default">
                         <BsFillBookmarkFill className="icon" />
-                        {/* <Text className='text'>Save</Text> */}
                       </Button>
                     </span>
                   </div>
@@ -498,7 +374,6 @@ export default function CreationCardMinimal({ index, creation }) {
                     <div
                       style={{
                         display: 'flex',
-                        // background: 'cyan',
                         justifyContent: 'space-between',
                         marginTop: 10,
                       }}
@@ -527,153 +402,13 @@ export default function CreationCardMinimal({ index, creation }) {
                   </div>
                 </div>
 
-                {/* <div className='creation-actions'> */}
-                {/* <Button>
-                        <FaRetweet />
-                      </Button> */}
-                {/* </IconButton>
-                      <IconButton aria-label="recreation"> */}
-                {/* </IconButton> */}
-
-                {/* <Box
-                        sx={{
-                          display: 'flex',
-                          background: 'rgba(0, 0, 0, 0.5)',
-                          backdropFilter: 'blur(16px)',
-                          borderRadius: '25px',
-                          width: 'auto',
-                          padding: 0,
-                          mr: 1,
-                        }}
-                      >
-                        <IconButton aria-label="bookmark" className="arrow-up">
-                          <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-                        </IconButton>
-                        <IconButton aria-label="bookmark" className="arrow-down">
-                          <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-                        </IconButton>
-                      </Box>
-
-                      <IconButton
-                        aria-label="share"
-                        sx={{
-                          background: 'rgba(0, 0, 0, 0.5)',
-                          backdropFilter: 'blur(16px)',
-                          borderRadius: '50%',
-                          width: 'auto',
-                          mr: 1,
-                        }}
-                      >
-                        <IosShareIcon />
-                      </IconButton> */}
-
-                {/* <ExpandMore
-                        expand={expanded}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                        >
-                        <ExpandMoreIcon />
-                      </ExpandMore> */}
-
-                {/* <Box
-                        sx={{
-                          display: 'flex',
-                          background: 'rgba(0, 0, 0, 0.5)',
-                          backdropFilter: 'blur(16px)',
-                          borderRadius: '25px',
-                          width: 'auto',
-                        }}
-                      >
-                        <IconButton aria-label="bookmark">
-                          <BookmarkBorderIcon />
-                        </IconButton>
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      </Box> */}
-                {/* </div> */}
+                <span>{key}</span>
+                <span>{timestamp}</span>
+                <span>{status}</span>
               </article>
             </>
           </div>
         </Link>
-
-        {/* COLLAPSE */}
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar
-                    alt="generator name"
-                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                  />
-                }
-                label={creation.generator.name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={`${width}x${height}`}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                    {currentGuildIcon}
-                  </Avatar>
-                }
-                label={guild_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                    <FaHashtag style={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={channel_name}
-                variant="outlined"
-              />
-
-              {generator_name ? (
-                <Tooltip title="Model Name">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar alt="model name" src="/static/images/avatar/1.jpg">
-                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.generator_name}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null}
-
-              {currentClipModel ? (
-                <Tooltip title="Clip Model">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.clip_model}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null}
-            </CardContent>
-          </Collapse> */}
       </article>
 
       <Modal
@@ -686,8 +421,6 @@ export default function CreationCardMinimal({ index, creation }) {
         }
         centered
         keyboard
-        // mask
-        // maskClosable
         onCancel={handleModalClose}
       >
         <>
@@ -702,7 +435,6 @@ export default function CreationCardMinimal({ index, creation }) {
             onClick={e => handleModalClose(e)}
           >
             {'X'}
-            {/* <CloseIcon className='close-icon' fontSize={'large'} /> */}
           </Button>
 
           <div
@@ -729,9 +461,6 @@ export default function CreationCardMinimal({ index, creation }) {
                   justifyContent: 'center',
                 }}
               >
-                {/* maxHeight: '612px',
-                  maxWidth: '612px', */}
-
                 <img
                   className="creation-card"
                   src={uri}
@@ -796,166 +525,9 @@ export default function CreationCardMinimal({ index, creation }) {
                 </div>
               </div>
             </div>
-
-            {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                  padding: 0,
-                  mr: 1,
-                }}
-              >
-                <IconButton aria-label="bookmark" className="arrow-up">
-                  <TbArrowBigDown style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-                <IconButton aria-label="bookmark" className="arrow-down">
-                  <TbArrowBigTop style={{ fontSize: '1.5rem' }} />
-                </IconButton>
-              </Box>
-              <IconButton
-                aria-label="share"
-                sx={{
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '50%',
-                  width: 'auto',
-                  mr: 1,
-                }}
-              >
-                <IosShareIcon />
-              </IconButton>
-              <Box
-                sx={{
-                  display: 'flex',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '25px',
-                  width: 'auto',
-                }}
-              >
-                <IconButton aria-label="bookmark">
-                  <BookmarkBorderIcon />
-                </IconButton>
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
-            </Box> */}
-
-            {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                >
-                <ExpandMoreIcon />
-              </ExpandMore> */}
-
-            <div>
-              {/* <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar
-                    alt="generator name"
-                    src="https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/a432c21c-bb12-4f38-b5e2-1c12a3c403f6/Animated-Logo_1.gif?format=48w"
-                  />
-                }
-                label={generator_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="clip model" src="/static/images/avatar/1.jpg">
-                    <OpenInFullIcon sx={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={`${width}x${height}`}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="guild name" src="/static/images/avatar/1.jpg">
-                    {currentGuildIcon}
-                  </Avatar>
-                }
-                label={guild_name}
-                variant="outlined"
-              />
-              <Chip
-                sx={{ m: 0.5 }}
-                avatar={
-                  <Avatar alt="channel name" src="/static/images/avatar/1.jpg">
-                    <FaHashtag style={{ fontSize: '1rem' }} />
-                  </Avatar>
-                }
-                label={channel_name}
-                variant="outlined"
-              /> */}
-
-              {/* {generator_name ? (
-                <Tooltip title="Model Name">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="model name"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <MemoryIcon sx={{ fontSize: '1.5rem' }} />
-                      </Avatar>
-                    }
-                    label={generator_name}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null} */}
-
-              {/* {currentClipModel ? (
-                <Tooltip title="Clip Model">
-                  <Chip
-                    sx={{ m: 0.5 }}
-                    avatar={
-                      <Avatar
-                        alt="clip model"
-                        src="/static/images/avatar/1.jpg"
-                      >
-                        <LocationSearchingIcon sx={{ fontSize: '1.3rem' }} />
-                      </Avatar>
-                    }
-                    label={creation.config.clip_model}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ) : null} */}
-            </div>
           </div>
         </>
       </Modal>
-
-      {/* <Box className="creation-header">
-          <Box sx={{ display: 'flex' }}>
-            <Avatar
-              sx={{ bgcolor: randomColor(), width: 20, height: 20, mr: 1 }}
-              aria-label="username"
-            />
-            <Typography
-              noWrap={true}
-              sx={{ display: 'inline-block', color: '#111', fontWeight: 600 }}
-            > */}
-
-      {/* {currentUserName === 'none'
-                ? currentUserName
-                : currentUserName.substring(0, currentUserName.indexOf('#'))} */}
-      {/* </Typography>
-          </Box>
-          <span style={{ display: 'none' }}>{cardOpen}</span>
-        </Box> */}
     </CardStyles>
   )
 }
