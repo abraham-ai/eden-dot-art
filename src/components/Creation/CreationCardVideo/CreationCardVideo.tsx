@@ -1,32 +1,27 @@
 import React, { useState, useRef } from 'react'
 
 // ANTD
-import {
-  Button,
-  Skeleton,
-  Typography,
-  Backdrop,
-  CardContent,
-  CardActions,
-} from 'antd'
+import { Button, Skeleton, Typography, CardContent, CardActions } from 'antd'
 const { Text } = Typography
+
+// UTILS
+import shaURL from '@/util/shaURL'
 
 // COMPONENTS
 import ReactPlayer from 'react-player'
 
 // ICONS
 import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
-// SyncOutlined,
-// PlayCircleTwoTone
 // import { HiSparkles } from 'react-icons/hi'
 // import { AiFillFire } from 'react-icons/ai'
-// import MoreVertIcon
-// import IosShareIcon
-// import BookmarkBorderIcon
+// SyncOutlined
+// PlayCircleTwoTone
+// MoreVertIcon
+// IosShareIcon
+// BookmarkBorderIcon
 
 // STYLES
 import styled from 'styled-components'
-import shaURL from '@/util/shaURL'
 
 const VideoCreationStyles = styled.article`
   height: 100%;

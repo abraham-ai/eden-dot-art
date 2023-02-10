@@ -1,15 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 
-// ANTD
-import { Typography } from 'antd'
-const { Text } = Typography
-
-// LIBS
+// FETCH
 import axios from 'axios'
-import { useInView } from 'react-intersection-observer'
 
 // COMPONENTS
+import { useInView } from 'react-intersection-observer'
 import Masonry from 'react-masonry-css'
+
+// EDEN COMPONENTS
 import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
 import Loader from '@/components/Loader/Loader'
 

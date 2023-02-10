@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
-// CSS
-import styled from 'styled-components'
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // WAGMI
 import { useAccount } from 'wagmi'
 
-// COMPONENTS
-import { CreationShare } from '@/components/CreationShare/CreationShare'
-
 // ANTD
 import { Button, Tooltip } from 'antd'
+
+// FETCH
+import axios from 'axios'
+const serverUrl = process.env.EDEN_API_URL
 
 // ICONS
 import { AiFillFire, AiOutlineFire } from 'react-icons/ai'
@@ -19,12 +20,8 @@ import { HiSparkles, HiOutlineSparkles } from 'react-icons/hi'
 // import { ShareAltOutlined } from '@ant-design/icons'
 // import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
 
-// HOOKS
-import useWindowDimensions from '../../../hooks/useWindowDimensions'
-
-// HTTP
-const axios = require('axios')
-const serverUrl = process.env.EDEN_API_URL
+// STYLES
+import styled from 'styled-components'
 
 const CreationSocialStyles = styled.nav`
   display: flex;
@@ -240,26 +237,23 @@ const CreationSocialStyles = styled.nav`
 `
 
 export default function CreationSocial({
-  creatorAddress,
-  creationID,
-  creationTextInput,
   creationBurns,
   creationPraises,
   creationSha,
   praisedByMe,
   burnedByMe,
 }) {
-  const { width } = useWindowDimensions()
-
   //   const navMode = width < 718 ? 'inline' : 'horizontal';
 
   const [burns, setBurns] = useState(creationBurns)
   const [praises, setPraises] = useState(creationPraises)
-  const [isShared, setIsShared] = useState(false)
   const [isPraised, setIsPraised] = useState(praisedByMe)
   const [isBurned, setIsBurned] = useState(burnedByMe)
 
   const { address } = useAccount()
+
+  const context = useContext(AppContext)
+  const { isWeb3WalletConnected } = context
 
   // DEBUG
   // console.log({ creationTextInput });

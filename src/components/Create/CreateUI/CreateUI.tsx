@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
 
 // ANTD
-import { Form, Modal, Button, Snackbar } from 'antd'
+import { Modal, Button } from 'antd'
 
 // ACCOUNT
 import Blockies from 'react-blockies'

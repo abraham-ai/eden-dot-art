@@ -1,4 +1,4 @@
-const  withAntdLess = require('next-plugin-antd-less')
+const withAntdLess = require('next-plugin-antd-less')
 const withImages = require('next-images')
 
 const redirects = {
@@ -16,7 +16,7 @@ const redirects = {
 module.exports = withAntdLess({
   // optional: you can modify antd less variables directly here
   modifyVars: { '@primary-color': '#04f' },
-  // Or better still you can specify a path to a file 
+  // Or better still you can specify a path to a file
   lessVarsFilePath: './styles/variables.less',
   // optional
   lessVarsFilePathAppendToEndOfContent: false,
@@ -34,11 +34,12 @@ module.exports = withAntdLess({
     domains: ['minio.aws.abraham.fun'],
   },
   env: {
+    EDEN_API_URL: 'https://api.eden.art',
     NEXT_PUBLIC_ABRAHAM_GATEWAY: 'https://gateway.prd.aws.abraham.fun',
   },
   ...withImages(redirects),
 
   webpack(config) {
-    return config;
-  }
-});
+    return config
+  },
+})

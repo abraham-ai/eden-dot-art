@@ -20,12 +20,11 @@ import createEmotionCache from 'src/createEmotionCache'
 import Head from 'next/head'
 // import { SidebarProvider } from 'src/contexts/SidebarContext'
 
-// PROVIDERS
-import WalletProvider from '../src/providers/WalletProvider'
+// CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
 
-// AUTH
-// import { WalletProvider } from '@/contexts/WalletContext'
+// PROVIDERS
+import WalletProvider from '@/providers/WalletProvider'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -43,6 +42,7 @@ function EdenApp(props: EdenAppProps) {
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
   const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
   const [authToken, setAuthToken] = useState('')
+  const [isLightTheme, setIsLightTheme] = useState(true)
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
@@ -60,6 +60,8 @@ function EdenApp(props: EdenAppProps) {
     setIsModalVisible,
     setIsWeb3AuthSuccess,
     setIsWeb3WalletConnected,
+    isLightTheme,
+    setIsLightTheme,
   }
 
   return (

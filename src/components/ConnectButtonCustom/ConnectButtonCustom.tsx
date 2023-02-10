@@ -19,9 +19,6 @@ const { Text } = Typography
 // EDEN COMPONENTS
 import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
 
-// UTILS
-import { withSessionRoute } from '@/util/withSession'
-
 // CSS
 import styled from 'styled-components'
 
@@ -278,7 +275,5 @@ export const ConnectButtonCustom = () => {
     </ConnectButtonStyles>
   )
 }
-
-// export default withSessionRoute(ConnectButtonCustom)
 
 export default ConnectButtonCustom

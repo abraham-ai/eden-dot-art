@@ -25,8 +25,11 @@ import Image from 'next/image'
 
 // FETCH
 import axios from 'axios'
-const serverUrl = process.env.NEXT_PUBLIC_ABRAHAM_GATEWAY
-const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
+
+// CONSTS
+const serverUrl = process.env.EDEN_API_URL
+const minioURL = process.env.MINIO_URL
+const PRD_URL = `${minioURL}/creations-prd//`
 
 // STYLES
 import styled from 'styled-components'
