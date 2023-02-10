@@ -27,12 +27,12 @@ export default function CreationsPage() {
     <>
       <Text>{'GARDEN TEST'}</Text>
 
-      {/* <Head>
+      <Head>
         <title>Creations</title>
       </Head>
       <CreationsGridStyles id="creations-grid">
         <CreationsGrid />
-      </CreationsGridStyles> */}
+      </CreationsGridStyles>
     </>
   )
 }
