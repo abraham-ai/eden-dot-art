@@ -14,6 +14,7 @@ import styled from 'styled-components'
 
 const CreationsGridStyles = styled.section`
   width: 100vw;
+  margin: 100px 0 0;
   padding: 0 10px;
 `
 

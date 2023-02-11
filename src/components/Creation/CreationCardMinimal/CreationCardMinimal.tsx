@@ -280,12 +280,175 @@ export default function CreationCardMinimal({ index, creation }) {
     event ? setModalOpen(false) : null
   }
 
+  const handlePraise = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault()
+    console.log('handle PRAISE 🙌 !')
+  }
+
+  const handleBurn = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault()
+    console.log('handle BURN 🔥 !')
+  }
+
+  const handleRecreation = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault()
+    console.log('handle RECREATION 🔀 !')
+  }
+
+  const handleSave = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault()
+    console.log('handle SAVE 🔖!')
+  }
+
   let displayAddress = address?.substr(0, 6)
   displayAddress += '...' + address.substr(-4)
 
   return (
     <CardStyles>
       <article id="creation-card" key={index}>
+        <article className="creation-content">
+          <div
+            style={{
+              position: 'absolute',
+              zIndex: 10,
+              left: 0,
+              flexDirection: 'row',
+              flex: 1,
+              padding: 10,
+              justifyContent: 'space-between',
+            }}
+          >
+            <span className="cr-social like" style={{ margin: 10 }}>
+              <Button
+                className="btn"
+                shape="circle"
+                type="default"
+                onClick={handlePraise}
+              >
+                🙌
+              </Button>
+            </span>
+            <span className="cr-social like" style={{ margin: 10 }}>
+              <Button
+                className="btn"
+                shape="circle"
+                type="default"
+                onClick={handleBurn}
+              >
+                🔥
+              </Button>
+            </span>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              width: 'auto',
+              flexDirection: 'column',
+              margin: 10,
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              zIndex: 20,
+            }}
+          >
+            <span className="cr-social remix" style={{ marginBottom: 10 }}>
+              <Button
+                className="btn"
+                shape="circle"
+                type="default"
+                onClick={handleRecreation}
+              >
+                <FaRetweet className="icon" />
+              </Button>
+            </span>
+
+            <span className="cr-social bookmark">
+              <Button
+                className="btn"
+                shape="circle"
+                type="default"
+                onClick={handleSave}
+              >
+                <BsFillBookmarkFill className="icon" />
+              </Button>
+            </span>
+          </div>
+
+          <div
+            style={{
+              borderRadius: '15px',
+              margin: 10,
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(16px)',
+              padding: 20,
+              zIndex: 10,
+              position: 'absolute',
+              bottom: 0,
+            }}
+          >
+            <div
+              style={{
+                overflowY: 'auto',
+                maxHeight: 150,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Text
+                className="prompt-command"
+                style={{
+                  fontWeight: 'bold',
+                  color: '#8C7CF0',
+                  fontFamily: 'courier',
+                }}
+              >
+                {generator}
+              </Text>
+              <Text style={{ color: 'white' }}>{prompt}</Text>
+
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginTop: 10,
+                }}
+              >
+                <Popover content={'test'} placement="bottomLeft">
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div
+                      style={{
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        width: '32px',
+                        height: '32px',
+                        marginRight: 10,
+                        background: 'orange',
+                      }}
+                    >
+                      <Blockies seed={address} />
+                    </div>
+                    <Text style={{ color: 'white' }}>{displayAddress}</Text>
+                  </div>
+                </Popover>
+                <CreationSocials />
+              </div>
+            </div>
+          </div>
+
+          <span>{key}</span>
+          <span>{timestamp}</span>
+          <span>{status}</span>
+        </article>
+
         <Link
           href={`/garden?creationId=${creation.key}`}
           as={`/creation/${creation.key}`}
@@ -301,111 +464,6 @@ export default function CreationCardMinimal({ index, creation }) {
                 alt={prompt}
                 layout="responsive"
               />
-
-              <article className="creation-content">
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flex: 1,
-                    width: '100%',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span className="cr-social like" style={{ margin: 10 }}>
-                    <Button className="btn" shape="circle" type="default">
-                      <FaStar className="icon" />
-                    </Button>
-                  </span>
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      margin: 10,
-                    }}
-                  >
-                    <span
-                      className="cr-social remix"
-                      style={{ marginBottom: 10 }}
-                    >
-                      <Button className="btn" shape="circle" type="default">
-                        <FaRetweet className="icon" />
-                      </Button>
-                    </span>
-
-                    <span className="cr-social bookmark">
-                      <Button className="btn" shape="circle" type="default">
-                        <BsFillBookmarkFill className="icon" />
-                      </Button>
-                    </span>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    borderRadius: '15px',
-                    margin: 10,
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    backdropFilter: 'blur(16px)',
-                    padding: 20,
-                  }}
-                >
-                  <div
-                    style={{
-                      overflowY: 'auto',
-                      maxHeight: 150,
-                      display: 'flex',
-                      flexDirection: 'column',
-                    }}
-                  >
-                    <Text
-                      className="prompt-command"
-                      style={{
-                        fontWeight: 'bold',
-                        color: '#8C7CF0',
-                        fontFamily: 'courier',
-                      }}
-                    >
-                      {generator}
-                    </Text>
-                    <Text style={{ color: 'white' }}>{prompt}</Text>
-
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginTop: 10,
-                      }}
-                    >
-                      <Popover content={'test'} placement="bottomLeft">
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <div
-                            style={{
-                              borderRadius: '50%',
-                              overflow: 'hidden',
-                              width: '32px',
-                              height: '32px',
-                              marginRight: 10,
-                              background: 'orange',
-                            }}
-                          >
-                            <Blockies seed={address} />
-                          </div>
-                          <Text style={{ color: 'white' }}>
-                            {displayAddress}
-                          </Text>
-                        </div>
-                      </Popover>
-                      <CreationSocials />
-                    </div>
-                  </div>
-                </div>
-
-                <span>{key}</span>
-                <span>{timestamp}</span>
-                <span>{status}</span>
-              </article>
             </>
           </div>
         </Link>

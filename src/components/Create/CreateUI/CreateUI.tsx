@@ -20,6 +20,8 @@ import styled from 'styled-components'
 
 const CreateUIStyles = styled.section`
   background: red;
+  height: 500px;
+  width: 100%;
 
   .filter-select > div {
     display: flex;
