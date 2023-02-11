@@ -1,113 +1,88 @@
-import { Box, Container, styled, Typography } from '@mui/material'
+import { Typography } from 'antd'
+const { Text } = Typography
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
 import Link from 'next/link'
 
-const FooterWrapper = styled(Container)(
-  ({ theme }) => `
-    margin-top: ${theme.spacing(4)};
-    .footer-info-section {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .footer-link {
-      padding: 8px 0;
-      color: #0c163b;
-    }
-`,
-)
+// STYLES
+import styled from 'styled-components'
+
+const FooterWrapper = styled.section`
+  .footer-info-section {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-link {
+    padding: 8px 0;
+    color: #0c163b;
+  }
+`
 
 function Footer() {
   return (
     <FooterWrapper className="footer-wrapper">
-      <Box
-        pb={4}
-        display={{ xs: 'block', md: 'flex' }}
-        alignItems="center"
-        textAlign={{ xs: 'center', md: 'left' }}
-        justifyContent="space-between"
+      <div
+        style={{
+          paddingBottom: 40,
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'space-between',
+        }}
       >
         <div className="footer-info-section">
           <AppLogo logo="eden" />
-          <Typography variant={'body1'} sx={{ color: '#0c163b' }}>
-            Learn
-          </Typography>
+          <Text style={{ color: '#0c163b' }}>Learn</Text>
 
           <Link href="/create">
-            <Typography className="footer-link" variant={'h4'}>
-              Create
-            </Typography>
+            <Text className="footer-link">Create</Text>
           </Link>
           <Link href="/collect">
-            <Typography className="footer-link" variant={'h4'}>
-              Collect
-            </Typography>
+            <Text className="footer-link">Collect</Text>
           </Link>
           <Link href="/docs">
-            <Typography className="footer-link" variant={'h4'}>
-              Documentation
-            </Typography>
+            <Text className="footer-link">Documentation</Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
-            Company
-          </Typography>
+          <Text className="footer-link">Company</Text>
 
           <Link href="/dev-about">
-            <Typography className="footer-link" variant={'h4'}>
-              About
-            </Typography>
+            <Text className="footer-link">About</Text>
           </Link>
           <Link href="/help">
-            <Typography className="footer-link" variant={'h4'}>
-              Help Center
-            </Typography>
+            <Text className="footer-link">Help Center</Text>
           </Link>
           <Link href="/subscribe">
-            <Typography className="footer-link" variant={'h4'}>
-              Subscribe
-            </Typography>
+            <Text className="footer-link">Subscribe</Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
-            Connect
-          </Typography>
+          <Text className="footer-link">Connect</Text>
           <Link href="twitter.com">
-            <Typography className="footer-link" variant={'h4'}>
-              Twitter
-            </Typography>
+            <Text className="footer-link">Twitter</Text>
           </Link>
           <Link href="instagram.com">
-            <Typography className="footer-link" variant={'h4'}>
-              Instagram
-            </Typography>
+            <Text className="footer-link">Instagram</Text>
           </Link>
           <Link href="discord.com">
-            <Typography className="footer-link" variant={'h4'}>
-              Discord
-            </Typography>
+            <Text className="footer-link">Discord</Text>
           </Link>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
-            Privacy Policy
-          </Typography>
+          <Text className="footer-link">Privacy Policy</Text>
         </div>
 
         <div className="footer-info-section">
-          <Typography className="footer-link" variant={'body1'}>
-            Terms of Service
-          </Typography>
+          <Text className="footer-link">Terms of Service</Text>
         </div>
-      </Box>
+      </div>
     </FooterWrapper>
   )
 }

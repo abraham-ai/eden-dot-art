@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
@@ -20,8 +20,6 @@ import {
   configureChains,
   WagmiConfig,
 } from 'wagmi'
-
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 import { publicProvider } from 'wagmi/providers/public'
 
@@ -117,29 +115,12 @@ const HeaderWrapperStyles = styled.div`
   }
 `
 
-// @media (min-width: ${theme.breakpoints.values.lg}px) {
-// left: ${theme.sidebar.width};
-
 export default function Header() {
   const context = useContext(AppContext)
-  const {
-    isModalVisible,
-    setIsModalVisible,
-    setIsWeb3WalletConnected,
-    isWeb3WalletConnected,
-    isWeb3AuthSuccess,
-  } = context
-
-  const [loginOpen, setLoginOpen] = useState(false)
+  const { setIsWeb3WalletConnected, isWeb3WalletConnected, isWeb3AuthSuccess } =
+    context
 
   const { isConnected } = useAccount()
-
-  const handleCreateClose = () => {
-    console.log('HANDLE CREATE CLOSE!')
-    setIsModalVisible(false)
-  }
-
-  const handleLoginClose = () => setLoginOpen(false)
 
   useEffect(() => {
     setIsWeb3WalletConnected(isConnected)
@@ -154,8 +135,6 @@ export default function Header() {
           <Logo />
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* {CustomAvatar} */}
-
             <ConnectButtonCustom />
 
             {isWeb3WalletConnected ? (

@@ -13,11 +13,11 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 import { Button, Typography } from 'antd'
 const { Title, Text } = Typography
 
-// CSS
+// STYLES
 import styled from 'styled-components'
 
 // ICON
-import { TwitterOutlined } from '@ant-design/icons'
+// import { TwitterOutlined } from '@ant-design/icons'
 import { FaDiscord } from 'react-icons/fa'
 import { BsTwitter } from 'react-icons/bs'
 

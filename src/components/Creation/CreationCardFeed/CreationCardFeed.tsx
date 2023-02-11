@@ -14,7 +14,7 @@ import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 import Blockies from 'react-blockies'
 
 // ICONS
-import CloseIcon from '@mui/icons-material/Close'
+// import CloseIcon
 import { StarOutlined, ShareAltOutlined, EyeOutlined } from '@ant-design/icons'
 
 const CardStyles = styled.section`
@@ -296,7 +296,7 @@ export default function CreationCardFeed({ creation }) {
       >
         <>
           <div className="close-icon-wrapper" onClick={handleModalClose}>
-            <CloseIcon className="close-icon" fontSize={'large'} />
+            {'Close'}
           </div>
 
           <div>

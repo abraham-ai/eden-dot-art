@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 // CONTEXT
 import AppContext from '@/components/AppContext/AppContext'
@@ -14,10 +14,10 @@ const themeLabel = { inputProps: { 'aria-label': 'Switch demo' } }
 
 export default function ThemeToggle() {
   const context = useContext(AppContext)
-  const { setTheme } = context
+  const { setIsLightTheme } = context
 
   const onChange = (checked: boolean) => {
-    checked ? context.setTheme(previousValue => !previousValue) : null
+    checked ? setIsLightTheme(previousValue => !previousValue) : null
     // console.log(`switch to ${checked}`);
   }
 

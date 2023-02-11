@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
-// CSS
-import styled from 'styled-components'
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // WAGMI
 import { useAccount } from 'wagmi'
 
-// COMPONENTS
-import { CreationShare } from '@/components/CreationShare/CreationShare'
+// ANTD
+import { Button, Tooltip } from 'antd'
 
-// ROUTING
-import { Link } from 'react-router-dom'
+// FETCH
+import axios from 'axios'
+const serverUrl = process.env.EDEN_API_URL
 
-// UI
-import { Button, Tooltip, Typography } from 'antd'
-import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
-import { ShareAltOutlined } from '@ant-design/icons'
-import {
-  HiSparkles,
-  HiOutlineSparkles,
-  HiShare,
-  HiOutlineShare,
-} from 'react-icons/hi'
+// ICONS
 import { AiFillFire, AiOutlineFire } from 'react-icons/ai'
+import { HiSparkles, HiOutlineSparkles } from 'react-icons/hi'
+// HiShare, HiOutlineShare,
+// import { ShareAltOutlined } from '@ant-design/icons'
+// import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
 
-const { Paragraph } = Typography
-
-// CONSTANTS
-import { NETWORKS } from '../../../constants'
-
-// HOOKS
-import useWindowDimensions from '../../../hooks/useWindowDimensions'
-
-// HTTP
-const axios = require('axios')
-const serverUrl = window?.appConfig?.ABRAHAM_GATEWAY
+// STYLES
+import styled from 'styled-components'
 
 const CreationSocialStyles = styled.nav`
   display: flex;
@@ -250,26 +237,23 @@ const CreationSocialStyles = styled.nav`
 `
 
 export default function CreationSocial({
-  creatorAddress,
-  creationID,
-  creationTextInput,
   creationBurns,
   creationPraises,
   creationSha,
   praisedByMe,
   burnedByMe,
 }) {
-  const { width } = useWindowDimensions()
-
   //   const navMode = width < 718 ? 'inline' : 'horizontal';
 
   const [burns, setBurns] = useState(creationBurns)
   const [praises, setPraises] = useState(creationPraises)
-  const [isShared, setIsShared] = useState(false)
   const [isPraised, setIsPraised] = useState(praisedByMe)
   const [isBurned, setIsBurned] = useState(burnedByMe)
 
   const { address } = useAccount()
+
+  const context = useContext(AppContext)
+  const { isWeb3WalletConnected } = context
 
   // DEBUG
   // console.log({ creationTextInput });

@@ -1,4 +1,3 @@
-import { useState, useEffect, useCallback } from 'react'
 import type { ReactElement } from 'react'
 
 // NEXT
@@ -6,10 +5,6 @@ import Head from 'next/head'
 
 // NAV
 import BaseLayout from 'src/layouts/BaseLayout'
-
-// ANTD
-import { Typography } from 'antd'
-const { Text } = Typography
 
 // EDEN COMPONENTS
 import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
@@ -19,14 +14,13 @@ import styled from 'styled-components'
 
 const CreationsGridStyles = styled.section`
   width: 100vw;
+  margin: 100px 0 0;
   padding: 0 10px;
 `
 
 export default function CreationsPage() {
   return (
     <>
-      <Text>{'GARDEN TEST'}</Text>
-
       <Head>
         <title>Creations</title>
       </Head>
