@@ -1,15 +1,13 @@
 import { useState } from 'react'
-// useContext,
 
-// EDEN COMPONENT
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
-
-// UI
-import { Button, Form, Input, InputNumber, Space } from 'antd'
-const { Item } = Form
+// ANTD
+import { Form } from 'antd'
 
 // FETCH
 import axios from 'axios'
+
+// EDEN COMPONENT
+import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
 
 // COMPONENTS
 import ImageResult from '@/components/ImageResult/ImageResult'
@@ -21,12 +19,6 @@ interface GenerateFormInputs {
 }
 
 const GenerateTab = () => {
-  const initialValues = {
-    prompt: '',
-    width: 512,
-    height: 512,
-  }
-
   const [form] = Form.useForm()
   const width = Form.useWatch('width', form)
   const height = Form.useWatch('height', form)
@@ -49,9 +41,13 @@ const GenerateTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="image" generatorName="create" />
+      <GeneratorInterface
+        mediaType="image"
+        generatorName="create"
+        handleGenerate={handleGenerate}
+      />
 
-      {message}
+      {generating ? message : null}
       {resultURL ? (
         <ImageResult width={width} height={height} imageUrl={resultURL} />
       ) : null}

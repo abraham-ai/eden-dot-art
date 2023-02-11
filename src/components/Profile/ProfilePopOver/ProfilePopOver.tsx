@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Button, Popover } from 'antd'
 
 // EDEN COMPONENTS
-import CreatorProfileAddress from '../../Creator/CreatorProfileAddress/CreatorProfileAddress'
+import CreatorProfileAddress from '@/components/Creator/CreatorProfileAddress/CreatorProfileAddress'
 
 // STYLES
 import styled from 'styled-components'
@@ -16,20 +16,20 @@ const PopperStyles = styled.section`
   },
 `
 
-const PopperPopupState = () => {
+const ProfilePopOver = ({ profileAddress }) => {
   return (
     <PopperStyles>
       <Button>Avatar</Button>
 
       <Popover>
-        <CreatorProfileAddress />
+        <CreatorProfileAddress profileAddress={profileAddress} />
       </Popover>
     </PopperStyles>
   )
 }
 
-PopperPopupState.propTypes = {
+ProfilePopOver.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default PopperPopupState
+export default ProfilePopOver

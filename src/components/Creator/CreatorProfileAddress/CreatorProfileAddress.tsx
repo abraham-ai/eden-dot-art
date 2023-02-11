@@ -18,7 +18,7 @@ const CreatorProfileAddressStyles = styled.div`
   height: 300px;
 `
 
-export default function CreatorProfileAddress() {
+export default function CreatorProfileAddress({ profileAddress }) {
   const { address } = useAccount()
   const currentAddress = address
 

@@ -41,9 +41,9 @@ export default function CreateSignInJWT() {
     `I am ${address} and I would like to create with Eden`,
   )
 
-  const { data, isError, isSuccess, signMessage } = useSignMessage({
+  const { data, isSuccess } = useSignMessage({
     message: appMessage,
-  }) // isLoading,
+  }) // isLoading, isError, signMessage
 
   console.log({ isModalVisible })
   console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })

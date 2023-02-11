@@ -1,9 +1,8 @@
 import React from 'react'
 
-// UI
-import { Typography } from 'antd'
+// ANTD
+import { Typography, Progress } from 'antd'
 const { Text } = Typography
-import { Progress } from 'antd'
 
 // STYLES
 import styled from 'styled-components'

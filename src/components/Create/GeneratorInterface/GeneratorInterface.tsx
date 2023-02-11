@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+
+// ANTD
 import { Button, Form } from 'antd'
-import {
-  RightCircleOutlined,
-  UpCircleOutlined,
-  DownCircleOutlined,
-} from '@ant-design/icons'
+
+// FETCH
 import axios from 'axios'
 
+// HOOKS
 import { useGeneratorInfo } from '@/hooks/useGeneratorInfo'
 
+// EDEN COMPONENTS
 import ImageResult from '@/components/Media/ImageResult/ImageResult'
 import VideoResult from '@/components/Media/VideoResult/VideoResult'
 import AudioResult from '@/components/Media/AudioResult/AudioResult'
@@ -18,12 +19,21 @@ import UploadParameter from '@/components/Parameters/UploadParameter/UploadParam
 import StringParameter from '@/components/Parameters/StringParameter/StringParameter'
 import SliderParameter from '@/components/Parameters/SliderParameter/SliderParameter'
 
+// ICONS
+import {
+  RightCircleOutlined,
+  UpCircleOutlined,
+  DownCircleOutlined,
+} from '@ant-design/icons'
+
 const GeneratorInterface = ({
   generatorName,
   mediaType,
+  handleGenerate,
 }: {
   generatorName: string
   mediaType: string
+  handleGenerate: Function
 }) => {
   const [form] = Form.useForm()
   const width = Form.useWatch('width', form)
@@ -50,22 +60,6 @@ const GeneratorInterface = ({
       }
     })
     return config
-  }
-
-  const handleGenerate = async (values: any) => {
-    setGenerating(true)
-    setMessage(null)
-    try {
-      const config = getConfig(values)
-      const response = await axios.post('/api/generate', {
-        generatorName: generatorName,
-        reqConfig: config,
-      })
-      setResultUrl(response.data.outputUrl)
-    } catch (error: any) {
-      setMessage(`Error: ${error.response.data.error}`)
-    }
-    setGenerating(false)
   }
 
   const renderFormFields = (parameters: any) => {

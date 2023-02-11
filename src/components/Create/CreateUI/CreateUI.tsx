@@ -113,7 +113,12 @@ export default function CreateUI() {
       className="create-modal"
       open={isModalVisible}
       onCancel={() => setIsModalVisible(false)}
-      style={{ background: 'rgba(0, 0, 0, 0.65)' }}
+      style={{
+        background: 'rgba(0, 0, 0, 0.65)',
+        minWidth: '80%',
+        height: '80%',
+        top: '100px',
+      }}
     >
       <CreateUIStyles>
         <>

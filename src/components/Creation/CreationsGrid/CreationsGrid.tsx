@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer'
 import Masonry from 'react-masonry-css'
 
 // EDEN COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+import CreationCardMinimal from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
 
 // STYLES
