@@ -13,7 +13,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import Masonry from 'react-masonry-css'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+import CreationCardMinimal from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
 
 // HOOKS
@@ -22,9 +22,8 @@ import Loader from '@/components/Loader/Loader'
 // CONSTS
 const PAGE_LENGTH = 10
 // import { DEVICE_WIDTH } from '@/const/device-width'
-const masonryOptions = { transitionDuration: 0 };
+const masonryOptions = { transitionDuration: 0 }
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
-
 
 export default function CreationsPage() {
   const [creations, setCreations] = useState<object[]>([])
@@ -88,13 +87,13 @@ export default function CreationsPage() {
         ) : (
           <div style={{ width: '100%', minHeight: 393, mt: 20 }}>
             <Masonry
-                className={'my-gallery-class'} // default ''
-                elementType={'ul'} // default 'div'
-                options={masonryOptions} // default {}
-                disableImagesLoaded={false} // default false
-                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                imagesLoadedOptions={imagesLoadedOptions} // default {}
-              >
+              className={'my-gallery-class'} // default ''
+              elementType={'ul'} // default 'div'
+              options={masonryOptions} // default {}
+              disableImagesLoaded={false} // default false
+              updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+              imagesLoadedOptions={imagesLoadedOptions} // default {}
+            >
               {creations.map((creation, index) => (
                 <CreationCardMinimal key={index} creation={creation} />
               ))}
