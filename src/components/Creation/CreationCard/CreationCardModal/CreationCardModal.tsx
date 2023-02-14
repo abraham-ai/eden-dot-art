@@ -12,7 +12,7 @@ import { Popover, Modal, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
-import CreationSocials from '@/components/Creation/CreationSocials/CreationSocials'
+import CreationSocials from '@/components/Creation/CreationCard/CreationSocials/CreationSocials'
 import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 
 // LIBS
@@ -81,7 +81,7 @@ export default function CreationCardModal({ index, creation }) {
           <div className="cr-modal-wrapper">
             <div className="cr-modal-inner-wrapper">
               <div className="cr-card-image">
-                <img className="cr-card" src={uri} alt="Card Media" />
+                <Image className="cr-card" src={uri} alt="Card Media" />
               </div>
 
               <div className="cr-card-content-wrapper">
@@ -104,6 +104,8 @@ export default function CreationCardModal({ index, creation }) {
                 </div>
               </div>
             </div>
+
+            <CreationSocials />
           </div>
         </>
       </Modal>

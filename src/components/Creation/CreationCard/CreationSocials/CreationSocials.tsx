@@ -4,13 +4,13 @@ import React from 'react'
 import { Popover, Button } from 'antd'
 
 // EDEN COMPONENTS
-import CreationSocialsExtra from '@/components/Creation/CreationSocialsExtra'
+import CreationSocialsExtra from '@/components/Creation/CreationCard/CreationSocials/CreationSocialsExtra/CreationSocialsExtra'
 
 // ICONS
 import { FiMoreHorizontal } from 'react-icons/fi'
 
 // STYLES
-import CreationSocialsStyles from './CreationSocials/CreationSocialsStyles'
+import CreationSocialsStyles from './CreationSocialsStyles'
 
 const CreationSocials = () => {
   return (
