@@ -13,7 +13,7 @@ const { Text } = Typography
 
 // EDEN COMPONENTS
 import CreationCardModal from '@/components/Creation/CreationCard/CreationCardModal/CreationCardModal'
-import CreationSocials '@/components/Creation/CreationCard/CreationSocials/CreationSocials'
+import CreationSocials from '@/components/Creation/CreationCard/CreationSocials/CreationSocials'
 import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 
 // LIBS
@@ -137,20 +137,18 @@ export default function CreationCardMinimal({ index, creation }) {
             </span>
           </div>
 
-          <div className='cr-content-main-wrapper'>
-            <div className='cr-content-main'>
+          <div className="cr-content-main-wrapper">
+            <div className="cr-content-main">
               <Text>{timestamp}</Text>
-              <Text className="cr-prompt-command">
-                {generator}
-              </Text>
-              <Text className='cr-prompt'>{prompt}</Text>
+              <Text className="cr-prompt-command">{generator}</Text>
+              <Text className="cr-prompt">{prompt}</Text>
 
               <div>
                 <Text>{key}</Text>
                 <Text>{status}</Text>
               </div>
 
-              <div className='cr-social-wrapper'>
+              <div className="cr-social-wrapper">
                 <Popover content={'test'} placement="bottomLeft">
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div

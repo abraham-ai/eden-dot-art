@@ -12,7 +12,7 @@ import { Popover, Modal, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
-import CreationSocials '@/components/Creation/CreationSocials/CreationSocials'
+import CreationSocials from '@/components/Creation/CreationSocials/CreationSocials'
 import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 
 // LIBS
@@ -23,7 +23,7 @@ import { FaRetweet } from 'react-icons/fa'
 import { BsFillBookmarkFill } from 'react-icons/bs'
 
 // STYLES
-import CreationCardStyles from './CreationCardStyles'
+import CreationCardModalStyles from './CreationCardModalStyles'
 
 export default function CreationCardModal({ index, creation }) {
   const router = useRouter()
@@ -58,10 +58,9 @@ export default function CreationCardModal({ index, creation }) {
   displayAddress += '...' + address.substr(-4)
 
   return (
-    <CreationCardStyles>
+    <CreationCardModalStyles>
       <Modal
-        className="cr-modal"
-        style={{ height: '100%', width: '100%' }}
+        className="cr-modal-outer-wrapper"
         open={
           creation.key === router.query.creationId
             ? !!router.query.creationId
@@ -74,108 +73,40 @@ export default function CreationCardModal({ index, creation }) {
         <>
           <Button
             className="close-icon-wrapper"
-            style={{
-              position: 'fixed',
-              top: '10px',
-              right: '10px',
-              color: 'black',
-            }}
             onClick={e => handleModalClose(e)}
           >
             {'X'}
           </Button>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }}
-          >
-            <div
-              style={{
-                overflowY: 'auto',
-                display: 'flex',
-                flexDirection: 'row',
-                width: '100%',
-              }}
-            >
-              <div
-                className="creation-card-wrapper"
-                style={{
-                  display: 'flex',
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <img
-                  className="creation-card"
-                  src={uri}
-                  alt="Card Media"
-                  style={{
-                    height: 'auto',
-                    position: 'relative',
-                    minHeight: '512px',
-                    minWidth: '512px',
-                  }}
-                />
+          <div className="cr-modal-wrapper">
+            <div className="cr-modal-inner-wrapper">
+              <div className="cr-card-image">
+                <img className="cr-card" src={uri} alt="Card Media" />
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+              <div className="cr-card-content-wrapper">
+                <div className="cr-card-content-inner">
+                  <div className="cr-card-popover-wrapper">
                     <Popover
                       content={<ProfilePopOver profileAddress={address} />}
                       placement="bottomLeft"
                     >
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div
-                          style={{
-                            borderRadius: '50%',
-                            overflow: 'hidden',
-                            width: '32px',
-                            height: '32px',
-                            marginRight: 10,
-                          }}
-                        >
+                      <div className="cr-creator-wrapper">
+                        <div className="cr-blockie">
                           <Blockies seed={address} />
                         </div>
-                        <Text
-                          style={{
-                            // color: '#111',
-                            fontWeight: 600,
-                            fontSize: '.8rem',
-                            color: 'white',
-                          }}
-                        >
-                          {displayAddress}
-                        </Text>
+                        <Text className="cr-address">{displayAddress}</Text>
                       </div>
                     </Popover>
                   </div>
 
-                  <Text
-                    style={{
-                      paddingTop: 20,
-                      color: '#111',
-                      fontWeight: 600,
-                      fontSize: '1.2rem',
-                    }}
-                  >
-                    {prompt}
-                  </Text>
+                  <Text className="cr-prompt">{prompt}</Text>
                 </div>
               </div>
             </div>
           </div>
         </>
       </Modal>
-    </CreationCardStyles>
+    </CreationCardModalStyles>
   )
 }

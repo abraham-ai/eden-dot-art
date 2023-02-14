@@ -17,80 +17,8 @@ import Blockies from 'react-blockies'
 // import CloseIcon
 import { StarOutlined, ShareAltOutlined, EyeOutlined } from '@ant-design/icons'
 
-const CardStyles = styled.section`
-  position: relative;
-  width: 100%;
-  background: blue;
-  padding-right: 70px;
-
-  #creation-card {
-    box-shadow: unset !important;
-    background: unset;
-    border-radius: 10px;
-  }
-  #creation-card:hover {
-    transform: unset;
-    cursor: zoom-in;
-  }
-  #creation-card:hover .creation-content {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-  }
-  #creation-card:hover .creation-actions {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    // background: #111633;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 10px;
-  }
-  #creation-card {
-    // background: yellow;
-  }
-  .creation-content {
-    position: absolute;
-    height: 100%;
-    right: 0;
-    bottom: 0;
-    border-radius: 15px;
-    display: none;
-    margin: 0;
-    padding: 0;
-  }
-  .creation-actions {
-    display: none;
-  }
-  .creation-header {
-    display: inline-block;
-    margin: 8px;
-    padding: 8px;
-  }
-  .creation-header > div {
-    flex: 0;
-    float: left;
-  }
-  .creation-header:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 25px;
-    margin: 8px;
-    padding: 8px;
-    cursor: pointer;
-    // backdrop-filter: blur(16px);
-  }
-  .close-icon-wrapper {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    color: black;
-  }
-  .close-icon-wrapper:hover {
-    cursor: pointer;
-    z-index: 50;
-  }
-`
+// STYLES
+import CreationCardFeedStyles from './CreationCardFeedStyles'
 
 export default function CreationCardFeed({ creation }) {
   // MAIN
@@ -124,31 +52,12 @@ export default function CreationCardFeed({ creation }) {
   displayAddress += '...' + address.substr(-4)
 
   return (
-    <CardStyles>
-      <div id="creation-card" onClick={handleModalOpen}>
-        <div
-          style={{ position: 'relative', background: 'lime', width: '100%' }}
-        >
-          <article
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              background: 'blue',
-            }}
-          >
-            <div
-              style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}
-            >
-              <span
-                style={{
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  width: '32px',
-                  height: '32px',
-                  marginRight: 10,
-                }}
-              >
+    <CreationCardFeedStyles>
+      <div id="cr-card-wrapper" onClick={handleModalOpen}>
+        <div className="cr-card">
+          <article className="cr-card-creator-wrapper">
+            <div className="cr-card-creator">
+              <span className="cr-blockies">
                 <Blockies seed={address} />
               </span>
               <Text>{displayAddress}</Text>
@@ -390,6 +299,6 @@ export default function CreationCardFeed({ creation }) {
           </div>
         </>
       </Modal>
-    </CardStyles>
+    </CreationCardFeedStyles>
   )
 }

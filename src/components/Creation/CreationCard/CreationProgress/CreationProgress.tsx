@@ -5,38 +5,19 @@ import { Typography, Progress } from 'antd'
 const { Text } = Typography
 
 // STYLES
-import styled from 'styled-components'
+import CreationProgressLabelStyles from './CreationProgressLabelStyles'
+import CreationProgressStyles from './CreationProgressStyles'
 
 function CircularProgressWithLabel() {
   return (
-    <div style={{ position: 'relative', display: 'inline-flex' }}>
+    <CreationProgressLabelStyles>
       <Progress variant="determinate" />
-      <div
-        style={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
+      <div className="progress-label-wrapper">
         <Text>{`${Math.round(10)}%`}</Text>
       </div>
-    </div>
+    </CreationProgressLabelStyles>
   )
 }
-
-const RunningCreationStyles = styled.div`
-  .ant-progress-circle .ant-progress-text {
-    font-size: 0.85em;
-  }
-  .ant-progress-inner.ant-progress-circle-gradient {
-    font-size: 12px;
-  }
-`
 
 interface Creation {
   status: string
@@ -53,27 +34,27 @@ export default function CreationProgress({
   function RunningCreations() {
     if (status === 'running' && status_code < 100) {
       return (
-        <RunningCreationStyles id="running-creation">
+        <CreationProgressStyles id="running-creation">
           {textInput}
           <CircularProgressWithLabel value={status_code} />
-        </RunningCreationStyles>
+        </CreationProgressStyles>
       )
     } else if (status === 'queued') {
       return (
-        <RunningCreationStyles id="running-creation">
+        <CreationProgressStyles id="running-creation">
           {/* {queue_position} */}
           {textInput} <b>(Queue position 1)</b>{' '}
           <CircularProgressWithLabel value={status_code} />
-        </RunningCreationStyles>
+        </CreationProgressStyles>
       )
     } else if (status === 'complete') {
       return null
     } else if (status === 'failed') {
       return (
-        <RunningCreationStyles id="running-creation">
+        <CreationProgressStyles id="running-creation">
           {textInput}
           <CircularProgressWithLabel value={status_code} />
-        </RunningCreationStyles>
+        </CreationProgressStyles>
       )
     } else if (status_code === 0) {
       return null
