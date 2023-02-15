@@ -26,4 +26,4 @@ const CreationCardMediaStyles = styled.section`
   }
 `
 
-export default CreationCardMediaStyles
+export { CreationCardMediaStyles }

@@ -23,12 +23,12 @@ import { FaRetweet } from 'react-icons/fa'
 import { BsFillBookmarkFill } from 'react-icons/bs'
 
 // STYLES
-import CreationCardModalStyles from './CreationCardModalStyles'
+import { CreationCardModalStyles } from './CreationCardModalStyles'
 
 export default function CreationCardModal({ index, creation }) {
   const router = useRouter()
 
-  console.log({ creation })
+  // console.log({ creation })
   const { key, address, uri, timestamp, prompt, status, generator } = creation
 
   const [modalOpen, setModalOpen] = useState(false)

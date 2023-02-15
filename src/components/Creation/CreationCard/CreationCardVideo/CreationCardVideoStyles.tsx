@@ -341,4 +341,4 @@ const CreationCardVideoStyles = styled.article`
   }
 `
 
-export default CreationCardVideoStyles
+export { CreationCardVideoStyles }

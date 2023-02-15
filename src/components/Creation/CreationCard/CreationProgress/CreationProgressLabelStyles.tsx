@@ -16,4 +16,4 @@ const CreationProgressLabelStyles = styled.div`
   }
 `
 
-export default CreationProgressLabelStyles
+export { CreationProgressLabelStyles }

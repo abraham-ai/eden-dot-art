@@ -22,4 +22,4 @@ const CreationSocialsExtraStyles = styled.span`
   }
 `
 
-export default CreationSocialsExtraStyles
+export { CreationSocialsExtraStyles }

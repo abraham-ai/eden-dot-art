@@ -46,10 +46,11 @@ const CreationCardStyles = styled.section`
     flex-direction: row;
     flex: 1;
     padding: 10px;
-    justifyContent: space-between;
+    justify-content: space-between;
   }
   /*** CR-SOCIAL PRAISE & BURN ***/
-  .cr-social.praise, .cr-social.burn {
+  .cr-social.praise,
+  .cr-social.burn {
     margin: 10px;
   }
   /*** CR-SOCIAL REMIX ***/
@@ -64,7 +65,7 @@ const CreationCardStyles = styled.section`
   .cr-action-right {
     display: flex;
     width: auto;
-    flex-direction: 'column;
+    flex-direction: column;
     margin: 10px;
     position: absolute;
     right: 0;
@@ -83,9 +84,9 @@ const CreationCardStyles = styled.section`
     padding: 0;
   }
   /*** CR-CONTENT MAIN ***/
-  .cr-content-main-wrapper {    
-    borderRadius: 15px;
-    margin: 10px,
+  .cr-content-main-wrapper {
+    border-radius: 15px;
+    margin: 10px;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(16px);
     padding: 20px;
@@ -98,12 +99,16 @@ const CreationCardStyles = styled.section`
     overflow-y: auto;
     max-height: 150px;
     display: flex;
-    flex-Direction: column;
+    flex-direction: column;
+  }
+  /*** CR DATE ***/
+  .cr-date {
+    color: white;
   }
   /*** CR-PROMPT-COMMAND ***/
   .cr-prompt-command {
-    fontWeight: bold;
-    color: #8C7CF0;
+    font-weight: bold;
+    color: #8c7cf0;
     font-family: courier;
   }
   /*** CR-PROMPT ***/
@@ -140,9 +145,16 @@ const CreationCardStyles = styled.section`
     cursor: pointer;
     // backdrop-filter: blur(16px);
   }
+  /*** CR METADATA ***/
+  .cr-metadata {
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
   .close-icon-wrapper:hover {
     cursor: pointer;
     z-index: 50;
   }
 `
-export default CreationCardStyles
+
+export { CreationCardStyles }

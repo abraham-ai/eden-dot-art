@@ -232,4 +232,4 @@ const EditProfileStyles = styled.section`
     } 
 `
 
-export default EditProfileStyles
+export { EditProfileStyles }

@@ -21,7 +21,7 @@ import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb'
 // BookmarkBorderIcon
 
 // STYLES
-import CreationCardVideoStyles from './CreationCardVideoStyles'
+import { CreationCardVideoStyles } from './CreationCardVideoStyles'
 
 export default function VideoCreation({
   item = {

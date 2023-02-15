@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const CreationCardFeedStyles = styled.section`
+const CreationCardFeed = styled.section`
   position: relative;
   width: 100%;
   background: blue;
@@ -18,22 +18,22 @@ const CreationCardFeedStyles = styled.section`
   }
   .cr-card-creator-wrapper {
     display: flex;
-    alignitems: center;
-    justifycontent: space-between;
+    align-items: center;
+    justify-content: space-between;
     background: blue;
   }
-	.cr-card-creator {
-		display: 'flex; 
-		align-items: center; 
-		margin-top: 10px;
-	}
-	.cr-blockies {
-		border-radius: '50%;
-		overflow: 'hidden;
-		width: 32px;
-		height: 32px;
-		margin-right: 10px;
-	}
+  .cr-card-creator {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .cr-blockies {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
   #creation-card:hover {
     transform: unset;
     cursor: zoom-in;
@@ -98,4 +98,4 @@ const CreationCardFeedStyles = styled.section`
   }
 `
 
-export default CreationCardFeedStyles
+export { CreationCardFeed }

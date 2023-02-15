@@ -11,7 +11,7 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 import { IoIosShareAlt } from 'react-icons/io'
 
 // STYLES
-import CreationSocialsExtraStyles from './CreationSocialsExtraStyles'
+import { CreationSocialsExtraStyles } from './CreationSocialsExtraStyles'
 
 export default function CreationSocialsExtra() {
   return (

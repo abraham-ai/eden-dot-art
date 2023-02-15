@@ -36,4 +36,4 @@ const CreationSocialsStyles = styled.div`
   }
 `
 
-export default CreationSocialsStyles
+export { CreationSocialsStyles }

@@ -10,7 +10,7 @@ import CreationSocialsExtra from '@/components/Creation/CreationCard/CreationSoc
 import { FiMoreHorizontal } from 'react-icons/fi'
 
 // STYLES
-import CreationSocialsStyles from './CreationSocialsStyles'
+import { CreationSocialsStyles } from './CreationSocialsStyles'
 
 const CreationSocials = () => {
   return (

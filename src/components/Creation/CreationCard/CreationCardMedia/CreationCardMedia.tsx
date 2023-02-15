@@ -8,7 +8,7 @@ const { Text } = Typography
 import shaURL from '@/util/shaURL'
 
 // STYLES
-import CreationCardMediaStyles from './CreationCardMediaStyles'
+import { CreationCardMediaStyles } from './CreationCardMediaStyles'
 
 // ICONS
 // SkipPrevious

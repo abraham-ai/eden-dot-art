@@ -26,7 +26,7 @@ const { Header, Content } = Layout
 import { PlusOutlined } from '@ant-design/icons'
 
 // STYLES
-import EditProfileStyles from './EditProfileStyles'
+import { EditProfileStyles } from './EditProfileStyles'
 
 const EditProfile = () => {
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false)

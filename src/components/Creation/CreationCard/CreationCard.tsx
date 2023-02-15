@@ -8,13 +8,17 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // ANTD
-import { Popover, Typography, Button } from 'antd'
+import { Popover, Typography, Button, Modal, Input } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
 import CreationCardModal from '@/components/Creation/CreationCard/CreationCardModal/CreationCardModal'
 import CreationSocials from '@/components/Creation/CreationCard/CreationSocials/CreationSocials'
+import CreationSaveModal from '@/components/Creation/CreationCard/CreationSaveModal/CreationSaveModal'
 import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
+
+// UTILS
+import time_ago from '@/util/time_ago'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -24,15 +28,17 @@ import { FaRetweet } from 'react-icons/fa'
 import { BsFillBookmarkFill } from 'react-icons/bs'
 
 // STYLES
-import CreationCardStyles from './CreationCardStyles'
+import { CreationCardStyles } from './CreationCardStyles'
 
-export default function CreationCardMinimal({ index, creation }) {
+export default function CreationCard({ key: index = 0, creation }) {
   const router = useRouter()
 
   console.log({ creation })
+
   const { key, address, uri, timestamp, prompt, status, generator } = creation
 
-  const [modalOpen, setModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSaveModalActive, setIsSaveModalActive] = useState(false)
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   // const handleModalOpen = () => {
@@ -81,6 +87,7 @@ export default function CreationCardMinimal({ index, creation }) {
   ) => {
     event.preventDefault()
     console.log('handle SAVE 🔖!')
+    setIsSaveModalActive(true)
   }
 
   let displayAddress = address?.substr(0, 6)
@@ -139,11 +146,11 @@ export default function CreationCardMinimal({ index, creation }) {
 
           <div className="cr-content-main-wrapper">
             <div className="cr-content-main">
-              <Text>{timestamp}</Text>
+              <Text className="cr-date">{time_ago(timestamp)}</Text>
               <Text className="cr-prompt-command">{generator}</Text>
               <Text className="cr-prompt">{prompt}</Text>
 
-              <div>
+              <div className="cr-metadata">
                 <Text>{key}</Text>
                 <Text>{status}</Text>
               </div>
@@ -194,6 +201,7 @@ export default function CreationCardMinimal({ index, creation }) {
       </article>
 
       <CreationCardModal index={index} creation={creation} />
+      <CreationSaveModal isSaveModalActive={isSaveModalActive} />
     </CreationCardStyles>
   )
 }

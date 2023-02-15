@@ -5,8 +5,8 @@ import { Typography, Progress } from 'antd'
 const { Text } = Typography
 
 // STYLES
-import CreationProgressLabelStyles from './CreationProgressLabelStyles'
-import CreationProgressStyles from './CreationProgressStyles'
+import { CreationProgressLabelStyles } from './CreationProgressLabelStyles'
+import { CreationProgressStyles } from './CreationProgressStyles'
 
 function CircularProgressWithLabel() {
   return (

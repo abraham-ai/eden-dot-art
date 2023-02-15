@@ -9,4 +9,4 @@ const CreationProgressStyles = styled.div`
   }
 `
 
-export default CreationProgressStyles
+export { CreationProgressStyles }

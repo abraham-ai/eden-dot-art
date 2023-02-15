@@ -18,7 +18,7 @@ import Blockies from 'react-blockies'
 import { StarOutlined, ShareAltOutlined, EyeOutlined } from '@ant-design/icons'
 
 // STYLES
-import CreationCardFeedStyles from './CreationCardFeedStyles'
+import { CreationCardFeed as CreationCardFeedStyles } from './CreationCardFeed'
 
 export default function CreationCardFeed({ creation }) {
   // MAIN

@@ -1,3 +1,6 @@
+'use client'
+
+import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
 
 // FETCH
@@ -8,11 +11,11 @@ import { useInView } from 'react-intersection-observer'
 import Masonry from 'react-masonry-css'
 
 // EDEN COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCard/CreationCard'
+import CreationCard from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
 
 // STYLES
-import CreationsGridStyles from './CreationsGridStyles'
+import { CreationsGridStyles } from './CreationsGridStyles'
 
 // CONSTS
 const PAGE_LENGTH = 10
@@ -95,7 +98,7 @@ export default function CreationsGrid({ username = null }) {
 
   return (
     <CreationsGridStyles id="creations-grid">
-      <div id="creations-grid-wrapper">
+      <div className="creations-grid-wrapper">
         {creations.length < 1 ? (
           <Loader />
         ) : (
@@ -105,9 +108,12 @@ export default function CreationsGrid({ username = null }) {
               className={'cr-grid-masonry'}
               columnClassName="cr-grid-masonry_column"
             >
-              {creations.map((creation, index) => (
-                <CreationCardMinimal index={index} creation={creation} />
-              ))}
+              {creations.map((creation, index) =>
+                creation.generator === 'tts' ||
+                creation.generator === 'complete' ? null : (
+                  <CreationCard key={index} creation={creation} />
+                ),
+              )}
             </Masonry>
           </div>
         )}

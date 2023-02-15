@@ -82,4 +82,4 @@ const CreationCardModalStyles = styled.section`
 	}
 `
 
-export default CreationCardModalStyles
+export { CreationCardModalStyles }

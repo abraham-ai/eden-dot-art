@@ -21,7 +21,7 @@ import { HiSparkles, HiOutlineSparkles } from 'react-icons/hi'
 // import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
 
 // STYLES
-import CreationSocialStyles from './CreationSocialStyles'
+import { CreationSocialStyles } from './CreationSocialStyles'
 
 export default function CreationSocial({
   creationBurns,
