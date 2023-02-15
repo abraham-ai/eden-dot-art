@@ -13,7 +13,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import Masonry from 'react-masonry-css'
 
 // COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCard/CreationCard'
+import CreationCard from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
 
 // HOOKS
@@ -95,7 +95,7 @@ export default function CreationsPage() {
               imagesLoadedOptions={imagesLoadedOptions} // default {}
             >
               {creations.map((creation, index) => (
-                <CreationCardMinimal key={index} creation={creation} />
+                <CreationCard key={index} creation={creation} />
               ))}
             </Masonry>
           </div>

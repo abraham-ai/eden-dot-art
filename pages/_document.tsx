@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { ServerStyleSheet } from 'styled-components'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'src/createEmotionCache'
@@ -33,7 +34,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400&display=swap"
           />
         </Head>
-        <body style={{ backgroundColor: 'white' }}>
+        <body>
           <Main />
           <NextScript />
         </body>
