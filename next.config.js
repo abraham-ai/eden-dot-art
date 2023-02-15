@@ -14,6 +14,10 @@ const redirects = {
 }
 
 module.exports = withAntdLess({
+  reactStrictMode: false,
+  compiler: {
+    styledComponents: true,
+  },
   // optional: you can modify antd less variables directly here
   modifyVars: { '@primary-color': '#04f' },
   // Or better still you can specify a path to a file
