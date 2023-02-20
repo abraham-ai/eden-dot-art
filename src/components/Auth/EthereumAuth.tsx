@@ -6,7 +6,7 @@ import { useState, useContext } from 'react'
 import AppContext from '@/components/AppContext/AppContext'
 
 // ANTD
-import { Button, Row, Typography } from 'antd'
+import { Row, Typography } from 'antd'
 const { Text } = Typography
 
 // FETCH
@@ -44,6 +44,7 @@ const EthereumAuth = ({ onModalCancel }) => {
   const [ethMessage, setEthMessage] = useState<string | null>(null)
 
   const context = useContext(AppContext)
+  const { setAuthToken, setIsWeb3AuthSuccess } = context
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -56,9 +57,12 @@ const EthereumAuth = ({ onModalCancel }) => {
 
         console.log({ resp })
         const { token } = resp.data
+        const { token: authToken } = token
 
-        context.setAuthToken(token.token)
-        context.setIsWeb3AuthSuccess(true)
+        console.log('Ethereum Auth Token: ', { authToken })
+
+        setAuthToken(authToken)
+        setIsWeb3AuthSuccess(true)
 
         setEthMessage(
           'Successfully authenticated as ' + address + ', Token' + token.token,
