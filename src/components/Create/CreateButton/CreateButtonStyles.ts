@@ -4,7 +4,10 @@ const CreateButtonStyles = styled.section`
   #create-button {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 45px;
+    width: 120px;
+    text-align: center;
     margin-left: 15px;
     padding: 10px 20px;
     color: white;
@@ -17,6 +20,7 @@ const CreateButtonStyles = styled.section`
     color: white;
     font-size: 1rem;
     margin: 0px 5px;
+    text-align: center;
   }
 `
 
