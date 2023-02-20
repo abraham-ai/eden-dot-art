@@ -54,9 +54,11 @@ export default withIronSessionApiRoute(
 
     res.setHeader(
       'Set-Cookie',
-      `ironSession=${''}; Path=/; HttpOnly; Expires=${new Date().toUTCString()}`,
+      `eden_art=${''}; Path=/; HttpOnly; Expires=${new Date().toUTCString()}`,
     )
-    res.status(200).json({ success: true })
+    res
+      .status(200)
+      .json({ success: true, isLoggedIn: false, login: '', avatarUrl: '' })
   },
   {
     cookieName: 'eden_art',
