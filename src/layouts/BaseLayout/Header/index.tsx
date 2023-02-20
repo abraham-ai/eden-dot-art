@@ -10,14 +10,10 @@ import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
 
 // CONTRACT - WEB3
-import {
-  useAccount,
-  chain,
-  createClient,
-  configureChains,
-  WagmiConfig,
-} from 'wagmi'
+import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
 
+// CHAINS
+import { goerli } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 
 // WALLET - WEB3
@@ -30,13 +26,13 @@ import {
 // LIBS
 import Blockies from 'react-blockies'
 
-const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.goerli, chain.polygonMumbai],
-  [publicProvider()],
-)
+// STYLES
+import { HeaderWrapperStyles } from './HeaderStyles'
+
+const { chains, provider } = configureChains([goerli], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: 'Eden Art App',
   chains,
 })
 
@@ -49,9 +45,6 @@ const wagmiClient = createClient({
 const CustomAvatar: AvatarComponent = ({ address }) => {
   return <Blockies seed={address} />
 }
-
-// STYLES
-import { HeaderWrapperStyles } from './HeaderWrapper.styled.js'
 
 export default function Header() {
   const context = useContext(AppContext)
@@ -70,19 +63,17 @@ export default function Header() {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
         <HeaderWrapperStyles id="header-wrapper">
-          <div className="header-wrapper-inner">
-            <Logo />
+          <Logo />
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <ConnectButtonCustom />
+          <div className="header-connect-wrapper">
+            <ConnectButtonCustom />
 
-              {isWeb3WalletConnected ? (
-                <>
-                  <CreateButton />
-                  <CreateModal />
-                </>
-              ) : null}
-            </div>
+            {isWeb3WalletConnected ? (
+              <>
+                <CreateButton />
+                <CreateModal />
+              </>
+            ) : null}
           </div>
         </HeaderWrapperStyles>
       </RainbowKitProvider>
