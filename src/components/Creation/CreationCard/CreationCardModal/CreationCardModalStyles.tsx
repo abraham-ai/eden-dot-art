@@ -32,6 +32,10 @@ const CreationCardModalStyles = styled.section`
     align-items: center;
     justify-content: center;
   }
+  .cr-card-image img {
+	width: 100% !important;
+    height: auto !important;
+  }
 	/*** CR-CARD CONTENT-WRAPPER ***/
 	.cr-card-content-wrapper {
 		display: flex;
@@ -49,10 +53,7 @@ const CreationCardModalStyles = styled.section`
 	}
   /*** CR-CARD ***/
   .cr-card {
-    height: auto;
     position: relative;
-    minheight: 512px;
-    minwidth: 512px;
   }
 	/*** CR CREATOR WRAPPER ***/
 	.cr-creator-wrapper {

@@ -25,11 +25,21 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 // STYLES
 import { CreationCardModalStyles } from './CreationCardModalStyles'
 
-export default function CreationCardModal({ index, creation }) {
+export default function CreationCardModal({ creation, index }) {
   const router = useRouter()
 
   // console.log({ creation })
-  const { key, address, uri, timestamp, prompt, status, generator } = creation
+  const {
+    key,
+    address,
+    uri,
+    timestamp,
+    prompt,
+    status,
+    generator,
+    width,
+    height,
+  } = creation
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -69,19 +79,27 @@ export default function CreationCardModal({ index, creation }) {
         centered
         keyboard
         onCancel={handleModalClose}
+        footer={null}
       >
         <>
-          <Button
+          {/* <Button
             className="close-icon-wrapper"
             onClick={e => handleModalClose(e)}
           >
-            {'X'}
-          </Button>
+            {'Xhello'}
+          </Button> */}
 
           <div className="cr-modal-wrapper">
             <div className="cr-modal-inner-wrapper">
               <div className="cr-card-image">
-                <Image className="cr-card" src={uri} alt="Card Media" />
+                <Image
+                  className="cr-card"
+                  src={uri}
+                  alt={prompt}
+                  width={width}
+                  height={height}
+                  style={{ width: '100%', height: 'auto' }}
+                />
               </div>
 
               <div className="cr-card-content-wrapper">
