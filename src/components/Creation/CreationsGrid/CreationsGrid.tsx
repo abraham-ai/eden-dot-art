@@ -1,7 +1,9 @@
 'use client'
 
-import React from 'react'
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
+
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // FETCH
 import axios from 'axios'
@@ -17,15 +19,12 @@ import Loader from '@/components/Loader/Loader'
 // STYLES
 import { CreationsGridStyles } from './CreationsGridStyles'
 
-// CONSTS
-const PAGE_LENGTH = 10
+// TYPES
+import Creation from '@/interfaces/Creation'
 
-const breakpointColumnsObj = {
-  default: 3,
-  1100: 3,
-  700: 2,
-  580: 1,
-}
+// CONSTS
+import { PAGE_LENGTH } from '@/consts/pageLength'
+import { breakpointColumnsObj } from '@/consts/breakpointColumns'
 
 export default function CreationsGrid({ username = null }) {
   const [creations, setCreations] = useState<object[]>([])
@@ -33,6 +32,9 @@ export default function CreationsGrid({ username = null }) {
   const [loading, setLoading] = useState(false)
   const [paginate, setPaginate] = useState(true)
   const [cutoffTime, setCutoffTime] = useState<number | null>(null)
+
+  const context = useContext(AppContext)
+  const { authToken, setAuthToken, setUserId, setIsWeb3AuthSuccess } = context
 
   const getMoreCreations = useCallback(async () => {
     if (!paginate) return
@@ -51,17 +53,37 @@ export default function CreationsGrid({ username = null }) {
 
       const response = await axios.post('/api/creations', filter)
 
+      const { data } = response
+      const { session } = data
+      const { userId, token } = session
+      const { token: respToken } = token
+
+      console.log('Creations Grid: ', { authToken, token })
+
+      if (respToken !== authToken && respToken.length === 175) {
+        setAuthToken(token.token)
+        setUserId(userId)
+        setIsWeb3AuthSuccess(true)
+      }
+
       const moreCreations =
         response.data.creations &&
-        response.data.creations.map((creation: any) => {
+        response.data.creations.map((creation: Creation) => {
+          const { _id, user, uri, createdAt, task } = creation
+          const { config, status, generator } = task
+          const { text_input, width, height } = config
+          const { generatorName } = generator
+
           return {
-            key: creation._id,
-            address: creation.user,
-            uri: creation.uri,
-            timestamp: creation.createdAt,
-            prompt: creation.task.config.text_input,
-            status: creation.task.status,
-            generator: creation.task.generator.generatorName,
+            key: _id,
+            address: user,
+            uri: uri,
+            timestamp: createdAt,
+            prompt: text_input,
+            status: status,
+            generator: generatorName,
+            width: width,
+            height: height,
           }
         })
 
@@ -108,10 +130,10 @@ export default function CreationsGrid({ username = null }) {
               className={'cr-grid-masonry'}
               columnClassName="cr-grid-masonry_column"
             >
-              {creations.map((creation, index) =>
+              {creations.map((creation, i: number) =>
                 creation.generator === 'tts' ||
                 creation.generator === 'complete' ? null : (
-                  <CreationCard key={index} creation={creation} />
+                  <CreationCard creation={creation} key={i} />
                 ),
               )}
             </Masonry>
