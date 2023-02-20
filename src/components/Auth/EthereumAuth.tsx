@@ -44,7 +44,12 @@ const EthereumAuth = ({ onModalCancel }) => {
   const [ethMessage, setEthMessage] = useState<string | null>(null)
 
   const context = useContext(AppContext)
-  const { setAuthToken, setIsWeb3AuthSuccess } = context
+  const {
+    setAuthToken,
+    setIsWeb3AuthSuccess,
+    setIsSignInModalVisible,
+    setIsCreateUIVisible,
+  } = context
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -63,6 +68,8 @@ const EthereumAuth = ({ onModalCancel }) => {
 
         setAuthToken(authToken)
         setIsWeb3AuthSuccess(true)
+        setIsSignInModalVisible(false)
+        setIsCreateUIVisible(true)
 
         setEthMessage(
           'Successfully authenticated as ' + address + ', Token' + token.token,
