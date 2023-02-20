@@ -58,7 +58,7 @@ export default function CreationsGrid({ username = null }) {
       const { userId, token } = session
       const { token: respToken } = token
 
-      console.log('Creations Grid: ', { authToken, token })
+      console.log('Creations Grid Token: ', { authToken, token })
 
       if (respToken !== authToken && respToken.length === 175) {
         setAuthToken(token.token)
@@ -118,6 +118,8 @@ export default function CreationsGrid({ username = null }) {
     }
   }, [inView, getMoreCreations])
 
+  console.log({ creations })
+
   return (
     <CreationsGridStyles id="creations-grid">
       <div className="creations-grid-wrapper">
@@ -130,12 +132,18 @@ export default function CreationsGrid({ username = null }) {
               className={'cr-grid-masonry'}
               columnClassName="cr-grid-masonry_column"
             >
-              {creations.map((creation, i: number) =>
-                creation.generator === 'tts' ||
-                creation.generator === 'complete' ? null : (
-                  <CreationCard creation={creation} key={i} />
-                ),
-              )}
+              {creations.map((creation, i: number) => {
+                const { generator } = creation
+                if (
+                  generator === 'tts' ||
+                  generator === 'complete' ||
+                  generator === 'interrogate'
+                ) {
+                  return null
+                } else {
+                  return <CreationCard creation={creation} key={i} />
+                }
+              })}
             </Masonry>
           </div>
         )}
