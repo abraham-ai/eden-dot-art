@@ -1,6 +1,9 @@
-import { useState } from 'react'
-import type { ReactElement, ReactNode } from 'react'
+import { useState, useEffect } from 'react'
 
+// TYPES
+import type { ReactElement, ReactNode } from 'react/types'
+
+// NEXT
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
@@ -11,6 +14,7 @@ import nProgress from 'nprogress'
 // CSS
 import 'nprogress/nprogress.css'
 import 'src/theme/base.css'
+import 'src/components/Creation/CreationCard/CreationCardModal/CreationCardModal.css'
 
 // EMOTION
 import { CacheProvider, EmotionCache } from '@emotion/react'
@@ -33,15 +37,20 @@ type NextPageWithLayout = NextPage & {
 }
 
 interface EdenAppProps extends AppProps {
+  pageProps: Record<string, unknown>
   emotionCache?: EmotionCache
   Component: NextPageWithLayout
 }
 
 function EdenApp(props: EdenAppProps) {
+  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false)
+  const [isCreationModalVisible, setIsCreationModalVisible] = useState(false)
+  const [isCreateUIModalVisible, setIsCreateUIModalVisible] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
   const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
   const [authToken, setAuthToken] = useState('')
+  const [userId, setUserId] = useState('')
   const [isLightTheme, setIsLightTheme] = useState(true)
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
@@ -53,16 +62,40 @@ function EdenApp(props: EdenAppProps) {
 
   const contextValues = {
     authToken,
+    userId,
     isModalVisible,
+    isCreateUIModalVisible,
+    setIsCreateUIModalVisible,
+    isCreationModalVisible,
+    setIsCreationModalVisible,
+    isSignInModalVisible,
+    setIsSignInModalVisible,
     isWeb3AuthSuccess,
     isWeb3WalletConnected,
     setAuthToken,
+    setUserId,
     setIsModalVisible,
     setIsWeb3AuthSuccess,
     setIsWeb3WalletConnected,
     isLightTheme,
     setIsLightTheme,
   }
+
+  console.log(authToken.length)
+  console.log({ authToken, userId })
+
+  useEffect(() => {
+    if (
+      authToken !== '' &&
+      userId !== '' &&
+      isWeb3AuthSuccess === false &&
+      authToken.length === 175
+    ) {
+      setIsWeb3AuthSuccess(true)
+    }
+  }, [authToken])
+
+  console.log({ authToken, userId, isWeb3AuthSuccess })
 
   return (
     <CacheProvider value={emotionCache}>
