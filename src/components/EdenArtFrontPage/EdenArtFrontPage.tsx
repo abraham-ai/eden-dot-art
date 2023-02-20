@@ -117,31 +117,20 @@ export default function EdenArtFrontPage() {
         <section className="section-wrapper header">
           <AppLogo size="medium" logo="eden" />
 
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="social-btns-wrapper">
             <Button
               className="social-btn"
               icon={<FaDiscord />}
               shape="circle"
               href={'https://discord.gg/4dSYwDT'}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
             />
             <Button
               className="social-btn"
               icon={<BsTwitter />}
               shape="circle"
               href={'https://twitter.com/Eden_Art_'}
-              style={{
-                margin: '0 10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+              style={{ margin: '0 10px' }}
             />
-            <ConnectButtonCustom />
           </div>
         </section>
 
@@ -165,19 +154,8 @@ export default function EdenArtFrontPage() {
             ''
           )}
 
-          <div
-            className="section-wrapper info-wrapper"
-            style={{ background: 'transparent' }}
-          >
-            <div
-              className="section-center-wrapper"
-              style={{
-                padding: '100px 0 0 0',
-                paddingBottom: 0,
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
+          <div className="section-wrapper info-wrapper">
+            <div className="section-center-wrapper">
               {windowWidth < 930 ? (
                 <MobileTitle />
               ) : (
@@ -216,15 +194,7 @@ export default function EdenArtFrontPage() {
                 </>
               )}
 
-              <article
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: 0,
-                  width: '100%',
-                }}
-              >
+              <article className="cta-btns-wrapper">
                 <div
                   className="button-wrapper"
                   style={{
@@ -253,14 +223,14 @@ export default function EdenArtFrontPage() {
                     <>
                       <ButtonLink
                         text={'GARDEN'}
-                        link={'https://examples.eden.art'}
+                        link={'/garden'}
                         textColor={'#0c163b'}
                         color={'white'}
                         type="main-link"
                       />
                       <ButtonLink
                         text={'EXAMPLES'}
-                        link={'/garden'}
+                        link={'https://examples.eden.art'}
                         color={'#8C7CF0'}
                         textColor={'white'}
                       />
@@ -272,14 +242,8 @@ export default function EdenArtFrontPage() {
           </div>
         </section>
 
-        <section
-          className="section-wrapper first-description"
-          style={{ marginTop: 100, marginBottom: 150 }}
-        >
-          <article
-            className="info-wrapper"
-            style={{ margin: 0, paddingTop: 0 }}
-          >
+        <section className="section-wrapper first-description">
+          <article className="info-wrapper">
             <div className="info odd">
               <span className="description-wrapper">
                 <Text className="description">
@@ -339,10 +303,7 @@ export default function EdenArtFrontPage() {
           </article>
         </section>
 
-        <section
-          className="section-wrapper"
-          style={{ marginTop: 0, marginBottom: 150 }}
-        >
+        <section className="section-wrapper visit-garden">
           <Button
             className="cta-btn-main main-link"
             type="primary"

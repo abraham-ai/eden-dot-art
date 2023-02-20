@@ -202,7 +202,13 @@ const EdenArtFrontPageStyles = styled.section`
   }
 
   /*** SECTION ***/
-  .section-wrapper:first-child {
+  .section-wrapper {
+  }
+  .section-center-wrapper:first-child {
+    padding: 100px 0 0 0;
+    padding-bottom: 0;
+    width: 100%;
+    text-align: center;
   }
   .section-wrapper {
     display: flex;
@@ -216,7 +222,18 @@ const EdenArtFrontPageStyles = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // background: lime;
+  }
+  .section-wrapper.first-description {
+    margin-top: 100px;
+    margin-bottom: 150px;
+  }
+  .section-wrapper.first-description .info-wrapper {
+    margin: 0;
+    padding-top: 0;
+  }
+  .section-wrapper.visit-garden {
+    margin-top: 0;
+    margin-bottom: 150px;
   }
   @media (max-width: 930px) {
     .section-wrapper.video-splash {
@@ -262,7 +279,7 @@ const EdenArtFrontPageStyles = styled.section`
   }
   .splash-garden-card:hover {
     opacity: 1;
-    fontsize: 1.5rem;
+    font-size: 1.5rem;
   }
   /*** HIGHLIGHT ***/
   .highlight {
@@ -321,6 +338,13 @@ const EdenArtFrontPageStyles = styled.section`
     padding-bottom: 40px;
   }
   /*** CTA BUTTONS ***/
+  .cta-btns-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+  }
   .button-wrapper {
     justify-content: center;
     flex-direction: row;
@@ -647,6 +671,15 @@ const EdenArtFrontPageStyles = styled.section`
     align-items: flex-end;
     justify-content: space-around;
     list-style-type: none;
+  }
+  .social-btns-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .follow-us-wrapper {
     display: flex;
