@@ -90,10 +90,18 @@ export default function CreateSignInJWT() {
             <Auth onModalCancel={handleCancel} />
           </div>
 
-          {isSuccess && <Text>Signature: {data}</Text>}
+          {isSuccess && (
+            <div className="sign-in-signature-wrapper">
+              <p className="sign-in-signature">Signature:</p>
+              <p className="sign-in-signature">{data}</p>
+            </div>
+          )}
 
           {isWeb3AuthSuccess && (
-            <Text className="sign-in-auth-token">Auth Token: {authToken}</Text>
+            <div className="sign-in-auth-token-wrapper">
+              <Text className="sign-in-auth-token-header">Auth Token:</Text>
+              <Text className="sign-in-auth-token">{authToken}</Text>
+            </div>
           )}
         </div>
       </CreateSignInJWTStyles>

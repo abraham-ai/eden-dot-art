@@ -22,31 +22,33 @@ export default function CreateUI() {
   const context = useContext(AppContext)
   const {
     authToken,
-    isModalVisible,
-    setIsModalVisible,
+    isCreateUIModalVisible,
+    setIsCreateUIModalVisible,
     isWeb3WalletConnected,
     isWeb3AuthSuccess,
   } = context
 
   const { address } = useAccount()
 
-  console.log({ isModalVisible })
+  console.log({ isCreateUIModalVisible })
   console.log({ authToken })
   console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
-  return isModalVisible ? (
+  return isCreateUIModalVisible ? (
     <CreateUIStyles>
       <Modal
         className="create-modal"
-        open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
+        open={isCreateUIModalVisible}
+        onCancel={() => setIsCreateUIModalVisible(false)}
+        bodyStyle={{ maxWidth: '90%', maxHeight: '90%' }}
+        width="90%"
       >
         <CreateUIStyles>
           <>
             <div className="close-icon-wrapper">
               <Button
                 className="close-icon"
-                onClick={() => setIsModalVisible(false)}
+                onClick={() => setIsCreateUIModalVisible(false)}
               />
             </div>
 

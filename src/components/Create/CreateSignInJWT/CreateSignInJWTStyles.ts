@@ -31,7 +31,18 @@ const CreateSignInJWTStyles = styled.section`
     text-align: center;
     font-weight: normal;
   }
-  .sign-in-auth-token {
+  .sign-in-auth-token-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .sign-in-signature-wrapper {
+    background: red;
+  }
+  .sign-in-auth-token-header {
+    font-weight: 600;
+  }
+  .sign-in-auth-token,
+  .sign-in-signature {
     word-break: break-word;
     color: black;
   }
