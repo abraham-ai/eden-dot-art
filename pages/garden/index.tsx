@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import type { ReactElement } from 'react'
 
@@ -13,12 +11,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // STYLES
-import styled from 'styled-components'
-
-const GardenStyles = styled.section`
-  width: 100vw;
-  margin: 100px 0 0 0;
-`
+import { GardenStyles } from './GardenStyles'
 
 export default function GardenPage() {
   return (
