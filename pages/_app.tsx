@@ -46,7 +46,6 @@ function EdenApp(props: EdenAppProps) {
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false)
   const [isCreationModalVisible, setIsCreationModalVisible] = useState(false)
   const [isCreateUIModalVisible, setIsCreateUIModalVisible] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
   const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
   const [authToken, setAuthToken] = useState('')
@@ -63,7 +62,6 @@ function EdenApp(props: EdenAppProps) {
   const contextValues = {
     authToken,
     userId,
-    isModalVisible,
     isCreateUIModalVisible,
     setIsCreateUIModalVisible,
     isCreationModalVisible,
@@ -74,7 +72,6 @@ function EdenApp(props: EdenAppProps) {
     isWeb3WalletConnected,
     setAuthToken,
     setUserId,
-    setIsModalVisible,
     setIsWeb3AuthSuccess,
     setIsWeb3WalletConnected,
     isLightTheme,
