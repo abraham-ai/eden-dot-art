@@ -8,6 +8,7 @@ const CreationCardStyles = styled.section`
   background: unset;
   border-radius: 10px;
   overflow: hidden;
+  margin-bottom: 10px;
 
   /*** CREATION-CARD ***/
   #creation-card {
@@ -36,7 +37,18 @@ const CreationCardStyles = styled.section`
     margin-right: 10px;
   }
   #creation-card {
-    // background: yellow;
+    height: 100%;
+  }
+  .cr-link {
+    height: 100%;
+  }
+  .cr-image-wrapper {
+    position: relative;
+    height: 100%;
+  }
+  .cr-image-wrapper img {
+    width: 100%;
+    height: 100%;
   }
   /*** CREATION-ACTIONS LEFT ***/
   .cr-action-left {
@@ -51,7 +63,13 @@ const CreationCardStyles = styled.section`
   /*** CR-SOCIAL PRAISE & BURN ***/
   .cr-social.praise,
   .cr-social.burn {
+    color: grey;
+    filter: grayscale(100%);
     margin: 10px;
+  }
+  .cr-social.praise:hover,
+  .cr-social.burn:hover {
+    filter: unset;
   }
   /*** CR-SOCIAL REMIX ***/
   .cr-social.remix {
