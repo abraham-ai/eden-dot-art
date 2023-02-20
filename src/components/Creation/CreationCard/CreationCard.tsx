@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // ANTD
-import { Popover, Typography, Button, Modal, Input } from 'antd'
+import { Popover, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -30,12 +30,39 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 // STYLES
 import { CreationCardStyles } from './CreationCardStyles'
 
-export default function CreationCard({ key: index = 0, creation }) {
+interface Creation {
+  key: number
+  address: string
+  uri: string
+  timestamp: string
+  prompt: string
+  status: string
+  generator: string
+  width: number
+  height: number
+}
+
+interface CreationCard {
+  creation: Creation
+  key: number
+}
+
+export default function CreationCard({ creation }: CreationCard) {
   const router = useRouter()
 
-  console.log({ creation })
+  // console.log({ creation })
 
-  const { key, address, uri, timestamp, prompt, status, generator } = creation
+  const {
+    key,
+    address,
+    uri,
+    timestamp,
+    prompt,
+    status,
+    generator,
+    width,
+    height,
+  } = creation
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSaveModalActive, setIsSaveModalActive] = useState(false)
@@ -58,7 +85,7 @@ export default function CreationCard({ key: index = 0, creation }) {
     // console.log('handleCardClose!')
     // console.log(event)
     router.push('/garden', '', { scroll: false })
-    event ? setModalOpen(false) : null
+    event ? setIsModalOpen(false) : null
   }
 
   const handlePraise = (
@@ -90,12 +117,12 @@ export default function CreationCard({ key: index = 0, creation }) {
     setIsSaveModalActive(true)
   }
 
-  let displayAddress = address?.substr(0, 6)
-  displayAddress += '...' + address.substr(-4)
+  let displayAddress = address?.substring(0, 6)
+  displayAddress += '...' + address.slice(-4)
 
   return (
-    <CreationCardStyles>
-      <article id="creation-card" key={index}>
+    <CreationCardStyles style={{ aspectRatio: `${width}/${height}` }}>
+      <article id="creation-card" creationkey={key}>
         <article className="creation-content">
           <div className="cr-action-left">
             <span className="cr-social praise">
@@ -186,21 +213,13 @@ export default function CreationCard({ key: index = 0, creation }) {
           scroll={false}
         >
           {/* onClick={handleModalOpen} */}
-          <div style={{ position: 'relative' }}>
-            <>
-              <Image
-                src={uri}
-                height={512}
-                width={512}
-                alt={prompt}
-                layout="responsive"
-              />
-            </>
+          <div className="cr-image-wrapper">
+            <Image src={uri} height={height} width={width} alt={prompt} />
           </div>
         </Link>
       </article>
 
-      <CreationCardModal index={index} creation={creation} />
+      <CreationCardModal index={key} creation={creation} />
       <CreationSaveModal isSaveModalActive={isSaveModalActive} />
     </CreationCardStyles>
   )
