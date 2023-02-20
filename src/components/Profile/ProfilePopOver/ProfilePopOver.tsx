@@ -1,35 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-// MUI
+// ANTD
 import { Button, Popover } from 'antd'
 
 // EDEN COMPONENTS
-import CreatorProfileAddress from '../../Creator/CreatorProfileAddress/CreatorProfileAddress'
+import CreatorProfileAddress from '@/components/Creator/CreatorProfileAddress/CreatorProfileAddress'
 
 // STYLES
-import styled from 'styled-components'
+import { ProfilePopOverStyles } from './ProfilePopOverStyles'
 
-const PopperStyles = styled.section`
-  .popper-wrapper: {
-    padding: 20px,
-  },
-`
-
-const PopperPopupState = () => {
+const ProfilePopOver = ({ profileAddress }) => {
   return (
-    <PopperStyles>
+    <ProfilePopOverStyles>
       <Button>Avatar</Button>
 
       <Popover>
-        <CreatorProfileAddress />
+        <CreatorProfileAddress profileAddress={profileAddress} />
       </Popover>
-    </PopperStyles>
+    </ProfilePopOverStyles>
   )
 }
 
-PopperPopupState.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
-
-export default PopperPopupState
+export default ProfilePopOver

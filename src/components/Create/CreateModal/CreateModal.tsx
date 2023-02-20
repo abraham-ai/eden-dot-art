@@ -11,17 +11,18 @@ import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT
 
 export default function CreateModal() {
   const context = useContext(AppContext)
-  const { isWeb3WalletConnected, isModalVisible, isWeb3AuthSuccess } = context
+  const { isWeb3WalletConnected, isWeb3AuthSuccess, isCreateUIModalVisible } =
+    context
 
-  console.log({ isModalVisible })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
+  console.log({ isCreateUIModalVisible })
+  // console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
   const handleComponent = () => {
-    return isWeb3WalletConnected && isWeb3AuthSuccess ? (
-      <CreateUI />
-    ) : (
-      <CreateSignInJWT />
-    )
+    if (isWeb3WalletConnected && isWeb3AuthSuccess && isCreateUIModalVisible) {
+      return <CreateUI />
+    } else {
+      return <CreateSignInJWT />
+    }
   }
 
   return handleComponent()

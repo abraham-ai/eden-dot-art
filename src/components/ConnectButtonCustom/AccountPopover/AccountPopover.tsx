@@ -1,23 +1,29 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+
+// FETCH
+import axios from 'axios'
+
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // WEB3
 import { useAccount } from 'wagmi'
 
 // ANTD
-import { Button, Typography, Slider } from 'antd'
+import { Typography, Slider } from 'antd'
 const { Text } = Typography
-
-// CSS
-import styled from 'styled-components'
 
 // LIBS
 import Blockies from 'react-blockies'
 
 // COMPONENTS
-import CreditBalance from '@/components/Auth/CreditBalance'
-import ApiKeys from '@/components/ApiKeys/ApiKeys'
+// import CreditBalance from '@/components/Auth/CreditBalance'
+// import ApiKeys from '@/components/ApiKeys/ApiKeys'
+
+// STYLES
+import { AccountPopoverStyles } from './AccountPopoverStyles'
 
 export const AccountPopover = ({
   openAccountModal,
@@ -28,7 +34,10 @@ export const AccountPopover = ({
   openChainModal,
   displayAddress,
 }) => {
+  // HOOKS
   const { isConnected } = useAccount()
+  const { setAuthToken, setIsWeb3WalletConnected, setUserId } =
+    useContext(AppContext)
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
@@ -38,17 +47,23 @@ export const AccountPopover = ({
     return event ? event : null
   }
 
+  const handleDisconnect = async () => {
+    try {
+      const resp = await axios.post('/api/logout')
+
+      console.log('resp', resp)
+
+      setAuthToken('')
+      setIsWeb3WalletConnected(false)
+      setUserId('')
+      disconnect()
+    } catch (error: any) {
+      console.error(`Error: ${error.response.data.error}`)
+    }
+  }
+
   return isConnected ? (
-    <div
-      style={{
-        display: 'flex',
-        width: '100%',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        backgroundColor: 'white',
-        padding: 10,
-      }}
-    >
+    <AccountPopoverStyles>
       <button
         className="connect-button-main"
         onClick={openAccountModal}
@@ -58,51 +73,19 @@ export const AccountPopover = ({
           justifyContent: 'flex-start',
         }}
       >
-        <div
-          className="account-button-wrapper"
-          style={{
-            overflow: 'hidden',
-            borderRadius: '50%',
-            height: '48px',
-            width: '48px',
-          }}
-        >
+        <div className="account-button-wrapper">
           <Blockies seed={walletAddress} scale={6} />
         </div>
 
-        <div
-          className="profile-wrapper"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            paddingLeft: 1,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: 600,
-              fontSize: '1.2rem',
-            }}
-          >
-            {'Your Name'}
-          </Text>
+        <div className="profile-wrapper">
+          <Text className="profile-name">{'Your Name'}</Text>
           <Text style={{ fontWeight: 'bold', fontSize: '1rem' }}>
             {account.displayName}
           </Text>
         </div>
       </button>
 
-      <div
-        className="wallet-wrapper"
-        style={{
-          display: 'flex',
-          flex: 1,
-          padding: 10,
-          border: '1px solid lightgray',
-          borderRadius: '12px',
-        }}
-      >
+      <div className="wallet-wrapper">
         {/* <div>
           <Text style={{ color: 'gray', fontWeight: 600 }}>
             {'Wallet Balance'}
@@ -121,72 +104,27 @@ export const AccountPopover = ({
 
         <ApiKeys /> */}
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-          }}
-        >
+        <div className="etherscan-wrapper">
           <a
             className="etherscan-link"
             href={`https://www.etherscan.io/address/${walletAddress}`}
             rel="noopener noreferrer"
             target="_blank"
-            style={{
-              height: '20px',
-              borderRadius: '5px',
-              marginLeft: '5px',
-            }}
           >
-            <Text
-              className="etherscan-address"
-              style={{
-                padding: 10,
-                color: 'black',
-                height: 1,
-                width: 'auto',
-                display: 'flex',
-                alignItems: 'center',
-                borderRadius: 0.5,
-                fontSize: '.8rem',
-                fontFamily: 'courier',
-                marginLeft: 3,
-                background: 'rgba(0, 0, 0, 0.05)',
-              }}
-            >
-              {displayAddress}
-            </Text>
+            <Text className="etherscan-address">{displayAddress}</Text>
           </a>
 
-          <button
-            className="connect-button"
-            onClick={openChainModal}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              height: 35,
-              marginTop: 0.5,
-              marginLeft: 0.5,
-            }}
-          >
+          <button className="connect-button" onClick={openChainModal}>
             {chain.hasIcon && (
               <div
-                style={{
-                  background: chain.iconBackground,
-                  width: 30,
-                  height: 30,
-                  borderRadius: 999,
-                  overflow: 'hidden',
-                  marginRight: 10,
-                }}
+                className="chain-icon-wrapper"
+                style={{ background: chain.iconBackground }}
               >
                 {chain.iconUrl && (
                   <img
+                    className="chain-icon"
                     alt={chain.name ?? 'Chain icon'}
                     src={chain.iconUrl}
-                    style={{ width: 30, height: 30 }}
                   />
                 )}
               </div>
@@ -196,40 +134,16 @@ export const AccountPopover = ({
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          marginLeft: 10,
-          alignItems: 'center',
-        }}
-      >
+      <div className="theme-settings-wrapper">
         {/* <LightModeIcon style={{ color: '#8C7CF0' }} /> */}
-        <Text style={{ color: '#8C7CF0', fontWeight: 600, marginRight: 40 }}>
-          Theme
-        </Text>
+        <Text className="theme-toggle">Theme</Text>
         {/* <ThemeToggle /> */}
       </div>
 
-      <div style={{ paddingLeft: 10, paddingRight: 10, width: '100%' }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
+      <div className="account-settings-wrapper">
+        <div className="masonry-count-wrapper">
           {/* <ViewColumnIcon style={{ color: '#8C7CF0' }} /> */}
-          <Text
-            style={{
-              paddingRight: 2,
-              color: '#8C7CF0',
-              fontWeight: 600,
-              marginLeft: 1,
-            }}
-          >
-            Masonry
-          </Text>
+          <Text className="masonry-text-count">Masonry</Text>
           <Slider
             className="masonry-count-slider"
             aria-label="Column Count"
@@ -239,26 +153,19 @@ export const AccountPopover = ({
             max={12}
             value={masonryColumnCount}
             onChange={() => handleChange}
-            style={{
-              marginRight: 20,
-              marginLeft: 10,
-              display: 'flex',
-              flex: 1,
-              alignItems: 'center',
-            }}
           />
         </div>
       </div>
 
       <button
-        onClick={disconnect}
+        className="connect-button"
+        onClick={handleDisconnect}
         icon={<Text>{'Logout'}</Text>}
         // block
-        style={{ display: 'flex', justifyContent: 'flex-start' }}
       >
         Disconnect
       </button>
-    </div>
+    </AccountPopoverStyles>
   ) : (
     <Text>{'Not Connected'}</Text>
   )

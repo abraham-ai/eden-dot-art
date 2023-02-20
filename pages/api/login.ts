@@ -1,6 +1,3 @@
-// FETCH
-import axios from 'axios'
-
 // TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
 

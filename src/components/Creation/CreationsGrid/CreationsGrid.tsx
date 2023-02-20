@@ -1,4 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
+'use client'
+
+import React, { useState, useEffect, useCallback, useContext } from 'react'
+
+// CONTEXT
+import AppContext from '@/components/AppContext/AppContext'
 
 // FETCH
 import axios from 'axios'
@@ -8,45 +13,18 @@ import { useInView } from 'react-intersection-observer'
 import Masonry from 'react-masonry-css'
 
 // EDEN COMPONENTS
-import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+import CreationCard from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
 
 // STYLES
-import styled from 'styled-components'
+import { CreationsGridStyles } from './CreationsGridStyles'
 
-const CreationsGridStyles = styled.section`
-  width: 100vw;
-  padding: 0 10px;
-
-  .cr-grid-masonry {
-    display: -webkit-box; /* Not needed if autoprefixing */
-    display: -ms-flexbox; /* Not needed if autoprefixing */
-    display: flex;
-    margin-left: -30px; /* gutter size offset */
-    width: auto;
-  }
-  .cr-masonry-grid_column {
-    padding-left: 30px; /* gutter size */
-    background-clip: padding-box;
-  }
-
-  /* Style your items */
-  .cr-grid-masonry_column > div {
-    /* change div to reference your elements you put in <Masonry> */
-    background: grey;
-    margin-bottom: 30px;
-  }
-`
+// TYPES
+import Creation from '@/interfaces/Creation'
 
 // CONSTS
-const PAGE_LENGTH = 10
-
-const breakpointColumnsObj = {
-  default: 3,
-  1100: 3,
-  700: 2,
-  580: 1,
-}
+import { PAGE_LENGTH } from '@/consts/pageLength'
+import { breakpointColumnsObj } from '@/consts/breakpointColumns'
 
 export default function CreationsGrid({ username = null }) {
   const [creations, setCreations] = useState<object[]>([])
@@ -54,7 +32,9 @@ export default function CreationsGrid({ username = null }) {
   const [loading, setLoading] = useState(false)
   const [paginate, setPaginate] = useState(true)
   const [cutoffTime, setCutoffTime] = useState<number | null>(null)
-  // const [breakpointCols] = useState(0)
+
+  const context = useContext(AppContext)
+  const { authToken, setAuthToken, setUserId, setIsWeb3AuthSuccess } = context
 
   const getMoreCreations = useCallback(async () => {
     if (!paginate) return
@@ -73,17 +53,37 @@ export default function CreationsGrid({ username = null }) {
 
       const response = await axios.post('/api/creations', filter)
 
+      const { data } = response
+      const { session } = data
+      const { userId, token } = session
+      const { token: respToken } = token
+
+      console.log('Creations Grid Token: ', { authToken, token })
+
+      if (respToken !== authToken && respToken.length === 175) {
+        setAuthToken(token.token)
+        setUserId(userId)
+        setIsWeb3AuthSuccess(true)
+      }
+
       const moreCreations =
         response.data.creations &&
-        response.data.creations.map((creation: any) => {
+        response.data.creations.map((creation: Creation) => {
+          const { _id, user, uri, createdAt, task } = creation
+          const { config, status, generator } = task
+          const { text_input, width, height } = config
+          const { generatorName } = generator
+
           return {
-            key: creation._id,
-            address: creation.user,
-            uri: creation.uri,
-            timestamp: creation.createdAt,
-            prompt: creation.task.config.text_input,
-            status: creation.task.status,
-            generator: creation.task.generator.generatorName,
+            key: _id,
+            address: user,
+            uri: uri,
+            timestamp: createdAt,
+            prompt: text_input,
+            status: status,
+            generator: generatorName,
+            width: width,
+            height: height,
           }
         })
 
@@ -118,21 +118,32 @@ export default function CreationsGrid({ username = null }) {
     }
   }, [inView, getMoreCreations])
 
+  console.log({ creations })
+
   return (
     <CreationsGridStyles id="creations-grid">
-      <div id="creations-grid-wrapper">
+      <div className="creations-grid-wrapper">
         {creations.length < 1 ? (
           <Loader />
         ) : (
-          <div style={{ width: '100%', minHeight: 393, marginTop: 20 }}>
+          <div className="masonry-wrapper">
             <Masonry
               breakpointCols={breakpointColumnsObj}
               className={'cr-grid-masonry'}
               columnClassName="cr-grid-masonry_column"
             >
-              {creations.map((creation, index) => (
-                <CreationCardMinimal index={index} creation={creation} />
-              ))}
+              {creations.map((creation, i: number) => {
+                const { generator } = creation
+                if (
+                  generator === 'tts' ||
+                  generator === 'complete' ||
+                  generator === 'interrogate'
+                ) {
+                  return null
+                } else {
+                  return <CreationCard creation={creation} key={i} />
+                }
+              })}
             </Masonry>
           </div>
         )}

@@ -1,3 +1,4 @@
+import React from 'react'
 import type { ReactElement } from 'react'
 
 // NEXT
@@ -10,27 +11,21 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // STYLES
-import styled from 'styled-components'
+import { GardenStyles } from './GardenStyles'
 
-const CreationsGridStyles = styled.section`
-  width: 100vw;
-  margin: 100px 0 0;
-  padding: 0 10px;
-`
-
-export default function CreationsPage() {
+export default function GardenPage() {
   return (
     <>
       <Head>
-        <title>Creations</title>
+        <title>Garden</title>
       </Head>
-      <CreationsGridStyles id="creations-grid">
+      <GardenStyles id="garden">
         <CreationsGrid />
-      </CreationsGridStyles>
+      </GardenStyles>
     </>
   )
 }
 
-CreationsPage.getLayout = function getLayout(page: ReactElement) {
+GardenPage.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>
 }

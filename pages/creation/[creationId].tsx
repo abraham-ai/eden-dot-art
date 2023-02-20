@@ -15,7 +15,7 @@ import NavLayout from 'src/layouts/NavLayout'
 import styled from 'styled-components'
 
 // COMPONENTS
-// import CreationCardMinimal from '@/components/Creation/CreationCardMinimal/CreationCardMinimal'
+// import CreationCard from '@/components/Creation/CreationCard/CreationCard'
 // import CreationSocial from '@/components/Creation/CreationSocial/CreationSocial'
 // import CreationShare from '@/components/Creation/CreationShare/CreationShare'
 // import RunningCreation from '@/components/Creation/CreationProgress/CreationProgress'

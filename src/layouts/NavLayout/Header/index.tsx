@@ -114,7 +114,7 @@ export default function Header() {
           >
             <AppLogo logo="eden" size="small" />
 
-            <div className="nav-right-wrapper" style={{ display: 'flex' }}>
+            <div className="nav-right-wrapper">
               <ConnectButtonCustom />
               {isWeb3WalletConnected ? <CreateButton /> : null}
             </div>

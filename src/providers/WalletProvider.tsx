@@ -23,7 +23,7 @@ const { chains, provider } = configureChains(
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'Eden Examples',
+  appName: 'Eden Art App',
   chains,
 })
 

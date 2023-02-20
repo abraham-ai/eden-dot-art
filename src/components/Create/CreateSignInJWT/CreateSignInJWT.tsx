@@ -21,36 +21,40 @@ import AppLogo from '@/components/AppLogo/AppLogo'
 // ICONS
 // import CloseIcon
 
+// STYLES
+import { CreateSignInJWTStyles } from './CreateSignInJWTStyles'
+
 export default function CreateSignInJWT() {
   const { address } = useAccount()
 
   const context = useContext(AppContext)
   const {
-    isModalVisible,
-    setIsModalVisible,
+    isSignInModalVisible,
+    setIsSignInModalVisible,
     isWeb3AuthSuccess,
     isWeb3WalletConnected,
     authToken,
   } = context
 
   const handleCancel = () => {
-    setIsModalVisible(false)
+    setIsSignInModalVisible(false)
   }
 
   const [appMessage] = useState(
     `I am ${address} and I would like to create with Eden`,
   )
 
-  const { data, isError, isSuccess, signMessage } = useSignMessage({
+  const { data, isSuccess } = useSignMessage({
     message: appMessage,
-  }) // isLoading,
+  }) // isLoading, isError, signMessage
 
-  console.log({ isModalVisible })
+  console.log({ isSignInModalVisible })
   console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
   return (
     <Modal
-      open={isModalVisible}
+      id="create-sign-in-jwt-modal"
+      open={isSignInModalVisible}
       mask
       maskClosable
       keyboard
@@ -65,57 +69,42 @@ export default function CreateSignInJWT() {
       }}
       footer={<></>}
     >
-      <div
-        style={{
-          display: 'flex',
-          flex: 1,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Title level={2} style={{ color: 'rgb(0 80 30)' }}>
-          Welcome to Eden
-        </Title>
-        <AppLogo logo="eden" size="x-large" />
+      <CreateSignInJWTStyles>
+        <div className="sign-in-modal-inner-wrapper">
+          <Title level={2} className="sign-in-header-text">
+            Welcome to Eden
+          </Title>
+          <AppLogo logo="eden" size="x-large" />
 
-        <Text
-          style={{
-            paddingTop: 30,
-            color: 'rgb(0 80 30)',
-            textAlign: 'center',
-            fontSize: '1rem',
-          }}
-        >
-          Sign the message in your wallet to continue
-        </Text>
-
-        <Title
-          level={4}
-          style={{
-            paddingTop: 10,
-            paddingBottom: 30,
-            color: 'rgb(0 80 30)',
-            textAlign: 'center',
-            fontWeight: 'normal',
-          }}
-        >
-          {
-            'Eden uses this signature to verify that you’re the owner of this Ethereum address.'
-          }
-        </Title>
-
-        <div>
-          <Auth onModalCancel={handleCancel} />
-        </div>
-
-        {isSuccess && <Text>Signature: {data}</Text>}
-
-        {isWeb3AuthSuccess && (
-          <Text style={{ wordBreak: 'break-word', color: 'black' }}>
-            Auth Token: {authToken}
+          <Text className="sign-in-message">
+            Sign the message in your wallet to continue
           </Text>
-        )}
-      </div>
+
+          <Title className="sign-in-message-cntd" level={4}>
+            {
+              'Eden uses this signature to verify that you’re the owner of this Ethereum address.'
+            }
+          </Title>
+
+          <div>
+            <Auth onModalCancel={handleCancel} />
+          </div>
+
+          {isSuccess && (
+            <div className="sign-in-signature-wrapper">
+              <p className="sign-in-signature">Signature:</p>
+              <p className="sign-in-signature">{data}</p>
+            </div>
+          )}
+
+          {isWeb3AuthSuccess && (
+            <div className="sign-in-auth-token-wrapper">
+              <Text className="sign-in-auth-token-header">Auth Token:</Text>
+              <Text className="sign-in-auth-token">{authToken}</Text>
+            </div>
+          )}
+        </div>
+      </CreateSignInJWTStyles>
     </Modal>
   )
 }

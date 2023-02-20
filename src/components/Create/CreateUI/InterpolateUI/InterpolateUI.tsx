@@ -1,8 +1,4 @@
 import { useState } from 'react'
-// useContext
-
-// UI
-import { Button, Form, Input, InputNumber, Space } from 'antd'
 
 // FETCH
 import axios from 'axios'
@@ -47,9 +43,14 @@ const InterpolateTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="video" generatorName="interpolate" />
+      <GeneratorInterface
+        mediaType="video"
+        generatorName="interpolate"
+        handleGenerate={handleInterpolate}
+      />
 
-      {message}
+      {generating ? message : null}
+
       <VideoResult resultUrl={resultUrl} />
     </>
   )

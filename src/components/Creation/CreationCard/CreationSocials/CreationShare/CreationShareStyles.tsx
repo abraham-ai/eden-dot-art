@@ -1,22 +1,5 @@
-import React, { useState } from 'react' // useEffect,
-
 // CSS
 import styled from 'styled-components'
-
-// UI
-import { Button, Typography } from 'antd' // Tooltip,
-import { HiShare, HiOutlineShare } from 'react-icons/hi'
-
-// HOOKS
-// import useWindowDimensions from '@/hooks/useWindowDimensions';
-
-// CONST
-// const GATEWAY_URL = process.env.GATEWAY_URL
-// const MINIO_URL = process.env.MINIO_URL
-// const MINIO_BUCKET = process.env.MINIO_BUCKET
-const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
-
-const { Paragraph } = Typography
 
 const CreationShareStyles = styled.div`
   display: flex;
@@ -175,28 +158,4 @@ const CreationShareStyles = styled.div`
   }
 `
 
-export default function CreationSocial({ creationSha }) {
-  //   const { width } = useWindowDimensions();
-  //   const navMode = width < 718 ? 'inline' : 'horizontal';
-
-  const [isShared, setIsShared] = useState(false)
-
-  return (
-    <CreationShareStyles id="cr-share-wrapper">
-      <span className="single-button-wrapper share">
-        <Button className="cr-share" onClick={() => setIsShared(!isShared)}>
-          <Paragraph
-            copyable={{
-              text: `${PRD_URL}/creation/${creationSha}`,
-              icon: [
-                <HiOutlineShare key="copy-icon" size="36px" />,
-                <HiShare key="copied-icon" />,
-              ],
-              tooltips: ['copy link', 'link copied!'],
-            }}
-          />
-        </Button>
-      </span>
-    </CreationShareStyles>
-  )
-}
+export { CreationShareStyles }
