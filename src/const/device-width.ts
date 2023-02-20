@@ -1,7 +1,0 @@
-export const DEVICE_WIDTH = {
-  MOBILE: 640,
-  TABLET: 840,
-  DESKTOP: 1150,
-  DESKTOP_XL: 1300,
-  DESKTOP_XXL: 1400,
-}

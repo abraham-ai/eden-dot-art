@@ -1,4 +1,4 @@
-// NEXT
+// TYPES
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -15,14 +15,14 @@ declare module 'iron-session' {
   }
 }
 
-// console.log(process.env.COOKIE_SECRET)
+console.log(process.env.COOKIE_SECRET)
 
-const sessionOptions = {
-  password: process.env.COOKIE_SECRET as string,
+export const sessionOptions = {
+  password: (process.env.COOKIE_SECRET as string) || '',
   cookieName: 'eden_art',
   ttl: 15 * 24 * 3600,
   cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production' ? true : false,
   },
 }
 
