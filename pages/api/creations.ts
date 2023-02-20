@@ -48,9 +48,9 @@ const handler: Handler = async (req: ApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({ creations: creations, session })
   } catch (error: any) {
-    if (error.response.data == 'jwt expired') {
-      return res.status(401).json({ error: 'Authentication expired' })
-    }
+    // if (error.response.data == 'jwt expired') {
+    //   return res.status(401).json({ error: 'Authentication expired' })
+    // }
     return res.status(500).json({ error: error.response.data })
   }
 }
