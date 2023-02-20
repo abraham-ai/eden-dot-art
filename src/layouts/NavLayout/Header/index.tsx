@@ -65,15 +65,6 @@ const HeaderStyles = styled.section`
     // background: lime;
   }
 
-  /*** NAV HEADER ***/
-  .nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-    height: 60;
-  }
-
   /*** NAV RIGHT WRAPPER ***/
   .nav-right-wrapper {
     display: flex;
@@ -112,10 +103,18 @@ export default function Header() {
     <HeaderStyles id="header-wrapper">
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-          <section id="nav-header">
+          <section
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flex: 1,
+              height: 60,
+            }}
+          >
             <AppLogo logo="eden" size="small" />
 
-            <div className="nav-right-wrapper">
+            <div className="nav-right-wrapper" style={{ display: 'flex' }}>
               <ConnectButtonCustom />
               {isWeb3WalletConnected ? <CreateButton /> : null}
             </div>
