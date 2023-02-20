@@ -36,7 +36,8 @@ export const AccountPopover = ({
 }) => {
   // HOOKS
   const { isConnected } = useAccount()
-  const { setAuthToken, setIsWeb3WalletConnected } = useContext(AppContext)
+  const { setAuthToken, setIsWeb3WalletConnected, setUserId } =
+    useContext(AppContext)
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
@@ -54,6 +55,7 @@ export const AccountPopover = ({
 
       setAuthToken('')
       setIsWeb3WalletConnected(false)
+      setUserId('')
       disconnect()
     } catch (error: any) {
       console.error(`Error: ${error.response.data.error}`)

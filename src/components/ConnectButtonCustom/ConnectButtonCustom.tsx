@@ -13,7 +13,7 @@ import AppContext from '@/components/AppContext/AppContext'
 import Blockies from 'react-blockies'
 
 // ANTD
-import { Popover, Typography, Button } from 'antd'
+import { Popover, Typography } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -112,7 +112,12 @@ export const ConnectButtonCustom = () => {
             (!authenticationStatus || authenticationStatus === 'authenticated')
 
           {
-            console.log({ connected, isWeb3WalletConnected, isWeb3AuthSuccess })
+            console.log('Connect Button Custom: ', {
+              connected,
+              isWeb3WalletConnected,
+              isWeb3AuthSuccess,
+              authToken,
+            })
           }
 
           return (
@@ -128,7 +133,12 @@ export const ConnectButtonCustom = () => {
               })}
             >
               {(() => {
-                if (!isWeb3WalletConnected && !connected) {
+                if (
+                  !isWeb3WalletConnected &&
+                  !connected &&
+                  !authToken &&
+                  !isWeb3AuthSuccess
+                ) {
                   return (
                     <button
                       className="connect-button"
