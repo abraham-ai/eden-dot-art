@@ -25,7 +25,7 @@ import Head from 'next/head'
 // import { SidebarProvider } from 'src/contexts/SidebarContext'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // PROVIDERS
 import WalletProvider from '@/providers/WalletProvider'
@@ -61,25 +61,22 @@ function EdenApp(props: EdenAppProps) {
 
   const contextValues = {
     authToken,
+    setAuthToken,
     userId,
+    setUserId,
+    isWeb3AuthSuccess,
+    setIsWeb3AuthSuccess,
     isCreateUIModalVisible,
     setIsCreateUIModalVisible,
     isCreationModalVisible,
     setIsCreationModalVisible,
     isSignInModalVisible,
     setIsSignInModalVisible,
-    isWeb3AuthSuccess,
     isWeb3WalletConnected,
-    setAuthToken,
-    setUserId,
-    setIsWeb3AuthSuccess,
     setIsWeb3WalletConnected,
     isLightTheme,
     setIsLightTheme,
   }
-
-  console.log(authToken.length)
-  console.log({ authToken, userId })
 
   useEffect(() => {
     if (
@@ -91,8 +88,6 @@ function EdenApp(props: EdenAppProps) {
       setIsWeb3AuthSuccess(true)
     }
   }, [authToken])
-
-  console.log({ authToken, userId, isWeb3AuthSuccess })
 
   return (
     <CacheProvider value={emotionCache}>
