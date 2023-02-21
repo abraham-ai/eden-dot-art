@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // WEB3
 import { useSignMessage, useAccount } from 'wagmi'
@@ -32,7 +32,6 @@ export default function CreateSignInJWT() {
     isSignInModalVisible,
     setIsSignInModalVisible,
     isWeb3AuthSuccess,
-    isWeb3WalletConnected,
     authToken,
   } = context
 
@@ -48,12 +47,9 @@ export default function CreateSignInJWT() {
     message: appMessage,
   }) // isLoading, isError, signMessage
 
-  console.log({ isSignInModalVisible })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
-
   return (
     <Modal
-      id="create-sign-in-jwt-modal"
+      className="create-sign-in-jwt-modal"
       open={isSignInModalVisible}
       mask
       maskClosable

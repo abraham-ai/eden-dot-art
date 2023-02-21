@@ -2,13 +2,13 @@ import { useState } from 'react'
 // useContext,
 
 // UI
-import { Button, Form, Input, InputNumber, Space } from 'antd'
+import { Form } from 'antd'
 
 // FETCH
 import axios from 'axios'
 
 // EDEN COMPONENTS
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 import ImageResult from '@/components/ImageResult/ImageResult'
 
 interface RemixFormInputs {

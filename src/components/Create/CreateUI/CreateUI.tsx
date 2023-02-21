@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
 import { Modal, Button } from 'antd'
@@ -20,19 +20,9 @@ import CreateUIStyles from './CreateUIStyles'
 
 export default function CreateUI() {
   const context = useContext(AppContext)
-  const {
-    authToken,
-    isCreateUIModalVisible,
-    setIsCreateUIModalVisible,
-    isWeb3WalletConnected,
-    isWeb3AuthSuccess,
-  } = context
+  const { isCreateUIModalVisible, setIsCreateUIModalVisible } = context
 
   const { address } = useAccount()
-
-  console.log({ isCreateUIModalVisible })
-  console.log({ authToken })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
 
   return isCreateUIModalVisible ? (
     <CreateUIStyles>

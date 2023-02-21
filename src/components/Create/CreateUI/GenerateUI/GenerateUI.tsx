@@ -7,7 +7,7 @@ import { Form } from 'antd'
 import axios from 'axios'
 
 // EDEN COMPONENT
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 
 // COMPONENTS
 import ImageResult from '@/components/ImageResult/ImageResult'

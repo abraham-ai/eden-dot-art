@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const CreateSignInJWTStyles = styled.section`
-  #create-sign-in-jwt-modal {
+  .create-sign-in-jwt-modal {
     width: 480px;
     background: white;
     border: 2px solid #000;

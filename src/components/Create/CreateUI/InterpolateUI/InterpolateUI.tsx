@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 // EDEN COMPONENTS
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 import VideoResult from '@/components/Media/VideoResult/VideoResult'
 
 interface InterpolateFormInputs {

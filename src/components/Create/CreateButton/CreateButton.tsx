@@ -7,7 +7,7 @@ import { Typography } from 'antd'
 const { Text } = Typography
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // STYLES
 import { CreateButtonStyles } from './CreateButtonStyles'
@@ -21,8 +21,6 @@ export default function CreateButton() {
   } = context
 
   const handleCreateOpen = (e: MouseEvent) => {
-    console.log('set modal visible!')
-
     if (isWeb3AuthSuccess === true) {
       setIsCreateUIModalVisible(true)
     } else {

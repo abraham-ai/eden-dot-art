@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 // ANTD
 import { Button, Form } from 'antd'
 
-// FETCH
-import axios from 'axios'
-
 // HOOKS
 import { useGeneratorInfo } from '@/hooks/useGeneratorInfo'
 
@@ -46,21 +43,21 @@ const GeneratorInterface = ({
   const { versionId, requiredParameters, optionalParameters } =
     useGeneratorInfo(generatorName)
 
-  const getConfig = (config: any) => {
-    Object.keys(requiredParameters).forEach(key => {
-      const name = requiredParameters[key].name
-      if (config[name] === undefined) {
-        config[name] = requiredParameters[key].defaultValue
-      }
-    })
-    Object.keys(optionalParameters).forEach(key => {
-      const name = optionalParameters[key].name
-      if (config[name] === undefined) {
-        config[name] = optionalParameters[key].defaultValue
-      }
-    })
-    return config
-  }
+  // const getConfig = (config: any) => {
+  //   Object.keys(requiredParameters).forEach(key => {
+  //     const name = requiredParameters[key].name
+  //     if (config[name] === undefined) {
+  //       config[name] = requiredParameters[key].defaultValue
+  //     }
+  //   })
+  //   Object.keys(optionalParameters).forEach(key => {
+  //     const name = optionalParameters[key].name
+  //     if (config[name] === undefined) {
+  //       config[name] = optionalParameters[key].defaultValue
+  //     }
+  //   })
+  //   return config
+  // }
 
   const renderFormFields = (parameters: any) => {
     return Object.keys(parameters).map(key => {

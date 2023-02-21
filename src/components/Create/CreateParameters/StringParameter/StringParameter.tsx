@@ -23,10 +23,6 @@ const StringParameter = (props: { form: any; parameter: any }) => {
     props.form.setFieldsValue({ [props.parameter.name]: newValue })
   }
 
-  const onChange = (newValue: string) => {
-    setValue(newValue)
-  }
-
   const isArray = Array.isArray(props.parameter.defaultValue)
 
   return (
