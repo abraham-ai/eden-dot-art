@@ -15,7 +15,7 @@ declare module 'iron-session' {
   }
 }
 
-console.log(process.env.COOKIE_SECRET)
+// console.log(process.env.COOKIE_SECRET)
 
 export const sessionOptions = {
   password: (process.env.COOKIE_SECRET as string) || '',
