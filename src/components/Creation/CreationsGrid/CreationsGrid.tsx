@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // FETCH
 import axios from 'axios'
@@ -14,6 +14,7 @@ import Masonry from 'react-masonry-css'
 
 // EDEN COMPONENTS
 import CreationCard from '@/components/Creation/CreationCard/CreationCard'
+import CreationCardVideo from '@/components/Creation/CreationCard/CreationCardVideo/CreationCardVideo'
 import Loader from '@/components/Loader/Loader'
 
 // STYLES
@@ -21,6 +22,7 @@ import { CreationsGridStyles } from './CreationsGridStyles'
 
 // TYPES
 import Creation from '@/interfaces/Creation'
+import CreationFullType from '@/interfaces/CreationFullType'
 
 // CONSTS
 import { PAGE_LENGTH } from '@/consts/pageLength'
@@ -58,7 +60,7 @@ export default function CreationsGrid({ username = null }) {
       const { userId, token } = session
       const { token: respToken } = token
 
-      console.log('Creations Grid Token: ', { authToken, token })
+      // console.log('Creations Grid Token: ', { authToken, token })
 
       if (respToken !== authToken && respToken.length === 175) {
         setAuthToken(token.token)
@@ -68,7 +70,7 @@ export default function CreationsGrid({ username = null }) {
 
       const moreCreations =
         response.data.creations &&
-        response.data.creations.map((creation: Creation) => {
+        response.data.creations.map((creation: CreationFullType) => {
           const { _id, user, uri, createdAt, task } = creation
           const { config, status, generator } = task
           const { text_input, width, height } = config
@@ -118,7 +120,7 @@ export default function CreationsGrid({ username = null }) {
     }
   }, [inView, getMoreCreations])
 
-  console.log({ creations })
+  // console.log({ creations })
 
   return (
     <CreationsGridStyles id="creations-grid">
@@ -132,16 +134,19 @@ export default function CreationsGrid({ username = null }) {
               className={'cr-grid-masonry'}
               columnClassName="cr-grid-masonry_column"
             >
-              {creations.map((creation, i: number) => {
+              {creations.map((creation: Creation) => {
                 const { generator } = creation
                 if (
                   generator === 'tts' ||
                   generator === 'complete' ||
-                  generator === 'interrogate'
+                  generator === 'interrogate' ||
+                  generator === 'wav2lip'
                 ) {
                   return null
+                } else if (generator === 'interpolate') {
+                  return <CreationCardVideo creation={creation} />
                 } else {
-                  return <CreationCard creation={creation} key={i} />
+                  return <CreationCard creation={creation} />
                 }
               })}
             </Masonry>

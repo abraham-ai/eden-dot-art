@@ -6,7 +6,7 @@ import React, { useState, useContext } from 'react'
 import axios from 'axios'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // WEB3
 import { useAccount } from 'wagmi'
@@ -51,12 +51,12 @@ export const AccountPopover = ({
     try {
       const resp = await axios.post('/api/logout')
 
-      console.log('resp', resp)
-
-      setAuthToken('')
-      setIsWeb3WalletConnected(false)
-      setUserId('')
-      disconnect()
+      if (resp.status === 200) {
+        setAuthToken('')
+        setIsWeb3WalletConnected(false)
+        setUserId('')
+        disconnect()
+      }
     } catch (error: any) {
       console.error(`Error: ${error.response.data.error}`)
     }
@@ -64,15 +64,7 @@ export const AccountPopover = ({
 
   return isConnected ? (
     <AccountPopoverStyles>
-      <button
-        className="connect-button-main"
-        onClick={openAccountModal}
-        // block
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-        }}
-      >
+      <button className="account-button-main" onClick={openAccountModal}>
         <div className="account-button-wrapper">
           <Blockies seed={walletAddress} scale={6} />
         </div>
@@ -157,13 +149,8 @@ export const AccountPopover = ({
         </div>
       </div>
 
-      <button
-        className="connect-button"
-        onClick={handleDisconnect}
-        icon={<Text>{'Logout'}</Text>}
-        // block
-      >
-        Disconnect
+      <button className="connect-button" onClick={handleDisconnect}>
+        {'Disconnect'}
       </button>
     </AccountPopoverStyles>
   ) : (

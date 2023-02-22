@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ANTD
-import { Popover, Button } from 'antd'
+import { Popover } from 'antd'
 
 // EDEN COMPONENTS
 import CreationSocialsExtra from '@/components/Creation/CreationCard/CreationSocials/CreationSocialsExtra/CreationSocialsExtra'
@@ -55,9 +55,9 @@ const CreationSocials = () => {
       <div className="cr-socials-extra">
         <Popover placement="topRight" content={<CreationSocialsExtra />}>
           <span className="cr-social share">
-            <Button className="btn" shape="circle" type="default">
+            <button className="btn">
               <FiMoreHorizontal className="icon" />
-            </Button>
+            </button>
           </span>
         </Popover>
       </div>

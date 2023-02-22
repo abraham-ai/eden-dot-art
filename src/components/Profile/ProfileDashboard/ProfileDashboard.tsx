@@ -12,7 +12,7 @@ import { HomeFilled } from '@ant-design/icons'
 // import { useRouter } from 'next/router'
 // import Link from 'next/link'
 
-import styled from 'styled-components'
+import { ProfileDashboardStyles } from './ProfileDashboardStyles'
 
 export function DashboardMenuItem({ labelName, labelCount }) {
   return (
@@ -60,7 +60,7 @@ export default function ProfileDashboard({
   // }
 
   return (
-    <DashboardStyles>
+    <ProfileDashboardStyles>
       <Divider />
       <div style={{ marginLeft: 20 }}>
         <Link href={`/profile/${profileAddress}/`}>
@@ -119,6 +119,6 @@ export default function ProfileDashboard({
         </Link>
       </div>
       <Divider />
-    </DashboardStyles>
+    </ProfileDashboardStyles>
   )
 }

@@ -62,7 +62,6 @@ const ConnectButtonCustomStyles = styled.section`
     max-width: 36px;
     border-radius: 50%;
     overflow: hidden;
-    padding: 5px;
     background-color: white;
   }
   .account-profile-wrapper:hover {

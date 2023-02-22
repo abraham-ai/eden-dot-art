@@ -1,7 +1,10 @@
-import { Button, Form, Table, DatePicker, Space } from 'antd'
-import axios from 'axios'
 import { useState } from 'react'
-import type { DatePickerProps } from 'antd'
+
+// ANTD
+import { Button, Form, Table } from 'antd'
+
+// FETCH
+import axios from 'axios'
 
 interface MyCreationsFormInputs {
   datefrom: number
@@ -67,10 +70,6 @@ const Profile = () => {
     },
   ]
 
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
-  }
-
   return (
     <>
       <Form
@@ -79,14 +78,6 @@ const Profile = () => {
         // initialValues={initialValues}
         onFinish={handleGenerate}
       >
-        <Space>
-          <Form.Item label="From" name="datefrom">
-            <DatePicker onChange={onChange} />
-          </Form.Item>
-          <Form.Item label="To" name="dateto">
-            <DatePicker onChange={onChange} />
-          </Form.Item>
-        </Space>
         <Form.Item>
           <Button
             type="primary"

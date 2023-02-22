@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-// WALLET
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
-
 // HOOKS
 import useWindowDimensions from '@/hooks/useWindowDimensions'
 
@@ -10,7 +7,7 @@ import useWindowDimensions from '@/hooks/useWindowDimensions'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
 // ANTD
-import { Button, Typography } from 'antd'
+import { Typography } from 'antd'
 const { Title, Text } = Typography
 
 // STYLES
@@ -54,16 +51,18 @@ export function ButtonLink({
   }, [width])
 
   return (
-    <Button
+    <a
       target={target}
-      shape={'round'}
       href={link}
-      className={`cta-button ${type}`}
-      block={windowWidth < 930 ? true : false}
+      className={
+        `${windowWidth < 930}`
+          ? `cta-button ${type} block`
+          : `cta-button ${type}`
+      }
       style={{ background: color, color: textColor }}
     >
       {text}
-    </Button>
+    </a>
   )
 }
 
@@ -118,19 +117,16 @@ export default function EdenArtFrontPage() {
           <AppLogo size="medium" logo="eden" />
 
           <div className="social-btns-wrapper">
-            <Button
+            <a className="social-btn" href={'https://discord.gg/4dSYwDT'}>
+              <FaDiscord />
+            </a>
+            <a
               className="social-btn"
-              icon={<FaDiscord />}
-              shape="circle"
-              href={'https://discord.gg/4dSYwDT'}
-            />
-            <Button
-              className="social-btn"
-              icon={<BsTwitter />}
-              shape="circle"
               href={'https://twitter.com/Eden_Art_'}
               style={{ margin: '0 10px' }}
-            />
+            >
+              <BsTwitter />
+            </a>
           </div>
         </section>
 
@@ -304,16 +300,9 @@ export default function EdenArtFrontPage() {
         </section>
 
         <section className="section-wrapper visit-garden">
-          <Button
-            className="cta-btn-main main-link"
-            type="primary"
-            href={'/garden'}
-            size="large"
-            shape="round"
-            style={{}}
-          >
+          <a className="cta-btn-main main-link" href={'/garden'}>
             <Title level={2}>{'VISIT GARDEN'}</Title>
-          </Button>
+          </a>
         </section>
       </div>
     </EdenArtFrontPageStyles>

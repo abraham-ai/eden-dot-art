@@ -7,7 +7,7 @@ import { useAccount, useDisconnect } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -76,16 +76,13 @@ export const ConnectButtonCustom = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
-  console.log({ authToken })
-  console.log({ isConnected, isWeb3WalletConnected, isWeb3AuthSuccess })
-
   useEffect(() => {
     if (isWeb3WalletConnected === false && isConnected === true) {
       setIsWeb3WalletConnected(isConnected)
     } else if (typeof isConnected === 'undefined' || isConnected === false) {
       setIsWeb3WalletConnected(false)
       setIsWeb3AuthSuccess(false)
-      setUserId()
+      setUserId('')
       setAuthToken('')
     }
   }, [isConnected])
@@ -110,15 +107,6 @@ export const ConnectButtonCustom = () => {
             account &&
             chain &&
             (!authenticationStatus || authenticationStatus === 'authenticated')
-
-          {
-            console.log('Connect Button Custom: ', {
-              connected,
-              isWeb3WalletConnected,
-              isWeb3AuthSuccess,
-              authToken,
-            })
-          }
 
           return (
             <div

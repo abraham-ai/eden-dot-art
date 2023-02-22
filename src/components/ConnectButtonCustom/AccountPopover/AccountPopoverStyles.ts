@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const AccountPopoverStyles = styled.section`
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   background-color: white;
@@ -13,6 +12,16 @@ const AccountPopoverStyles = styled.section`
     border-radius: 50%;
     height: 48px;
     width: 48px;
+  }
+  button.account-button-main {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+  }
+  button.account-button-main:hover {
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
   .profile-wrapper {
     display: flex;

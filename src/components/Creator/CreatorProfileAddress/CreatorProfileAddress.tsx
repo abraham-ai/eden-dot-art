@@ -20,7 +20,7 @@ const CreatorProfileAddressStyles = styled.div`
 
 export default function CreatorProfileAddress({ profileAddress }) {
   const { address } = useAccount()
-  const currentAddress = address
+  const currentAddress = address === profileAddress ? address : profileAddress
 
   if (!address) {
     return (

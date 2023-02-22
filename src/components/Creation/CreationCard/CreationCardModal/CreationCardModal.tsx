@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 
 // NEXTJS
 import Image from 'next/image'
-import Link from 'next/link'
+
+// CONTEXT
+import AppContext from '@/context/AppContext/AppContext'
 
 // ROUTER
 import { useRouter } from 'next/router'
 
 // ANTD
-import { Popover, Modal, Typography, Button } from 'antd'
+import { Popover, Modal, Typography } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -19,29 +21,33 @@ import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 import Blockies from 'react-blockies'
 
 // ICONS
-import { FaRetweet } from 'react-icons/fa'
-import { BsFillBookmarkFill } from 'react-icons/bs'
+// import { FaRetweet } from 'react-icons/fa'
+// import { BsFillBookmarkFill } from 'react-icons/bs'
 
 // STYLES
 import { CreationCardModalStyles } from './CreationCardModalStyles'
 
-export default function CreationCardModal({ creation, index }) {
+// TYPES
+import CreationModal from '@/interfaces/CreationModal'
+
+export default function CreationCardModal({ creation }: CreationModal) {
   const router = useRouter()
+
+  const context = useContext(AppContext)
+  const { setIsCreationModalOpen } = context
 
   // console.log({ creation })
   const {
-    key,
+    // key,
     address,
     uri,
-    timestamp,
+    // timestamp,
     prompt,
-    status,
-    generator,
+    // status,
+    // generator,
     width,
     height,
   } = creation
-
-  const [modalOpen, setModalOpen] = useState(false)
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   // const handleModalOpen = () => {
@@ -51,7 +57,7 @@ export default function CreationCardModal({ creation, index }) {
   //   `/creation/${creation.id}`,
   //   { shallow: true }
   // )
-  // setModalOpen(true)
+  // setIsCreationModalOpen(true)
   // }
 
   const handleModalClose = (
@@ -61,7 +67,7 @@ export default function CreationCardModal({ creation, index }) {
     // console.log('handleCardClose!')
     // console.log(event)
     router.push('/garden', '', { scroll: false })
-    event ? setModalOpen(false) : null
+    event ? setIsCreationModalOpen(false) : null
   }
 
   let displayAddress = address?.substr(0, 6)
