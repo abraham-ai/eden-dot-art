@@ -22,7 +22,6 @@ import createEmotionCache from 'src/createEmotionCache'
 
 // NAV
 import Head from 'next/head'
-// import { SidebarProvider } from 'src/contexts/SidebarContext'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
@@ -43,9 +42,9 @@ interface EdenAppProps extends AppProps {
 }
 
 function EdenApp(props: EdenAppProps) {
-  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false)
-  const [isCreationModalVisible, setIsCreationModalVisible] = useState(false)
-  const [isCreateUIModalVisible, setIsCreateUIModalVisible] = useState(false)
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
+  const [isCreationModalOpen, setIsCreationModalOpen] = useState(false)
+  const [isCreateUIModalOpen, setIsCreateUIModalOpen] = useState(false)
   const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
   const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
   const [authToken, setAuthToken] = useState('')
@@ -66,12 +65,12 @@ function EdenApp(props: EdenAppProps) {
     setUserId,
     isWeb3AuthSuccess,
     setIsWeb3AuthSuccess,
-    isCreateUIModalVisible,
-    setIsCreateUIModalVisible,
-    isCreationModalVisible,
-    setIsCreationModalVisible,
-    isSignInModalVisible,
-    setIsSignInModalVisible,
+    isCreateUIModalOpen,
+    setIsCreateUIModalOpen,
+    isCreationModalOpen,
+    setIsCreationModalOpen,
+    isSignInModalOpen,
+    setIsSignInModalOpen,
     isWeb3WalletConnected,
     setIsWeb3WalletConnected,
     isLightTheme,

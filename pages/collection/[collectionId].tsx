@@ -16,7 +16,7 @@ export default function CreationsPage() {
         <title>Creations</title>
       </Head>
 
-      <section maxWidth="xl">
+      <section>
         <CreationsGrid />
       </section>
     </>

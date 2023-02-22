@@ -1,6 +1,9 @@
 import * as React from 'react'
-import { ServerStyleSheet } from 'styled-components'
+
+// NEXT
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+// EMOTION CSS
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'src/createEmotionCache'
 

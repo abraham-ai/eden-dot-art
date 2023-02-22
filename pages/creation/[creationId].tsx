@@ -59,7 +59,7 @@ import { SlSizeFullscreen } from 'react-icons/sl'
 // const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 
 // HOOKS
-import useWindowDimensions from '@/hooks/useWindowDimensions'
+// import useWindowDimensions from '@/hooks/useWindowDimensions'
 
 // UTILS
 import shaURL from '@/util/shaURL'
@@ -67,9 +67,9 @@ import { formatAddress } from '@/util/address'
 import time_ago from '@/util/time_ago'
 
 // TYPES
-type SizeType = 'default' | 'small' | 'large'
-type ButtonShapeType = 'circle' | 'square' | 'round' | 'default'
-type AvatarShapeType = 'circle' | 'square'
+// type SizeType = 'default' | 'small' | 'large'
+// type ButtonShapeType = 'circle' | 'square' | 'round' | 'default'
+// type AvatarShapeType = 'circle' | 'square'
 
 const singleCreation = {
   id: '63877cb82e7cdbe5f534a05a',
@@ -131,10 +131,10 @@ const RelatedCreations = ({ item = singleCreation }) => {
           <Title level={3}>Related Creations</Title>
         </span>
 
-        <Button className="cr-search-more" shape="round" size="large">
+        <button className="cr-search-more">
           <Text>Search More</Text>
           <HiOutlineArrowNarrowUp className="search-icon" />
-        </Button>
+        </button>
       </Row>
 
       <Row className="cr-related-creations">
@@ -199,14 +199,13 @@ export default function Creation({
   //   mintButton,
 }) {
   // hooks
-  const { width } = useWindowDimensions()
+  // const { width } = useWindowDimensions()
 
   // const router = useRouter();
   // const { pathname, query, asPath } = router;
 
   // hover stats
   const [isHovering, setIsHovering] = useState(true)
-  // const [visible, setVisible] = useState(true);
 
   // const { sort_by, filter_by } = context;
 

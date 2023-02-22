@@ -18,8 +18,6 @@ interface ApiRequest extends NextApiRequest {
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { message, signature, userAddress } = req.body
 
-  console.log({ req })
-
   try {
     const token = await eden.loginEth(message, signature, userAddress)
 
