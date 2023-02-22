@@ -34,7 +34,6 @@ const wagmiClient = createClient({
 })
 
 const WalletProvider = ({ children }) => {
-  // : PropsWithChildren
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
