@@ -5,12 +5,12 @@ export interface AppContext {
   setUserId: (userId: string) => void
   isWeb3AuthSuccess: boolean
   setIsWeb3AuthSuccess: (isWeb3AuthSuccess: boolean) => void
-  isCreateUIModalVisible: boolean
-  setIsCreateUIModalVisible: (isCreateUIModalVisible: boolean) => void
-  isCreationModalVisible: boolean
-  setIsCreationModalVisible: (isCreationModalVisible: boolean) => void
-  isSignInModalVisible: boolean
-  setIsSignInModalVisible: (isSignInModalVisible: boolean) => void
+  isCreateUIModalOpen: boolean
+  setIsCreateUIModalOpen: (isCreateUIModalOpen: boolean) => void
+  isCreationModalOpen: boolean
+  setIsCreationModalOpen: (isCreationModalOpen: boolean) => void
+  isSignInModalOpen: boolean
+  setIsSignInModalOpen: (isSignInModalOpen: boolean) => void
   isWeb3WalletConnected: boolean
   setIsWeb3WalletConnected: (isWeb3WalletConnected: boolean) => void
   isLightTheme: boolean
