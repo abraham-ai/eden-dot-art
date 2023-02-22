@@ -12,6 +12,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).json({ error: 'Missing generator name' })
     }
   } catch (error: any) {
+    // console.log("ERROR!!!" )
+    // console.log(error)
+    // console.log(error.response)
+    // console.log(error.response.data)
     return res.status(500).json({ error: error.response.data })
   }
 }

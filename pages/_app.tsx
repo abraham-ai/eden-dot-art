@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // TYPES
-import type { ReactElement, ReactNode } from 'react/types'
+import type { ReactElement, ReactNode } from 'react';
 
 // NEXT
 import type { NextPage } from 'next'
@@ -86,7 +86,7 @@ function EdenApp(props: EdenAppProps) {
     ) {
       setIsWeb3AuthSuccess(true)
     }
-  }, [authToken])
+  }, [authToken, userId, isWeb3AuthSuccess])
 
   return (
     <CacheProvider value={emotionCache}>

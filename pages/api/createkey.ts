@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     eden.setAuthToken(authToken)
-    const newApiKey = await eden.createNewApiKey()
+    const newApiKey = await eden.createNewApiKey("My new API key")
     return res.status(200).json(newApiKey)
   } catch (error: any) {
     if (error.response.data == 'jwt expired') {

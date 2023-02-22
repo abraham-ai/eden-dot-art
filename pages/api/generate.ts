@@ -2,27 +2,33 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import { withSessionRoute } from '@/util/withSession'
 import { eden } from '../../src/util/eden'
 
+
 interface ApiRequest extends NextApiRequest {
   body: {
-    creatorId: string
-    earliestTime: number
-    latestTime: number
-    limit: number
-  }
+    generatorName: string;
+    config: any;
+  };
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const authToken = req.session.token
+  const { config, generatorName } = req.body;
+  const authToken = req.session.token;
 
   if (!authToken) {
     return res.status(401).json({ error: 'Not authenticated' })
   }
 
   try {
-    eden.setAuthToken(authToken)
+    eden.setAuthToken(authToken.token)
     //const userId = req.session.userId;
-
-    return res.status(200).json({ tbd: 'TBD' })
+    const result = await eden.startTask(generatorName, config);
+    if (result.error) {
+      return res.status(500).json({ error: result.error });
+    } 
+    else {
+      // console.log(`Starting task ${result.taskId}...`)
+      return res.status(200).json({ taskId: result.taskId });
+    }
   } catch (error: any) {
     if (error.response.data == 'jwt expired') {
       return res.status(401).json({ error: 'Authentication expired' })
