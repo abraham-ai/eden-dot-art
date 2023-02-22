@@ -18,11 +18,11 @@ interface RemixFormInputs {
 }
 
 const RemixTab = () => {
-  const initialValues: RemixFormInputs = {
-    initImageUrl: '',
-    width: 512,
-    height: 512,
-  }
+  // const initialValues: RemixFormInputs = {
+  //   initImageUrl: '',
+  //   width: 512,
+  //   height: 512,
+  // }
 
   const [form] = Form.useForm()
   const width = Form.useWatch('width', form)
@@ -46,9 +46,12 @@ const RemixTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="audio" generatorName="tts" />
-
-      {message && <p>{message}</p>}
+      <GeneratorInterface
+        mediaType="audio"
+        generatorName="tts"
+        handleGenerate={handleRemix}
+      />
+      {generating ? <p>{message}</p> : null}
       <ImageResult width={width} height={height} imageUrl={resultUrl} />
     </>
   )

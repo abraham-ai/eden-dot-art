@@ -14,29 +14,21 @@ import { CreateButtonStyles } from './CreateButtonStyles'
 
 export default function CreateButton() {
   const context = useContext(AppContext)
-  const {
-    setIsCreateUIModalVisible,
-    setIsSignInModalVisible,
-    isWeb3AuthSuccess,
-  } = context
+  const { setIsCreateUIModalOpen, setIsSignInModalOpen, isWeb3AuthSuccess } =
+    context
 
-  const handleCreateOpen = (e: MouseEvent) => {
+  const handleCreateOpen = () => {
     if (isWeb3AuthSuccess === true) {
-      setIsCreateUIModalVisible(true)
+      setIsCreateUIModalOpen(true)
     } else {
-      setIsSignInModalVisible(true)
+      setIsSignInModalOpen(true)
     }
   }
 
   return (
     <CreateButtonStyles id="create-button-wrapper">
-      <button
-        id="create-button"
-        onClick={e => handleCreateOpen(e)}
-        size="middle"
-        icon={'+'}
-      >
-        <Text className="create-button-text">Create</Text>
+      <button id="create-button" onClick={handleCreateOpen}>
+        <Text className="create-button-text">{'Create +'}</Text>
       </button>
     </CreateButtonStyles>
   )

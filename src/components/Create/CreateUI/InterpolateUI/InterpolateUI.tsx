@@ -16,13 +16,13 @@ interface InterpolateFormInputs {
 }
 
 const InterpolateTab = () => {
-  const initialValues: InterpolateFormInputs = {
-    prompt1: '',
-    prompt2: '',
-    width: 512,
-    height: 512,
-    numFrames: 30,
-  }
+  // const initialValues: InterpolateFormInputs = {
+  //   prompt1: '',
+  //   prompt2: '',
+  //   width: 512,
+  //   height: 512,
+  //   numFrames: 30,
+  // }
 
   const [resultUrl, setResultUrl] = useState<string>('')
   const [generating, setGenerating] = useState<boolean>(false)

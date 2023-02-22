@@ -20,16 +20,16 @@ import CreateUIStyles from './CreateUIStyles'
 
 export default function CreateUI() {
   const context = useContext(AppContext)
-  const { isCreateUIModalVisible, setIsCreateUIModalVisible } = context
+  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = context
 
   const { address } = useAccount()
 
-  return isCreateUIModalVisible ? (
+  return isCreateUIModalOpen ? (
     <CreateUIStyles>
       <Modal
         className="create-modal"
-        open={isCreateUIModalVisible}
-        onCancel={() => setIsCreateUIModalVisible(false)}
+        open={isCreateUIModalOpen}
+        onCancel={() => setIsCreateUIModalOpen(false)}
         bodyStyle={{ maxWidth: '90%', maxHeight: '90%' }}
         width="90%"
       >
@@ -38,7 +38,7 @@ export default function CreateUI() {
             <div className="close-icon-wrapper">
               <Button
                 className="close-icon"
-                onClick={() => setIsCreateUIModalVisible(false)}
+                onClick={() => setIsCreateUIModalOpen(false)}
               />
             </div>
 

@@ -18,15 +18,13 @@ export default function SelectLabels() {
     <CreateTypeSelectStyles>
       <Form style={{ margin: 10, minWidth: 120 }}>
         <Select
-          labelId="select-creation-type"
           id="select-creation-type"
           value={creationType}
-          label="" // Creation Type
           onChange={handleChange}
         >
-          <Item value={1}>Text 2 Image</Item>
-          <Item value={2}>Text 2 Video</Item>
-          <Item value={3}>Image 2 Image</Item>
+          <Item key={1}>Text 2 Image</Item>
+          <Item key={2}>Text 2 Video</Item>
+          <Item key={3}>Image 2 Image</Item>
         </Select>
       </Form>
     </CreateTypeSelectStyles>

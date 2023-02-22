@@ -29,14 +29,14 @@ export default function CreateSignInJWT() {
 
   const context = useContext(AppContext)
   const {
-    isSignInModalVisible,
-    setIsSignInModalVisible,
+    isSignInModalOpen,
+    setIsSignInModalOpen,
     isWeb3AuthSuccess,
     authToken,
   } = context
 
   const handleCancel = () => {
-    setIsSignInModalVisible(false)
+    setIsSignInModalOpen(false)
   }
 
   const [appMessage] = useState(
@@ -50,7 +50,7 @@ export default function CreateSignInJWT() {
   return (
     <Modal
       className="create-sign-in-jwt-modal"
-      open={isSignInModalVisible}
+      open={isSignInModalOpen}
       mask
       maskClosable
       keyboard

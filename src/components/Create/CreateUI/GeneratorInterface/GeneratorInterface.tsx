@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // ANTD
-import { Button, Form } from 'antd'
+import { Form } from 'antd'
 
 // HOOKS
 import { useGeneratorInfo } from '@/hooks/useGeneratorInfo'
@@ -36,9 +36,9 @@ const GeneratorInterface = ({
   const width = Form.useWatch('width', form)
   const height = Form.useWatch('height', form)
 
-  const [resultUrl, setResultUrl] = useState<string>('')
-  const [generating, setGenerating] = useState<boolean>(false)
-  const [message, setMessage] = useState<string | null>(null)
+  const [resultUrl] = useState<string>('')
+  const [generating] = useState<boolean>(false)
+  const [message] = useState<string | null>(null)
   const [showOptional, setShowOptional] = useState<boolean>(false)
   const { versionId, requiredParameters, optionalParameters } =
     useGeneratorInfo(generatorName)
@@ -130,32 +130,31 @@ const GeneratorInterface = ({
           {renderFormFields(requiredParameters)}
           <h3 style={{ padding: 5 }}>
             {showOptional ? (
-              <Button onClick={() => setShowOptional(false)}>
+              <button onClick={() => setShowOptional(false)}>
                 <UpCircleOutlined />
                 Hide optional settings
-              </Button>
+              </button>
             ) : (
-              <Button onClick={() => setShowOptional(true)}>
+              <button onClick={() => setShowOptional(true)}>
                 <DownCircleOutlined />
                 Show optional settings
-              </Button>
+              </button>
             )}
           </h3>
           {showOptional && renderFormFields(optionalParameters)}
           <Form.Item>
-            <Button
-              type="primary"
-              icon={<RightCircleOutlined />}
+            <button
+              // type="primary"
               htmlType="submit"
-              loading={generating}
-              disabled={generating}
-              size="large"
+              // loading={generating}
+              // disabled={generating}
             >
+              <RightCircleOutlined />
               Create
-            </Button>
+            </button>
           </Form.Item>
         </Form>
-        {message && <p>{message}</p>}
+        {generating && message && <p>{message}</p>}
         {resultUrl && (
           <>
             {mediaType == 'image' && (
