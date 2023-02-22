@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import { AppContext } from '@/interfaces/AppContext'
+import { AppContext as AppContextTypes } from '@/interfaces/AppContext'
 
-const AppContext = createContext<AppContext | null>(null)
+const AppContext = createContext<AppContextTypes | null>(null)
 
 export default AppContext
