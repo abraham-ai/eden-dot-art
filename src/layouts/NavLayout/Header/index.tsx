@@ -4,7 +4,7 @@ import { useEffect, useContext } from 'react'
 import Blockies from 'react-blockies'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // COMPONENTS
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
@@ -24,7 +24,7 @@ import {
 } from '@rainbow-me/rainbowkit'
 
 // STYLES
-import styled from 'styled-components'
+import { HeaderStyles } from './HeaderStyles'
 
 const { provider, chains } = configureChains(
   [mainnet],
@@ -45,49 +45,6 @@ const wagmiClient = createClient({
 const CustomAvatar: AvatarComponent = ({ address }) => {
   return <Blockies seed={address} />
 }
-
-const HeaderStyles = styled.section`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  right: 0;
-  left: 0;
-  background: white;
-  z-index: 100;
-  box-shadow: 0px 1px 1px #0000001f;
-  backdrop-filter: blur(3px);
-
-  > div:first-child {
-    width: 100%;
-    height: 100%;
-    // background: lime;
-  }
-
-  /*** NAV RIGHT WRAPPER ***/
-  .nav-right-wrapper {
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-    align-items: center;
-    // background: magenta;
-  }
-
-  .nav-link-wrapper {
-    padding: 0 10px;
-  }
-  .nav-link-wrapper:hover {
-    color: white;
-  }
-  .nav-link-text:hover {
-    cursor: pointer;
-    color: white;
-  }
-  .menu-item {
-    display: flex;
-  }
-`
 
 export default function Header() {
   const { isConnected } = useAccount()
