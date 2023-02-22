@@ -77,13 +77,8 @@ export default function WatchPage() {
     const newCreationsArray = []
 
     creations.map(creation => {
-      // console.log(creation.text_input)
-      // console.log('Turning into Story Object')
-
-      const { text_input, source, sha, video_sha, intermediate_sha } = creation
+      const { prompt, source, sha, video_sha, intermediate_sha } = creation
       const creationType = video_sha ? 'video' : 'image'
-      // console.log({ creationType })
-      // console.log(PRD_URL + sha)
 
       // get age of creation
       const date = new Date(creation.date)
@@ -160,14 +155,14 @@ export default function WatchPage() {
                 flex: 1,
                 width: '100%',
                 justifyContent: 'center',
-                p: 0,
-                m: 0,
+                padding: 0,
+                margin: 0,
               }}
             >
               <div
                 style={{
                   borderRadius: '15px',
-                  m: 0,
+                  margin: 0,
                   display: 'flex',
                   background: 'rgba(0, 0, 0, 0.5)',
                   backdropFilter: 'blur(16px)',
@@ -177,13 +172,7 @@ export default function WatchPage() {
                   <Text style={{ fontWeight: 'bold' }} color="text.primary">
                     {'/create'}
                   </Text>
-                  <Text
-                    variant="h3"
-                    color="text.secondary"
-                    style={{ p: 2, color: 'white' }}
-                  >
-                    {text_input}
-                  </Text>
+                  <Text style={{ padding: 20, color: 'white' }}>{prompt}</Text>
                 </div>
               </div>
             </div>
@@ -207,7 +196,6 @@ export default function WatchPage() {
   // fetchContext
   const getCreations = useCallback(
     (newPage, pageUpdateType, context) => {
-      // console.log('|| --------------- Get Creations! ------------------- ||')
       let gatewayError = false
       let gatewayErrorMessage = ''
 
@@ -223,10 +211,6 @@ export default function WatchPage() {
       axios
         .post(serverUrl + '/get_creations', fetch_type)
         .then(response => {
-          // DEBUG
-          // console.log({ response })
-          // console.log(creations.length)
-
           if (page === 0 && context === 'onAllStoriesEnd') {
             context.replaceCreations(response.data)
             context.incrementPageCreation(page)
@@ -271,7 +255,7 @@ export default function WatchPage() {
       <Head>
         <title>Creations</title>
       </Head>
-      <section maxWidth="xl">
+      <section>
         <WatchStyles>
           <div
             className="stories-wrapper"
