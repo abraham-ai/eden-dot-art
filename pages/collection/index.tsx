@@ -16,7 +16,7 @@ export default function CollectionsPage() {
         <title>Collections</title>
       </Head>
 
-      <section maxWidth="xl">
+      <section>
         <CreationsGrid />
       </section>
     </>

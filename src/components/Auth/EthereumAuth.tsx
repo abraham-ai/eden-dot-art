@@ -3,7 +3,7 @@
 import { useState, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
 import { Row, Typography } from 'antd'
@@ -47,8 +47,8 @@ const EthereumAuth = ({ onModalCancel }) => {
   const {
     setAuthToken,
     setIsWeb3AuthSuccess,
-    setIsSignInModalVisible,
-    setIsCreateUIVisible,
+    setIsSignInModalOpen,
+    setIsCreateUIModalOpen,
   } = context
 
   const { signMessage } = useSignMessage({
@@ -60,16 +60,13 @@ const EthereumAuth = ({ onModalCancel }) => {
           userAddress: address,
         })
 
-        console.log({ resp })
         const { token } = resp.data
         const { token: authToken } = token
 
-        console.log('Ethereum Auth Token: ', { authToken })
-
         setAuthToken(authToken)
         setIsWeb3AuthSuccess(true)
-        setIsSignInModalVisible(false)
-        setIsCreateUIVisible(true)
+        setIsSignInModalOpen(false)
+        setIsCreateUIModalOpen(true)
 
         setEthMessage(
           'Successfully authenticated as ' + address + ', Token' + token.token,
@@ -86,8 +83,6 @@ const EthereumAuth = ({ onModalCancel }) => {
   }
 
   const handleSiwe = async () => {
-    console.log(window.location.host)
-
     if (!isConnected) return
     setEthAuthenticating(true)
     try {
@@ -117,10 +112,7 @@ const EthereumAuth = ({ onModalCancel }) => {
       <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
         <button
           className="auth-btn sign-in"
-          type="primary"
           onClick={handleSiwe}
-          shape="round"
-          size="large"
           // disabled={ethAuthenticating}
           // loading={ethAuthenticating}
         >
@@ -129,11 +121,12 @@ const EthereumAuth = ({ onModalCancel }) => {
           </Text>
         </button>
         <button
-          className="auth-btn cancel"
-          type="default"
+          className={
+            ethAuthenticating
+              ? 'auth-btn authenticating cancel'
+              : 'auth-btn cancel'
+          }
           onClick={handleCancelModal}
-          shape="round"
-          size="large"
           // disabled={ethAuthenticating}
         >
           <Text strong style={{ fontSize: '1rem' }}>

@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 // ANTD
 import {
   Alert,
-  Button,
-  // Checkbox,
   Card,
   Form,
   Input,
@@ -12,7 +10,6 @@ import {
   Space,
   Tag,
   Typography,
-  // theme,
   Col,
   Row,
   Upload,
@@ -335,15 +332,7 @@ const EditProfile = () => {
             </Row>
 
             <Form.Item className="form-submit">
-              <Button
-                type="primary"
-                shape="round"
-                size="large"
-                block
-                style={{ width: '100%' }}
-              >
-                Save changes
-              </Button>
+              <button style={{ width: '100%' }}>Save changes</button>
             </Form.Item>
           </Form>
         </Card>

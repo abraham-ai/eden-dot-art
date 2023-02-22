@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // ANTD
-import { Button, Table } from 'antd'
+import { Table } from 'antd'
 
 // FETCH
 import axios from 'axios'
@@ -59,14 +59,14 @@ const ApiKeys = () => {
     <div>
       <h1>My API Keys</h1>
       <Table dataSource={data} columns={columns} />
-      <Button
-        type="primary"
+      <button
+        className={`button ${apiKeyCreating ? 'loading' : ''}`}
         onClick={handleCreateAPIKey}
-        disabled={apiKeyCreating}
-        loading={apiKeyCreating}
+        // disabled={apiKeyCreating}
+        // loading={apiKeyCreating}
       >
         Create new API key
-      </Button>
+      </button>
       {apiMessage && <p>{apiMessage}</p>}
     </div>
   )

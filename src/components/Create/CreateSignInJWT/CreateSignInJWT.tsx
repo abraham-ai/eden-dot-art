@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // WEB3
 import { useSignMessage, useAccount } from 'wagmi'
@@ -29,15 +29,14 @@ export default function CreateSignInJWT() {
 
   const context = useContext(AppContext)
   const {
-    isSignInModalVisible,
-    setIsSignInModalVisible,
+    isSignInModalOpen,
+    setIsSignInModalOpen,
     isWeb3AuthSuccess,
-    isWeb3WalletConnected,
     authToken,
   } = context
 
   const handleCancel = () => {
-    setIsSignInModalVisible(false)
+    setIsSignInModalOpen(false)
   }
 
   const [appMessage] = useState(
@@ -48,13 +47,10 @@ export default function CreateSignInJWT() {
     message: appMessage,
   }) // isLoading, isError, signMessage
 
-  console.log({ isSignInModalVisible })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
-
   return (
     <Modal
-      id="create-sign-in-jwt-modal"
-      open={isSignInModalVisible}
+      className="create-sign-in-jwt-modal"
+      open={isSignInModalOpen}
       mask
       maskClosable
       keyboard

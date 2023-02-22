@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // ANTD
-import { Typography, Modal, Popover, Button } from 'antd'
+import { Typography, Modal, Popover } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -62,9 +62,7 @@ export default function CreationCardFeed({ creation }) {
               </span>
               <Text>{displayAddress}</Text>
             </div>
-            <Button shape="round" size="large">
-              Follow
-            </Button>
+            <button>Follow</button>
           </article>
 
           <div
@@ -166,7 +164,9 @@ export default function CreationCardFeed({ creation }) {
                   paddingBottom: 10,
                 }}
               >
-                <Button shape="circle" icon={<StarOutlined />}></Button>
+                <button>
+                  <StarOutlined />
+                </button>
                 <Text>43.6k</Text>
               </li>
               <li
@@ -177,7 +177,9 @@ export default function CreationCardFeed({ creation }) {
                   paddingBottom: 10,
                 }}
               >
-                <Button shape="circle" icon={<EyeOutlined />}></Button>
+                <button shape="circle">
+                  <EyeOutlined />
+                </button>
                 <Text>295</Text>
               </li>
               <li
@@ -187,7 +189,9 @@ export default function CreationCardFeed({ creation }) {
                   alignItems: 'center',
                 }}
               >
-                <Button shape="circle" icon={<ShareAltOutlined />}></Button>
+                <button shape="circle">
+                  <ShareAltOutlined />
+                </button>
                 <Text>108</Text>
               </li>
             </ul>

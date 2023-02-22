@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 // EDEN COMPONENTS
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 import VideoResult from '@/components/Media/VideoResult/VideoResult'
 
 interface InterpolateFormInputs {
@@ -16,13 +16,13 @@ interface InterpolateFormInputs {
 }
 
 const InterpolateTab = () => {
-  const initialValues: InterpolateFormInputs = {
-    prompt1: '',
-    prompt2: '',
-    width: 512,
-    height: 512,
-    numFrames: 30,
-  }
+  // const initialValues: InterpolateFormInputs = {
+  //   prompt1: '',
+  //   prompt2: '',
+  //   width: 512,
+  //   height: 512,
+  //   numFrames: 30,
+  // }
 
   const [resultUrl, setResultUrl] = useState<string>('')
   const [generating, setGenerating] = useState<boolean>(false)

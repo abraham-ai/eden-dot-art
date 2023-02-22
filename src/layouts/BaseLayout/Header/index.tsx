@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // COMPONENTS
 import Logo from '@/components/Logo/Logo'
@@ -48,8 +48,7 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
 
 export default function Header() {
   const context = useContext(AppContext)
-  const { setIsWeb3WalletConnected, isWeb3WalletConnected, isWeb3AuthSuccess } =
-    context
+  const { setIsWeb3WalletConnected, isWeb3WalletConnected } = context
 
   const { isConnected } = useAccount()
 
@@ -57,7 +56,7 @@ export default function Header() {
     setIsWeb3WalletConnected(isConnected)
   }, [isConnected])
 
-  console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
+  // console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
 
   return (
     <WagmiConfig client={wagmiClient}>

@@ -1,11 +1,11 @@
 import React from 'react'
 
 // ANTD
-import { Typography, Button } from 'antd'
+import { Typography } from 'antd'
 const { Text } = Typography
 
 // ICONS
-import { FiMoreHorizontal } from 'react-icons/fi'
+// import { FiMoreHorizontal } from 'react-icons/fi'
 import { FaStar, FaRetweet } from 'react-icons/fa'
 import { BsFillBookmarkFill } from 'react-icons/bs'
 import { IoIosShareAlt } from 'react-icons/io'
@@ -18,17 +18,17 @@ export default function CreationSocialsExtra() {
     <CreationSocialsExtraStyles>
       <div className="cr-socials-main">
         <span className="cr-social like">
-          <Button block className="btn" shape="round" type="default">
+          <button className="btn">
             <FaStar className="icon" />
             <Text className="text">{'303'}</Text>
-          </Button>
+          </button>
         </span>
 
         <span className="cr-social remix">
-          <Button className="btn" shape="round" type="default">
+          <button className="btn">
             <FaRetweet className="icon" />
             <Text className="text">{'310'}</Text>
-          </Button>
+          </button>
         </span>
 
         {/* <span className='cr-social views'>
@@ -39,17 +39,17 @@ export default function CreationSocialsExtra() {
           </span> */}
 
         <span className="cr-social bookmark">
-          <Button className="btn" shape="round" type="default">
+          <button className="btn">
             <BsFillBookmarkFill className="icon" />
             <Text className="text">Save</Text>
-          </Button>
+          </button>
         </span>
 
         <span className="cr-social share">
-          <Button className="btn" shape="round" type="default">
+          <button className="btn">
             <IoIosShareAlt className="icon" />
             <Text className="text">Share</Text>
-          </Button>
+          </button>
         </span>
       </div>
     </CreationSocialsExtraStyles>

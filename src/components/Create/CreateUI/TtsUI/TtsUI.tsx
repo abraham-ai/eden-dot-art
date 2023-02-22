@@ -2,13 +2,13 @@ import { useState } from 'react'
 // useContext,
 
 // UI
-import { Button, Form, Input, InputNumber, Space } from 'antd'
+import { Form } from 'antd'
 
 // FETCH
 import axios from 'axios'
 
 // EDEN COMPONENTS
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 import ImageResult from '@/components/ImageResult/ImageResult'
 
 interface RemixFormInputs {
@@ -18,11 +18,11 @@ interface RemixFormInputs {
 }
 
 const RemixTab = () => {
-  const initialValues: RemixFormInputs = {
-    initImageUrl: '',
-    width: 512,
-    height: 512,
-  }
+  // const initialValues: RemixFormInputs = {
+  //   initImageUrl: '',
+  //   width: 512,
+  //   height: 512,
+  // }
 
   const [form] = Form.useForm()
   const width = Form.useWatch('width', form)
@@ -46,9 +46,12 @@ const RemixTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="audio" generatorName="tts" />
-
-      {message && <p>{message}</p>}
+      <GeneratorInterface
+        mediaType="audio"
+        generatorName="tts"
+        handleGenerate={handleRemix}
+      />
+      {generating ? <p>{message}</p> : null}
       <ImageResult width={width} height={height} imageUrl={resultUrl} />
     </>
   )

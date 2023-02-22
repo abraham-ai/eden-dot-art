@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
 import { Modal, Button } from 'antd'
@@ -20,26 +20,16 @@ import CreateUIStyles from './CreateUIStyles'
 
 export default function CreateUI() {
   const context = useContext(AppContext)
-  const {
-    authToken,
-    isCreateUIModalVisible,
-    setIsCreateUIModalVisible,
-    isWeb3WalletConnected,
-    isWeb3AuthSuccess,
-  } = context
+  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = context
 
   const { address } = useAccount()
 
-  console.log({ isCreateUIModalVisible })
-  console.log({ authToken })
-  console.log({ isWeb3WalletConnected, isWeb3AuthSuccess })
-
-  return isCreateUIModalVisible ? (
+  return isCreateUIModalOpen ? (
     <CreateUIStyles>
       <Modal
         className="create-modal"
-        open={isCreateUIModalVisible}
-        onCancel={() => setIsCreateUIModalVisible(false)}
+        open={isCreateUIModalOpen}
+        onCancel={() => setIsCreateUIModalOpen(false)}
         bodyStyle={{ maxWidth: '90%', maxHeight: '90%' }}
         width="90%"
       >
@@ -48,7 +38,7 @@ export default function CreateUI() {
             <div className="close-icon-wrapper">
               <Button
                 className="close-icon"
-                onClick={() => setIsCreateUIModalVisible(false)}
+                onClick={() => setIsCreateUIModalOpen(false)}
               />
             </div>
 

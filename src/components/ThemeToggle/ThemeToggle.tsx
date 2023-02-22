@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
 import { Switch } from 'antd'
@@ -14,10 +14,11 @@ const themeLabel = { inputProps: { 'aria-label': 'Switch demo' } }
 
 export default function ThemeToggle() {
   const context = useContext(AppContext)
-  const { setIsLightTheme } = context
+  const { setIsLightTheme, isLightTheme } = context
 
-  const onChange = (checked: boolean) => {
-    checked ? setIsLightTheme(previousValue => !previousValue) : null
+  const onChange = e => {
+    e.preventDefault()
+    e ? setIsLightTheme(!isLightTheme) : null
     // console.log(`switch to ${checked}`);
   }
 
@@ -25,9 +26,9 @@ export default function ThemeToggle() {
     <Switch
       {...themeLabel}
       defaultChecked
-      onChange={onChange}
+      onChange={e => onChange(e)}
       checkedChildren={
-        <div style={{ marginTop: 2 }}>
+        <div style={{ marginTop: 20 }}>
           <BsSunFill />
         </div>
       }

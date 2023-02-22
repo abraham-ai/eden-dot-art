@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 
 // CONTEXT
-import AppContext from '@/components/AppContext/AppContext'
+import AppContext from '@/context/AppContext/AppContext'
 
 // WAGMI
 import { useAccount } from 'wagmi'
@@ -62,9 +62,9 @@ export default function CreationSocial({
     if (!address) {
       return
     }
-    console.log(' Praise Handler ')
+    // console.log(' Praise Handler ')
     let praiseOpperation = ''
-    console.log({ isPraised })
+    // console.log({ isPraised })
 
     if (isPraised === true && praises > 0) {
       setPraises(praises - 1)
@@ -76,7 +76,7 @@ export default function CreationSocial({
       setIsPraised(true)
     }
 
-    console.log({ praiseOpperation })
+    // console.log({ praiseOpperation })
 
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
@@ -85,7 +85,7 @@ export default function CreationSocial({
       address: address,
     })
 
-    console.log({ results })
+    // console.log({ results })
     setPraises(results.data.praise)
   }
 
@@ -93,9 +93,9 @@ export default function CreationSocial({
     if (!address) {
       return
     }
-    console.log('Burn Handler')
+    // console.log('Burn Handler')
     let burnOpperation = ''
-    console.log({ isBurned })
+    // console.log({ isBurned })
 
     if (isBurned === true && burns > 0) {
       setBurns(burns - 1)
@@ -107,7 +107,7 @@ export default function CreationSocial({
       setIsBurned(true)
     }
 
-    console.log({ burnOpperation })
+    // console.log({ burnOpperation })
 
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
@@ -116,7 +116,7 @@ export default function CreationSocial({
       address: address,
     })
 
-    console.log({ results })
+    // console.log({ results })
     setBurns(results.data.burn)
   }
 

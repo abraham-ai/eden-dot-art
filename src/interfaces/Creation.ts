@@ -2,19 +2,18 @@ import Task from '@/interfaces/Task'
 
 interface Creation {
   _id: string
-  _v: number
-  attributes: string[]
-  delagateHasClaimed: boolean
-  name: string
+  key: string
   user: string
-  task: Task
-  thumbnail: string
   createdAt: string
-  updatedAt: string
-  key: number
+  task: Task
   address: string
   uri: string
   timestamp: string
+  prompt: string
+  status: string
+  generator: string
+  width: number
+  height: number
 }
 
 export default Creation

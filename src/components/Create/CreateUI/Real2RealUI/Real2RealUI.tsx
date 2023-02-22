@@ -1,13 +1,10 @@
 import { useState } from 'react' // useContext
 
-// UI
-import { Button, Form, Input, InputNumber, Space } from 'antd'
-
 // FETCH
 import axios from 'axios'
 
 // EDEN COMPONENTS
-import GeneratorInterface from '@/components/Create/GeneratorInterface/GeneratorInterface'
+import GeneratorInterface from '@/components/Create/CreateUI/GeneratorInterface/GeneratorInterface'
 import VideoResult from '@/components/Media/VideoResult/VideoResult'
 
 interface Real2RealFormInputs {
@@ -19,13 +16,13 @@ interface Real2RealFormInputs {
 }
 
 const Real2RealTab = () => {
-  const initialValues: Real2RealFormInputs = {
-    initImageUrl1: '',
-    initImageUrl2: '',
-    width: 512,
-    height: 512,
-    numFrames: 30,
-  }
+  // const initialValues: Real2RealFormInputs = {
+  //   initImageUrl1: '',
+  //   initImageUrl2: '',
+  //   width: 512,
+  //   height: 512,
+  //   numFrames: 30,
+  // }
 
   const [resultUrl, setResultUrl] = useState<string>('')
   const [generating, setGenerating] = useState<boolean>(false)
@@ -46,9 +43,13 @@ const Real2RealTab = () => {
 
   return (
     <>
-      <GeneratorInterface mediaType="video" generatorName="real2real" />
+      <GeneratorInterface
+        mediaType="video"
+        generatorName="real2real"
+        handleGenerate={handleReal2Real}
+      />
 
-      {message}
+      {generating ? `${message}` : null}
       <VideoResult resultUrl={resultUrl} />
     </>
   )

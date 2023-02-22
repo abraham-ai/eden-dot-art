@@ -5,17 +5,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 // ROUTER
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 // ANTD
-import { Popover, Typography, Button } from 'antd'
+import { Popover, Typography } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
 import CreationCardModal from '@/components/Creation/CreationCard/CreationCardModal/CreationCardModal'
 import CreationSocials from '@/components/Creation/CreationCard/CreationSocials/CreationSocials'
 import CreationSaveModal from '@/components/Creation/CreationCard/CreationSaveModal/CreationSaveModal'
-import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
+// import ProfilePopOver from '@/components/Profile/ProfilePopOver/ProfilePopOver'
 
 // UTILS
 import time_ago from '@/util/time_ago'
@@ -29,43 +29,21 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 
 // STYLES
 import { CreationCardStyles } from './CreationCardStyles'
+// import AppContext from '@/context/AppContext/AppContext'
 
-interface Creation {
-  key: number
-  address: string
-  uri: string
-  timestamp: string
-  prompt: string
-  status: string
-  generator: string
-  width: number
-  height: number
-}
+// TYPES
+import Creation from '@/interfaces/Creation'
 
-interface CreationCard {
-  creation: Creation
-  key: number
-}
+export default function CreationCard({ creation }: { creation: Creation }) {
+  // const router = useRouter()
 
-export default function CreationCard({ creation }: CreationCard) {
-  const router = useRouter()
+  const { uri, timestamp, prompt, status, generator, width, height, address } =
+    creation
 
-  // console.log({ creation })
-
-  const {
-    key,
-    address,
-    uri,
-    timestamp,
-    prompt,
-    status,
-    generator,
-    width,
-    height,
-  } = creation
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSaveModalActive, setIsSaveModalActive] = useState(false)
+
+  // const context = useContext(AppContext)
+  // const { setIsCreationModalOpen } = context
 
   // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   // const handleModalOpen = () => {
@@ -78,42 +56,40 @@ export default function CreationCard({ creation }: CreationCard) {
   // setModalOpen(true)
   // }
 
-  const handleModalClose = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    // event.preventDefault()
-    // console.log('handleCardClose!')
-    // console.log(event)
-    router.push('/garden', '', { scroll: false })
-    event ? setIsModalOpen(false) : null
-  }
+  // const handleModalClose = (
+  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  // ) => {
+  //   // event.preventDefault()
+  //   router.push('/garden', '', { scroll: false })
+  //   event ? setIsCreationModalOpen(false) : null
+  // }
 
   const handlePraise = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log('handle PRAISE 🙌 !')
+    // console.log('handle PRAISE 🙌 !')
   }
 
   const handleBurn = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log('handle BURN 🔥 !')
+    // console.log('handle BURN 🔥 !')
   }
 
   const handleRecreation = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log('handle RECREATION 🔀 !')
+    // console.log('handle RECREATION 🔀 !')
   }
 
   const handleSave = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log('handle SAVE 🔖!')
+    // console.log('handle SAVE 🔖!')
     setIsSaveModalActive(true)
   }
 
@@ -122,52 +98,32 @@ export default function CreationCard({ creation }: CreationCard) {
 
   return (
     <CreationCardStyles style={{ aspectRatio: `${width}/${height}` }}>
-      <article id="creation-card" creationkey={key}>
+      <article id="creation-card">
         <article className="creation-content">
           <div className="cr-action-left">
             <span className="cr-social praise">
-              <Button
-                className="btn"
-                shape="circle"
-                type="default"
-                onClick={handlePraise}
-              >
+              <button className="btn" onClick={handlePraise}>
                 🙌
-              </Button>
+              </button>
             </span>
             <span className="cr-social burn">
-              <Button
-                className="btn"
-                shape="circle"
-                type="default"
-                onClick={handleBurn}
-              >
+              <button className="btn" onClick={handleBurn}>
                 🔥
-              </Button>
+              </button>
             </span>
           </div>
 
           <div className="cr-action-right">
             <span className="cr-social remix">
-              <Button
-                className="btn"
-                shape="circle"
-                type="default"
-                onClick={handleRecreation}
-              >
+              <button className="btn" onClick={handleRecreation}>
                 <FaRetweet className="icon" />
-              </Button>
+              </button>
             </span>
 
             <span className="cr-social bookmark">
-              <Button
-                className="btn"
-                shape="circle"
-                type="default"
-                onClick={handleSave}
-              >
+              <button className="btn" onClick={handleSave}>
                 <BsFillBookmarkFill className="icon" />
-              </Button>
+              </button>
             </span>
           </div>
 
@@ -178,7 +134,6 @@ export default function CreationCard({ creation }: CreationCard) {
               <Text className="cr-prompt">{prompt}</Text>
 
               <div className="cr-metadata">
-                <Text>{key}</Text>
                 <Text>{status}</Text>
               </div>
 
@@ -219,7 +174,7 @@ export default function CreationCard({ creation }: CreationCard) {
         </Link>
       </article>
 
-      <CreationCardModal index={key} creation={creation} />
+      <CreationCardModal creation={creation} />
       <CreationSaveModal isSaveModalActive={isSaveModalActive} />
     </CreationCardStyles>
   )
