@@ -35,9 +35,6 @@ export default function CreationsGrid({ username = null }) {
   const [paginate, setPaginate] = useState(true)
   const [cutoffTime, setCutoffTime] = useState<number | null>(null)
 
-  const context = useContext(AppContext)
-  const { authToken, setAuthToken, setUserId, setIsWeb3AuthSuccess } = context
-
   const getMoreCreations = useCallback(async () => {
     if (!paginate) return
 
@@ -55,18 +52,13 @@ export default function CreationsGrid({ username = null }) {
 
       const response = await axios.post('/api/creations', filter)
 
-      const { data } = response
-      const { session } = data
-      const { userId, token } = session
-      const { token: respToken } = token
+      //const { data } = response
+      // const { session } = data
+      // const { token } = session
+      // const { token: respToken } = token
+
 
       // console.log('Creations Grid Token: ', { authToken, token })
-
-      if (respToken !== authToken && respToken.length === 175) {
-        setAuthToken(token.token)
-        setUserId(userId)
-        setIsWeb3AuthSuccess(true)
-      }
 
       const moreCreations =
         response.data.creations &&
@@ -140,13 +132,15 @@ export default function CreationsGrid({ username = null }) {
                   generator === 'tts' ||
                   generator === 'complete' ||
                   generator === 'interrogate' ||
-                  generator === 'wav2lip'
+                  generator === 'wav2lip' || 
+                  generator === 'interpolate' || 
+                  generator === 'real2real'
                 ) {
                   return null
-                } else if (generator === 'interpolate') {
-                  return <CreationCardVideo creation={creation} />
+                // } else if (generator === 'interpolate') {
+                //   return <CreationCardVideo key={creation._id} creation={creation} />
                 } else {
-                  return <CreationCard creation={creation} />
+                  return <CreationCard key={creation._id} creation={creation} />
                 }
               })}
             </Masonry>

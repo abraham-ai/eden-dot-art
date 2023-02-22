@@ -8,6 +8,7 @@ import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
 
 // CONTRACT - WEB3
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
@@ -54,7 +55,7 @@ export default function Header() {
 
   useEffect(() => {
     setIsWeb3WalletConnected(isConnected)
-  }, [isConnected])
+  }, [isConnected, setIsWeb3WalletConnected])
 
   // console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
 
@@ -71,6 +72,7 @@ export default function Header() {
               <>
                 <CreateButton />
                 <CreateModal />
+                <PendingCreations />
               </>
             ) : null}
           </div>

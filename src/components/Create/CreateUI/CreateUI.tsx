@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
-import { Modal, Button } from 'antd'
+import { Modal, Button, Tabs } from 'antd'
 
 // ACCOUNT
 import Blockies from 'react-blockies'
@@ -13,17 +13,41 @@ import Blockies from 'react-blockies'
 import { useAccount } from 'wagmi'
 
 // COMPONENTS
-import EdenTabs from '@/components/Create/CreateUI/EdenTabs/EdenTabs'
+import GenerateUI from '@/components/Create/CreateUI/GenerateUI/GenerateUI'
 
 // STYLES
 import CreateUIStyles from './CreateUIStyles'
 
 export default function CreateUI() {
   const context = useContext(AppContext)
-  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = context
+  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = context;
 
   const { address } = useAccount()
 
+
+  const tabItems = [
+    {
+      label: 'Generate',
+      key: 'tab1',
+      children: <GenerateUI generatorName="create" />,
+    },
+    {
+      label: 'Remix',
+      key: 'tab2',
+      children: <GenerateUI generatorName="remix" />,
+    },
+    {
+      label: 'Interpolate',
+      key: 'tab3',
+      children: <GenerateUI generatorName="interpolate" />,
+    },
+    {
+      label: 'Real2Real',
+      key: 'tab4',
+      children: <GenerateUI generatorName="real2real" />,
+    },
+  ]
+  
   return isCreateUIModalOpen ? (
     <CreateUIStyles>
       <Modal
@@ -46,13 +70,19 @@ export default function CreateUI() {
               <div key="form-outer-wrapper" className="form-wrapper">
                 <div className="form-wrapper">
                   <div className="form-inner-wrapper">
+                    
                     <div className="account-wrapper">
                       <Blockies seed={address} scale={6} />
                     </div>
 
                     <div className="form-tabs-wrapper">
-                      <EdenTabs />
+                      <Tabs
+                        defaultActiveKey="tab1"
+                        items={tabItems}
+                        style={{ height: '100%', paddingLeft: 30, paddingTop: 20 }}
+                      />
                     </div>
+
                   </div>
                 </div>
               </div>

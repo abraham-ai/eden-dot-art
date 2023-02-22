@@ -141,7 +141,7 @@ const RelatedCreations = ({ item = singleCreation }) => {
         {relatedCreationsArray.map((el, i) => {
           return (
             <Row key={i} className="cr-related-creation">
-              <span>{el}</span>
+              <span>{el.toString()}</span>
               <span className="cr-related-creation-img">
                 <img src={shaURL(item)} />
               </span>
