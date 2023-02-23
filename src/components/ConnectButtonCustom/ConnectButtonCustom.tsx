@@ -1,6 +1,9 @@
 'use client'
 
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
+
+// FETCH
+import axios from 'axios'
 
 // WEB3
 import { useAccount, useDisconnect } from 'wagmi'
@@ -51,21 +54,17 @@ export const ConnectButtonCustom = () => {
     setAuthToken,
     setIsWeb3WalletConnected,
     setIsWeb3AuthSuccess,
+    userId,
     setUserId,
   } = context
-
-  // const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-  //   open ? setOpen(false) : setOpen(true)
-  //   // <setAnchorEl>(event.currentTarget)
-  // }
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen)
   }
 
-  // appAddress = address === appAddress ? appAddress : address
+  // console.log('CONNECT BUTTON CUSTOM')
+  // console.log({ userId, isWeb3WalletConnected, isWeb3AuthSuccess })
 
-  // const open = Boolean(anchorEl)
   const id = open ? 'account-popover' : undefined
 
   let displayAddress = walletAddress
@@ -76,6 +75,20 @@ export const ConnectButtonCustom = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
+  const checkAuthToken = useCallback(async () => {
+    // console.log('CHECK AUTH TOKEN - USE CALLBACK')
+    const response = await axios.post('/api/user', {})
+
+    if (response.data.message === 'Session Cookie Found') {
+      const { token, userId } = response.data
+
+      setIsWeb3AuthSuccess(true)
+      setAuthToken(token)
+      setUserId(userId)
+      // console.log({ userId, token })
+    }
+  }, [setAuthToken, setUserId, setIsWeb3AuthSuccess])
+
   useEffect(() => {
     if (isWeb3WalletConnected === false && isConnected === true) {
       setIsWeb3WalletConnected(isConnected)
@@ -84,8 +97,20 @@ export const ConnectButtonCustom = () => {
       setIsWeb3AuthSuccess(false)
       setUserId('')
       setAuthToken('')
+    } else if (isWeb3WalletConnected === true && isWeb3AuthSuccess === false) {
+      checkAuthToken()
     }
-  }, [isConnected])
+  }, [
+    isConnected,
+    setAuthToken,
+    userId,
+    setUserId,
+    isWeb3WalletConnected,
+    setIsWeb3WalletConnected,
+    isWeb3AuthSuccess,
+    setIsWeb3AuthSuccess,
+    checkAuthToken,
+  ])
 
   return (
     <ConnectButtonCustomStyles>
