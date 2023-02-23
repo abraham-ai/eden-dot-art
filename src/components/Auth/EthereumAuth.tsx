@@ -60,6 +60,8 @@ const EthereumAuth = ({ onModalCancel }) => {
           userAddress: address,
         })
 
+        console.log('Ethereum Auth: ', resp)
+
         const { token } = resp.data
         const { token: authToken } = token
 
