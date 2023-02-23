@@ -1,9 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, useContext } from 'react'
-
-// CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
+import React, { useState, useEffect, useCallback } from 'react'
 
 // FETCH
 import axios from 'axios'
@@ -14,8 +11,8 @@ import Masonry from 'react-masonry-css'
 
 // EDEN COMPONENTS
 import CreationCard from '@/components/Creation/CreationCard/CreationCard'
-import CreationCardVideo from '@/components/Creation/CreationCard/CreationCardVideo/CreationCardVideo'
 import Loader from '@/components/Loader/Loader'
+// import CreationCardVideo from '@/components/Creation/CreationCard/CreationCardVideo/CreationCardVideo'
 
 // STYLES
 import { CreationsGridStyles } from './CreationsGridStyles'
@@ -56,7 +53,6 @@ export default function CreationsGrid({ username = null }) {
       // const { session } = data
       // const { token } = session
       // const { token: respToken } = token
-
 
       // console.log('Creations Grid Token: ', { authToken, token })
 
@@ -132,13 +128,13 @@ export default function CreationsGrid({ username = null }) {
                   generator === 'tts' ||
                   generator === 'complete' ||
                   generator === 'interrogate' ||
-                  generator === 'wav2lip' || 
-                  generator === 'interpolate' || 
+                  generator === 'wav2lip' ||
+                  generator === 'interpolate' ||
                   generator === 'real2real'
                 ) {
                   return null
-                // } else if (generator === 'interpolate') {
-                //   return <CreationCardVideo key={creation._id} creation={creation} />
+                  // } else if (generator === 'interpolate') {
+                  //   return <CreationCardVideo key={creation._id} creation={creation} />
                 } else {
                   return <CreationCard key={creation._id} creation={creation} />
                 }
