@@ -43,7 +43,7 @@ export default function CreationsPage() {
               columnClassName="cr-grid-masonry_column"
             >
               {creations.map(creation => (
-                <CreationCard creation={creation} />
+                <CreationCard creation={creation} key={creation._id} />
               ))}
             </Masonry>
           </CreationStyles>
