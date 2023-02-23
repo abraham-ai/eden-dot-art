@@ -11,6 +11,7 @@ const HeaderWrapperStyles = styled.section`
   padding-top: 10px 0;
   background-color: white;
   box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+  box-sizing: border-box;
   justify-content: space-between;
   // backdrop-filter: blur(3px);
 

@@ -12,7 +12,6 @@ import Masonry from 'react-masonry-css'
 // EDEN COMPONENTS
 import CreationCard from '@/components/Creation/CreationCard/CreationCard'
 import Loader from '@/components/Loader/Loader'
-// import CreationCardVideo from '@/components/Creation/CreationCard/CreationCardVideo/CreationCardVideo'
 
 // STYLES
 import { CreationsGridStyles } from './CreationsGridStyles'
@@ -124,6 +123,7 @@ export default function CreationsGrid({ username = null }) {
             >
               {creations.map((creation: Creation) => {
                 const { generator } = creation
+
                 if (
                   generator === 'tts' ||
                   generator === 'complete' ||
@@ -133,10 +133,14 @@ export default function CreationsGrid({ username = null }) {
                   generator === 'real2real'
                 ) {
                   return null
-                  // } else if (generator === 'interpolate') {
-                  //   return <CreationCardVideo key={creation._id} creation={creation} />
-                } else {
-                  return <CreationCard key={creation._id} creation={creation} />
+                }
+                // else if (generator === 'interpolate') {
+                //   return (
+                //     <CreationCardVideo key={creation._id} creation={creation} />
+                //   )
+                // }
+                else {
+                  return <CreationCard key={creation.key} creation={creation} />
                 }
               })}
             </Masonry>

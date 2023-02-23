@@ -98,7 +98,7 @@ export default function CreationCard({ creation }: { creation: Creation }) {
 
   return (
     <CreationCardStyles style={{ aspectRatio: `${width}/${height}` }}>
-      <article id="creation-card">
+      <article id={`creation-card`}>
         <article className="creation-content">
           <div className="cr-action-left">
             <span className="cr-social praise">

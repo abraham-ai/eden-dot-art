@@ -4,7 +4,7 @@ import { eden } from '@/util/eden'
 
 // TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
-import { Handler, Session } from 'next-iron-session'
+// import { Handler, Session } from 'next-iron-session'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -14,15 +14,16 @@ interface ApiRequest extends NextApiRequest {
     latestTime: number
     limit: number
   }
-  session: Session
 }
 
-const handler: Handler = async (req: ApiRequest, res: NextApiResponse) => {
+const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { creatorId, generators, earliestTime, latestTime, limit } = req.body
 
   const { session } = req
 
-  console.log(session)
+  // console.log('CREATION ROUTE')
+  // console.log(session)
+
   const { token } = session
 
   try {
