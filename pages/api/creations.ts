@@ -21,6 +21,8 @@ const handler: Handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { creatorId, generators, earliestTime, latestTime, limit } = req.body
 
   const { session } = req
+
+  console.log(session)
   const { token } = session
 
   try {
