@@ -19,10 +19,14 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { message, signature, userAddress } = req.body
 
   try {
-    const token = await eden.loginEth(message, signature, userAddress)
+    const resp = await eden.loginEth(message, signature, userAddress)
 
-    req.session.token = token
+    console.log(resp)
+
+    req.session.token = resp.token
     req.session.userId = userAddress
+
+    const token = resp.token
 
     await req.session.save()
 
