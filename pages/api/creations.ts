@@ -2,9 +2,11 @@
 import { withSessionRoute } from '@/util/withSession'
 import { eden } from '@/util/eden'
 
+// FETCH
+import { AxiosError } from 'axios'
+
 // TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
-// import { Handler, Session } from 'next-iron-session'
 
 interface ApiRequest extends NextApiRequest {
   body: {
@@ -41,11 +43,13 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     const creations = await eden.getCreations(filter)
 
     return res.status(200).json({ creations: creations, session })
-  } catch (error: any) {
-    if (error.response.data == 'jwt expired') {
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response?.status === 401) {
+      // Inside this block, err is known to be a AxiosError
       return res.status(401).json({ error: 'Authentication expired' })
+    } else if (error instanceof AxiosError && error.response?.status === 500) {
+      return res.status(500).json({ error: error.response.data })
     }
-    return res.status(500).json({ error: error.response.data })
   }
 }
 

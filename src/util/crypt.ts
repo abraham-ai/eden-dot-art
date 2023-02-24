@@ -6,7 +6,7 @@ const [key, initVector] = process.env
 
 function crypt(
   cipher: Cipher,
-  data: any,
+  data: string,
   inputType: Encoding,
   outputType: BufferEncoding,
 ) {
@@ -17,7 +17,7 @@ function crypt(
 }
 
 export function encrypt(
-  data: any,
+  data: string,
   inputType: Encoding = 'utf8',
   outputType: BufferEncoding = 'base64',
 ) {
@@ -30,7 +30,7 @@ export function encrypt(
 }
 
 export function decrypt(
-  data: any,
+  data: string,
   inputType: Encoding = 'base64',
   outputType: BufferEncoding = 'utf8',
 ) {

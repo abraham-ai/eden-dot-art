@@ -1,4 +1,5 @@
 import Task from './Task'
+import Config from './Config'
 
 interface CreationFullType {
   _id: string
@@ -15,6 +16,9 @@ interface CreationFullType {
   address: string
   uri: string
   timestamp: string
+  output: string
+  status: string
+  config: Config
 }
 
 export default CreationFullType
