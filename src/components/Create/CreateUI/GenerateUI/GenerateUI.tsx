@@ -3,12 +3,14 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 // ANTD
 import { Button, Form, message } from 'antd'
 import type { FormInstance } from 'antd/lib/form/Form'
+const { Item } = Form
 
 // FETCH
 import axios, { AxiosError } from 'axios'
 
 // HOOKS
-import { useGeneratorInfo } from '@/hooks/useGeneratorInfo'
+import useGeneratorInfo from '@/hooks/useGeneratorInfo'
+import useGenerateUI from '@/hooks/useGenerateUI'
 
 // EDEN COMPONENTS
 import OptionParameter from '@/components/Parameters/OptionParameter/OptionParameter'
@@ -37,114 +39,32 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   const { versionId, requiredParameters, optionalParameters } =
     useGeneratorInfo(generatorName)
 
-  const allParameters = useMemo(() => {
-    const params: ParameterList = []
+  // const allParameters = useMemo(() => {
+  //   const params: ParameterList = []
 
-    Object.keys(allParameters).forEach(key => {
-      const parameter = allParameters[key]
-      params.push({
-        id: parameter.id,
-        name: parameter.name,
-        values: parameter.values,
-        selectedValue: parameter.values[0],
-      })
-    })
+  //   if (Array.isArray(allParameters)) {
+  //     Object.keys(allParameters).forEach(key => {
+  //       const parameter = allParameters[key]
+  //       params.push({
+  //         id: parameter.id,
+  //         name: parameter.name,
+  //         value: parameter.values[0],
+  //         selectedValue: parameter.values[0],
+  //         allowedValues: parameter.allowedValues || [],
+  //       })
+  //     })
+  //   }
 
-    return params
-  }, [])
+  //   return params
+  // }, [])
 
-  // const allParameters: ParameterList = [...requiredParameters, ...optionalParameters];
-
-  const getConfig = useCallback(
-    (config: Config) => {
-      requiredParameters.forEach(parameter => {
-        const name = parameter.name
-        if (config[name] === undefined) {
-          config[name] = parameter.value
-        }
-      })
-      optionalParameters.forEach(parameter => {
-        const name = parameter.name
-        if (config[name] === undefined) {
-          config[name] = parameter.value
-        }
-      })
-      return config
-    },
-    [optionalParameters, requiredParameters],
+  const allParameters: ParameterList = useMemo(
+    () => [...requiredParameters, ...optionalParameters],
+    [requiredParameters, optionalParameters],
   )
-
-  const validateConfig = useCallback(
-    (values: Config) => {
-      for (const v in values) {
-        if (!values[v]) {
-          continue
-        }
-        const param = allParameters.find(
-          (parameter: ParameterType) => parameter.name === v,
-        )
-        if (param.minLength) {
-          if (values[v].length < param.minLength) {
-            message.error(
-              `Error: ${v} must have at least ${param.minLength} elements`,
-            )
-            return false
-          }
-        }
-        if (param.maxLength) {
-          if (values[v].length >= param.maxLength) {
-            message.error(
-              `Error: ${v} must have no more than ${param.maxLength} elements`,
-            )
-            return false
-          }
-        }
-      }
-      return true
-    },
-    [allParameters],
-  )
-
-  const handleFinish = (formValues: FormInstance) => {
-    setValues(formValues)
-  }
-
-  useEffect(() => {
-    const requestCreation = async values => {
-      setGenerating(true)
-
-      if (!validateConfig(values)) {
-        setGenerating(false)
-        return
-      }
-
-      try {
-        const config = getConfig(values)
-        const response = await axios.post('/api/generate', {
-          generatorName: generatorName,
-          config: config,
-        })
-        const newTaskId = response.data.taskId
-        message.success(`Task ${newTaskId} started.`)
-      } catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          if (error.message) {
-            message.error(`Error: ${error.message}`)
-          } else {
-            message.error(`Error: ${error.response.data.error}`)
-          }
-        }
-      }
-
-      setGenerating(false)
-    }
-
-    if (Object.keys(values).length > 0) {
-      requestCreation(values)
-    }
-  }, [values, generatorName, getConfig, validateConfig])
 
   const renderFormFields = (parameters: ParameterType[]) => {
+    console.log('FUNCTION: RENDER FORM FIELDS')
     return Object.keys(parameters).map(key => {
       return (
         <div
@@ -193,6 +113,130 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
     })
   }
 
+  const getConfig = useCallback(
+    (config: Config) => {
+      console.log('USE-CALLBACK: GET CONFIG')
+      requiredParameters.forEach(parameter => {
+        const name = parameter.name
+        if (config[name] === undefined) {
+          config[name] = parameter.value
+        }
+      })
+      optionalParameters.forEach(parameter => {
+        const name = parameter.name
+        if (config[name] === undefined) {
+          config[name] = parameter.value
+        }
+      })
+      return config
+    },
+    [optionalParameters, requiredParameters],
+  )
+
+  const validateConfig = useCallback(
+    (values: Config) => {
+      console.log('USE-CALLBACK: VALIDATE CONFIG')
+      for (const v in values) {
+        if (!values[v]) {
+          continue
+        }
+        const param = allParameters.find(
+          (parameter: ParameterType) => parameter.name === v,
+        )
+        if (param?.minLength) {
+          if (values[v].length < param.minLength) {
+            message.error(
+              `Error: ${v} must have at least ${param.minLength} elements`,
+            )
+            return false
+          }
+        }
+        if (param?.maxLength) {
+          if (values[v].length >= param.maxLength) {
+            message.error(
+              `Error: ${v} must have no more than ${param.maxLength} elements`,
+            )
+            return false
+          }
+        }
+      }
+      return true
+    },
+    [allParameters],
+  )
+
+  const handleFinish = (formValues: FormInstance) => {
+    console.log('FUNCTION: HANDLE FINISH')
+    console.log({ formValues })
+    setValues(formValues)
+  }
+
+  useEffect(() => {
+    console.log('USE EFFECT')
+    const validateCreation = async values => {
+      console.log('USE EFFECT: VALIDATE CREATION')
+      // setGenerating(true)
+
+      if (!validateConfig(values)) {
+        // setGenerating(false)
+        return
+      }
+    }
+
+    if (Object.keys(values).length > 0) {
+      validateCreation(values)
+    }
+  }, [values, generatorName, getConfig, validateConfig])
+
+  const handleGeneration = useCallback(
+    result => {
+      console.log('HANDLING SUBMISSION')
+      console.log({ result })
+      if (typeof result !== 'undefined') {
+        if (result.error) {
+          // Handle Error here
+        } else {
+          // Handle Success here
+          form.resetFields()
+        }
+      }
+    },
+    [form],
+  )
+
+  const onSubmit = useCallback(async () => {
+    let validValues
+
+    try {
+      validValues = await form.validateFields()
+      console.log('USE CALLBACK: ON SUBMIT')
+      setValues(validValues)
+    } catch (errorInfo) {
+      return
+    }
+
+    console.log({ validValues })
+
+    const stringValues = { ...validValues }
+
+    for (const key in stringValues) {
+      if (typeof stringValues[key] === 'bigint') {
+        stringValues[key] = stringValues[key].toString()
+      }
+    }
+    console.log({ stringValues })
+
+    const config = getConfig(stringValues)
+
+    const result = await useGenerateUI(generatorName, values, config)
+    handleGeneration(result)
+  }, [generatorName, form, handleGeneration, getConfig, values])
+
+  console.log('PARAMS BEFORE RETURN')
+  console.log({ allParameters })
+  console.log({ versionId, requiredParameters, optionalParameters })
+  console.log({ values })
+
   return (
     <div>
       <div
@@ -231,18 +275,18 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
             )}
           </h3>
           {showOptional && renderFormFields(optionalParameters)}
-          <Form.Item>
+          <Item>
             <Button
-              type="primary"
-              icon={<RightCircleOutlined />}
               htmlType="submit"
+              onClick={onSubmit}
               loading={generating}
               disabled={generating}
               size="large"
             >
+              <RightCircleOutlined />
               Create
             </Button>
-          </Form.Item>
+          </Item>
         </Form>
       </div>
     </div>
