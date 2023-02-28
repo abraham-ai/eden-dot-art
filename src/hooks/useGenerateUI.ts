@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+// import { useCallback } from 'react'
 
 // ANTD
 import { message } from 'antd'
@@ -20,8 +20,8 @@ const useGenerateUI = async (generatorName, values, config) => {
   //     return
   //   }
 
-  console.log('USE GENERATE UI')
-  console.log({ values })
+  //   console.log('USE GENERATE UI')
+  //   console.log({ values })
 
   const stringValues = { ...values }
   for (const key in stringValues) {
@@ -30,7 +30,7 @@ const useGenerateUI = async (generatorName, values, config) => {
     }
   }
 
-  console.log(stringValues)
+  //   console.log(stringValues)
 
   try {
     // const config = getConfig(stringValues)
