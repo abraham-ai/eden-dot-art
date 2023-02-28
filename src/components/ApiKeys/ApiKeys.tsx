@@ -4,13 +4,16 @@ import React, { useState } from 'react'
 import { Table } from 'antd'
 
 // FETCH
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 // WALLET
 import { useAccount } from 'wagmi'
 
 // HOOKS
 import { useApiKeys } from '@/hooks/useApiKeys'
+
+// TYPES
+import ApiKey from '@/interfaces/ApiKey'
 
 const ApiKeys = () => {
   const { isConnected } = useAccount()
@@ -26,8 +29,10 @@ const ApiKeys = () => {
       setApiKeyCreating(false)
       mutate()
     } catch (error: any) {
-      setApiMessage(`Error: ${error.response.data.error}`)
-      setApiKeyCreating(false)
+      if (error instanceof AxiosError) {
+        setApiMessage(`Error: ${error.response.data.error}`)
+        setApiKeyCreating(false)
+      }
     }
   }
 
@@ -50,7 +55,7 @@ const ApiKeys = () => {
     },
   ]
 
-  const data = apiKeys?.map((apiKey: any, index: any) => ({
+  const data = apiKeys?.map((apiKey: ApiKey, index: number) => ({
     ...apiKey,
     key: apiKey._id || index,
   }))

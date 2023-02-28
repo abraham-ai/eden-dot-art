@@ -54,7 +54,7 @@ export default function Header() {
 
   useEffect(() => {
     setIsWeb3WalletConnected(isConnected)
-  }, [isConnected])
+  }, [isConnected, setIsWeb3WalletConnected])
 
   return (
     <HeaderStyles id="header-wrapper">

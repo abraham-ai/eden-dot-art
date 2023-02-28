@@ -1,5 +1,10 @@
 import useSWR from 'swr'
+
+// UTILS
 import { fetcher } from '@/util/fetcher'
+
+// TYPES
+import { GeneratorInfo } from '@/interfaces/GeneratorInfo'
 
 const empty = {
   versionId: 'loading',
@@ -10,10 +15,9 @@ const empty = {
   mutate: null,
 }
 
-export const useGeneratorInfo = (generatorName: any) => {
-
+const useGeneratorInfo = (generatorName: string): GeneratorInfo => {
   if (!generatorName) {
-    return empty;
+    return empty
   }
 
   const { data, error, isLoading, mutate } = useSWR(
@@ -49,3 +53,5 @@ export const useGeneratorInfo = (generatorName: any) => {
     mutate,
   }
 }
+
+export default useGeneratorInfo

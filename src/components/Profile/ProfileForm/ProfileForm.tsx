@@ -4,7 +4,10 @@ import { useState } from 'react'
 import { Button, Form, Table } from 'antd'
 
 // FETCH
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+
+// TYPES
+import Creation from '@/interfaces/Creation'
 
 interface MyCreationsFormInputs {
   datefrom: number
@@ -25,7 +28,7 @@ const Profile = () => {
       })
       const data =
         response.data.creations &&
-        response.data.creations.map((creation: any) => {
+        response.data.creations.map((creation: Creation) => {
           return {
             key: creation._id,
             timestamp: creation.createdAt,
@@ -35,8 +38,11 @@ const Profile = () => {
           }
         })
       setCreations(data)
-    } catch (error: any) {
-      setMessage(`Error: ${error}`)
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        // Inside this block, err is known to be a AxiosError
+        setMessage(`Error: ${error}`)
+      }
     }
     setGenerating(false)
   }

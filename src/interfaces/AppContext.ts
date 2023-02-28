@@ -15,4 +15,6 @@ export interface AppContext {
   setIsWeb3WalletConnected: (isWeb3WalletConnected: boolean) => void
   isLightTheme: boolean
   setIsLightTheme: (isLightTheme: boolean) => void
+  // isGenerating: boolean
+  // setGenerating: (isGenerating: boolean) => void
 }

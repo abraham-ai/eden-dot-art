@@ -1,66 +1,80 @@
-import { Form, Select, Row, Col, Switch } from "antd";
-import { useState } from "react";
+import { useState } from 'react'
 
+// ANTD
+import { Form, Select, Row, Col, Switch } from 'antd'
 
-const OptionParameter = (props: {form: any, parameter: any}) => {
-  const [value, setValue] = useState(props.parameter.default);
+// TYPES
+import { ParameterType } from '@/interfaces/ParameterType'
 
-  const options = Object.keys(props.parameter.allowedValues).map((key) => {
+const OptionParameter = ({
+  form,
+  parameter,
+}: {
+  form: any
+  parameter: ParameterType
+}) => {
+  const { allowedValues, name, label, isRequired, description } = parameter
+  const [value, setValue] = useState(parameter.default)
+  const options = Object.keys(allowedValues).map(key => {
     return {
-      value: props.parameter.allowedValues[key],
-      label: props.parameter.allowedValues[key]
+      value: allowedValues[key],
+      label: allowedValues[key],
     }
-  });  
+  })
 
   const onChange = (newValue: number | null) => {
     if (newValue !== null) {
-      setValue(newValue);
-      props.form.setFieldsValue({[props.parameter.name]: newValue});
+      setValue(newValue)
+      form.setFieldsValue({ [name]: newValue })
     }
-  };
+  }
 
+  // true as the string "true" and false as the string "false"
+  // Previous Type Error: Type 'boolean' is not assignable to type 'string'
   const onSwitchChange = (newValue: boolean) => {
-    setValue(newValue);
-    props.form.setFieldsValue({[props.parameter.name]: newValue});
-  };
+    setValue(newValue ? 'true' : 'false')
+    form.setFieldsValue({ [name]: newValue })
+  }
 
   return (
     <>
       <Row>
         <Col span={12}>
-          <Form.Item 
-            style={{marginBottom: 5}} 
-            label={props.parameter.label} 
-            name={props.parameter.name}
-            initialValue={props.parameter.default}
-            rules={[{ 
-              required: props.parameter.isRequired, 
-              message: `${props.parameter.label} required`
-            }]}
-          >      
-            {typeof props.parameter.default === "boolean" ? (
+          <Form.Item
+            style={{ marginBottom: 5 }}
+            label={label}
+            name={name}
+            initialValue={parameter.default}
+            rules={[
+              {
+                required: isRequired,
+                message: `${label} required`,
+              },
+            ]}
+          >
+            {typeof parameter.default === 'boolean' ? (
               <Switch
-                checked={value}
+                checked={
+                  typeof value === 'boolean' && value === 'true' ? true : false
+                }
                 onChange={onSwitchChange}
-              />              
+              />
             ) : (
               <Select
                 value={value}
-                style={{ width: "40%" }}
+                style={{ width: '40%' }}
                 options={options}
                 onChange={onChange}
-              />                
+              />
             )}
           </Form.Item>
         </Col>
       </Row>
       <Row>
-        <span style={{color: "gray"}}>
-          {props.parameter.description}
-        </span>
+        <span style={{ color: 'gray' }}>{description}</span>
       </Row>
     </>
-  );
-};
+  )
+}
 
-export default OptionParameter;
+export default OptionParameter

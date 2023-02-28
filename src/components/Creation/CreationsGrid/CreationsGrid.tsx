@@ -24,7 +24,7 @@ import CreationFullType from '@/interfaces/CreationFullType'
 import { PAGE_LENGTH } from '@/consts/pageLength'
 import { breakpointColumnsObj } from '@/consts/breakpointColumns'
 
-export default function CreationsGrid({ username = null }) {
+export default function CreationsGrid() {
   const [creations, setCreations] = useState<object[]>([])
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -37,14 +37,14 @@ export default function CreationsGrid({ username = null }) {
     setLoading(true)
 
     try {
-      let filter = {
+      const filter = {
         latestTime: cutoffTime,
         limit: PAGE_LENGTH,
       }
 
-      if (username != null) {
-        filter = Object.assign(filter, { username })
-      }
+      // if (username != null) {
+      //   filter = Object.assign(filter, { username })
+      // }
 
       const response = await axios.post('/api/creations', filter)
 
@@ -92,7 +92,7 @@ export default function CreationsGrid({ username = null }) {
       setMessage(`Error:`)
     }
     setLoading(false)
-  }, [creations, cutoffTime, paginate, username])
+  }, [creations, cutoffTime, paginate])
 
   const { ref, inView } = useInView({
     threshold: 0,
