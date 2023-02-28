@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 
 // ANTD
-import { Typography } from 'antd'
+import { Typography, Button } from 'antd'
 const { Text } = Typography
 
 // CONTEXT
@@ -11,6 +11,8 @@ import AppContext from '@/context/AppContext/AppContext'
 
 // STYLES
 import { CreateButtonStyles } from './CreateButtonStyles'
+
+// ICONS
 
 export default function CreateButton() {
   const context = useContext(AppContext)
@@ -27,9 +29,9 @@ export default function CreateButton() {
 
   return (
     <CreateButtonStyles id="create-button-wrapper">
-      <button id="create-button" onClick={handleCreateOpen}>
-        <Text className="create-button-text">{'Create +'}</Text>
-      </button>
+      <Button id="create-button" onClick={handleCreateOpen}>
+        <Text className="create-button-text">{'Create'}</Text>
+      </Button>
     </CreateButtonStyles>
   )
 }
