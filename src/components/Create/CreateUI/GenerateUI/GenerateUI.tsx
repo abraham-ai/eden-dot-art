@@ -6,7 +6,7 @@ import type { FormInstance } from 'antd/lib/form/Form'
 const { Item } = Form
 
 // FETCH
-import axios, { AxiosError } from 'axios'
+// import axios, { AxiosError } from 'axios'
 
 // HOOKS
 import useGeneratorInfo from '@/hooks/useGeneratorInfo'
@@ -64,7 +64,7 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   )
 
   const renderFormFields = (parameters: ParameterType[]) => {
-    console.log('FUNCTION: RENDER FORM FIELDS')
+    // console.log('FUNCTION: RENDER FORM FIELDS')
     return Object.keys(parameters).map(key => {
       return (
         <div
@@ -115,7 +115,7 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
   const getConfig = useCallback(
     (config: Config) => {
-      console.log('USE-CALLBACK: GET CONFIG')
+      // console.log('USE-CALLBACK: GET CONFIG')
       requiredParameters.forEach(parameter => {
         const name = parameter.name
         if (config[name] === undefined) {
@@ -135,7 +135,7 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
   const validateConfig = useCallback(
     (values: Config) => {
-      console.log('USE-CALLBACK: VALIDATE CONFIG')
+      // console.log('USE-CALLBACK: VALIDATE CONFIG')
       for (const v in values) {
         if (!values[v]) {
           continue
@@ -166,19 +166,19 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   )
 
   const handleFinish = (formValues: FormInstance) => {
-    console.log('FUNCTION: HANDLE FINISH')
-    console.log({ formValues })
+    // console.log('FUNCTION: HANDLE FINISH')
+    // console.log({ formValues })
     setValues(formValues)
   }
 
   useEffect(() => {
-    console.log('USE EFFECT')
+    // console.log('USE EFFECT')
     const validateCreation = async values => {
-      console.log('USE EFFECT: VALIDATE CREATION')
-      // setGenerating(true)
+      // console.log('USE EFFECT: VALIDATE CREATION')
+      setGenerating(true)
 
       if (!validateConfig(values)) {
-        // setGenerating(false)
+        setGenerating(false)
         return
       }
     }
@@ -190,8 +190,8 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
   const handleGeneration = useCallback(
     result => {
-      console.log('HANDLING SUBMISSION')
-      console.log({ result })
+      // console.log('HANDLING SUBMISSION')
+      // console.log({ result })
       if (typeof result !== 'undefined') {
         if (result.error) {
           // Handle Error here
@@ -209,13 +209,13 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
     try {
       validValues = await form.validateFields()
-      console.log('USE CALLBACK: ON SUBMIT')
+      // console.log('USE CALLBACK: ON SUBMIT')
       setValues(validValues)
     } catch (errorInfo) {
       return
     }
 
-    console.log({ validValues })
+    // console.log({ validValues })
 
     const stringValues = { ...validValues }
 
@@ -224,7 +224,7 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
         stringValues[key] = stringValues[key].toString()
       }
     }
-    console.log({ stringValues })
+    // console.log({ stringValues })
 
     const config = getConfig(stringValues)
 
@@ -232,10 +232,10 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
     handleGeneration(result)
   }, [generatorName, form, handleGeneration, getConfig, values])
 
-  console.log('PARAMS BEFORE RETURN')
-  console.log({ allParameters })
-  console.log({ versionId, requiredParameters, optionalParameters })
-  console.log({ values })
+  // console.log('PARAMS BEFORE RETURN')
+  // console.log({ allParameters })
+  // console.log({ versionId, requiredParameters, optionalParameters })
+  // console.log({ values })
 
   return (
     <div>
