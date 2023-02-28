@@ -9,4 +9,4 @@ interface GeneratorInfo {
   mutate: () => void
 }
 
-export type { GeneratorInfo }
+export default GeneratorInfo

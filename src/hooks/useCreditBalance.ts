@@ -1,8 +1,12 @@
 import useSWR from 'swr'
 import { fetcher } from '@/util/fetcher'
 
+interface BalanceResponse {
+  balance: number
+}
+
 export const useCreditBalance = () => {
-  const { data, error, isLoading, mutate } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR<BalanceResponse>(
     '/api/user/balance',
     fetcher,
   )

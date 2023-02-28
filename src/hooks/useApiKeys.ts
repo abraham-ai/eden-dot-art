@@ -1,8 +1,11 @@
 import useSWR from 'swr'
 import { fetcher } from '@/util/fetcher'
 
+// TYPES
+import ApiKey from '@/interfaces/ApiKey'
+
 interface ApiKeysResponse {
-  apiKeys: string[]
+  apiKeys: ApiKey[]
 }
 
 export const useApiKeys = () => {
@@ -12,7 +15,10 @@ export const useApiKeys = () => {
   )
 
   return {
-    apiKeys: data?.apiKeys,
+    apiKeys: data?.apiKeys.map((apiKey, index) => ({
+      ...apiKey,
+      key: apiKey._id || index,
+    })),
     isLoading,
     error,
     mutate,

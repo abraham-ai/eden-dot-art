@@ -7,7 +7,7 @@ import { useTasks } from 'src/hooks/useTasks'
 import AppContext from '@/context/AppContext/AppContext'
 
 // TYPES
-import { Task } from '@/interfaces/Task'
+import Task from '@/interfaces/Task'
 
 export default function PendingCreations() {
   const context = useContext(AppContext)
