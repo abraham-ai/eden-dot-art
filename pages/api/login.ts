@@ -21,7 +21,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   try {
     const resp = await eden.loginEth(message, signature, userAddress)
 
-    console.log(resp)
+    // console.log(resp)
 
     req.session.token = resp.token
     req.session.userId = userAddress
