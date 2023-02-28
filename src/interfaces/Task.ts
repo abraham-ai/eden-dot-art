@@ -15,4 +15,4 @@ interface Task {
   progress: number
 }
 
-export type { Task }
+export default Task
