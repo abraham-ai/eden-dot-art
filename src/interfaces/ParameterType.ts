@@ -1,7 +1,7 @@
 interface ParameterType {
   id: string
   name: string
-  value: string | number
+  value: string | number | boolean
   allowedValues: string[] // array of allowed values for an option parameter
   default?: string | number // default value for a string or slider parameter
   mediaUpload?: boolean // boolean indicating if the parameter requires a media upload
