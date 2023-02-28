@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // TYPES
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react'
 
 // NEXT
 import type { NextPage } from 'next'
@@ -50,6 +50,7 @@ function EdenApp(props: EdenAppProps) {
   const [authToken, setAuthToken] = useState('')
   const [userId, setUserId] = useState('')
   const [isLightTheme, setIsLightTheme] = useState(true)
+  // const [isGenerating, setIsGenerating] = useState(false)
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
@@ -75,6 +76,8 @@ function EdenApp(props: EdenAppProps) {
     setIsWeb3WalletConnected,
     isLightTheme,
     setIsLightTheme,
+    // isGenerating,
+    // setIsGenerating,
   }
 
   useEffect(() => {
