@@ -8,6 +8,9 @@ interface ParameterType {
   minLength?: number // minimum length for a string parameter
   maxLength?: number // maximum length for a string parameter
   selectedValue: string | number // selected value for a string or slider parameter
+  label: string // label for a string or slider parameter
+  isRequired: boolean // boolean indicating if the parameter is required
+  description: string // description for a string or slider parameter
 }
 
 export type { ParameterType }
