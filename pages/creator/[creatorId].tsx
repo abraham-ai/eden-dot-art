@@ -149,7 +149,7 @@ export default function Creator({
                 {address === profileAddress ? null : (
                   <button
                     className={
-                      `follow-button ${isFollowing}`
+                      'follow-button' + `${isFollowing}`
                         ? `following`
                         : `not-following`
                     }
