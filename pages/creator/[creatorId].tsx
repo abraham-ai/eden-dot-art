@@ -17,7 +17,7 @@ import Blockies from 'react-blockies'
 // import { Palette } from 'react-palette'
 
 // STYLES
-import { CreatorStyles } from './CreatorStyles'
+import CreatorStyles from './CreatorStyles'
 
 // COMPONENTS
 import CreatorDashboard from '@/components/Profile/ProfileDashboard/ProfileDashboard'
