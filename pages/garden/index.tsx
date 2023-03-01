@@ -11,7 +11,7 @@ import BaseLayout from 'src/layouts/BaseLayout'
 import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
 // STYLES
-import { GardenStyles } from './GardenStyles'
+import GardenStyles from './GardenStyles'
 
 export default function GardenPage() {
   return (

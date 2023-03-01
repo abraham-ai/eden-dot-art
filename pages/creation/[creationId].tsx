@@ -12,7 +12,7 @@ import { useState } from 'react'
 import NavLayout from 'src/layouts/NavLayout'
 
 // CSS
-import { CreationStyles } from './CreationStyles'
+import CreationStyles from './CreationStyles'
 
 // COMPONENTS
 // import CreationCard from '@/components/Creation/CreationCard/CreationCard'
@@ -113,7 +113,7 @@ const singleCreation = {
   __typename: 'Creation',
 }
 
-import { RelatedCreationsStyles } from './RelatedCreationsStyles'
+import RelatedCreationsStyles from './RelatedCreationsStyles'
 
 const RelatedCreations = ({ item = singleCreation }) => {
   const length = 20

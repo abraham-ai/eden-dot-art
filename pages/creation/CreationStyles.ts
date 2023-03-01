@@ -532,4 +532,4 @@ const CreationStyles = styled.article`
   }
 `
 
-export { CreationStyles }
+export default CreationStyles

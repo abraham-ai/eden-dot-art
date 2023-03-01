@@ -6,4 +6,4 @@ const GardenStyles = styled.section`
   margin: 100px 0 0 0;
 `
 
-export { GardenStyles }
+export default GardenStyles
