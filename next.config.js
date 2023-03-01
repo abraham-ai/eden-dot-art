@@ -37,12 +37,11 @@ module.exports = withAntdLess({
   },
   env: {
     EDEN_API_URL: 'https://api.eden.art',
-    NEXT_PUBLIC_ABRAHAM_GATEWAY: 'https://gateway.prd.aws.abraham.fun',
   },
   ...withImages(redirects),
 
   webpack(config) {
     return config
   },
-  extends: ['eslint:recommended', 'next'],
+  //extends: ['eslint:recommended', 'next'],
 })
