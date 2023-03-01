@@ -21,7 +21,7 @@ import Loader from '@/components/Loader/Loader'
 import { breakpointColumnsObj } from '@/consts/breakpointColumns'
 
 // STYLES
-import { CreationStyles } from './CreationStyles'
+import CreationStyles from './CreationStyles'
 
 export default function CreationsPage() {
   const [creations] = useState<Creation[]>([])
