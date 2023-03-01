@@ -16,7 +16,7 @@ import AppContext from '@/context/AppContext/AppContext'
 import Blockies from 'react-blockies'
 
 // ANTD
-import { Popover, Typography } from 'antd'
+import { Popover, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -153,28 +153,28 @@ export const ConnectButtonCustom = () => {
                   !isWeb3AuthSuccess
                 ) {
                   return (
-                    <button
+                    <Button
                       className="connect-button"
                       onClick={openConnectModal}
-                      type="button"
                     >
                       {/* { width < 930 ? 'Connect' : 'Connect Wallet' } */}
                       <Text style={{ color: 'white' }}>Connect Wallet</Text>
-                    </button>
+                    </Button>
                   )
                 }
 
+                /*
                 if (connected && chain.unsupported) {
                   return (
-                    <button
+                    <Button
                       className="connect-button"
                       onClick={openChainModal}
-                      type="button"
                     >
-                      Wrong network
-                    </button>
+                      <Text style={{ color: 'white' }}>Wrong network</Text>
+                    </Button>
                   )
                 }
+                */
 
                 return (
                   <Popover

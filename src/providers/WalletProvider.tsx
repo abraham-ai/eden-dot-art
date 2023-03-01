@@ -8,12 +8,12 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 
 // WALLET
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
-import { goerli } from 'wagmi/chains'
+import { mainnet } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
 const { chains, provider } = configureChains(
-  [goerli],
+  [mainnet],
   [
     alchemyProvider({
       apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY as string,
