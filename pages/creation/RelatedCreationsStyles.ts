@@ -31,4 +31,4 @@ const RelatedCreationsStyles = styled.section`
   }
 `
 
-export { RelatedCreationsStyles }
+export default RelatedCreationsStyles
