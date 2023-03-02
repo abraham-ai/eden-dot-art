@@ -7,8 +7,9 @@ import AppContext from '@/context/AppContext/AppContext'
 import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+import ProfileButton from '@/components/Account/ProfileButton/ProfileButton'
 import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
+import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
 
 // CONTRACT - WEB3
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
@@ -66,10 +67,11 @@ export default function Header() {
           <Logo />
 
           <div className="header-connect-wrapper">
-            <ConnectButtonCustom />
+            <ProfileButton />
 
             {isWeb3WalletConnected ? (
               <>
+                <SettingsButton />
                 <CreateButton />
                 <CreateModal />
                 <PendingCreations />

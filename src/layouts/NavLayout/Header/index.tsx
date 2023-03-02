@@ -7,7 +7,7 @@ import Blockies from 'react-blockies'
 import AppContext from '@/context/AppContext/AppContext'
 
 // COMPONENTS
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+import ConnectButtonCustom from '@/components/SettingsButton/SettingsButton'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
