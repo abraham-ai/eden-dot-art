@@ -1,12 +1,9 @@
 'use client'
 
-import React, { useState, useContext, useEffect, useCallback } from 'react'
-
-// FETCH
-import axios from 'axios'
+import React, { useState, useContext, useCallback, useEffect } from 'react'
 
 // WEB3
-import { useAccount, useDisconnect } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
@@ -15,34 +12,25 @@ import AppContext from '@/context/AppContext/AppContext'
 // LIBS
 import Blockies from 'react-blockies'
 
+// CSS
+import ProfileButtonStyles from '@/components/Account/ProfileButton/ProfileButtonStyles'
+
+// FETCH
+import axios from 'axios'
+
+// LIBS
+// import Blockies from 'react-blockies'
+
 // ANTD
-import { Popover, Typography } from 'antd'
+import { Typography, Button } from 'antd'
 const { Text } = Typography
 
-// EDEN COMPONENTS
-import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
-
-// CSS
-import { ConnectButtonCustomStyles } from './ConnectButtonCustomStyles'
-
-// ICONS
-// import SettingsIcon'
-// import HelpIcon
-// import LightModeIcon
-// import ViewColumnIcon
-// import LogoutIcon
-
-// CONST CSS
-// const animSpeed = '300ms'
-// const animCurve = 'cubic-bezier(0.23, 1, 0.32, 1)'
-
-export const ConnectButtonCustom = () => {
+export const ProfileButton = () => {
   // const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = useState(false)
 
   // HOOKS
   const { address = '', isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
   const walletAddress = address
 
   // CONTEXT
@@ -66,6 +54,8 @@ export const ConnectButtonCustom = () => {
   // console.log({ userId, isWeb3WalletConnected, isWeb3AuthSuccess })
 
   const id = open ? 'account-popover' : undefined
+
+  const [isHover, setIsHover] = useState(false)
 
   let displayAddress = walletAddress
     ? walletAddress?.slice(0, 6)
@@ -113,7 +103,7 @@ export const ConnectButtonCustom = () => {
   ])
 
   return (
-    <ConnectButtonCustomStyles>
+    <ProfileButtonStyles>
       <ConnectButton.Custom>
         {({
           account,
@@ -153,63 +143,45 @@ export const ConnectButtonCustom = () => {
                   !isWeb3AuthSuccess
                 ) {
                   return (
-                    <button
+                    <Button
                       className="connect-button"
                       onClick={openConnectModal}
-                      type="button"
                     >
                       {/* { width < 930 ? 'Connect' : 'Connect Wallet' } */}
                       <Text style={{ color: 'white' }}>Connect Wallet</Text>
-                    </button>
+                    </Button>
                   )
                 }
 
+                /*
                 if (connected && chain.unsupported) {
                   return (
-                    <button
+                    <Button
                       className="connect-button"
                       onClick={openChainModal}
-                      type="button"
                     >
-                      Wrong network
-                    </button>
+                      <Text style={{ color: 'white' }}>Wrong network</Text>
+                    </Button>
                   )
                 }
+                */
 
                 return (
-                  <Popover
-                    id={id}
-                    content={
-                      <AccountPopover
-                        openAccountModal={openAccountModal}
-                        openChainModal={openChainModal}
-                        walletAddress={walletAddress}
-                        displayAddress={displayAddress}
-                        chain={chain}
-                        account={account}
-                        disconnect={disconnect}
-                      />
-                    }
-                    trigger="click"
-                    open={open}
-                    onOpenChange={handleOpenChange}
-                    placement="bottom"
-                    style={{ borderRadius: '24px' }}
-                  >
+                  <Button onClick={() => null}>
                     <div className="main-account-button">
                       <div className="account-profile-wrapper">
-                        <Blockies seed={walletAddress} scale={6} />
+                        <Blockies seed={address} scale={6} />
                       </div>
                     </div>
-                  </Popover>
+                  </Button>
                 )
               })()}
             </div>
           )
         }}
       </ConnectButton.Custom>
-    </ConnectButtonCustomStyles>
+    </ProfileButtonStyles>
   )
 }
 
-export default ConnectButtonCustom
+export default ProfileButton

@@ -4,7 +4,7 @@ const boxShadowRegular =
   '0px 0px 2px rgba(0, 0, 0, 0.15), 0px 4px 7px rgba(0, 0, 0, 0.05), 0px 12px 40px rgba(0, 0, 0, 0.1);'
 const smallTranslate = 'translate3d(0px, -1px, 0px)'
 
-const ConnectButtonCustomStyles = styled.section`
+const SettingsButtonStyles = styled.section`
   // CONNECT
   .connect-button-wrapper {
     display: flex;
@@ -84,4 +84,4 @@ const ConnectButtonCustomStyles = styled.section`
   }
 `
 
-export { ConnectButtonCustomStyles }
+export default SettingsButtonStyles
