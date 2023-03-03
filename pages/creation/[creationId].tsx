@@ -113,7 +113,7 @@ const singleCreation = {
   __typename: 'Creation',
 }
 
-import { RelatedCreationsStyles } from './RelatedCreationsStyles'
+import RelatedCreationsStyles from './RelatedCreationsStyles'
 
 const RelatedCreations = ({ item = singleCreation }) => {
   const length = 20

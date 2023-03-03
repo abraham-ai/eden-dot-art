@@ -5,6 +5,12 @@ import { eden } from '../../src/util/eden'
 // TYPES
 import Config from '@/interfaces/Config'
 
+// interface Error {
+//   response: {
+//     data: string
+//   }
+// }
+
 interface ApiRequest extends NextApiRequest {
   body: {
     generatorName: string
@@ -24,6 +30,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     eden.setAuthToken(authToken)
     //const userId = req.session.userId;
     const result = await eden.startTask(generatorName, config)
+    // console.log(result)
     if (result.error) {
       return res.status(500).json({ error: result.error })
     } else {

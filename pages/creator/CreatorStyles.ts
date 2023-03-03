@@ -109,4 +109,4 @@ const CreatorStyles = styled.div`
   }
 `
 
-export { CreatorStyles }
+export default CreatorStyles

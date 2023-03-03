@@ -3,6 +3,7 @@ import Generator from '@/interfaces/Generator'
 
 interface Task {
   _id: string
+  taskId: string
   config: Config
   generator: Generator
   status: string
@@ -11,6 +12,7 @@ interface Task {
   uri: string
   timestamp: string
   prompt: string
+  progress: number
 }
 
 export default Task

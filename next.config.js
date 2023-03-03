@@ -19,18 +19,16 @@ module.exports = withAntdLess({
     styledComponents: true,
   },
   // optional: you can modify antd less variables directly here
-  modifyVars: { '@primary-color': '#04f' },
+  // modifyVars: { '@primary-color': '#04f' },
   // Or better still you can specify a path to a file
-  lessVarsFilePath: './styles/variables.less',
+  // lessVarsFilePath: './styles/variables.less',
   // optional
-  lessVarsFilePathAppendToEndOfContent: false,
+  // lessVarsFilePathAppendToEndOfContent: false,
   // optional https://github.com/webpack-contrib/css-loader#object
-  cssLoaderOptions: {},
+  // cssLoaderOptions: {},
 
   // Other Config Here...
-  experimental: {
-    outputStandalone: true,
-  },
+  output: 'standalone',
   // compiler: {
   //   styledComponents: true,
   // },
@@ -46,4 +44,5 @@ module.exports = withAntdLess({
   webpack(config) {
     return config
   },
+  extends: ['eslint:recommended', 'next'],
 })

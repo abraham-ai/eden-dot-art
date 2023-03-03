@@ -1,54 +1,73 @@
-import { Form, Col, Row, Slider, InputNumber } from "antd";
-import { useState } from "react";
+import { useState } from 'react'
 
+// ANTD
+import { Form, Col, Row, Slider, InputNumber } from 'antd'
+import type { FormInstance } from 'antd/lib/form/Form'
 
-const SliderParameter = (props: {form: any, parameter: any}) => {
-  const [value, setValue] = useState(props.parameter.default);
+interface SliderParameterProps {
+  form: FormInstance
+  parameter: {
+    label: string
+    name: string
+    minimum: number
+    maximum: number
+    step: number
+    isRequired: boolean
+    description: string
+    minLength?: number
+    default: string | string[]
+  }
+}
+
+const SliderParameter = ({ form, parameter }: SliderParameterProps) => {
+  const [value, setValue] = useState<number>(Number(parameter.default))
 
   const onChange = (newValue: number | null) => {
     if (newValue !== null) {
-      setValue(newValue);
-      props.form.setFieldsValue({[props.parameter.name]: newValue});
+      setValue(newValue)
+      form.setFieldsValue({ [parameter.name]: newValue })
     }
-  };
-  
+  }
+
   return (
     <>
       <Row>
         <Col span={8}>
-          <Form.Item 
-            style={{ marginBottom: 5 }} 
-            label={props.parameter.label} 
-            name={props.parameter.name}
-            initialValue={props.parameter.default} 
-            rules={[{ 
-              required: props.parameter.isRequired, 
-              message: `${props.parameter.label} required`
-            }]}
+          <Form.Item
+            style={{ marginBottom: 5 }}
+            label={parameter.label}
+            name={parameter.name}
+            initialValue={parameter.default}
+            rules={[
+              {
+                required: parameter.isRequired,
+                message: `${parameter.label} required`,
+              },
+            ]}
           >
-            <Slider 
+            <Slider
               value={value}
-              min={props.parameter.minimum} 
-              max={props.parameter.maximum} 
-              step={props.parameter.step ? props.parameter.step : 1} 
+              min={parameter.minimum}
+              max={parameter.maximum}
+              step={parameter.step ? parameter.step : 1}
               onChange={(newValue: number) => setValue(newValue)}
             />
           </Form.Item>
         </Col>
-        <Col style={{marginLeft: 10}}>
-          <InputNumber 
+        <Col style={{ marginLeft: 10 }}>
+          <InputNumber
             value={value}
-            min={props.parameter.minimum} 
-            max={props.parameter.maximum} 
+            min={parameter.minimum}
+            max={parameter.maximum}
             onChange={onChange}
           />
         </Col>
       </Row>
       <Row>
-        <span style={{color: "gray" }}>{props.parameter.description}</span>
+        <span style={{ color: 'gray' }}>{parameter.description}</span>
       </Row>
     </>
-  );
-};
+  )
+}
 
-export default SliderParameter;
+export default SliderParameter
