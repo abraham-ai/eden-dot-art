@@ -23,6 +23,9 @@ const SettingsButtonStyles = styled.section`
     box-shadow: ${boxShadowRegular};
     transform: ${smallTranslate};
   }
+  .connect-button > * {
+    color: white;
+  }
   .profile-button-main {
     background-color: white;
   }

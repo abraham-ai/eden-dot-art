@@ -21,9 +21,10 @@ import Blockies from 'react-blockies'
 // COMPONENTS
 // import CreditBalance from '@/components/Auth/CreditBalance'
 // import ApiKeys from '@/components/ApiKeys/ApiKeys'
+import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 
 // STYLES
-import { AccountPopoverStyles } from './AccountPopoverStyles'
+import AccountPopoverStyles from './AccountPopoverStyles'
 
 export const AccountPopover = ({
   openAccountModal,
@@ -62,7 +63,7 @@ export const AccountPopover = ({
 
   return isConnected ? (
     <AccountPopoverStyles>
-      <Button className="account-button-main" onClick={openAccountModal}>
+      {/* <Button className="account-button-main" onClick={openAccountModal}>
         <div className="account-button-wrapper">
           <Blockies seed={walletAddress} scale={6} />
         </div>
@@ -73,9 +74,9 @@ export const AccountPopover = ({
             {account.displayName}
           </Text>
         </div>
-      </Button>
+      </Button> */}
 
-      <div className="wallet-wrapper">
+      {/* <div className="wallet-wrapper">
         <div className="etherscan-wrapper">
           <a
             className="etherscan-link"
@@ -104,12 +105,12 @@ export const AccountPopover = ({
             {chain.name}
           </Button>
         </div>
-      </div>
+      </div> */}
 
       <div className="theme-settings-wrapper">
         {/* <LightModeIcon style={{ color: '#8C7CF0' }} /> */}
         <Text className="theme-toggle">Theme</Text>
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </div>
 
       <div className="account-settings-wrapper">

@@ -20,16 +20,20 @@ import { HiSparkles, HiOutlineSparkles } from 'react-icons/hi'
 // import { ShareAltOutlined } from '@ant-design/icons'
 // import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons'
 
+// TYPES
+import CreationSocialType from '@/interfaces/CreationSocial'
+
 // STYLES
-import { CreationSocialStyles } from './CreationSocialStyles'
+import CreationSocialStyles from './CreationSocialStyles'
 
 export default function CreationSocial({
+  layout = 'minimal',
   creationBurns,
   creationPraises,
   creationSha,
   praisedByMe,
   burnedByMe,
-}) {
+}: CreationSocialType) {
   //   const navMode = width < 718 ? 'inline' : 'horizontal';
 
   const [burns, setBurns] = useState(creationBurns)
@@ -62,9 +66,7 @@ export default function CreationSocial({
     if (!address) {
       return
     }
-    // console.log(' Praise Handler ')
     let praiseOpperation = ''
-    // console.log({ isPraised })
 
     if (isPraised === true && praises > 0) {
       setPraises(praises - 1)
@@ -76,8 +78,6 @@ export default function CreationSocial({
       setIsPraised(true)
     }
 
-    // console.log({ praiseOpperation })
-
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
       stat: 'praise',
@@ -85,7 +85,6 @@ export default function CreationSocial({
       address: address,
     })
 
-    // console.log({ results })
     setPraises(results.data.praise)
   }
 
@@ -93,9 +92,8 @@ export default function CreationSocial({
     if (!address) {
       return
     }
-    // console.log('Burn Handler')
+
     let burnOpperation = ''
-    // console.log({ isBurned })
 
     if (isBurned === true && burns > 0) {
       setBurns(burns - 1)
@@ -107,8 +105,6 @@ export default function CreationSocial({
       setIsBurned(true)
     }
 
-    // console.log({ burnOpperation })
-
     const results = await axios.post(serverUrl + '/update_stats', {
       creation: creationSha,
       stat: 'burn',
@@ -116,7 +112,6 @@ export default function CreationSocial({
       address: address,
     })
 
-    // console.log({ results })
     setBurns(results.data.burn)
   }
 
@@ -134,6 +129,7 @@ export default function CreationSocial({
   // console.log({ isWeb3WalletConnected });
   // console.log({ praiseClasses });
   // console.log({ burnClasses });
+  console.log({ layout })
 
   const isTooltipVisible = isWeb3WalletConnected ? null : false
 
@@ -154,13 +150,46 @@ export default function CreationSocial({
 
   return (
     <CreationSocialStyles id="social-buttons">
-      <div className="single-button-wrapper">
-        <Tooltip
-          placement="bottom"
-          title={'praise'}
-          defaultVisible={isTooltipVisible}
-          mouseEnterDelay={0.8}
-        >
+      {layout === 'minimal' ? (
+        <>
+          <div className="single-button-wrapper">
+            <Tooltip
+              placement="bottom"
+              title={'praise'}
+              defaultVisible={isTooltipVisible}
+              mouseEnterDelay={0.8}
+            >
+              <Button className={praiseClasses} onClick={() => praiseHandler()}>
+                <span className="social-icon">
+                  {isPraised ? (
+                    <HiSparkles size="36px" />
+                  ) : (
+                    <HiOutlineSparkles size="36px" />
+                  )}
+                </span>
+              </Button>
+            </Tooltip>
+            {praiseCount}
+          </div>
+
+          <div className="single-button-wrapper">
+            <Tooltip
+              placement="bottom"
+              title={'burn'}
+              defaultVisible={isTooltipVisible}
+              mouseEnterDelay={0.8}
+            >
+              <Button className={burnClasses} onClick={() => burnHandler()}>
+                <span className="social-icon">
+                  {isBurned ? <AiFillFire /> : <AiOutlineFire />}
+                </span>
+              </Button>
+            </Tooltip>
+            {burnCount}
+          </div>
+        </>
+      ) : (
+        <>
           <Button className={praiseClasses} onClick={() => praiseHandler()}>
             <span className="social-icon">
               {isPraised ? (
@@ -170,38 +199,38 @@ export default function CreationSocial({
               )}
             </span>
           </Button>
-        </Tooltip>
-        {praiseCount}
-      </div>
 
-      <div className="single-button-wrapper">
-        <Tooltip
-          placement="bottom"
-          title={'burn'}
-          defaultVisible={isTooltipVisible}
-          mouseEnterDelay={0.8}
-        >
           <Button className={burnClasses} onClick={() => burnHandler()}>
             <span className="social-icon">
               {isBurned ? <AiFillFire /> : <AiOutlineFire />}
             </span>
           </Button>
-        </Tooltip>
-        {burnCount}
-      </div>
+
+          <Button className={praiseClasses} onClick={() => praiseHandler()}>
+            <span className="social-icon">
+              {isPraised ? (
+                <HiSparkles size="36px" />
+              ) : (
+                <HiOutlineSparkles size="36px" />
+              )}
+            </span>
+          </Button>
+        </>
+      )}
+
       {/* <CreationShare creationSha={creationSha} /> */}
       {/* <span className="single-button-wrapper share">
-        <Button className="cr-share" onClick={() => setIsShared(!isShared)}>
-          <Paragraph
-            copyable={{
-              text: `${window?.appConfig?.ABRAHAM_SELF}/creation/${creationSha}`,
-              icon: [<HiOutlineShare key="copy-icon" size="36px" />, <HiShare key="copied-icon" />],
-              placement: 'bottom',
-              tooltips: ['copy link', 'link copied!'],
-            }}
-          />
-        </Button>
-      </span> */}
+      <Button className="cr-share" onClick={() => setIsShared(!isShared)}>
+        <Paragraph
+          copyable={{
+            text: `${window?.appConfig?.ABRAHAM_SELF}/creation/${creationSha}`,
+            icon: [<HiOutlineShare key="copy-icon" size="36px" />, <HiShare key="copied-icon" />],
+            placement: 'bottom',
+            tooltips: ['copy link', 'link copied!'],
+          }}
+        />
+      </Button>
+    </span> */}
     </CreationSocialStyles>
   )
 }

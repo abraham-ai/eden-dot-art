@@ -158,4 +158,4 @@ const CreationShareStyles = styled.div`
   }
 `
 
-export { CreationShareStyles }
+export default CreationShareStyles

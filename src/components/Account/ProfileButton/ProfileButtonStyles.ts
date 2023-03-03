@@ -38,6 +38,7 @@ const ProfileButtonStyles = styled.section`
     border-radius: 50%;
     overflow: hidden;
     margin: 0;
+    margin-right: 10px;
     padding: 0;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.05),
       0px 8px 40px rgba(0, 0, 0, 0.04);

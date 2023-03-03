@@ -1,4 +1,4 @@
-import { Image } from 'antd'
+import Image from 'next/image'
 
 const ImageResult = ({
   resultUrl,
@@ -15,8 +15,9 @@ const ImageResult = ({
       width={width}
       height={height}
       alt="result"
-      fallback="placeholder.png"
-      preview={false}
+      fill
+      placeholder={'blur'}
+      blurDataURL={resultUrl}
     />
   )
 }

@@ -2,6 +2,9 @@
 
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 
+// NEXTJS
+import Link from 'next/link'
+
 // WEB3
 import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
@@ -167,13 +170,14 @@ export const ProfileButton = () => {
                 */
 
                 return (
-                  <Button onClick={() => null}>
-                    <div className="main-account-button">
-                      <div className="account-profile-wrapper">
-                        <Blockies seed={address} scale={6} />
-                      </div>
+                  <Link
+                    href={`/creator/${address}`}
+                    className="main-account-button"
+                  >
+                    <div className="account-profile-wrapper">
+                      <Blockies seed={address} scale={6} />
                     </div>
-                  </Button>
+                  </Link>
                 )
               })()}
             </div>
