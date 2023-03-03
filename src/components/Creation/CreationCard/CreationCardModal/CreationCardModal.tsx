@@ -32,7 +32,7 @@ import Blockies from 'react-blockies'
 
 // ICONS
 import { CloseOutlined, CodeOutlined } from '@ant-design/icons'
-import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
+// import { HiOutlineArrowNarrowUp, HiOutlineFingerPrint } from 'react-icons/hi' // HiCommandLine
 import { MdOutlineDateRange } from 'react-icons/md'
 import { BsAspectRatio } from 'react-icons/bs'
 import { SlSizeFullscreen } from 'react-icons/sl'
@@ -214,7 +214,14 @@ export default function CreationCardModal({ creation }: CreationModal) {
                   className="cr-socials-wrapper"
                   style={{ padding: '20px 0 20px 0px', display: 'flex' }}
                 >
-                  <CreationSocials layout={'expanded'} />
+                  <CreationSocials
+                    layout={'expanded'}
+                    creationBurns={1}
+                    creationPraises={1}
+                    creationSha={key}
+                    praisedByMe={true}
+                    burnedByMe={false}
+                  />
                 </div>
                 <Input.Group
                   className="cr-share-wrapper"

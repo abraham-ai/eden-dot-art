@@ -6,7 +6,7 @@ import React, { useState, useContext, useEffect, useCallback } from 'react'
 import axios from 'axios'
 
 // WEB3
-import { useAccount, useDisconnect } from 'wagmi'
+import { useAccount } from 'wagmi' // useDisconnect
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
@@ -43,7 +43,7 @@ export const SettingsButton = () => {
 
   // HOOKS
   const { address = '', isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
+  // const { disconnect } = useDisconnect()
   const walletAddress = address
 
   // CONTEXT
@@ -121,8 +121,8 @@ export const SettingsButton = () => {
         {({
           account,
           chain,
-          openAccountModal,
-          openChainModal,
+          // openAccountModal,
+          // openChainModal,
           openConnectModal,
           authenticationStatus,
           mounted,
@@ -184,13 +184,13 @@ export const SettingsButton = () => {
                     id={id}
                     content={
                       <AccountPopover
-                        openAccountModal={openAccountModal}
-                        openChainModal={openChainModal}
-                        walletAddress={walletAddress}
-                        displayAddress={displayAddress}
-                        chain={chain}
-                        account={account}
-                        disconnect={disconnect}
+                      // openAccountModal={openAccountModal}
+                      // openChainModal={openChainModal}
+                      // walletAddress={walletAddress}
+                      // displayAddress={displayAddress}
+                      // chain={chain}
+                      // account={account}
+                      // disconnect={disconnect}
                       />
                     }
                     trigger="click"

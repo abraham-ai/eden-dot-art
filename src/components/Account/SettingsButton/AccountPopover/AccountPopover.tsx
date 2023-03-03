@@ -16,7 +16,7 @@ import { Typography, Slider, Button } from 'antd'
 const { Text } = Typography
 
 // LIBS
-import Blockies from 'react-blockies'
+// import Blockies from 'react-blockies'
 
 // COMPONENTS
 // import CreditBalance from '@/components/Auth/CreditBalance'
@@ -26,18 +26,20 @@ import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 // STYLES
 import AccountPopoverStyles from './AccountPopoverStyles'
 
-export const AccountPopover = ({
-  openAccountModal,
-  walletAddress,
-  chain,
-  account,
-  disconnect,
-  openChainModal,
-  displayAddress,
-}) => {
+// {
+//   openAccountModal,
+//   walletAddress,
+//   chain,
+//   account,
+//   disconnect,
+//   openChainModal,
+//   displayAddress,
+// }
+
+export const AccountPopover = () => {
   // HOOKS
   const { isConnected } = useAccount()
-  const { setAuthToken, setUserId } = useContext(AppContext)
+  const { setAuthToken } = useContext(AppContext)
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)

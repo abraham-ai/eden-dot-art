@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useContext, useCallback, useEffect } from 'react'
+import React, { useContext, useCallback, useEffect } from 'react'
 
 // NEXTJS
 import Link from 'next/link'
@@ -30,7 +30,7 @@ const { Text } = Typography
 
 export const ProfileButton = () => {
   // const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
 
   // HOOKS
   const { address = '', isConnected } = useAccount()
@@ -49,16 +49,16 @@ export const ProfileButton = () => {
     setUserId,
   } = context
 
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
-  }
+  // const handleOpenChange = (newOpen: boolean) => {
+  //   setOpen(newOpen)
+  // }
 
   // console.log('CONNECT BUTTON CUSTOM')
   // console.log({ userId, isWeb3WalletConnected, isWeb3AuthSuccess })
 
-  const id = open ? 'account-popover' : undefined
+  // const id = open ? 'account-popover' : undefined
 
-  const [isHover, setIsHover] = useState(false)
+  // const [isHover, setIsHover] = useState(false)
 
   let displayAddress = walletAddress
     ? walletAddress?.slice(0, 6)
@@ -111,8 +111,8 @@ export const ProfileButton = () => {
         {({
           account,
           chain,
-          openAccountModal,
-          openChainModal,
+          // openAccountModal,
+          // openChainModal,
           openConnectModal,
           authenticationStatus,
           mounted,

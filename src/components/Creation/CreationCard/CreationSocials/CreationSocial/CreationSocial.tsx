@@ -129,7 +129,7 @@ export default function CreationSocial({
   // console.log({ isWeb3WalletConnected });
   // console.log({ praiseClasses });
   // console.log({ burnClasses });
-  console.log({ layout })
+  // console.log({ layout })
 
   const isTooltipVisible = isWeb3WalletConnected ? null : false
 
