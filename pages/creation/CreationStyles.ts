@@ -136,11 +136,6 @@ const CreationStyles = styled.article`
   .cr-main {
     z-index: 10;
     width: 100%;
-    // min-width: 544px;
-    // max-width: 544px;
-    // background: yellow;
-    // border: 4px solid black;
-    // padding-top: 50px;
     padding: 0 0 0 20px;
     margin-right: 10px;
   }
@@ -156,10 +151,10 @@ const CreationStyles = styled.article`
       padding: 0;
     }
   }
-  /*** CR-MAIN-HEADER ***/ 
+  /*** CR-MAIN-HEADER ***/
   .cr-main-header {
-    // background: lime; 
-    display: flex; 
+    // background: lime;
+    display: flex;
     align-items: center;
   }
   @media (max-width: 1400px) {
@@ -189,12 +184,12 @@ const CreationStyles = styled.article`
   /** CR-CREATOR **/
   .cr-creator {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     font-size: 1.4em;
     flex: 1;
   }
-  @media (max-width: 930px ) {
+  @media (max-width: 930px) {
     .cr-creator {
       flex: 1;
       align-items: center;
@@ -219,7 +214,6 @@ const CreationStyles = styled.article`
   }
   @media (max-width: 930px) {
     .cr-creator-name {
-
     }
   }
   /*** CR-BUTTONS ***/
@@ -274,14 +268,14 @@ const CreationStyles = styled.article`
   }
   /*** CR-SOCIALS ***/
   .cr-socials {
-    max-width: 40px; 
+    max-width: 40px;
     min-width: 40px;
     position: absolute;
     right: 0;
     bottom: 0;
     display: flex;
     flex: 0;
-    align-items: center; 
+    align-items: center;
     justify-content: flex-end;
     flex-direction: column;
     margin: 0 20px;
@@ -502,34 +496,33 @@ const CreationStyles = styled.article`
   }
 
   @media only screen and (max-width: 560px) {
-      padding-top: 10px;
-      border: none;
-      margin-bottom: 15px;
-      flex: 1;
-      max-width: unset;
+    padding-top: 10px;
+    border: none;
+    margin-bottom: 15px;
+    flex: 1;
+    max-width: unset;
 
-      .cr-text {
-        padding: 16px 16px 0 16px;
-        font-size: 18px;
-        font-weight: 600;
-      }
-      .cr-buttons {
-        height: 54px;
-      }
-      .social-buttons-wrapper {
-        height: 54px;
-        align-items: center;
-        justify-content: flex-start;
-        padding-left: 16px;
-      }
-      .social-buttons-wrapper > span {
-        display: flex;
-        flex: 2;
-        justify-content: flex-end;
-        padding-right: 16px;
-      }
+    .cr-text {
+      padding: 16px 16px 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .cr-buttons {
+      height: 54px;
+    }
+    .social-buttons-wrapper {
+      height: 54px;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 16px;
+    }
+    .social-buttons-wrapper > span {
+      display: flex;
+      flex: 2;
+      justify-content: flex-end;
+      padding-right: 16px;
     }
   }
 `
 
-export { CreationStyles }
+export default CreationStyles

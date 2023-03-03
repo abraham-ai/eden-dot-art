@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // TYPES
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react'
 
 // NEXT
 import type { NextPage } from 'next'

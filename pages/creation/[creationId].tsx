@@ -12,7 +12,7 @@ import { useState } from 'react'
 import NavLayout from 'src/layouts/NavLayout'
 
 // CSS
-import { CreationStyles } from './CreationStyles'
+import CreationStyles from './CreationStyles'
 
 // COMPONENTS
 // import CreationCard from '@/components/Creation/CreationCard/CreationCard'
