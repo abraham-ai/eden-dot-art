@@ -15,7 +15,7 @@ import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
 
 // CHAINS
-import { goerli } from 'wagmi/chains'
+import { mainnet } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 
 // WALLET - WEB3
@@ -31,7 +31,7 @@ import Blockies from 'react-blockies'
 // STYLES
 import { HeaderWrapperStyles } from './HeaderStyles'
 
-const { chains, provider } = configureChains([goerli], [publicProvider()])
+const { chains, provider } = configureChains([mainnet], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
   appName: 'Eden Art App',
