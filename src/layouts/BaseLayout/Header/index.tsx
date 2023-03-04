@@ -9,8 +9,9 @@ import { Button, Space } from 'antd';
 import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
-import PendingCreations from '@/components/Create/CreateModal/PendingCreations';
+// import ProfileButton from '@/components/Account/ProfileButton/ProfileButton'
+import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
+import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
 
 // STYLES
 import { HeaderWrapperStyles } from './HeaderStyles'
@@ -49,7 +50,7 @@ export default function Header() {
             </>
           )}
         </Space>
-        <ConnectButtonCustom />
+        <SettingsButton />
       </div>
     </HeaderWrapperStyles>
   )

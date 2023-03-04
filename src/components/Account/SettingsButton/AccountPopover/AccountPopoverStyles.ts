@@ -122,4 +122,4 @@ const AccountPopoverStyles = styled.section`
   }
 `
 
-export { AccountPopoverStyles }
+export default AccountPopoverStyles

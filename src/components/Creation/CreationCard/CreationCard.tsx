@@ -10,7 +10,7 @@ import Link from 'next/link'
 import axios from 'axios'
 
 // ANTD
-import { Popover, Typography } from 'antd'
+import { Popover, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
@@ -120,28 +120,36 @@ export default function CreationCard({ creation }: { creation: Creation }) {
         <article className="creation-content">
           <div className="cr-action-left">
             <span className="cr-social praise">
-              <button className="btn" onClick={handlePraise}>
+              <Button
+                className="btn"
+                shape="circle"
+                onClick={() => handlePraise}
+              >
                 🙌 {praises} - {praised?"yes":"no"}
-              </button>
+              </Button>
             </span>
             <span className="cr-social burn">
-              <button className="btn" onClick={handleBurn}>
+              <Button className="btn" shape="circle" onClick={() => handleBurn}>
                 🔥 {burns}
-              </button>
+              </Button>
             </span>
           </div>
 
           <div className="cr-action-right">
             <span className="cr-social remix">
-              <button className="btn" onClick={handleRecreation}>
+              <Button
+                className="btn"
+                shape="circle"
+                onClick={() => handleRecreation}
+              >
                 <FaRetweet className="icon" />
-              </button>
+              </Button>
             </span>
 
             <span className="cr-social bookmark">
-              <button className="btn" onClick={handleSave}>
+              <Button className="btn" shape="circle" onClick={() => handleSave}>
                 <BsFillBookmarkFill className="icon" />
-              </button>
+              </Button>
             </span>
           </div>
 

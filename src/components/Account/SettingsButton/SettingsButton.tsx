@@ -7,26 +7,27 @@ import axios from 'axios'
 
 
 // WEB3
-import { useAccount, useDisconnect } from 'wagmi'
+import { useAccount } from 'wagmi' // useDisconnect
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
 
 // LIBS
-import Blockies from 'react-blockies'
+// import Blockies from 'react-blockies'
 
 // ANTD
 import { Popover, Typography, Button } from 'antd'
 const { Text } = Typography
 
 // EDEN COMPONENTS
-import AccountPopover from '@/components/ConnectButtonCustom/AccountPopover/AccountPopover'
+import AccountPopover from '@/components/Account/SettingsButton/AccountPopover/AccountPopover'
 
 // CSS
-import { ConnectButtonCustomStyles } from './ConnectButtonCustomStyles'
+import SettingsButtonStyles from '@/components/Account/SettingsButton/SettingsButtonStyles'
 
 // ICONS
+import { SettingTwoTone, SettingOutlined } from '@ant-design/icons'
 // import SettingsIcon'
 // import HelpIcon
 // import LightModeIcon
@@ -37,7 +38,7 @@ import { ConnectButtonCustomStyles } from './ConnectButtonCustomStyles'
 // const animSpeed = '300ms'
 // const animCurve = 'cubic-bezier(0.23, 1, 0.32, 1)'
 
-export const ConnectButtonCustom = () => {
+export const SettingsButton = () => {
   // const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = useState(false)
 
@@ -67,6 +68,8 @@ export const ConnectButtonCustom = () => {
   // console.log({ userId, isWeb3WalletConnected, isWeb3AuthSuccess })
 
   const id = open ? 'account-popover' : undefined
+
+  const [isHover, setIsHover] = useState(false)
 
   let displayAddress = walletAddress
     ? walletAddress?.slice(0, 6)
@@ -114,16 +117,15 @@ export const ConnectButtonCustom = () => {
   // ])
 
   return (
-    <ConnectButtonCustomStyles>
-      
+    <SettingsButtonStyles>
       <ConnectButton.Custom>
       
       
         {({
           account,
           chain,
-          openAccountModal,
-          openChainModal,
+          // openAccountModal,
+          // openChainModal,
           openConnectModal,
           authenticationStatus,
           mounted,
@@ -167,13 +169,13 @@ export const ConnectButtonCustom = () => {
                     id={id}
                     content={
                       <AccountPopover
-                        openAccountModal={openAccountModal}
-                        openChainModal={openChainModal}
-                        walletAddress={walletAddress}
-                        displayAddress={displayAddress}
-                        chain={chain}
-                        account={account}
-                        disconnect={disconnect}
+                      // openAccountModal={openAccountModal}
+                      // openChainModal={openChainModal}
+                      // walletAddress={walletAddress}
+                      // displayAddress={displayAddress}
+                      // chain={chain}
+                      // account={account}
+                      // disconnect={disconnect}
                       />
                     }
                     trigger="click"
@@ -182,11 +184,13 @@ export const ConnectButtonCustom = () => {
                     placement="bottom"
                     style={{ borderRadius: '24px' }}
                   >
-                    <div className="main-account-button">
-                      <div className="account-profile-wrapper">
-                        <Blockies seed={walletAddress} scale={6} />
-                      </div>
-                    </div>
+                    <Button
+                      className="nav-account-settings"
+                      shape={'circle'}
+                      onMouseEnter={() => setIsHover(true)}
+                      onMouseLeave={() => setIsHover(false)}
+                      icon={isHover ? <SettingTwoTone /> : <SettingOutlined />}
+                    />
                   </Popover>
                 )
               })()}
@@ -199,8 +203,8 @@ export const ConnectButtonCustom = () => {
 
         
       </ConnectButton.Custom>
-    </ConnectButtonCustomStyles>
+    </SettingsButtonStyles>
   )
 }
 
-export default ConnectButtonCustom
+export default SettingsButton
