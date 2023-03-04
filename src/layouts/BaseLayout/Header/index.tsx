@@ -7,14 +7,15 @@ import AppContext from '@/context/AppContext/AppContext'
 import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+import ProfileButton from '@/components/Account/ProfileButton/ProfileButton'
 import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
+import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
 
 // CONTRACT - WEB3
 import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
 
 // CHAINS
-import { goerli } from 'wagmi/chains'
+import { mainnet } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 
 // WALLET - WEB3
@@ -30,7 +31,7 @@ import Blockies from 'react-blockies'
 // STYLES
 import { HeaderWrapperStyles } from './HeaderStyles'
 
-const { chains, provider } = configureChains([goerli], [publicProvider()])
+const { chains, provider } = configureChains([mainnet], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
   appName: 'Eden Art App',
@@ -66,10 +67,11 @@ export default function Header() {
           <Logo />
 
           <div className="header-connect-wrapper">
-            <ConnectButtonCustom />
+            <ProfileButton />
 
             {isWeb3WalletConnected ? (
               <>
+                <SettingsButton />
                 <CreateButton />
                 <CreateModal />
                 <PendingCreations />

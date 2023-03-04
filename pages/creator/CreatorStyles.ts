@@ -13,7 +13,7 @@ const CreatorStyles = styled.div`
     overflow: hidden;
     width: 100%;
     z-index: 50;
-    background: lime;
+    background: '#e7e7e7';
     display: flex;
     justify-content: center;
     align-items: center;

@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react'
 
 // FETCH
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
@@ -12,32 +12,34 @@ import AppContext from '@/context/AppContext/AppContext'
 import { useAccount } from 'wagmi'
 
 // ANTD
-import { Typography, Slider } from 'antd'
+import { Typography, Slider, Button } from 'antd'
 const { Text } = Typography
 
 // LIBS
-import Blockies from 'react-blockies'
+// import Blockies from 'react-blockies'
 
 // COMPONENTS
 // import CreditBalance from '@/components/Auth/CreditBalance'
 // import ApiKeys from '@/components/ApiKeys/ApiKeys'
+import ThemeToggle from '@/components/ThemeToggle/ThemeToggle'
 
 // STYLES
-import { AccountPopoverStyles } from './AccountPopoverStyles'
+import AccountPopoverStyles from './AccountPopoverStyles'
 
-export const AccountPopover = ({
-  openAccountModal,
-  walletAddress,
-  chain,
-  account,
-  disconnect,
-  openChainModal,
-  displayAddress,
-}) => {
+// {
+//   openAccountModal,
+//   walletAddress,
+//   chain,
+//   account,
+//   disconnect,
+//   openChainModal,
+//   displayAddress,
+// }
+
+export const AccountPopover = () => {
   // HOOKS
   const { isConnected } = useAccount()
-  const { setAuthToken, setIsWeb3WalletConnected, setUserId } =
-    useContext(AppContext)
+  const { setAuthToken } = useContext(AppContext)
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
@@ -52,19 +54,18 @@ export const AccountPopover = ({
       const resp = await axios.post('/api/logout')
 
       if (resp.status === 200) {
-        setAuthToken('')
-        setIsWeb3WalletConnected(false)
-        setUserId('')
-        disconnect()
+        setAuthToken(resp.data.token)
       }
     } catch (error: any) {
-      console.error(`Error: ${error.response.data.error}`)
+      if (error instanceof AxiosError) {
+        console.error(`Error: ${error.response.data.error}`)
+      }
     }
   }
 
   return isConnected ? (
     <AccountPopoverStyles>
-      <button className="account-button-main" onClick={openAccountModal}>
+      {/* <Button className="account-button-main" onClick={openAccountModal}>
         <div className="account-button-wrapper">
           <Blockies seed={walletAddress} scale={6} />
         </div>
@@ -75,27 +76,9 @@ export const AccountPopover = ({
             {account.displayName}
           </Text>
         </div>
-      </button>
+      </Button> */}
 
-      <div className="wallet-wrapper">
-        {/* <div>
-          <Text style={{ color: 'gray', fontWeight: 600 }}>
-            {'Wallet Balance'}
-          </Text>
-          <Text
-            style={{
-              color: 'black',
-              fontSize: '1.2rem',
-              fontWeight: 600,
-            }}
-          >
-            {account.displayBalance}
-          </Text>
-          <CreditBalance />
-        </div>
-
-        <ApiKeys /> */}
-
+      {/* <div className="wallet-wrapper">
         <div className="etherscan-wrapper">
           <a
             className="etherscan-link"
@@ -106,7 +89,7 @@ export const AccountPopover = ({
             <Text className="etherscan-address">{displayAddress}</Text>
           </a>
 
-          <button className="connect-button" onClick={openChainModal}>
+          <Button className="connect-button" onClick={openChainModal}>
             {chain.hasIcon && (
               <div
                 className="chain-icon-wrapper"
@@ -122,14 +105,14 @@ export const AccountPopover = ({
               </div>
             )}
             {chain.name}
-          </button>
+          </Button>
         </div>
-      </div>
+      </div> */}
 
       <div className="theme-settings-wrapper">
         {/* <LightModeIcon style={{ color: '#8C7CF0' }} /> */}
         <Text className="theme-toggle">Theme</Text>
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </div>
 
       <div className="account-settings-wrapper">
@@ -149,9 +132,9 @@ export const AccountPopover = ({
         </div>
       </div>
 
-      <button className="connect-button" onClick={handleDisconnect}>
+      <Button className="connect-button" onClick={() => handleDisconnect}>
         {'Disconnect'}
-      </button>
+      </Button>
     </AccountPopoverStyles>
   ) : (
     <Text>{'Not Connected'}</Text>

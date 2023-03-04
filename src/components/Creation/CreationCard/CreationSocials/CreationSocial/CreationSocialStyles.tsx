@@ -214,4 +214,4 @@ const CreationSocialStyles = styled.nav`
   }
 `
 
-export { CreationSocialStyles }
+export default CreationSocialStyles

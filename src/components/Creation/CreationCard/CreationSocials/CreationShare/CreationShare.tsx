@@ -9,7 +9,7 @@ const PRD_URL = 'https://minio.aws.abraham.fun/creations-prd//'
 const { Paragraph } = Typography
 
 // STYLES
-import { CreationShareStyles } from './CreationShareStyles'
+import CreationShareStyles from './CreationShareStyles'
 
 export default function CreationSocial({ creationSha }) {
   //   const { width } = useWindowDimensions();

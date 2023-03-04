@@ -7,7 +7,7 @@ import Blockies from 'react-blockies'
 import AppContext from '@/context/AppContext/AppContext'
 
 // COMPONENTS
-import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
+import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import AppLogo from '@/components/AppLogo/AppLogo'
 
@@ -72,7 +72,7 @@ export default function Header() {
             <AppLogo logo="eden" size="small" />
 
             <div className="nav-right-wrapper">
-              <ConnectButtonCustom />
+              <SettingsButton />
               {isWeb3WalletConnected ? <CreateButton /> : null}
             </div>
           </section>

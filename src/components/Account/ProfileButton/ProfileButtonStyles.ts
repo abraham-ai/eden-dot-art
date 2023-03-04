@@ -4,7 +4,7 @@ const boxShadowRegular =
   '0px 0px 2px rgba(0, 0, 0, 0.15), 0px 4px 7px rgba(0, 0, 0, 0.05), 0px 12px 40px rgba(0, 0, 0, 0.1);'
 const smallTranslate = 'translate3d(0px, -1px, 0px)'
 
-const ConnectButtonCustomStyles = styled.section`
+const ProfileButtonStyles = styled.section`
   // CONNECT
   .connect-button-wrapper {
     display: flex;
@@ -38,6 +38,7 @@ const ConnectButtonCustomStyles = styled.section`
     border-radius: 50%;
     overflow: hidden;
     margin: 0;
+    margin-right: 10px;
     padding: 0;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.05),
       0px 8px 40px rgba(0, 0, 0, 0.04);
@@ -84,4 +85,4 @@ const ConnectButtonCustomStyles = styled.section`
   }
 `
 
-export { ConnectButtonCustomStyles }
+export default ProfileButtonStyles
