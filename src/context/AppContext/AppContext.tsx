@@ -1,6 +1,27 @@
 import { createContext } from 'react'
-import { AppContext as AppContextTypes } from '@/interfaces/AppContext'
+import { AppContextType } from '@/interfaces/AppContext'
 
-const AppContext = createContext<AppContextTypes | null>(null)
+const AppContext = createContext<AppContextType>({
+  isConnected: true,
+  setIsConnected: () => {},
+  isSignedIn: false,
+  setIsSignedIn: () => {},
 
-export default AppContext
+  lastLoadTime: null,
+  setLastLoadTime: () => {},
+
+  isCreateUIModalOpen: false,
+  setIsCreateUIModalOpen: () => {},
+  isCreationModalOpen: false,
+  setIsCreationModalOpen: () => {},
+  isSignInModalOpen: false,
+  setIsSignInModalOpen: () => {},
+
+  isLightTheme: false,
+  setIsLightTheme: () => {},
+
+  generators: {},
+  setGenerators: () => {},
+});
+
+export default AppContext;

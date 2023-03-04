@@ -7,7 +7,7 @@ interface BalanceResponse {
 
 export const useCreditBalance = () => {
   const { data, error, isLoading, mutate } = useSWR<BalanceResponse>(
-    '/api/user/balance',
+    '/api/user/manna',
     fetcher,
   )
   return {

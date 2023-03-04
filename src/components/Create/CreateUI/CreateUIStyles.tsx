@@ -17,13 +17,12 @@ const CreateUIStyles = styled.section`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
-    max-width: 90%;
-    max-height: 90%;
+    width: 97%;
+    height: 97%;
+    max-width: 97%;
+    max-height: 97%;
     background: white;
-    border: 2px solid #000;
-    padding: 10px;
+    padding: 0px;
     border-radius: 20px;
   }
   /*** FORM OUTER WRAPPER ***/

@@ -1,83 +1,56 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
+
+import { Button, Space } from 'antd';
 
 // COMPONENTS
 import Logo from '@/components/Logo/Logo'
 import CreateModal from '@/components/Create/CreateModal/CreateModal'
 import CreateButton from '@/components/Create/CreateButton/CreateButton'
 import ConnectButtonCustom from '@/components/ConnectButtonCustom/ConnectButtonCustom'
-import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
-
-// CONTRACT - WEB3
-import { useAccount, createClient, configureChains, WagmiConfig } from 'wagmi'
-
-// CHAINS
-import { goerli } from 'wagmi/chains'
-import { publicProvider } from 'wagmi/providers/public'
-
-// WALLET - WEB3
-import {
-  RainbowKitProvider,
-  AvatarComponent,
-  getDefaultWallets,
-} from '@rainbow-me/rainbowkit'
-
-// LIBS
-import Blockies from 'react-blockies'
+import PendingCreations from '@/components/Create/CreateModal/PendingCreations';
 
 // STYLES
 import { HeaderWrapperStyles } from './HeaderStyles'
 
-const { chains, provider } = configureChains([goerli], [publicProvider()])
-
-const { connectors } = getDefaultWallets({
-  appName: 'Eden Art App',
-  chains,
-})
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-})
-
-const CustomAvatar: AvatarComponent = ({ address }) => {
-  return <Blockies seed={address} />
-}
-
 export default function Header() {
-  const context = useContext(AppContext)
-  const { setIsWeb3WalletConnected, isWeb3WalletConnected } = context
-
-  const { isConnected } = useAccount()
-
-  useEffect(() => {
-    setIsWeb3WalletConnected(isConnected)
-  }, [isConnected, setIsWeb3WalletConnected])
-
-  // console.log({ isWeb3WalletConnected, isConnected, isWeb3AuthSuccess })
+  const {
+    isConnected,
+    isSignedIn,
+    isCreateUIModalOpen,
+    isCreationModalOpen,
+    isSignInModalOpen,
+  } = useContext(AppContext);
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider avatar={CustomAvatar} chains={chains}>
-        <HeaderWrapperStyles id="header-wrapper">
-          <Logo />
-
-          <div className="header-connect-wrapper">
-            <ConnectButtonCustom />
-
-            {isWeb3WalletConnected ? (
-              <>
-                <CreateButton />
-                <CreateModal />
-                <PendingCreations />
-              </>
-            ) : null}
-          </div>
-        </HeaderWrapperStyles>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <HeaderWrapperStyles id="header-wrapper">
+      <Logo />
+      <div className="header-connect-wrapper">
+        {isCreateUIModalOpen}
+        {isCreationModalOpen}
+        {isSignInModalOpen}
+        <Space>
+          <Button shape="round" size="large" type="primary" href="/garden" >All creations</Button>
+          <Button shape="round" size="large" type="primary" href="/praised">🙌</Button>
+          <Button shape="round" size="large" type="primary" href="/burned">🔥</Button>
+          <Button shape="round" size="large" type="primary" href="/collections">Collections</Button>
+          {isConnected && (
+            <Button shape="round" size="large" type="primary" href="/profile">My profile</Button>
+          )}
+          {isConnected && isSignedIn && (
+            <PendingCreations />
+          )}
+          {isConnected && (
+            <>
+              <CreateButton />
+              <CreateModal />
+            </>
+          )}
+        </Space>
+        <ConnectButtonCustom />
+      </div>
+    </HeaderWrapperStyles>
   )
 }

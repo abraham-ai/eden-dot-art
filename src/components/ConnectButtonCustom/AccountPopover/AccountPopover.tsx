@@ -8,9 +8,6 @@ import axios from 'axios'
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
 
-// WEB3
-import { useAccount } from 'wagmi'
-
 // ANTD
 import { Typography, Slider } from 'antd'
 const { Text } = Typography
@@ -35,9 +32,7 @@ export const AccountPopover = ({
   displayAddress,
 }) => {
   // HOOKS
-  const { isConnected } = useAccount()
-  const { setAuthToken, setIsWeb3WalletConnected, setUserId } =
-    useContext(AppContext)
+  const { isConnected, setIsConnected } = useContext(AppContext);
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
@@ -50,15 +45,12 @@ export const AccountPopover = ({
   const handleDisconnect = async () => {
     try {
       const resp = await axios.post('/api/logout')
-
       if (resp.status === 200) {
-        setAuthToken('')
-        setIsWeb3WalletConnected(false)
-        setUserId('')
-        disconnect()
+        setIsConnected(false);
+        disconnect();
       }
     } catch (error: any) {
-      console.error(`Error: ${error.response.data.error}`)
+      console.error(`Error: ${error}`)
     }
   }
 

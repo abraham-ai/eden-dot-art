@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback, useEffect, useContext } from 'react'
+import axios from "axios";
+import { useAccount } from 'wagmi'
 
 // TYPES
 import type { ReactElement, ReactNode } from 'react'
@@ -25,6 +27,7 @@ import Head from 'next/head'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
+import {GeneratorState} from '@/interfaces/GeneratorState'
 
 // PROVIDERS
 import WalletProvider from '@/providers/WalletProvider'
@@ -42,73 +45,85 @@ interface EdenAppProps extends AppProps {
 }
 
 function EdenApp(props: EdenAppProps) {
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
-  const [isCreationModalOpen, setIsCreationModalOpen] = useState(false)
-  const [isCreateUIModalOpen, setIsCreateUIModalOpen] = useState(false)
-  const [isWeb3WalletConnected, setIsWeb3WalletConnected] = useState(false)
-  const [isWeb3AuthSuccess, setIsWeb3AuthSuccess] = useState(false)
-  const [authToken, setAuthToken] = useState('')
-  const [userId, setUserId] = useState('')
-  const [isLightTheme, setIsLightTheme] = useState(true)
-  // const [isGenerating, setIsGenerating] = useState(false)
+  const { isConnected : accountIsConnected } = useAccount();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [lastLoadTime, setLastLoadTime] = useState(null);
+  const [generators, setGenerators] = useState<Record<string, GeneratorState>>({});
 
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-  const getLayout = Component.getLayout ?? (page => page)
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
+  const [isCreateUIModalOpen, setIsCreateUIModalOpen] = useState(false);
+  
+  const [isLightTheme, setIsLightTheme] = useState(true);
+  
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const getLayout = Component.getLayout ?? (page => page);
 
   Router.events.on('routeChangeStart', nProgress.start)
   Router.events.on('routeChangeError', nProgress.done)
   Router.events.on('routeChangeComplete', nProgress.done)
 
+  const checkAuthToken = useCallback(async () => {
+    const response = await axios.post('/api/user');
+    if (response.data.token) {
+      setIsSignedIn(true);
+    }
+  }, [setIsSignedIn]);
+
+  useEffect(() => {
+    if (accountIsConnected) {
+      setIsConnected(true);
+      checkAuthToken();
+    }
+  }, [checkAuthToken, setIsConnected])
+
+  useEffect(() => {
+    const navigationStart = performance.timeOrigin;
+    const currentTime = new Date(navigationStart);    
+    setLastLoadTime(currentTime);
+  }, []);
+
   const contextValues = {
-    authToken,
-    setAuthToken,
-    userId,
-    setUserId,
-    isWeb3AuthSuccess,
-    setIsWeb3AuthSuccess,
+    generators, 
+    setGenerators,
+
+    isConnected,
+    setIsConnected,
+    isSignedIn, 
+    setIsSignedIn, 
+
+    lastLoadTime,
+    setLastLoadTime,
+
     isCreateUIModalOpen,
     setIsCreateUIModalOpen,
     isCreationModalOpen,
     setIsCreationModalOpen,
     isSignInModalOpen,
     setIsSignInModalOpen,
-    isWeb3WalletConnected,
-    setIsWeb3WalletConnected,
+
     isLightTheme,
     setIsLightTheme,
-    // isGenerating,
-    // setIsGenerating,
   }
-
-  useEffect(() => {
-    if (
-      authToken !== '' &&
-      userId !== '' &&
-      isWeb3AuthSuccess === false &&
-      authToken.length === 175
-    ) {
-      setIsWeb3AuthSuccess(true)
-    }
-  }, [authToken, userId, isWeb3AuthSuccess])
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-          Eden.Art | Compute, Scalablity, and Scaffolding for ML Model Creators
+          Eden
         </title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      {/* <SidebarProvider> */}
       <AppContext.Provider value={contextValues}>
         <WalletProvider>
+        
           {getLayout(<Component {...pageProps} />)}
         </WalletProvider>
       </AppContext.Provider>
-      {/* </SidebarProvider> */}
     </CacheProvider>
   )
 }

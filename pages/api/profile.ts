@@ -4,20 +4,21 @@ import { eden } from '@/util/eden'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const authToken = req.session.token;
-  const { note } = req.body;
-
+  
   if (!authToken) {
     return res.status(401).json({ error: "Not authenticated" });
   }
 
   try {
-    const newApiKey = await eden.createNewApiKey(note);
-    return res.status(200).json(newApiKey);
+    const result = await eden.getProfile();
+    if (result.error) {
+      return res.status(500).json({ error: result.error });
+    } else {
+      return res.status(200).json({ profile: result.user });
+    }
   } 
   catch (error: any) {
-    if (error.response.data == "jwt expired") {
-      return res.status(401).json({ error: "Authentication expired" });
-    }
+    console.error(error);
     return res.status(500).json({ error: error.response.data });
   }
 };

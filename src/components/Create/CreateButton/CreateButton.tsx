@@ -15,12 +15,14 @@ import { CreateButtonStyles } from './CreateButtonStyles'
 // ICONS
 
 export default function CreateButton() {
-  const context = useContext(AppContext)
-  const { setIsCreateUIModalOpen, setIsSignInModalOpen, isWeb3AuthSuccess } =
-    context
+  const { 
+    isSignedIn,
+    setIsCreateUIModalOpen,
+    setIsSignInModalOpen 
+  } = useContext(AppContext);
 
   const handleCreateOpen = () => {
-    if (isWeb3AuthSuccess === true) {
+    if (isSignedIn) {
       setIsCreateUIModalOpen(true)
     } else {
       setIsSignInModalOpen(true)

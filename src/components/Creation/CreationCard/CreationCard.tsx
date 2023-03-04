@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // NEXTJS
 import Image from 'next/image'
@@ -6,6 +6,8 @@ import Link from 'next/link'
 
 // ROUTER
 // import { useRouter } from 'next/router'
+
+import axios from 'axios'
 
 // ANTD
 import { Popover, Typography } from 'antd'
@@ -34,11 +36,16 @@ import { CreationCardStyles } from './CreationCardStyles'
 // TYPES
 import Creation from '@/interfaces/Creation'
 
+
+import { useReactions } from '@/hooks/useReactions'
+
 export default function CreationCard({ creation }: { creation: Creation }) {
   // const router = useRouter()
 
   const { uri, timestamp, prompt, status, generator, width, height, address } =
-    creation
+    creation;
+
+  const {praises, burns, praised, burned } = useReactions(creation.key);
 
   const [isSaveModalActive, setIsSaveModalActive] = useState(false)
 
@@ -64,18 +71,29 @@ export default function CreationCard({ creation }: { creation: Creation }) {
   //   event ? setIsCreationModalOpen(false) : null
   // }
 
-  const handlePraise = (
+  const handlePraise = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    // console.log('handle PRAISE 🙌 !')
+    console.log("lets go 22")
+    const resss  = await axios.post('/api/react', {
+      creationId: creation.key,
+      reaction: "🙌"
+    });
+    console.log(resss)
   }
 
-  const handleBurn = (
+  const handleBurn = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    // console.log('handle BURN 🔥 !')
+    console.log("lets go")
+    const resss = await axios.post('/api/react', {
+      creationId: creation.key,
+      reaction: "🔥"
+    });
+
+    console.log(resss)
   }
 
   const handleRecreation = (
@@ -103,12 +121,12 @@ export default function CreationCard({ creation }: { creation: Creation }) {
           <div className="cr-action-left">
             <span className="cr-social praise">
               <button className="btn" onClick={handlePraise}>
-                🙌
+                🙌 {praises} - {praised?"yes":"no"}
               </button>
             </span>
             <span className="cr-social burn">
               <button className="btn" onClick={handleBurn}>
-                🔥
+                🔥 {burns}
               </button>
             </span>
           </div>
@@ -130,7 +148,8 @@ export default function CreationCard({ creation }: { creation: Creation }) {
           <div className="cr-content-main-wrapper">
             <div className="cr-content-main">
               <Text className="cr-date">{time_ago(timestamp)}</Text>
-              <Text className="cr-prompt-command">{generator}</Text>
+              {/* <Text className="cr-prompt-command">{generator}</Text> */}
+              <Text className="cr-prompt-command">{creation.key}</Text>
               <Text className="cr-prompt">{prompt}</Text>
 
               <div className="cr-metadata">

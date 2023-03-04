@@ -1,88 +1,66 @@
-import React, { useState, useContext } from 'react'
-import { Modal, Button } from 'antd'
+import React, { useState, useContext, useEffect } from 'react'
+import { Spin, Modal, Button, Progress } from 'antd'
 import { useTasks } from 'src/hooks/useTasks'
-// import axios from 'axios'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
+import { LoadingOutlined, CheckOutlined } from '@ant-design/icons';
+
+const loadingIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />;
+const doneIcon = <CheckOutlined style={{ fontSize: 24, color: "white" }} />;
+
 
 // TYPES
 import Task from '@/interfaces/Task'
 
 export default function PendingCreations() {
-  const context = useContext(AppContext)
-  // const { progress, setProgress } = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { tasks, mutate } = useTasks();
+  const { isConnected, isSignedIn, isCreateUIModalOpen } = useContext(AppContext);
 
-  const { tasks } = useTasks()
+  useEffect(() => {
+    mutate();
+  }, [isCreateUIModalOpen, mutate]);
 
-  const { isWeb3WalletConnected, isWeb3AuthSuccess, isCreateUIModalOpen } =
-    context
-
-  // const pollForResult = async (pollingInterval: number = 2000) => {
-  //   let response = await axios.post("/api/fetch", {taskId: []});
-  //   let task = response.data.task;
-
-  //   while (
-  //     task.status == "pending" ||
-  //     task.status == "starting" ||
-  //     task.status == "running"
-  //   ) {
-  //     await new Promise((r) => setTimeout(r, pollingInterval));
-  //     response = await axios.post("/api/fetch", {taskId: []});
-  //     task = response.data.task;
-  //     // setProgress(Math.floor(100*task.progress));
-  //   }
-
-  //   if (task.status == "failed") {
-  //     throw new Error(task.error.message);
-  //   } else if (!response.data.creation) {
-  //     throw new Error("No creation found");
-  //   };
-
-  //   return response.data.creation;
-  // };
+  // find if any of the tasks status is not done
+  const tasksRunning = tasks?.some((task: Task) => task.status !== 'completed');
 
   const handleComponent = () => {
-    if (isWeb3WalletConnected && isWeb3AuthSuccess && isCreateUIModalOpen) {
+    if (isConnected && isSignedIn) {
       return (
         <>
           <Modal
-            style={{ backgroundColor: 'white' }}
+            title="Creations status"
             open={isModalVisible}
             onOk={() => setIsModalVisible(false)}
             onCancel={() => setIsModalVisible(false)}
-            bodyStyle={{ maxWidth: '50%', maxHeight: '50%' }}
-            width="50%"
+            cancelButtonProps={{ style: { display: 'none' } }}
           >
             <div>
-              {tasks.map((task: Task) => {
+              {tasks && tasks.map((task: Task) => {
                 return (
-                  <>
-                    {task.status === 'pending' ||
-                    task.status === 'starting' ||
-                    task.status === 'running' ? (
-                      <div key={task._id}>
-                        <div>{task.taskId}</div>
-                        <div>{task.status}</div>
-                        <div>{task.progress}</div>
-                      </div>
-                    ) : null}
-                  </>
+                  <div key={task._id}>
+                    {task.taskId}
+                    <Progress percent={100*task.progress} />
+                  </div>
                 )
               })}
             </div>
           </Modal>
-
-          <Button onClick={() => setIsModalVisible(true)}>
-            Pending creations
-          </Button>
+          {tasks?.length > 0 && (
+            <Button 
+              shape="round" 
+              size="large" 
+              type="primary" 
+              onClick={() => setIsModalVisible(true)}
+            >
+              {tasksRunning ? <Spin indicator={loadingIcon}/> : doneIcon}
+            </Button>
+          )}
         </>
       )
-    } else {
-      return null
     }
   }
-
+//tip={`Pending creations ${tasks?.length}`} 
   return handleComponent()
 }

@@ -5,6 +5,7 @@ const HeaderWrapperStyles = styled.section`
   position: fixed;
   width: 100%;
   height: 60px;
+  padding-left: 10px;
   right: 0;
   z-index: 6;
   display: flex;
