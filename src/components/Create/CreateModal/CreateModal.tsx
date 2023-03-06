@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useContext } from 'react'
 
 // CONTEXT
@@ -10,12 +8,10 @@ import CreateUI from '@/components/Create/CreateUI/CreateUI'
 import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT'
 
 export default function CreateModal() {
-  const context = useContext(AppContext)
-  const { isWeb3WalletConnected, isWeb3AuthSuccess, isCreateUIModalOpen } =
-    context
+  const { isConnected, isSignedIn, isCreateUIModalOpen } = useContext(AppContext);
 
   const handleComponent = () => {
-    if (isWeb3WalletConnected && isWeb3AuthSuccess && isCreateUIModalOpen) {
+    if (isConnected && isSignedIn && isCreateUIModalOpen) {
       return <CreateUI />
     } else {
       return <CreateSignInJWT />

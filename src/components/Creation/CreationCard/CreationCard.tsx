@@ -7,6 +7,8 @@ import Link from 'next/link'
 // ROUTER
 // import { useRouter } from 'next/router'
 
+import axios from 'axios'
+
 // ANTD
 import { Popover, Typography, Button } from 'antd'
 const { Text } = Typography
@@ -34,11 +36,15 @@ import { CreationCardStyles } from './CreationCardStyles'
 // TYPES
 import Creation from '@/interfaces/Creation'
 
+import { useReactions } from '@/hooks/useReactions'
+
 export default function CreationCard({ creation }: { creation: Creation }) {
   // const router = useRouter()
 
-  const { uri, timestamp, prompt, status, generator, width, height, address } =
-    creation
+  const { uri, timestamp, prompt, status, width, height, address } = creation
+
+  // const {praises, burns, praised, burned } = useReactions(creation.key);
+  const { praises, burns } = useReactions(creation.key)
 
   const [isSaveModalActive, setIsSaveModalActive] = useState(false)
 
@@ -64,18 +70,24 @@ export default function CreationCard({ creation }: { creation: Creation }) {
   //   event ? setIsCreationModalOpen(false) : null
   // }
 
-  const handlePraise = (
+  const handlePraise = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    // console.log('handle PRAISE 🙌 !')
+    const resss = await axios.post('/api/react', {
+      creationId: creation.key,
+      reaction: '🙌',
+    })
   }
 
-  const handleBurn = (
+  const handleBurn = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    // console.log('handle BURN 🔥 !')
+    const resss = await axios.post('/api/react', {
+      creationId: creation.key,
+      reaction: '🔥',
+    })
   }
 
   const handleRecreation = (
@@ -107,12 +119,12 @@ export default function CreationCard({ creation }: { creation: Creation }) {
                 shape="circle"
                 onClick={() => handlePraise}
               >
-                🙌
+                🙌 {praises}
               </Button>
             </span>
             <span className="cr-social burn">
               <Button className="btn" shape="circle" onClick={() => handleBurn}>
-                🔥
+                🔥 {burns}
               </Button>
             </span>
           </div>
@@ -138,7 +150,8 @@ export default function CreationCard({ creation }: { creation: Creation }) {
           <div className="cr-content-main-wrapper">
             <div className="cr-content-main">
               <Text className="cr-date">{time_ago(timestamp)}</Text>
-              <Text className="cr-prompt-command">{generator}</Text>
+              {/* <Text className="cr-prompt-command">{generator}</Text> */}
+              <Text className="cr-prompt-command">{creation.key}</Text>
               <Text className="cr-prompt">{prompt}</Text>
 
               <div className="cr-metadata">

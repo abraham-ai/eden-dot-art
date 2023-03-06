@@ -1,20 +1,35 @@
-export interface AppContext {
-  authToken: string
-  setAuthToken: (authToken: string) => void
+import { GeneratorState } from '@/interfaces/GeneratorState'
+
+export interface AppContextType {
+  isConnected: boolean
+  setIsConnected: (isConnected: boolean) => void
+  isSignedIn: boolean
+  setIsSignedIn: (signedIn: boolean) => void
+
   userId: string
   setUserId: (userId: string) => void
-  isWeb3AuthSuccess: boolean
-  setIsWeb3AuthSuccess: (isWeb3AuthSuccess: boolean) => void
+  username: string
+  setUsername: (username: string) => void
+  userAddress: string
+  setUserAddress: (userAddress: string) => void
+
+  lastLoadTime: Date
+  setLastLoadTime: (lastLoadTime: Date) => void
+
   isCreateUIModalOpen: boolean
   setIsCreateUIModalOpen: (isCreateUIModalOpen: boolean) => void
   isCreationModalOpen: boolean
   setIsCreationModalOpen: (isCreationModalOpen: boolean) => void
   isSignInModalOpen: boolean
   setIsSignInModalOpen: (isSignInModalOpen: boolean) => void
-  isWeb3WalletConnected: boolean
-  setIsWeb3WalletConnected: (isWeb3WalletConnected: boolean) => void
+
   isLightTheme: boolean
   setIsLightTheme: (isLightTheme: boolean) => void
-  // isGenerating: boolean
-  // setGenerating: (isGenerating: boolean) => void
+
+  generators: Record<string, GeneratorState>
+  setGenerators: (
+    updater: (
+      prevGenerators: Record<string, GeneratorState>,
+    ) => Record<string, GeneratorState>,
+  ) => void
 }

@@ -9,11 +9,11 @@ import AppContext from '@/context/AppContext/AppContext'
 import { useSignMessage, useAccount } from 'wagmi'
 
 // COMPONENTS
-import Auth from '@/components/Auth/Auth'
+import EthereumAuth from '@/components/Auth/EthereumAuth'
 
 // ANTD
 import { Typography, Modal } from 'antd'
-const { Title, Text } = Typography
+const { Title } = Typography
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
@@ -27,13 +27,7 @@ import { CreateSignInJWTStyles } from './CreateSignInJWTStyles'
 export default function CreateSignInJWT() {
   const { address } = useAccount()
 
-  const context = useContext(AppContext)
-  const {
-    isSignInModalOpen,
-    setIsSignInModalOpen,
-    isWeb3AuthSuccess,
-    authToken,
-  } = context
+  const { isSignInModalOpen, setIsSignInModalOpen } = useContext(AppContext)
 
   const handleCancel = () => {
     setIsSignInModalOpen(false)
@@ -45,7 +39,7 @@ export default function CreateSignInJWT() {
 
   const { data, isSuccess } = useSignMessage({
     message: appMessage,
-  }) // isLoading, isError, signMessage
+  })
 
   return (
     <Modal
@@ -67,36 +61,22 @@ export default function CreateSignInJWT() {
     >
       <CreateSignInJWTStyles>
         <div className="sign-in-modal-inner-wrapper">
-          <Title level={2} className="sign-in-header-text">
-            Welcome to Eden
-          </Title>
-          <AppLogo logo="eden" size="x-large" />
-
-          <Text className="sign-in-message">
-            Sign the message in your wallet to continue
-          </Text>
+          <AppLogo logo="eden" size="large" />
 
           <Title className="sign-in-message-cntd" level={4}>
             {
-              'Eden uses this signature to verify that you’re the owner of this Ethereum address.'
+              'Eden uses a signature from your wallet to verify that you’re the owner of this Ethereum address.'
             }
           </Title>
 
           <div>
-            <Auth onModalCancel={handleCancel} />
+            <EthereumAuth onModalCancel={handleCancel} />
           </div>
 
           {isSuccess && (
             <div className="sign-in-signature-wrapper">
               <p className="sign-in-signature">Signature:</p>
               <p className="sign-in-signature">{data}</p>
-            </div>
-          )}
-
-          {isWeb3AuthSuccess && (
-            <div className="sign-in-auth-token-wrapper">
-              <Text className="sign-in-auth-token-header">Auth Token:</Text>
-              <Text className="sign-in-auth-token">{authToken}</Text>
             </div>
           )}
         </div>

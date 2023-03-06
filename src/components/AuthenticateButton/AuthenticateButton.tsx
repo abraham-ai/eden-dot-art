@@ -8,8 +8,7 @@ import CreateSignInJWT from '@/components/Create/CreateSignInJWT/CreateSignInJWT
 import AppContext from '@/context/AppContext/AppContext'
 
 export default function AuthenticateButton() {
-  const context = useContext(AppContext)
-  const { isWeb3AuthSuccess } = context
+  const { isConnected } = useContext(AppContext)
 
-  return isWeb3AuthSuccess ? <CreateUI /> : <CreateSignInJWT />
+  return isConnected ? <CreateUI /> : <CreateSignInJWT />
 }

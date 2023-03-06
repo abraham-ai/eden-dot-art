@@ -1,16 +1,16 @@
 'use client'
 
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 
 // FETCH
-import axios from 'axios'
+// import axios from 'axios'
 
 // WEB3
 import { useAccount } from 'wagmi' // useDisconnect
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
+// import AppContext from '@/context/AppContext/AppContext'
 
 // LIBS
 // import Blockies from 'react-blockies'
@@ -42,22 +42,22 @@ export const SettingsButton = () => {
   const [open, setOpen] = useState(false)
 
   // HOOKS
-  const { address = '', isConnected } = useAccount()
-  // const { disconnect } = useDisconnect()
+  const { address } = useAccount()
+  // const { disconnect } = useDisconnect();
   const walletAddress = address
 
   // CONTEXT
-  const context = useContext(AppContext)
-  const {
-    authToken,
-    isWeb3WalletConnected,
-    isWeb3AuthSuccess,
-    setAuthToken,
-    setIsWeb3WalletConnected,
-    setIsWeb3AuthSuccess,
-    userId,
-    setUserId,
-  } = context
+  // const context = useContext(AppContext)
+  // const {
+  //   authToken,
+  //   isWeb3WalletConnected,
+  //   isWeb3AuthSuccess,
+  //   setAuthToken,
+  //   setIsWeb3WalletConnected,
+  //   setIsWeb3AuthSuccess,
+  //   userId,
+  //   setUserId,
+  // } = context;
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen)
@@ -78,42 +78,42 @@ export const SettingsButton = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
-  const checkAuthToken = useCallback(async () => {
-    // console.log('CHECK AUTH TOKEN - USE CALLBACK')
-    const response = await axios.post('/api/user', {})
+  // const checkAuthToken = useCallback(async () => {
+  //   // console.log('CHECK AUTH TOKEN - USE CALLBACK')
+  //   const response = await axios.post('/api/user', {})
 
-    if (response.data.message === 'Session Cookie Found') {
-      const { token, userId } = response.data
+  //   if (response.data.message === 'Session Cookie Found') {
+  //     const { token, userId } = response.data
 
-      setIsWeb3AuthSuccess(true)
-      setAuthToken(token)
-      setUserId(userId)
-      // console.log({ userId, token })
-    }
-  }, [setAuthToken, setUserId, setIsWeb3AuthSuccess])
+  //     setIsWeb3AuthSuccess(true)
+  //     setAuthToken(token)
+  //     setUserId(userId)
+  //     // console.log({ userId, token })
+  //   }
+  // }, [setAuthToken, setUserId, setIsWeb3AuthSuccess])
 
-  useEffect(() => {
-    if (isWeb3WalletConnected === false && isConnected === true) {
-      setIsWeb3WalletConnected(isConnected)
-    } else if (typeof isConnected === 'undefined' || isConnected === false) {
-      setIsWeb3WalletConnected(false)
-      setIsWeb3AuthSuccess(false)
-      setUserId('')
-      setAuthToken('')
-    } else if (isWeb3WalletConnected === true && isWeb3AuthSuccess === false) {
-      checkAuthToken()
-    }
-  }, [
-    isConnected,
-    setAuthToken,
-    userId,
-    setUserId,
-    isWeb3WalletConnected,
-    setIsWeb3WalletConnected,
-    isWeb3AuthSuccess,
-    setIsWeb3AuthSuccess,
-    checkAuthToken,
-  ])
+  // useEffect(() => {
+  //   if (isWeb3WalletConnected === false && isConnected === true) {
+  //     setIsWeb3WalletConnected(isConnected)
+  //   } else if (typeof isConnected === 'undefined' || isConnected === false) {
+  //     setIsWeb3WalletConnected(false)
+  //     setIsWeb3AuthSuccess(false)
+  //     setUserId('')
+  //     setAuthToken('')
+  //   } else if (isWeb3WalletConnected === true && isWeb3AuthSuccess === false) {
+  //     checkAuthToken()
+  //   }
+  // }, [
+  //   isConnected,
+  //   setAuthToken,
+  //   userId,
+  //   setUserId,
+  //   isWeb3WalletConnected,
+  //   setIsWeb3WalletConnected,
+  //   isWeb3AuthSuccess,
+  //   setIsWeb3AuthSuccess,
+  //   checkAuthToken,
+  // ])
 
   return (
     <SettingsButtonStyles>
@@ -149,35 +149,16 @@ export const SettingsButton = () => {
               })}
             >
               {(() => {
-                if (
-                  !isWeb3WalletConnected &&
-                  !connected &&
-                  !authToken &&
-                  !isWeb3AuthSuccess
-                ) {
+                if (!connected) {
                   return (
                     <Button
                       className="connect-button"
                       onClick={openConnectModal}
                     >
-                      {/* { width < 930 ? 'Connect' : 'Connect Wallet' } */}
                       <Text style={{ color: 'white' }}>Connect Wallet</Text>
                     </Button>
                   )
                 }
-
-                /*
-                if (connected && chain.unsupported) {
-                  return (
-                    <Button
-                      className="connect-button"
-                      onClick={openChainModal}
-                    >
-                      <Text style={{ color: 'white' }}>Wrong network</Text>
-                    </Button>
-                  )
-                }
-                */
 
                 return (
                   <Popover

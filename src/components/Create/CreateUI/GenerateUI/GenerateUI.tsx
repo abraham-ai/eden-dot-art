@@ -1,29 +1,28 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useCallback, useContext, useMemo } from 'react'
+import { AxiosError } from 'axios'
 
 // ANTD
-import { Button, Form, message } from 'antd'
-import type { FormInstance } from 'antd/lib/form/Form'
-const { Item } = Form
-
-// FETCH
-// import axios, { AxiosError } from 'axios'
+import { Button, Form, message } from 'antd';
+import type { FormInstance } from 'antd/lib/form/Form';
+const { Item } = Form;
 
 // HOOKS
-import useGeneratorInfo from '@/hooks/useGeneratorInfo'
-import useGenerateUI from '@/hooks/useGenerateUI'
+import useGeneratorInfo from '@/hooks/useGeneratorInfo';
+import useGenerateUI from '@/hooks/useGenerateUI';
+import AppContext from '@/context/AppContext/AppContext';
 
 // EDEN COMPONENTS
-import OptionParameter from '@/components/Parameters/OptionParameter/OptionParameter'
-import UploadParameter from '@/components/Parameters/UploadParameter/UploadParameter'
-import StringParameter from '@/components/Parameters/StringParameter/StringParameter'
-import SliderParameter from '@/components/Parameters/SliderParameter/SliderParameter'
+import OptionParameter from '@/components/Parameters/OptionParameter/OptionParameter';
+import UploadParameter from '@/components/Parameters/UploadParameter/UploadParameter';
+import StringParameter from '@/components/Parameters/StringParameter/StringParameter';
+import SliderParameter from '@/components/Parameters/SliderParameter/SliderParameter';
 
-// ICONS
+
 import {
   RightCircleOutlined,
   UpCircleOutlined,
   DownCircleOutlined,
-} from '@ant-design/icons'
+} from '@ant-design/icons';
 
 // TYPES
 import Config from '@/interfaces/Config'
@@ -31,13 +30,12 @@ import { ParameterType } from '@/interfaces/ParameterType'
 type ParameterList = ParameterType[]
 
 const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
-  const [form] = Form.useForm()
-
-  const [values, setValues] = useState({})
-  const [generating, setGenerating] = useState<boolean>(false)
-  const [showOptional, setShowOptional] = useState<boolean>(false)
-  const { versionId, requiredParameters, optionalParameters } =
-    useGeneratorInfo(generatorName)
+  const [form] = Form.useForm();
+  const [values, setValues] = useState({});
+  const [generating, setGenerating] = useState<boolean>(false);
+  const [showOptional, setShowOptional] = useState<boolean>(false);
+  const { setIsCreateUIModalOpen } = useContext(AppContext);
+  const { requiredParameters, optionalParameters } = useGeneratorInfo(generatorName);
 
   // const allParameters = useMemo(() => {
   //   const params: ParameterList = []
@@ -64,7 +62,6 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   )
 
   const renderFormFields = (parameters: ParameterType[]) => {
-    // console.log('FUNCTION: RENDER FORM FIELDS')
     return Object.keys(parameters).map(key => {
       return (
         <div
@@ -135,7 +132,6 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
   const validateConfig = useCallback(
     (values: Config) => {
-      // console.log('USE-CALLBACK: VALIDATE CONFIG')
       for (const v in values) {
         if (!values[v]) {
           continue
@@ -166,23 +162,17 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   )
 
   const handleFinish = (formValues: FormInstance) => {
-    // console.log('FUNCTION: HANDLE FINISH')
-    // console.log({ formValues })
-    setValues(formValues)
+    setValues(formValues);
   }
 
   useEffect(() => {
-    // console.log('USE EFFECT')
     const validateCreation = async values => {
-      // console.log('USE EFFECT: VALIDATE CREATION')
-      setGenerating(true)
-
+      setGenerating(true);
       if (!validateConfig(values)) {
-        setGenerating(false)
+        setGenerating(false);
         return
       }
     }
-
     if (Object.keys(values).length > 0) {
       validateCreation(values)
     }
@@ -190,14 +180,18 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
 
   const handleGeneration = useCallback(
     result => {
-      // console.log('HANDLING SUBMISSION')
-      // console.log({ result })
+      console.log("received", result);
       if (typeof result !== 'undefined') {
+        console.log("not undefined")
         if (result.error) {
+          console.log("ERROR", result.error)
           // Handle Error here
         } else {
           // Handle Success here
-          form.resetFields()
+          console.log("success")
+          form.resetFields();
+          setGenerating(false); 
+          setIsCreateUIModalOpen(false);         
         }
       }
     },
@@ -205,55 +199,45 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
   )
 
   const onSubmit = useCallback(async () => {
-    let validValues
-
+    let validValues;
     try {
-      validValues = await form.validateFields()
-      // console.log('USE CALLBACK: ON SUBMIT')
-      setValues(validValues)
+      validValues = await form.validateFields();
+      setValues(validValues);
     } catch (errorInfo) {
-      return
+      return;
     }
 
-    // console.log({ validValues })
-
-    const stringValues = { ...validValues }
-
+    const stringValues = { ...validValues };
     for (const key in stringValues) {
       if (typeof stringValues[key] === 'bigint') {
         stringValues[key] = stringValues[key].toString()
       }
     }
-    // console.log({ stringValues })
 
-    const config = getConfig(stringValues)
-
-    const result = await useGenerateUI(generatorName, values, config)
-    handleGeneration(result)
+    const config = getConfig(stringValues);
+    console.log("run", config);
+    
+    try {
+      const response = await useGenerateUI(generatorName, values, config);
+      const taskId = response.data.taskId;
+      form.resetFields();
+      setGenerating(false); 
+      setIsCreateUIModalOpen(false);         
+      message.success(`Task ${taskId} started.`);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        if (error.message) {
+          message.error(`Error: ${error.message}`)
+        } else {
+          message.error(`Error: ${error.response.data.error}`)
+        }
+      }
+      setGenerating(false);
+    }
   }, [generatorName, form, handleGeneration, getConfig, values])
-
-  // console.log('PARAMS BEFORE RETURN')
-  // console.log({ allParameters })
-  // console.log({ versionId, requiredParameters, optionalParameters })
-  // console.log({ values })
 
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: '#eee',
-          padding: 10,
-          borderRadius: 10,
-          marginBottom: 10,
-          width: '90%',
-        }}
-      >
-        <h2>/{generatorName}</h2>
-        <h3>
-          version: <span style={{ color: 'gray' }}>{versionId}</span>
-        </h3>
-      </div>
-
       <div style={{ padding: 10 }}>
         <Form form={form} name="generate" onFinish={handleFinish}>
           {renderFormFields(requiredParameters)}

@@ -1,10 +1,5 @@
-// TYPES
 import { NextApiRequest, NextApiResponse } from 'next/types'
-
-// SESSION
 import { withSessionRoute } from '@/util/withSession'
-
-// LIBS
 import { eden } from '@/util/eden'
 
 interface ApiRequest extends NextApiRequest {
@@ -19,24 +14,25 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { message, signature, userAddress } = req.body
 
   try {
-    const resp = await eden.loginEth(message, signature, userAddress)
+    const result = await eden.loginEth(message, signature, userAddress)
 
-    // console.log(resp)
+    if (result.error) {
+      return res.status(500).json({ error: result.error })
+    }
 
-    req.session.token = resp.token
-    req.session.userId = userAddress
-
-    const token = resp.token
+    req.session.token = result.token
+    req.session.userAddress = userAddress
+    req.session.userId = result.userId
+    req.session.username = result.username
 
     await req.session.save()
 
-    res.send({
-      message: 'Successfully authenticated key pair',
-      token,
-    })
+    eden.setAuthToken(result.token)
+
+    res.send({ token: result.token, userId: userAddress })
   } catch (error: any) {
     console.error(error)
-    res.status(500).json({ error: 'Error authenticating key pair' })
+    res.status(500).json({ error: 'Error authenticating signature' })
   }
 }
 

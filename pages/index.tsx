@@ -29,9 +29,8 @@ export default function IndexPage() {
   return (
     <OverviewWrapperStyles id="overview-wrapper">
       <Head>
-        <title>Eden.Art</title>
+        <title>Eden</title>
       </Head>
-
       <EdenArtFrontPage />
     </OverviewWrapperStyles>
   )

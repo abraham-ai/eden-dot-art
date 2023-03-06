@@ -10,8 +10,10 @@ import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
 
 declare module 'iron-session' {
   interface IronSessionData {
-    token?: string
-    userId?: string
+    token?: string;
+    userAddress?: string;
+    userId?: string;
+    username?: string;
   }
 }
 

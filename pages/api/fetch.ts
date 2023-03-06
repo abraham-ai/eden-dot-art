@@ -1,40 +1,51 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { withSessionRoute } from '@/util/withSession'
-import { eden } from '../../src/util/eden'
+import { eden } from '@/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {
-    taskId: string
-  }
+    earliestTime: number,
+    status: string[],
+    limit: number,
+  };
 }
 
-const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  // const { taskId } = req.body;
-  const authToken = req.session.token
 
-  // console.log('fetch.js — req.session', req.session)
-  // console.log('fetch.js — authToken', authToken)
+const handler = async (req: ApiRequest, res: NextApiResponse) => {
+  const { earliestTime, limit, status } = req.body;
+  const authToken = req.session.token;
 
   if (!authToken) {
-    return res.status(401).json({ error: 'Not authenticated' })
+    return res.status(401).json({ error: "Not authenticated" });
   }
 
   try {
-    eden.setAuthToken(authToken)
-    const result = await eden.getTasks(['running', 'pending'])
-    if (result.error) {
-      // console.log("result.error found")
-      // console.log(result.error)
-      return res.status(500).json({ error: result.error })
+    const filter = {
+      earliestTime: earliestTime,
+      status: status,
+      limit: limit,
     }
 
-    return res.status(200).json(result)
-  } catch (error: any) {
-    // console.log(error)
-    // console.log("FETCH CAUGHT AN ERORR")
-    // console.log(error)
-    return res.status(500).json({ error: error.response.data })
-  }
-}
+    const result = await eden.getTasks(filter);
+    console.log(result);
 
-export default withSessionRoute(handler)
+    if (result.error) {
+      console.log(result.error)
+      return res.status(500).json({ error: result.error });
+    } 
+    else {
+      // result.tasks.forEach(async (task) => {
+      //   if (task && task.creation) {
+      //     const creation = await eden.getCreation(result.task.creation);
+      //     Object.assign(task, { creation: creation });  
+      //   };
+      // });
+      return res.status(200).json(result);
+    }
+  } catch (error: any) {
+    console.log(error)
+    return res.status(500).json(error);
+  }
+};
+
+export default withSessionRoute(handler);

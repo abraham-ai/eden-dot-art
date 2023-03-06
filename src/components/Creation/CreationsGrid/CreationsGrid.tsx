@@ -48,13 +48,6 @@ export default function CreationsGrid() {
 
       const response = await axios.post('/api/creations', filter)
 
-      //const { data } = response
-      // const { session } = data
-      // const { token } = session
-      // const { token: respToken } = token
-
-      // console.log('Creations Grid Token: ', { authToken, token })
-
       const moreCreations =
         response.data.creations &&
         response.data.creations.map((creation: CreationFullType) => {

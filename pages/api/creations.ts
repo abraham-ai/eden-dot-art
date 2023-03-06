@@ -1,16 +1,10 @@
-// UTILS
+import { NextApiRequest, NextApiResponse } from 'next/types'
 import { withSessionRoute } from '@/util/withSession'
 import { eden } from '@/util/eden'
 
-// FETCH
-import { AxiosError } from 'axios'
-
-// TYPES
-import { NextApiRequest, NextApiResponse } from 'next/types'
-
 interface ApiRequest extends NextApiRequest {
   body: {
-    creatorId: string
+    username: string
     generators: string[]
     earliestTime: number
     latestTime: number
@@ -19,37 +13,29 @@ interface ApiRequest extends NextApiRequest {
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { creatorId, generators, earliestTime, latestTime, limit } = req.body
-
-  const { session } = req
-
-  // console.log('CREATION ROUTE')
-  // console.log(session)
-
-  const { token } = session
+  const { 
+    username, 
+    generators, 
+    earliestTime, 
+    latestTime, 
+    limit 
+  } = req.body;
 
   try {
-    if (token) {
-      eden.setAuthToken(token)
-    }
-
     const filter = {}
-    Object.assign(filter, creatorId ? { creatorId: creatorId } : {})
+    Object.assign(filter, username ? { username: username } : {})
     Object.assign(filter, generators ? { generators: generators } : {})
     Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {})
     Object.assign(filter, latestTime ? { latestTime: latestTime } : {})
     Object.assign(filter, limit ? { limit: limit } : {})
-
     const creations = await eden.getCreations(filter)
 
-    return res.status(200).json({ creations: creations, session })
-  } catch (error: unknown) {
-    if (error instanceof AxiosError && error.response?.status === 401) {
-      // Inside this block, err is known to be a AxiosError
+    return res.status(200).json({ creations: creations })
+  } catch (error: any) {
+    if (error.response.data == 'jwt expired') {
       return res.status(401).json({ error: 'Authentication expired' })
-    } else if (error instanceof AxiosError && error.response?.status === 500) {
-      return res.status(500).json({ error: error.response.data })
     }
+    return res.status(500).json({ error: error.response.data })
   }
 }
 

@@ -1,3 +1,3 @@
-import Auth from '@/components/Auth/Auth'
+import EthereumAuth from '@/components/Auth/EthereumAuth'
 
-export default Auth
+export default EthereumAuth

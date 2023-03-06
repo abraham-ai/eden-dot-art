@@ -41,20 +41,9 @@ const useGeneratorInfo = (generatorName: string): GeneratorInfo => {
     (parameter: { optional: boolean }) => !parameter.optional,
   )
 
-  const optionalParameters = data?.generatorVersion.parameters
-    .filter((parameter: { optional: boolean }) => parameter.optional)
-    .map(parameter => ({
-      id: parameter.name,
-      name: parameter.name,
-      value: undefined, // set default value as undefined
-      allowedValues: [], // set default allowed values as an empty array
-      selectedValues: [], // set default allowed values as an empty array
-      optional: true,
-      selectedValue: undefined, // set default selected value as undefined
-      label: parameter.label, // add label property
-      isRequired: false, // add isRequired property
-      description: parameter.description, // add description property
-    }))
+  const optionalParameters = data?.generatorVersion.parameters.filter(
+    (parameter: { optional: boolean }) => parameter.optional,
+  )
 
   return {
     versionId: data?.generatorVersion.versionId,

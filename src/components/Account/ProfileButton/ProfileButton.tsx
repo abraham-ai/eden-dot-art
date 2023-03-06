@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useCallback, useEffect } from 'react'
+import React from 'react'
 
 // NEXTJS
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
+// import AppContext from '@/context/AppContext/AppContext'
 
 // LIBS
 import Blockies from 'react-blockies'
@@ -19,7 +19,7 @@ import Blockies from 'react-blockies'
 import ProfileButtonStyles from '@/components/Account/ProfileButton/ProfileButtonStyles'
 
 // FETCH
-import axios from 'axios'
+// import axios from 'axios'
 
 // LIBS
 // import Blockies from 'react-blockies'
@@ -33,21 +33,21 @@ export const ProfileButton = () => {
   // const [open, setOpen] = useState(false)
 
   // HOOKS
-  const { address = '', isConnected } = useAccount()
+  const { address } = useAccount()
   const walletAddress = address
 
   // CONTEXT
-  const context = useContext(AppContext)
-  const {
-    authToken,
-    isWeb3WalletConnected,
-    isWeb3AuthSuccess,
-    setAuthToken,
-    setIsWeb3WalletConnected,
-    setIsWeb3AuthSuccess,
-    userId,
-    setUserId,
-  } = context
+  // const context = useContext(AppContext)
+  // const {
+  //   // authToken,
+  //   // isWeb3WalletConnected,
+  //   // isWeb3AuthSuccess,
+  //   // setAuthToken,
+  //   // setIsWeb3WalletConnected,
+  //   // setIsWeb3AuthSuccess,
+  //   userId,
+  //   setUserId,
+  // } = context
 
   // const handleOpenChange = (newOpen: boolean) => {
   //   setOpen(newOpen)
@@ -68,42 +68,42 @@ export const ProfileButton = () => {
     ? (displayAddress += '...' + walletAddress.slice(-4))
     : walletAddress
 
-  const checkAuthToken = useCallback(async () => {
-    // console.log('CHECK AUTH TOKEN - USE CALLBACK')
-    const response = await axios.post('/api/user', {})
+  // const checkAuthToken = useCallback(async () => {
+  //   // console.log('CHECK AUTH TOKEN - USE CALLBACK')
+  //   const response = await axios.post('/api/user', {})
 
-    if (response.data.message === 'Session Cookie Found') {
-      const { token, userId } = response.data
+  //   if (response.data.message === 'Session Cookie Found') {
+  //     const { token, userId } = response.data
 
-      setIsWeb3AuthSuccess(true)
-      setAuthToken(token)
-      setUserId(userId)
-      // console.log({ userId, token })
-    }
-  }, [setAuthToken, setUserId, setIsWeb3AuthSuccess])
+  //     setIsWeb3AuthSuccess(true)
+  //     setAuthToken(token)
+  //     setUserId(userId)
+  //     // console.log({ userId, token })
+  //   }
+  // }, [setAuthToken, setUserId, setIsWeb3AuthSuccess])
 
-  useEffect(() => {
-    if (isWeb3WalletConnected === false && isConnected === true) {
-      setIsWeb3WalletConnected(isConnected)
-    } else if (typeof isConnected === 'undefined' || isConnected === false) {
-      setIsWeb3WalletConnected(false)
-      setIsWeb3AuthSuccess(false)
-      setUserId('')
-      setAuthToken('')
-    } else if (isWeb3WalletConnected === true && isWeb3AuthSuccess === false) {
-      checkAuthToken()
-    }
-  }, [
-    isConnected,
-    setAuthToken,
-    userId,
-    setUserId,
-    isWeb3WalletConnected,
-    setIsWeb3WalletConnected,
-    isWeb3AuthSuccess,
-    setIsWeb3AuthSuccess,
-    checkAuthToken,
-  ])
+  // useEffect(() => {
+  //   if (isWeb3WalletConnected === false && isConnected === true) {
+  //     setIsWeb3WalletConnected(isConnected)
+  //   } else if (typeof isConnected === 'undefined' || isConnected === false) {
+  //     setIsWeb3WalletConnected(false)
+  //     setIsWeb3AuthSuccess(false)
+  //     setUserId('')
+  //     setAuthToken('')
+  //   } else if (isWeb3WalletConnected === true && isWeb3AuthSuccess === false) {
+  //     checkAuthToken()
+  //   }
+  // }, [
+  //   isConnected,
+  //   setAuthToken,
+  //   userId,
+  //   setUserId,
+  //   isWeb3WalletConnected,
+  //   setIsWeb3WalletConnected,
+  //   isWeb3AuthSuccess,
+  //   setIsWeb3AuthSuccess,
+  //   checkAuthToken,
+  // ])
 
   return (
     <ProfileButtonStyles>
@@ -139,12 +139,7 @@ export const ProfileButton = () => {
               })}
             >
               {(() => {
-                if (
-                  !isWeb3WalletConnected &&
-                  !connected &&
-                  !authToken &&
-                  !isWeb3AuthSuccess
-                ) {
+                if (!connected) {
                   return (
                     <Button
                       className="connect-button"

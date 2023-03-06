@@ -1,28 +1,29 @@
+import React from 'react'
 import type { ReactElement } from 'react'
 
 // NEXT
 import Head from 'next/head'
 
-// LAYOUT
+// NAV
 import BaseLayout from 'src/layouts/BaseLayout'
 
 // EDEN COMPONENTS
-import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
+// import CreationsGrid from '@/components/Creation/CreationsGrid/CreationsGrid'
 
-export default function CollectionsPage() {
+// STYLES
+import GardenStyles from '../garden/GardenStyles'
+
+export default function GardenPage() {
   return (
     <>
       <Head>
-        <title>Collections</title>
+        <title>Garden</title>
       </Head>
-
-      <section>
-        <CreationsGrid />
-      </section>
+      <GardenStyles id="garden">collections TBD</GardenStyles>
     </>
   )
 }
 
-CollectionsPage.getLayout = function getLayout(page: ReactElement) {
+GardenPage.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>
 }

@@ -47,14 +47,14 @@ const CustomAvatar: AvatarComponent = ({ address }) => {
 }
 
 export default function Header() {
-  const { isConnected } = useAccount()
+  const { isConnected: accountIsConnected } = useAccount()
 
   const context = useContext(AppContext)
-  const { setIsWeb3WalletConnected, isWeb3WalletConnected } = context
+  const { isConnected, isSignedIn, setIsSignedIn } = context
 
   useEffect(() => {
-    setIsWeb3WalletConnected(isConnected)
-  }, [isConnected, setIsWeb3WalletConnected])
+    setIsSignedIn(accountIsConnected)
+  }, [setIsSignedIn, accountIsConnected, isSignedIn])
 
   return (
     <HeaderStyles id="header-wrapper">
@@ -73,7 +73,7 @@ export default function Header() {
 
             <div className="nav-right-wrapper">
               <SettingsButton />
-              {isWeb3WalletConnected ? <CreateButton /> : null}
+              {isConnected ? <CreateButton /> : null}
             </div>
           </section>
         </RainbowKitProvider>

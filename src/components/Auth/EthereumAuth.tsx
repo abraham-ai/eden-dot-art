@@ -1,16 +1,14 @@
-'use client'
-
 import { useState, useContext } from 'react'
 
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
 
 // ANTD
-import { Row, Typography } from 'antd'
-const { Text } = Typography
+import { Row, Button } from 'antd';
 
 // FETCH
 import axios from 'axios'
+// import { eden } from '@/util/eden';
 
 // WEB3 & WALLET
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
@@ -39,17 +37,15 @@ const EthereumAuthStyles = styled.section`
 
 const EthereumAuth = ({ onModalCancel }) => {
   const { chain } = useNetwork()
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAccount();
   const [ethAuthenticating, setEthAuthenticating] = useState(false)
   const [ethMessage, setEthMessage] = useState<string | null>(null)
 
-  const context = useContext(AppContext)
   const {
-    setAuthToken,
-    setIsWeb3AuthSuccess,
+    setIsSignedIn,
     setIsSignInModalOpen,
     setIsCreateUIModalOpen,
-  } = context
+  } = useContext(AppContext);
 
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
@@ -59,20 +55,13 @@ const EthereumAuth = ({ onModalCancel }) => {
           signature: data,
           userAddress: address,
         })
-
-        // console.log('Ethereum Auth: ', resp)
-
-        const { token } = resp.data
-        const { token: authToken } = token
-
-        setAuthToken(authToken)
-        setIsWeb3AuthSuccess(true)
-        setIsSignInModalOpen(false)
-        setIsCreateUIModalOpen(true)
-
-        setEthMessage(
-          'Successfully authenticated as ' + address + ', Token' + token.token,
-        )
+        const { token } = resp.data;
+        if (token) {
+          setIsSignedIn(true);
+          setIsSignInModalOpen(false);
+          setIsCreateUIModalOpen(true);
+          setEthMessage(`Successfully authenticated as ${address}`);
+        }
       } catch (error: any) {
         setEthMessage('Error authenticating')
       }
@@ -85,7 +74,7 @@ const EthereumAuth = ({ onModalCancel }) => {
   }
 
   const handleSiwe = async () => {
-    if (!isConnected) return
+    if (!isConnected) return;
     setEthAuthenticating(true)
     try {
       const message = new SiweMessage({
@@ -96,7 +85,7 @@ const EthereumAuth = ({ onModalCancel }) => {
         version: '1',
         chainId: chain?.id,
         nonce: Date.now().toString(),
-      })
+      });
       const preparedMessage = message.prepareMessage()
       await signMessage({
         message: preparedMessage,
@@ -109,20 +98,17 @@ const EthereumAuth = ({ onModalCancel }) => {
 
   return (
     <EthereumAuthStyles>
-      <h1>Sign in with Ethereum</h1>
 
       <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <button
+        <Button
           className="auth-btn sign-in"
           onClick={handleSiwe}
           // disabled={ethAuthenticating}
           // loading={ethAuthenticating}
         >
-          <Text strong style={{ fontSize: '1rem', color: 'white' }}>
-            Sign In
-          </Text>
-        </button>
-        <button
+          Sign In
+        </Button>
+        <Button
           className={
             ethAuthenticating
               ? 'auth-btn authenticating cancel'
@@ -131,10 +117,8 @@ const EthereumAuth = ({ onModalCancel }) => {
           onClick={handleCancelModal}
           // disabled={ethAuthenticating}
         >
-          <Text strong style={{ fontSize: '1rem' }}>
-            Cancel
-          </Text>
-        </button>
+          Cancel
+        </Button>
       </Row>
       {ethMessage && <p>{ethMessage}</p>}
     </EthereumAuthStyles>

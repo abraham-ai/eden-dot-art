@@ -19,11 +19,8 @@ import GenerateUI from '@/components/Create/CreateUI/GenerateUI/GenerateUI'
 import CreateUIStyles from './CreateUIStyles'
 
 export default function CreateUI() {
-  const context = useContext(AppContext)
-  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = context;
-
-  const { address } = useAccount()
-
+  const { isCreateUIModalOpen, setIsCreateUIModalOpen } = useContext(AppContext);
+  const { address } = useAccount();
 
   const tabItems = [
     {
@@ -48,48 +45,48 @@ export default function CreateUI() {
     },
   ]
   
-  return isCreateUIModalOpen ? (
+  return isCreateUIModalOpen && (
     <CreateUIStyles>
       <Modal
         className="create-modal"
         open={isCreateUIModalOpen}
         onCancel={() => setIsCreateUIModalOpen(false)}
         bodyStyle={{ maxWidth: '90%', maxHeight: '90%' }}
-        width="90%"
+        width="60%"
+        footer={null}
+        closable={false}
       >
         <CreateUIStyles>
-          <>
-            <div className="close-icon-wrapper">
-              <Button
-                className="close-icon"
-                onClick={() => setIsCreateUIModalOpen(false)}
-              />
-            </div>
+          <div className="close-icon-wrapper">
+            <Button
+              className="close-icon"
+              onClick={() => setIsCreateUIModalOpen(false)}
+            />
+          </div>
 
-            <div className="create-modal-form-wrapper">
-              <div key="form-outer-wrapper" className="form-wrapper">
-                <div className="form-wrapper">
-                  <div className="form-inner-wrapper">
-                    
-                    <div className="account-wrapper">
-                      <Blockies seed={address} scale={6} />
-                    </div>
-
-                    <div className="form-tabs-wrapper">
-                      <Tabs
-                        defaultActiveKey="tab1"
-                        items={tabItems}
-                        style={{ height: '100%', paddingLeft: 30, paddingTop: 20 }}
-                      />
-                    </div>
-
+          <div className="create-modal-form-wrapper">
+            {/* <div key="form-outer-wrapper" className="form-wrapper"> */}
+              <div className="form-wrapper">
+                <div className="form-inner-wrapper">
+                  
+                  <div className="account-wrapper">
+                    <Blockies seed={address} scale={6} />
                   </div>
+
+                  <div className="form-tabs-wrapper">
+                    <Tabs
+                      defaultActiveKey="tab1"
+                      items={tabItems}
+                      style={{ height: '100%', paddingLeft: 20, paddingTop: 10 }}
+                    />
+                  </div>
+
                 </div>
               </div>
             </div>
-          </>
+          {/* </div> */}
         </CreateUIStyles>
       </Modal>
     </CreateUIStyles>
-  ) : null
+  )
 }

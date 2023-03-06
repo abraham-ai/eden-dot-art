@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 
 // FETCH
 import axios, { AxiosError } from 'axios'
 
 // CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
+// import AppContext from '@/context/AppContext/AppContext'
 
 // WEB3
 import { useAccount } from 'wagmi'
@@ -39,7 +39,7 @@ import AccountPopoverStyles from './AccountPopoverStyles'
 export const AccountPopover = () => {
   // HOOKS
   const { isConnected } = useAccount()
-  const { setAuthToken } = useContext(AppContext)
+  // const { setAuthToken } = useContext(AppContext);
 
   // MASONRY SLIDER
   const [masonryColumnCount, setMasonryColumnCount] = useState<number>(3)
@@ -54,7 +54,7 @@ export const AccountPopover = () => {
       const resp = await axios.post('/api/logout')
 
       if (resp.status === 200) {
-        setAuthToken(resp.data.token)
+        // setAuthToken(resp.data.token)
       }
     } catch (error: any) {
       if (error instanceof AxiosError) {
