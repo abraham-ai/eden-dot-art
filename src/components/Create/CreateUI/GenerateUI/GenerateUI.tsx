@@ -184,25 +184,25 @@ const GeneratorUI = ({ generatorName }: { generatorName: string }) => {
     }
   }, [values, generatorName, getConfig, validateConfig])
 
-  const handleGeneration = useCallback(
-    result => {
-      // console.log("received", result);
-      if (typeof result !== 'undefined') {
-        // console.log("not undefined")
-        if (result.error) {
-          // console.log("ERROR", result.error)
-          // Handle Error here
-        } else {
-          // Handle Success here
-          // console.log("success")
-          form.resetFields()
-          setGenerating(false)
-          setIsCreateUIModalOpen(false)
-        }
-      }
-    },
-    [form, setIsCreateUIModalOpen],
-  )
+  // const handleGeneration = useCallback(
+  //   result => {
+  //     // console.log("received", result);
+  //     if (typeof result !== 'undefined') {
+  //       // console.log("not undefined")
+  //       if (result.error) {
+  //         // console.log("ERROR", result.error)
+  //         // Handle Error here
+  //       } else {
+  //         // Handle Success here
+  //         // console.log("success")
+  //         form.resetFields()
+  //         setGenerating(false)
+  //         setIsCreateUIModalOpen(false)
+  //       }
+  //     }
+  //   },
+  //   [form, setIsCreateUIModalOpen],
+  // )
 
   const onSubmit = useCallback(async () => {
     let validValues
