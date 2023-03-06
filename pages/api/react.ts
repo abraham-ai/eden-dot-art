@@ -4,28 +4,27 @@ import { eden } from '@/util/eden'
 
 interface ApiRequest extends NextApiRequest {
   body: {
-    creationId: string,
-    reaction: string;
-  };
+    creationId: string
+    reaction: string
+  }
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { creationId, reaction } = req.body;
-  const authToken = req.session.token;
+  const { creationId, reaction } = req.body
+  const authToken = req.session.token
 
   if (!authToken) {
-    return res.status(401).json({ error: "Not authenticated" });
+    return res.status(401).json({ error: 'Not authenticated' })
   }
 
   try {
-    const creation = await eden.getCreation(creationId);
-    const result = await creation.react(reaction);
-    return res.status(200).json({ result: result });
-
+    const creation = await eden.getCreation(creationId)
+    const result = await creation.react(reaction)
+    return res.status(200).json({ result: result })
   } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ error: error.response.data });
+    // console.log(error);
+    return res.status(500).json({ error: error.response.data })
   }
-};
+}
 
-export default withSessionRoute(handler);
+export default withSessionRoute(handler)
