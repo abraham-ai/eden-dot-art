@@ -47,13 +47,18 @@ const EthereumAuth = ({ onModalCancel }) => {
   const { signMessage } = useSignMessage({
     onSuccess: async (data, variables) => {
       try {
-        console.info('/api/login')
+        console.info('/api/login !')
+        console.info({
+          message: variables.message,
+          signature: data,
+          userAddress: address,
+        })
         const resp = await axios.post('/api/login', {
           message: variables.message,
           signature: data,
           userAddress: address,
         })
-        console.info(resp)
+        console.info(resp.data)
         const { token } = resp.data
         if (token) {
           console.info('got token', token)
