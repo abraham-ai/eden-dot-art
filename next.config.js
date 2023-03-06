@@ -40,8 +40,20 @@ module.exports = withAntdLess({
   },
   ...withImages(redirects),
 
-  webpack(config) {
+  // webpack(config) {
+  //   return config
+  // },
+
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      config.optimization.minimizer.forEach(plugin => {
+        if (plugin.constructor.name === 'TerserPlugin') {
+          plugin.options.terserOptions.compress.drop_console = false
+        }
+      })
+    }
     return config
   },
+
   //extends: ['eslint:recommended', 'next'],
 })
