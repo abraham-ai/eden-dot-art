@@ -74,7 +74,7 @@ export default function CreationCard({ creation }: { creation: Creation }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    const resss = await axios.post('/api/react', {
+    await axios.post('/api/react', {
       creationId: creation.key,
       reaction: '🙌',
     })
@@ -84,7 +84,7 @@ export default function CreationCard({ creation }: { creation: Creation }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    const resss = await axios.post('/api/react', {
+    await axios.post('/api/react', {
       creationId: creation.key,
       reaction: '🔥',
     })
