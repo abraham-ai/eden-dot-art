@@ -12,11 +12,18 @@ interface ApiRequest extends NextApiRequest {
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { message, signature, userAddress } = req.body
+  console.info('message', message)
+  console.info('signature', signature)
+  console.info('userAddress', userAddress)
 
   try {
+    console.info('log eth', message, signature, userAddress)
     const result = await eden.loginEth(message, signature, userAddress)
 
+    console.info('log eth result', result)
+
     if (result.error) {
+      console.info(result.error)
       return res.status(500).json({ error: result.error })
     }
 
@@ -24,6 +31,8 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     req.session.userAddress = userAddress
     req.session.userId = result.userId
     req.session.username = result.username
+
+    console.info('log eth session', req.session)
 
     await req.session.save()
 
