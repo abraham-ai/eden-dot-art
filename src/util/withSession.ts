@@ -5,19 +5,22 @@ import {
   NextApiHandler,
 } from 'next/types'
 
+console.info('the types')
+
 // SESSION
 import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
 
 declare module 'iron-session' {
   interface IronSessionData {
-    token?: string;
-    userAddress?: string;
-    userId?: string;
-    username?: string;
+    token?: string
+    userAddress?: string
+    userId?: string
+    username?: string
   }
 }
 
-// console.log(process.env.COOKIE_SECRET)
+console.info('THE COOKIE SECRET', process.env.COOKIE_SECRET)
+console.info('THE NODE_ENV', process.env.NODE_ENV)
 
 export const sessionOptions = {
   password: (process.env.COOKIE_SECRET as string) || '',
