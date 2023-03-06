@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // NEXTJS
 import Image from 'next/image'
@@ -36,16 +36,15 @@ import { CreationCardStyles } from './CreationCardStyles'
 // TYPES
 import Creation from '@/interfaces/Creation'
 
-
 import { useReactions } from '@/hooks/useReactions'
 
 export default function CreationCard({ creation }: { creation: Creation }) {
   // const router = useRouter()
 
-  const { uri, timestamp, prompt, status, generator, width, height, address } =
-    creation;
+  const { uri, timestamp, prompt, status, width, height, address } = creation
 
-  const {praises, burns, praised, burned } = useReactions(creation.key);
+  // const {praises, burns, praised, burned } = useReactions(creation.key);
+  const { praises, burns } = useReactions(creation.key)
 
   const [isSaveModalActive, setIsSaveModalActive] = useState(false)
 
@@ -75,25 +74,20 @@ export default function CreationCard({ creation }: { creation: Creation }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log("lets go 22")
-    const resss  = await axios.post('/api/react', {
+    const resss = await axios.post('/api/react', {
       creationId: creation.key,
-      reaction: "🙌"
-    });
-    console.log(resss)
+      reaction: '🙌',
+    })
   }
 
   const handleBurn = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault()
-    console.log("lets go")
     const resss = await axios.post('/api/react', {
       creationId: creation.key,
-      reaction: "🔥"
-    });
-
-    console.log(resss)
+      reaction: '🔥',
+    })
   }
 
   const handleRecreation = (
@@ -125,7 +119,7 @@ export default function CreationCard({ creation }: { creation: Creation }) {
                 shape="circle"
                 onClick={() => handlePraise}
               >
-                🙌 {praises} - {praised?"yes":"no"}
+                🙌 {praises}
               </Button>
             </span>
             <span className="cr-social burn">

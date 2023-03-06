@@ -1,5 +1,6 @@
 // FETCH
-import axios, { AxiosError } from 'axios'
+//import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
 // CONTEXT
 // import AppContext from '@/context/AppContext/AppContext'
@@ -15,7 +16,7 @@ const useGenerateUI = async (generatorName, values, config) => {
     generatorName: generatorName,
     config: config,
   })
-  return response;
+  return response
 }
 
 export default useGenerateUI

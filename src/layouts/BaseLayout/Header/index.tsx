@@ -3,7 +3,7 @@ import { useContext } from 'react'
 // CONTEXT
 import AppContext from '@/context/AppContext/AppContext'
 
-import { Button, Space } from 'antd';
+import { Button, Space } from 'antd'
 
 // COMPONENTS
 import Logo from '@/components/Logo/Logo'
@@ -12,6 +12,7 @@ import CreateButton from '@/components/Create/CreateButton/CreateButton'
 // import ProfileButton from '@/components/Account/ProfileButton/ProfileButton'
 import PendingCreations from '@/components/Create/CreateModal/PendingCreations'
 import SettingsButton from '@/components/Account/SettingsButton/SettingsButton'
+import ProfileButton from '@/components/Account/ProfileButton/ProfileButton'
 
 // STYLES
 import { HeaderWrapperStyles } from './HeaderStyles'
@@ -20,10 +21,11 @@ export default function Header() {
   const {
     isConnected,
     isSignedIn,
+    username,
     isCreateUIModalOpen,
     isCreationModalOpen,
     isSignInModalOpen,
-  } = useContext(AppContext);
+  } = useContext(AppContext)
 
   return (
     <HeaderWrapperStyles id="header-wrapper">
@@ -33,16 +35,29 @@ export default function Header() {
         {isCreationModalOpen}
         {isSignInModalOpen}
         <Space>
-          <Button shape="round" size="large" type="primary" href="/garden" >All creations</Button>
-          <Button shape="round" size="large" type="primary" href="/praised">🙌</Button>
-          <Button shape="round" size="large" type="primary" href="/burned">🔥</Button>
-          <Button shape="round" size="large" type="primary" href="/collections">Collections</Button>
+          <Button shape="round" size="large" type="primary" href="/garden">
+            All creations
+          </Button>
+          <Button shape="round" size="large" type="primary" href="/garden">
+            🙌
+          </Button>
+          <Button shape="round" size="large" type="primary" href="/garden">
+            🔥
+          </Button>
+          <Button shape="round" size="large" type="primary" href="/collections">
+            Collections
+          </Button>
           {isConnected && (
-            <Button shape="round" size="large" type="primary" href="/profile">My profile</Button>
+            <Button
+              shape="round"
+              size="large"
+              type="primary"
+              href={`/creator/${username}`}
+            >
+              My profile
+            </Button>
           )}
-          {isConnected && isSignedIn && (
-            <PendingCreations />
-          )}
+          {isConnected && isSignedIn && <PendingCreations />}
           {isConnected && (
             <>
               <CreateButton />
@@ -51,6 +66,7 @@ export default function Header() {
           )}
         </Space>
         <SettingsButton />
+        <ProfileButton />
       </div>
     </HeaderWrapperStyles>
   )

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import { createContext } from 'react'
 import { AppContextType } from '@/interfaces/AppContext'
 
@@ -6,6 +8,13 @@ const AppContext = createContext<AppContextType>({
   setIsConnected: () => {},
   isSignedIn: false,
   setIsSignedIn: () => {},
+
+  userId: null,
+  setUserId: () => {},
+  username: null,
+  setUsername: () => {},
+  userAddress: null,
+  setUserAddress: () => {},
 
   lastLoadTime: null,
   setLastLoadTime: () => {},
@@ -22,6 +31,6 @@ const AppContext = createContext<AppContextType>({
 
   generators: {},
   setGenerators: () => {},
-});
+})
 
-export default AppContext;
+export default AppContext

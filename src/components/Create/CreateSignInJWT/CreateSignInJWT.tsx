@@ -13,7 +13,7 @@ import EthereumAuth from '@/components/Auth/EthereumAuth'
 
 // ANTD
 import { Typography, Modal } from 'antd'
-const { Title, Text } = Typography
+const { Title } = Typography
 
 // COMPONENTS
 import AppLogo from '@/components/AppLogo/AppLogo'
@@ -27,11 +27,7 @@ import { CreateSignInJWTStyles } from './CreateSignInJWTStyles'
 export default function CreateSignInJWT() {
   const { address } = useAccount()
 
-  const {
-    isConnected,
-    isSignInModalOpen,
-    setIsSignInModalOpen,
-  } = useContext(AppContext)
+  const { isSignInModalOpen, setIsSignInModalOpen } = useContext(AppContext)
 
   const handleCancel = () => {
     setIsSignInModalOpen(false)
@@ -43,7 +39,7 @@ export default function CreateSignInJWT() {
 
   const { data, isSuccess } = useSignMessage({
     message: appMessage,
-  });
+  })
 
   return (
     <Modal
@@ -75,7 +71,7 @@ export default function CreateSignInJWT() {
 
           <div>
             <EthereumAuth onModalCancel={handleCancel} />
-         </div>
+          </div>
 
           {isSuccess && (
             <div className="sign-in-signature-wrapper">
@@ -83,7 +79,6 @@ export default function CreateSignInJWT() {
               <p className="sign-in-signature">{data}</p>
             </div>
           )}
-
         </div>
       </CreateSignInJWTStyles>
     </Modal>

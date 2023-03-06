@@ -1,17 +1,16 @@
 'use client'
 
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 
 // FETCH
-import axios from 'axios'
-
+// import axios from 'axios'
 
 // WEB3
 import { useAccount } from 'wagmi' // useDisconnect
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
+// import AppContext from '@/context/AppContext/AppContext'
 
 // LIBS
 // import Blockies from 'react-blockies'
@@ -43,8 +42,8 @@ export const SettingsButton = () => {
   const [open, setOpen] = useState(false)
 
   // HOOKS
-  const { address, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { address } = useAccount()
+  // const { disconnect } = useDisconnect();
   const walletAddress = address
 
   // CONTEXT
@@ -119,8 +118,6 @@ export const SettingsButton = () => {
   return (
     <SettingsButtonStyles>
       <ConnectButton.Custom>
-      
-      
         {({
           account,
           chain,
@@ -151,7 +148,6 @@ export const SettingsButton = () => {
                 },
               })}
             >
-
               {(() => {
                 if (!connected) {
                   return (
@@ -197,11 +193,6 @@ export const SettingsButton = () => {
             </div>
           )
         }}
-
-
-
-
-        
       </ConnectButton.Custom>
     </SettingsButtonStyles>
   )

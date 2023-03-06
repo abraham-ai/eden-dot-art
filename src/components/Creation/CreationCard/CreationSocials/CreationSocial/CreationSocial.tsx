@@ -44,7 +44,7 @@ export default function CreationSocial({
   const { address } = useAccount()
 
   const context = useContext(AppContext)
-  const { isWeb3WalletConnected } = context
+  const { isSignedIn } = context
 
   // DEBUG
   // console.log({ creationTextInput });
@@ -116,7 +116,7 @@ export default function CreationSocial({
   }
 
   let praiseClasses, burnClasses
-  if (isWeb3WalletConnected) {
+  if (isSignedIn) {
     praiseClasses = isPraised ? 'cr-praise is-active' : 'cr-praise'
     burnClasses = isBurned ? 'cr-burn is-active' : 'cr-burn'
   } else {
@@ -124,17 +124,10 @@ export default function CreationSocial({
     burnClasses = 'cr-burn disabled'
   }
 
-  // DEBUG
-  // console.log({ isPraised, isBurned, creationTextInput });
-  // console.log({ isWeb3WalletConnected });
-  // console.log({ praiseClasses });
-  // console.log({ burnClasses });
-  // console.log({ layout })
-
-  const isTooltipVisible = isWeb3WalletConnected ? null : false
+  const isTooltipVisible = isSignedIn ? null : false
 
   let burnCount, praiseCount
-  if ((isWeb3WalletConnected && isPraised) || isBurned) {
+  if ((isSignedIn && isPraised) || isBurned) {
     // console.log('show social based on address count');
     burnCount =
       burns > 1 ? <span className="social-icon-count">{burns}</span> : null
