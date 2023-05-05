@@ -225,6 +225,13 @@ export default function EdenArtFrontPage() {
                         textColor={'white'}
                         type="accent-link"
                       />
+                      <ButtonLink
+                        text={'Docs'}
+                        link={'https://docs.eden.art/docs/overview/intro'}
+                        color={'#2A564D'}
+                        textColor={'white'}
+                        type="accent-link"
+                      />
                     </>
                   ) : (
                     <>
@@ -237,6 +244,12 @@ export default function EdenArtFrontPage() {
                       <ButtonLink
                         text={'Visit the garden'}
                         link={'https://garden.eden.art'}
+                        color={'#2A564D'}
+                        textColor={'white'}
+                      />
+                      <ButtonLink
+                        text={'Read the docs'}
+                        link={'https://docs.eden.art/docs/overview/intro'}
                         color={'#2A564D'}
                         textColor={'white'}
                       />
