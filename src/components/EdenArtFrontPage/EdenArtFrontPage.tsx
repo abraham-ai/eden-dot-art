@@ -17,6 +17,7 @@ import EdenArtFrontPageStyles from './EdenArtFrontPageStyles'
 // import { TwitterOutlined } from '@ant-design/icons'
 import { FaDiscord } from 'react-icons/fa'
 import { BsTwitter } from 'react-icons/bs'
+import { BsGithub } from 'react-icons/bs'
 
 export function AppLink({ title, description, icon }) {
   return (
@@ -117,15 +118,26 @@ export default function EdenArtFrontPage() {
           <AppLogo size="medium" logo="eden" />
 
           <div className="social-btns-wrapper">
-            <a className="social-btn" href={'https://discord.gg/4dSYwDT'}>
-              <FaDiscord />
+            <a
+              className="social-btn"
+              href={'https://discord.gg/4dSYwDT'}
+              style={{ margin: '0 10px', color: '#aaa' }}
+            >
+              <FaDiscord size="40" />
             </a>
             <a
               className="social-btn"
               href={'https://twitter.com/Eden_Art_'}
-              style={{ margin: '0 10px' }}
+              style={{ margin: '0 10px', color: '#aaa' }}
             >
-              <BsTwitter />
+              <BsTwitter size="40" />
+            </a>
+            <a
+              className="social-btn"
+              href={'https://github.com/abraham-ai'}
+              style={{ margin: '0 10px', color: '#aaa' }}
+            >
+              <BsGithub size="40" />
             </a>
           </div>
         </section>
@@ -165,7 +177,7 @@ export default function EdenArtFrontPage() {
                     style={{
                       paddingBottom: 30,
                       fontStyle: 'italic',
-                      color: '#8C7CF0',
+                      color: '#2A564D',
                     }}
                   >
                     AI-generated art
@@ -176,16 +188,14 @@ export default function EdenArtFrontPage() {
               {windowWidth < 930 ? (
                 <Text className="splash-text-description">
                   Eden is a community of artists, technologist and machine
-                  learners building an open-source social platform for
-                  generative AI.
+                  learners building a provenance layer for generative AI.
                 </Text>
               ) : (
                 <>
                   <Text className="splash-text-description">
                     {/* 'rgb(166, 166, 166)' */}
-                    Eden is a community of artists, creative technologists, and
-                    machine learners building an open-source social platform for
-                    generative AI.
+                    Eden is a community of artists, technologist and machine
+                    learners building a provenance layer for generative AI.
                   </Text>
                 </>
               )}
@@ -202,32 +212,32 @@ export default function EdenArtFrontPage() {
                   {windowWidth < 930 ? (
                     <>
                       <ButtonLink
-                        text={'GARDEN'}
-                        link={'/garden'}
-                        color={'#8c7cf0'}
+                        text={'Garden'}
+                        link={'https://garden.eden.art'}
+                        color={'#2A564D'}
                         textColor={'white'}
                         type="main-link"
                       />
                       <ButtonLink
-                        text={'EXAMPLES'}
-                        link={'https://examples.eden.art'}
-                        color={'#0c163b'}
+                        text={'App'}
+                        link={'https://app.eden.art'}
+                        color={'#2A564D'}
+                        textColor={'white'}
                         type="accent-link"
                       />
                     </>
                   ) : (
                     <>
                       <ButtonLink
-                        text={'GARDEN'}
-                        link={'/garden'}
-                        textColor={'#0c163b'}
-                        color={'white'}
-                        type="main-link"
+                        text={'Try the app'}
+                        link={'https://app.eden.art'}
+                        color={'#2A564D'}
+                        textColor={'white'}
                       />
                       <ButtonLink
-                        text={'EXAMPLES'}
-                        link={'https://examples.eden.art'}
-                        color={'#8C7CF0'}
+                        text={'Visit the garden'}
+                        link={'https://garden.eden.art'}
+                        color={'#2A564D'}
                         textColor={'white'}
                       />
                     </>

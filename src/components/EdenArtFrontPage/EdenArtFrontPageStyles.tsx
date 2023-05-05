@@ -89,7 +89,7 @@ const EdenArtFrontPageStyles = styled.section`
   .section-center-wrapper h1 {
   }
   .splash-text-accent {
-    color: #8c7cf0;
+    color: #2a564d;
     font-size: 6rem;
   }
   @media only screen and (max-width: 930px) {
@@ -322,7 +322,7 @@ const EdenArtFrontPageStyles = styled.section`
     bottom: 15px;
     left: 3px;
     background: #ff2457;
-    background: #8c7cf0;
+    background: #2a564d;
     position: absolute;
   }
   .slogan .art {
@@ -360,7 +360,7 @@ const EdenArtFrontPageStyles = styled.section`
     min-height: 60px;
     font-size: 1.2rem;
     font-weight: bold;
-    background: #8c7cf0;
+    background: #2a564d;
     color: white;
     text-decoration: none;
     border: none;
@@ -371,11 +371,11 @@ const EdenArtFrontPageStyles = styled.section`
     border-color: white;
   }
   .cta-button.accent-link {
-    // box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #2A564D 1px 1px 25px 0px;
   }
   /*** CTA MAIN LINK ***/
   .cta-button.main-link {
-    // box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #2A564D 1px 1px 25px 0px;
     background: white;
     color: #0c163b;
   }
@@ -391,7 +391,7 @@ const EdenArtFrontPageStyles = styled.section`
     .cta-button.main-link:hover {
       color: white;
       background: #473ff4 !important;
-      // box-shadow: #8c7cf0 1px 1px 25px 0px !important;
+      // box-shadow: #2A564D 1px 1px 25px 0px !important;
     }
   }
   /*** CTA SECONDARY LINK ***/
@@ -400,9 +400,9 @@ const EdenArtFrontPageStyles = styled.section`
   }
   /*** CTA ICON ***/
   .cta-button.icon:hover {
-    color: #8c7cf0;
-    background: #8c7cf0;
-    border-color: #8c7cf0;
+    color: #2a564d;
+    background: #2a564d;
+    border-color: #2a564d;
   }
   /*** CTA MAIN LINK BOTTOM ***/
   .cta-btn-main {
@@ -410,12 +410,12 @@ const EdenArtFrontPageStyles = styled.section`
     display: flex;
     align-items: center;
     color: white;
-    background: #8c7cf0;
+    background: #2a564d;
     font-weight: bold;
     margin: 0;
     text-decoration: none;
     border-radius: 60px;
-    // box-shadow: #8c7cf0 1px 1px 25px 0px;
+    // box-shadow: #2A564D 1px 1px 25px 0px;
   }
   .cta-btn-main.main-link:hover {
     background: #473ff4;
@@ -508,7 +508,7 @@ const EdenArtFrontPageStyles = styled.section`
     font-size: 3rem;
     padding: 30px 0;
     font-weight: 600;
-    color: #8c7cf0;
+    color: #2a564d;
   }
   @media only screen and (max-width: 900px) {
     .description {
