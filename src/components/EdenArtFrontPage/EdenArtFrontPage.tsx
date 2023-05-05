@@ -309,11 +309,11 @@ export default function EdenArtFrontPage() {
           </article>
         </section>
 
-        <section className="section-wrapper visit-garden">
+        {/* <section className="section-wrapper visit-garden">
           <a className="cta-btn-main main-link" href={'/garden'}>
             <Title level={2}>{'VISIT GARDEN'}</Title>
           </a>
-        </section>
+        </section> */}
       </div>
     </EdenArtFrontPageStyles>
   )
