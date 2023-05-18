@@ -178,6 +178,7 @@ const EdenArtFrontPageStyles = styled.section`
     .splash-text-description {
       font-size: 2.8rem;
       max-width: 660px;
+      padding-bottom: 50px;
     }
   }
   @media only screen and (max-width: 930px) {
@@ -209,6 +210,14 @@ const EdenArtFrontPageStyles = styled.section`
     padding-bottom: 0;
     width: 100%;
     text-align: center;
+  }
+  @media (max-width: 700px) {
+    .section-center-wrapper:first-child {
+      padding: 0;
+      padding-bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
   }
   .section-wrapper {
     display: flex;

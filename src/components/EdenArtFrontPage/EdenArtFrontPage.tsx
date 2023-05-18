@@ -60,7 +60,7 @@ export function ButtonLink({
           ? `cta-button ${type} block`
           : `cta-button ${type}`
       }
-      style={{ background: color, color: textColor }}
+      style={{ background: color, color: textColor, fontFamily: 'arial' }}
     >
       {text}
     </a>
@@ -200,41 +200,17 @@ export default function EdenArtFrontPage() {
                 </>
               )}
 
-              <article className="cta-btns-wrapper">
-                <div
-                  className="button-wrapper"
-                  style={{
-                    display: 'flex',
-                    zIndex: 50,
-                    width: '100%',
-                  }}
-                >
-                  {windowWidth < 930 ? (
-                    <>
-                      <ButtonLink
-                        text={'Garden'}
-                        link={'https://garden.eden.art'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                        type="main-link"
-                      />
-                      <ButtonLink
-                        text={'App'}
-                        link={'https://app.eden.art'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                        type="accent-link"
-                      />
-                      <ButtonLink
-                        text={'Docs'}
-                        link={'https://docs.eden.art/docs/overview/intro'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                        type="accent-link"
-                      />
-                    </>
-                  ) : (
-                    <>
+              {windowWidth < 930 ? null : (
+                <>
+                  <article className="cta-btns-wrapper">
+                    <div
+                      className="button-wrapper"
+                      style={{
+                        display: 'flex',
+                        zIndex: 50,
+                        width: '100%',
+                      }}
+                    >
                       <ButtonLink
                         text={'Try the app'}
                         link={'https://app.eden.art'}
@@ -253,13 +229,54 @@ export default function EdenArtFrontPage() {
                         color={'#2A564D'}
                         textColor={'white'}
                       />
-                    </>
-                  )}
-                </div>
-              </article>
+                    </div>
+                  </article>
+                </>
+              )}
             </div>
           </div>
         </section>
+
+        <div className="section-wrapper info-wrapper">
+          <div className="section-center-wrapper">
+            {windowWidth < 930 ? (
+              <>
+                <article className="cta-btns-wrapper">
+                  <div
+                    className="button-wrapper"
+                    style={{
+                      display: 'flex',
+                      zIndex: 50,
+                      width: '100%',
+                    }}
+                  >
+                    <ButtonLink
+                      text={'Garden'}
+                      link={'https://garden.eden.art'}
+                      color={'#2A564D'}
+                      textColor={'white'}
+                      type="main-link"
+                    />
+                    <ButtonLink
+                      text={'App'}
+                      link={'https://app.eden.art'}
+                      color={'#2A564D'}
+                      textColor={'white'}
+                      type="accent-link"
+                    />
+                    <ButtonLink
+                      text={'Docs'}
+                      link={'https://docs.eden.art/docs/overview/intro'}
+                      color={'#2A564D'}
+                      textColor={'white'}
+                      type="accent-link"
+                    />
+                  </div>
+                </article>
+              </>
+            ) : null}
+          </div>
+        </div>
 
         <section className="section-wrapper first-description">
           <article className="info-wrapper">
