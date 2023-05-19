@@ -1,38 +1,21 @@
+import type { NextPage } from 'next'
+import type { ReactElement, ReactNode } from 'react'
+import type { AppProps } from 'next/app'
+import { GeneratorState } from '@/interfaces/GeneratorState'
+
 import { useState, useCallback, useEffect } from 'react'
+import AppContext from '@/context/AppContext/AppContext'
+import Head from 'next/head'
+
+import WalletProvider from '@/providers/WalletProvider'
 import axios from 'axios'
 import { useAccount } from 'wagmi'
 
-// TYPES
-import type { ReactElement, ReactNode } from 'react'
-
-// NEXT
-import type { NextPage } from 'next'
-import type { AppProps } from 'next/app'
-
-// ROUTER
 import Router from 'next/router'
 import nProgress from 'nprogress'
-
-// CSS
 import 'nprogress/nprogress.css'
 import 'src/theme/base.css'
 import 'src/components/Creation/CreationCard/CreationCardModal/CreationCardModal.css'
-
-// EMOTION
-import { CacheProvider, EmotionCache } from '@emotion/react'
-import createEmotionCache from 'src/createEmotionCache'
-
-// NAV
-import Head from 'next/head'
-
-// CONTEXT
-import AppContext from '@/context/AppContext/AppContext'
-import { GeneratorState } from '@/interfaces/GeneratorState'
-
-// PROVIDERS
-import WalletProvider from '@/providers/WalletProvider'
-
-const clientSideEmotionCache = createEmotionCache()
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -40,7 +23,6 @@ type NextPageWithLayout = NextPage & {
 
 interface EdenAppProps extends AppProps {
   pageProps: Record<string, unknown>
-  emotionCache?: EmotionCache
   Component: NextPageWithLayout
 }
 
@@ -62,7 +44,7 @@ function EdenApp(props: EdenAppProps) {
 
   const [isLightTheme, setIsLightTheme] = useState(true)
 
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+  const { Component, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
 
   Router.events.on('routeChangeStart', nProgress.start)
@@ -123,9 +105,9 @@ function EdenApp(props: EdenAppProps) {
   }
 
   return (
-    <CacheProvider value={emotionCache}>
+    <>
       <Head>
-        <title>Eden</title>
+        <title>{'Eden'}</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -136,7 +118,7 @@ function EdenApp(props: EdenAppProps) {
           {getLayout(<Component {...pageProps} />)}
         </WalletProvider>
       </AppContext.Provider>
-    </CacheProvider>
+    </>
   )
 }
 

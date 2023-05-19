@@ -42,8 +42,8 @@ export function ButtonLink({
   textColor = 'white',
   type = '',
 }) {
-  const [windowWidth, setWindowWidth] = useState(0)
-  const { width = 0 } = useWindowDimensions()
+  const [windowWidth, setWindowWidth] = useState(1000)
+  const { width = 1000 } = useWindowDimensions()
 
   const target = text === 'GARDEN' ? '_self' : '_blank'
 

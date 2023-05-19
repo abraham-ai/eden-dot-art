@@ -35,6 +35,9 @@ module.exports = withAntdLess({
   images: {
     domains: ['minio.aws.abraham.fun'],
   },
+  compiler: {
+    styledComponents: true,
+  },
   env: {
     EDEN_API_URL: 'https://api.eden.art',
   },

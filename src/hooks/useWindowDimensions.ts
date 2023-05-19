@@ -10,8 +10,8 @@ function getWindowDimensions() {
     }
   } else {
     return {
-      width: 0,
-      height: 0,
+      width: 1000,
+      height: 1000,
     }
   }
 }
