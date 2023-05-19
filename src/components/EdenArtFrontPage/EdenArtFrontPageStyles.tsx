@@ -260,6 +260,7 @@ const EdenArtFrontPageStyles = styled.section`
       height: 85vh;
       z-index: 0;
       width: 100%;
+      top: 0;
       overflow: hidden;
     }
     .section-wrapper.video-splash video {
