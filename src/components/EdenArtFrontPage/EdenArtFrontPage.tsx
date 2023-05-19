@@ -67,6 +67,30 @@ export function ButtonLink({
   )
 }
 
+const MobileVideo = () => {
+  const videoURL =
+    'https://eden-art.s3.amazonaws.com/eden-landing-mobile-real2real_seed_7_pass_lantent-blending.mp4'
+
+  return (
+    <EdenArtFrontPageStyles>
+      <article className="section-wrapper video-splash mobile-video">
+        <div className="eden-splash-video-overlay" />
+        <video
+          className="eden-splash-video-above-the-fold"
+          src={`${videoURL}`}
+          preload="auto"
+          muted={true}
+          autoPlay={true}
+          loop={true}
+          // poster={`${PRD_URL}${
+          //   intermediate_sha[intermediate_sha.length - 1]
+          // }`}
+        />
+      </article>
+    </EdenArtFrontPageStyles>
+  )
+}
+
 export function TabletTitle() {
   return (
     <div className="splash-text-slogan-wrapper">
@@ -108,9 +132,6 @@ export default function EdenArtFrontPage() {
     setWindowWidth(width)
   }, [width])
 
-  const videoURL =
-    'https://eden-art.s3.amazonaws.com/eden-landing-mobile-real2real_seed_7_pass_lantent-blending.mp4'
-
   return (
     <EdenArtFrontPageStyles>
       <div className="home-wrapper">
@@ -143,24 +164,7 @@ export default function EdenArtFrontPage() {
         </section>
 
         <section className="section-above-the-fold">
-          {windowWidth < 930 ? (
-            <article className="section-wrapper video-splash">
-              <div className="eden-splash-video-overlay" />
-              <video
-                className="eden-splash-video-above-the-fold"
-                src={`${videoURL}`}
-                preload="auto"
-                muted={true}
-                autoPlay={true}
-                loop={true}
-                // poster={`${PRD_URL}${
-                //   intermediate_sha[intermediate_sha.length - 1]
-                // }`}
-              />
-            </article>
-          ) : (
-            ''
-          )}
+          <MobileVideo />
 
           <div className="section-wrapper info-wrapper">
             <div className="section-center-wrapper">
@@ -169,7 +173,7 @@ export default function EdenArtFrontPage() {
               ) : (
                 <>
                   <Title className="splash-text-slogan" level={2}>
-                    Create, remix, and share
+                    {'Create, remix, and share'}
                   </Title>
                   <Title
                     className="splash-text-slogan"
@@ -180,22 +184,24 @@ export default function EdenArtFrontPage() {
                       color: '#2A564D',
                     }}
                   >
-                    AI-generated art
+                    {'AI-generated art'}
                   </Title>
                 </>
               )}
 
               {windowWidth < 930 ? (
                 <Text className="splash-text-description">
-                  Eden is a community of artists, technologist and machine
-                  learners building a provenance layer for generative AI.
+                  {
+                    'Eden is a community of artists, technologist and machine learners building a provenance layer for generative AI.'
+                  }
                 </Text>
               ) : (
                 <>
                   <Text className="splash-text-description">
                     {/* 'rgb(166, 166, 166)' */}
-                    Eden is a community of artists, technologist and machine
-                    learners building a provenance layer for generative AI.
+                    {
+                      'Eden is a community of artists, technologist and machine learners building a provenance layer for generative AI.'
+                    }
                   </Text>
                 </>
               )}

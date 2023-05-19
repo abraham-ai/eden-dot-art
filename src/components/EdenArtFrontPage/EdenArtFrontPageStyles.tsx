@@ -23,6 +23,16 @@ const EdenArtFrontPageStyles = styled.section`
     left: 0;
     z-index: 100;
   }
+  /*** MOBILE VIEO ***/
+  .mobile-video {
+    display: none;
+  }
+
+  @media (max-width: 929px) {
+    .mobile-video {
+      display: block;
+    }
+  }
   /*** ATF SECTION ***/
   .section-above-the-fold {
   }
