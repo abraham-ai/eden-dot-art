@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import type { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 
+import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Router from 'next/router'
 import nProgress from 'nprogress'
@@ -17,8 +18,9 @@ interface EdenAppProps extends AppProps {
   Component: NextPageWithLayout
 }
 
-function EdenApp(props: EdenAppProps) {
-  const { Component, pageProps } = props
+const inter = Inter({ subsets: ['latin'] })
+
+const EdenApp: FC<EdenAppProps> = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout ?? (page => page)
 
   Router.events.on('routeChangeStart', nProgress.start)
@@ -34,7 +36,9 @@ function EdenApp(props: EdenAppProps) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <main className={inter.className}>
+        {getLayout(<Component {...pageProps} />)}
+      </main>
     </>
   )
 }
