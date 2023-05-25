@@ -20,7 +20,8 @@ interface EdenAppProps extends AppProps {
 
 const inter = Inter({ subsets: ['latin'] })
 
-const EdenApp: FC<EdenAppProps> = ({ Component, pageProps }) => {
+function EdenApp(props: EdenAppProps) {
+  const { Component, pageProps } = props
   const getLayout = Component.getLayout ?? (page => page)
 
   Router.events.on('routeChangeStart', nProgress.start)
