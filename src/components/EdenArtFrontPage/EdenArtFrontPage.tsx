@@ -195,7 +195,7 @@ export default function EdenArtFrontPage() {
               {windowWidth < 930 ? (
                 <Text className={`${inter.className} splash-text-description`}>
                   {
-                    'Eden is a community of artists, technologist and machine learners building a provenance layer for generative AI.'
+                    'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
                   }
                 </Text>
               ) : (
@@ -205,7 +205,7 @@ export default function EdenArtFrontPage() {
                   >
                     {/* 'rgb(166, 166, 166)' */}
                     {
-                      'Eden is a community of artists, technologist and machine learners building a provenance layer for generative AI.'
+                      'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
                     }
                   </Text>
                 </>
