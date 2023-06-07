@@ -15,10 +15,6 @@ import { FaDiscord } from 'react-icons/fa'
 import { BsTwitter } from 'react-icons/bs'
 import { BsGithub } from 'react-icons/bs'
 
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
-
 export function AppLink({ title, description, icon }) {
   return (
     <>
@@ -172,14 +168,11 @@ export default function EdenArtFrontPage() {
                 <MobileTitle />
               ) : (
                 <>
-                  <Title
-                    className={`splash-text-slogan ${inter.className}`}
-                    level={2}
-                  >
+                  <Title className={`splash-text-slogan`} level={2}>
                     {'Create, remix, and share'}
                   </Title>
                   <Title
-                    className={`splash-text-slogan ${inter.className}`}
+                    className={`splash-text-slogan`}
                     level={2}
                     style={{
                       paddingBottom: 30,
@@ -193,16 +186,14 @@ export default function EdenArtFrontPage() {
               )}
 
               {windowWidth < 930 ? (
-                <Text className={`${inter.className} splash-text-description`}>
+                <Text className={`splash-text-description`}>
                   {
                     'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
                   }
                 </Text>
               ) : (
                 <>
-                  <Text
-                    className={`${inter.className} splash-text-description`}
-                  >
+                  <Text className={`splash-text-description`}>
                     {/* 'rgb(166, 166, 166)' */}
                     {
                       'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
@@ -213,7 +204,7 @@ export default function EdenArtFrontPage() {
 
               {windowWidth < 930 ? null : (
                 <>
-                  <article className={`${inter.className} cta-btns-wrapper`}>
+                  <article className={`cta-btns-wrapper`}>
                     <div
                       className="button-wrapper"
                       style={{

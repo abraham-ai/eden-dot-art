@@ -1,13 +1,6 @@
 {
   "presets": [
-    [
-      "next/babel",
-      {
-        "preset-env": {
-          "exclude": ["next/font"]
-        }
-      }
-    ]
+    "next/babel"
   ],
   "plugins": [
     ["styled-components", { "ssr": true, "displayName": true }]
