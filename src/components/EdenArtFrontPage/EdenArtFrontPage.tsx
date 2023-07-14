@@ -214,23 +214,23 @@ export default function EdenArtFrontPage() {
                       }}
                     >
                       <ButtonLink
-                        text={'Try the app'}
+                        text={'Enter Garden of Eden'}
                         link={'https://app.eden.art'}
                         color={'#2A564D'}
                         textColor={'white'}
                       />
-                      <ButtonLink
+                      {/* <ButtonLink
                         text={'Visit the garden'}
                         link={'https://garden.eden.art'}
                         color={'#2A564D'}
                         textColor={'white'}
-                      />
-                      <ButtonLink
+                      /> */}
+                      {/* <ButtonLink
                         text={'Read the docs'}
                         link={'https://docs.eden.art/docs/overview/intro'}
                         color={'#2A564D'}
                         textColor={'white'}
-                      />
+                      /> */}
                     </div>
                   </article>
                 </>
@@ -253,13 +253,13 @@ export default function EdenArtFrontPage() {
                     }}
                   >
                     <ButtonLink
-                      text={'Garden'}
-                      link={'https://garden.eden.art'}
+                      text={'Enter Garden of Eden'}
+                      link={'https://app.eden.art'}
                       color={'#2A564D'}
                       textColor={'white'}
                       type="main-link"
                     />
-                    <ButtonLink
+                    {/* <ButtonLink
                       text={'App'}
                       link={'https://app.eden.art'}
                       color={'#2A564D'}
@@ -272,7 +272,7 @@ export default function EdenArtFrontPage() {
                       color={'#2A564D'}
                       textColor={'white'}
                       type="accent-link"
-                    />
+                    /> */}
                   </div>
                 </article>
               </>
