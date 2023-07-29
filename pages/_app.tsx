@@ -7,7 +7,7 @@ import Router from 'next/router'
 import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import 'src/theme/base.css'
-
+import 'src/theme/global.css'
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
 }
