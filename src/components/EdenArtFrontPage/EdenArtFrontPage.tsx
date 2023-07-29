@@ -1,352 +1,144 @@
-import React, { useState, useEffect } from 'react'
-
-import useWindowDimensions from '@/hooks/useWindowDimensions'
-
-import AppLogo from '@/components/AppLogo/AppLogo'
-
 import { Typography } from 'antd'
-const { Title, Text } = Typography
-
+const { Text } = Typography
 import EdenArtFrontPageStyles from './EdenArtFrontPageStyles'
-
-// ICON
-// import { TwitterOutlined } from '@ant-design/icons'
-import { FaDiscord } from 'react-icons/fa'
-import { BsTwitter } from 'react-icons/bs'
-import { BsGithub } from 'react-icons/bs'
-
-export function AppLink({ title, description, icon }) {
-  return (
-    <>
-      <div className="app-link">
-        <span className="icon-wrapper">{icon}</span>
-        <span className="app-link-info-wrapper">
-          <Title className="title" level={3}>
-            {title}
-          </Title>
-          <Text className="tag">{description}</Text>
-        </span>
-      </div>
-    </>
-  )
-}
-
-export function ButtonLink({
-  text,
-  link,
-  color = 'white',
-  textColor = 'white',
-  type = '',
-}) {
-  const [windowWidth, setWindowWidth] = useState(1000)
-  const { width = 1000 } = useWindowDimensions()
-
-  const target = text === 'GARDEN' ? '_self' : '_blank'
-
-  useEffect(() => {
-    setWindowWidth(width)
-  }, [width])
-
-  return (
-    <a
-      target={target}
-      href={link}
-      className={
-        `${windowWidth < 930}`
-          ? `cta-button ${type} block`
-          : `cta-button ${type}`
-      }
-      style={{ background: color, color: textColor, fontFamily: 'arial' }}
-    >
-      {text}
-    </a>
-  )
-}
-
-const MobileVideo = () => {
-  const videoURL =
-    'https://eden-art.s3.amazonaws.com/eden-landing-mobile-real2real_seed_7_pass_lantent-blending.mp4'
-
-  return (
-    <EdenArtFrontPageStyles>
-      <article className="section-wrapper video-splash mobile-video">
-        <div className="eden-splash-video-overlay" />
-        <video
-          className="eden-splash-video-above-the-fold"
-          src={`${videoURL}`}
-          preload="auto"
-          muted={true}
-          autoPlay={true}
-          loop={true}
-          // poster={`${PRD_URL}${
-          //   intermediate_sha[intermediate_sha.length - 1]
-          // }`}
-        />
-      </article>
-    </EdenArtFrontPageStyles>
-  )
-}
-
-export function TabletTitle() {
-  return (
-    <div className="splash-text-slogan-wrapper">
-      <Title className="splash-text-slogan" level={2}>
-        CREATE, REMIX
-      </Title>
-
-      <Title className="splash-text-slogan" level={2}>
-        & SHARE
-        <Text className="splash-text-accent" italic>
-          AI ART{' '}
-        </Text>
-      </Title>
-    </div>
-  )
-}
-
-export function MobileTitle() {
-  return (
-    <div className="splash-text-slogan-wrapper">
-      <Title className="splash-text-slogan" level={2}>
-        CREATE <i>&</i> SHARE
-      </Title>
-
-      <Title className="splash-text-slogan" level={2}>
-        <Text className="splash-text-accent" italic>
-          AI ART{' '}
-        </Text>
-      </Title>
-    </div>
-  )
-}
-
+import Link from 'next/link'
 export default function EdenArtFrontPage() {
-  const [windowWidth, setWindowWidth] = useState(0)
-  const { width = 0 } = useWindowDimensions()
-
-  useEffect(() => {
-    setWindowWidth(width)
-  }, [width])
-
   return (
-    <EdenArtFrontPageStyles>
-      <div className="home-wrapper">
-        <section className="section-wrapper header">
-          <AppLogo size="medium" logo="eden" />
-
-          <div className="social-btns-wrapper">
-            <a
-              className="social-btn"
-              href={'https://discord.gg/4dSYwDT'}
-              style={{ margin: '0 10px', color: '#aaa' }}
-            >
-              <FaDiscord size="40" />
-            </a>
-            <a
-              className="social-btn"
-              href={'https://twitter.com/Eden_Art_'}
-              style={{ margin: '0 10px', color: '#aaa' }}
-            >
-              <BsTwitter size="40" />
-            </a>
-            <a
-              className="social-btn"
-              href={'https://github.com/abraham-ai'}
-              style={{ margin: '0 10px', color: '#aaa' }}
-            >
-              <BsGithub size="40" />
-            </a>
-          </div>
-        </section>
-
-        <section className="section-above-the-fold">
-          <MobileVideo />
-
-          <div className="section-wrapper info-wrapper">
-            <div className="section-center-wrapper">
-              {windowWidth < 930 ? (
-                <MobileTitle />
-              ) : (
-                <>
-                  <Title className={`splash-text-slogan`} level={2}>
-                    {'Create, remix, and share'}
-                  </Title>
-                  <Title
-                    className={`splash-text-slogan`}
-                    level={2}
-                    style={{
-                      paddingBottom: 30,
-                      fontStyle: 'italic',
-                      color: '#2A564D',
-                    }}
-                  >
-                    {'AI-generated art'}
-                  </Title>
-                </>
-              )}
-
-              {windowWidth < 930 ? (
-                <Text className={`splash-text-description`}>
-                  {
-                    'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
-                  }
-                </Text>
-              ) : (
-                <>
-                  <Text className={`splash-text-description`}>
-                    {/* 'rgb(166, 166, 166)' */}
-                    {
-                      'Eden is a community of artists, technologists and machine learners building a provenance layer for generative AI.'
-                    }
-                  </Text>
-                </>
-              )}
-
-              {windowWidth < 930 ? null : (
-                <>
-                  <article className={`cta-btns-wrapper`}>
-                    <div
-                      className="button-wrapper"
-                      style={{
-                        display: 'flex',
-                        zIndex: 50,
-                        width: '100%',
-                      }}
-                    >
-                      <ButtonLink
-                        text={'Enter Garden of Eden'}
-                        link={'https://app.eden.art'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                      />
-                      {/* <ButtonLink
-                        text={'Visit the garden'}
-                        link={'https://garden.eden.art'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                      /> */}
-                      {/* <ButtonLink
-                        text={'Read the docs'}
-                        link={'https://docs.eden.art/docs/overview/intro'}
-                        color={'#2A564D'}
-                        textColor={'white'}
-                      /> */}
-                    </div>
-                  </article>
-                </>
-              )}
+    <div className="bg-black">
+      <EdenArtFrontPageStyles>
+        <div className="home-wrapper">
+          <section className="section-wrapper header">
+            <div className="flex items-center justify-start">
+              <Link href="/">
+                <img src="logo.png" className="h-16 sm:h-20 pl-8 pt-6" />
+              </Link>
+              <Link href="/">
+                <p className="text-xl pl-2 pt-6 text-white sm:text-3xl">
+                  eden.art
+                </p>
+              </Link>
             </div>
-          </div>
-        </section>
 
-        <div className="section-wrapper info-wrapper">
-          <div className="section-center-wrapper">
-            {windowWidth < 930 ? (
-              <>
-                <article className="cta-btns-wrapper">
-                  <div
-                    className="button-wrapper"
-                    style={{
-                      display: 'flex',
-                      zIndex: 50,
-                      width: '100%',
-                    }}
-                  >
-                    <ButtonLink
-                      text={'Enter Garden of Eden'}
-                      link={'https://app.eden.art'}
-                      color={'#2A564D'}
-                      textColor={'white'}
-                      type="main-link"
-                    />
-                    {/* <ButtonLink
-                      text={'App'}
-                      link={'https://app.eden.art'}
-                      color={'#2A564D'}
-                      textColor={'white'}
-                      type="accent-link"
-                    />
-                    <ButtonLink
-                      text={'Docs'}
-                      link={'https://docs.eden.art/docs/overview/intro'}
-                      color={'#2A564D'}
-                      textColor={'white'}
-                      type="accent-link"
-                    /> */}
+            <div className="flex items-center justify-end pr-8 pt-6">
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/abraham-ai"
+              >
+                <img src="github.png" className="h-8 sm:h-12" />
+              </Link>
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://discord.com/invite/4dSYwDT"
+              >
+                <img src="discord.png" className="h-8 ml-2 sm:h-12 sm:ml-4" />
+              </Link>
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://twitter.com/Eden_Art_"
+              >
+                <img src="twitter.png" className="h-8 ml-2 sm:h-12 sm:ml-4" />
+              </Link>
+            </div>
+          </section>
+          <div className="relative h-screen">
+            <video
+              autoPlay
+              loop
+              muted
+              className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              style={{ opacity: 0.4 }}
+            >
+              <source src="video.mp4" type="video/mp4" />
+              {/* Add more <source> elements for other video formats if needed */}
+              Your browser does not support the video tag.
+            </video>
+            <div className="max-w-7xl px-14 pb-24 pt-48 sm:pb-32 md:flex md:px-24 md:py-36 lg:flex lg:px-24 lg:py-36 justify-start -mt-8 relative z-10">
+              <div className="max-w-3xl flex-shrink-0  lg:pt-8">
+                <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                  Create, remix, and share AI-generated art
+                </h1>
+                <p className="mt-3 font-extralight text-xl leading-8 text-gray-300">
+                  Eden is a community of artists, technologists and machine
+                  learners building a social hub for creative AI.
+                </p>
+                <Link href={'https://app.eden.art'}>
+                  <div className="mt-6">
+                    <button className="text-white pl-4 pr-4 pt-3 pb-3 border border-2 rounded-2xl font-bold tracking-wide transition-transform hover:scale-105">
+                      Enter Garden of Eden
+                    </button>
                   </div>
-                </article>
-              </>
-            ) : null}
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center items-center ">
+              <img className="h-16 animate-bounce" src="downarrow.png" />
+            </div>
           </div>
-        </div>
-
-        <section className="section-wrapper first-description">
-          <article className="info-wrapper">
-            <div className="info odd">
-              <span className="description-wrapper">
-                <Text className="description">
-                  <i>For artists</i> Create and share your art, get inspired by
-                  and collaborate with other artists. Own your profile and your
-                  creations.
-                </Text>
-              </span>
-
-              <video
-                className="eden-splash-video"
-                preload="auto"
-                muted={true}
-                autoPlay={true}
-                loop={true}
-                src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2004_latent-blending.mp4"
-              />
-            </div>
-
-            <div className="info even">
-              <video
-                className="eden-splash-video"
-                preload="auto"
-                muted={true}
-                autoPlay={true}
-                loop={true}
-                src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2025_latent-blending.mp4"
-              />
-
-              <span className="description-wrapper">
-                <Text className="description">
-                  <i>For developers</i> Build applications with ease, connect
-                  new techniques and models to a shared ecosystem.
-                </Text>
-              </span>
-            </div>
-
-            <div className="info odd">
-              <div>
+          <section className="section-wrapper first-description">
+            <article className="info-wrapper">
+              <div className="info odd">
                 <span className="description-wrapper">
                   <Text className="description">
-                    <i>For collectors</i> Discover, curate, and tell stories
-                    with your collections. Make the garden beautiful.
+                    <i>For artists</i> Create and share your art, get inspired
+                    by and collaborate with other artists. Own your profile and
+                    your creations.
+                  </Text>
+                </span>
+
+                <video
+                  className="eden-splash-video"
+                  preload="auto"
+                  muted={true}
+                  autoPlay={true}
+                  loop={true}
+                  src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2004_latent-blending.mp4"
+                />
+              </div>
+
+              <div className="info even">
+                <video
+                  className="eden-splash-video"
+                  preload="auto"
+                  muted={true}
+                  autoPlay={true}
+                  loop={true}
+                  src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2025_latent-blending.mp4"
+                />
+
+                <span className="description-wrapper">
+                  <Text className="description">
+                    <i>For developers</i> Build applications with ease, connect
+                    new techniques and models to a shared ecosystem.
                   </Text>
                 </span>
               </div>
 
-              <video
-                className="eden-splash-video"
-                preload="auto"
-                muted={true}
-                autoPlay={true}
-                loop={true}
-                src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2026_latent-blending.mp4"
-              />
-            </div>
-          </article>
-        </section>
+              <div className="info odd">
+                <div>
+                  <span className="description-wrapper">
+                    <Text className="description">
+                      <i>For collectors</i> Discover, curate, and tell stories
+                      with your collections. Make the garden beautiful.
+                    </Text>
+                  </span>
+                </div>
 
-        {/* <section className="section-wrapper visit-garden">
-          <a className="cta-btn-main main-link" href={'/garden'}>
-            <Title level={2}>{'VISIT GARDEN'}</Title>
-          </a>
-        </section> */}
-      </div>
-    </EdenArtFrontPageStyles>
+                <video
+                  className="eden-splash-video"
+                  preload="auto"
+                  muted={true}
+                  autoPlay={true}
+                  loop={true}
+                  src="https://eden-art.s3.amazonaws.com/eden-real2real_seed_2026_latent-blending.mp4"
+                />
+              </div>
+            </article>
+          </section>
+        </div>
+      </EdenArtFrontPageStyles>
+    </div>
   )
 }
