@@ -58,16 +58,16 @@ export default function EdenArtFrontPage() {
             <div className="max-w-7xl px-14 pb-24 pt-48 sm:pb-32 md:flex md:px-24 md:py-36 lg:flex lg:px-24 lg:py-36 justify-start -mt-8 relative z-10">
               <div className="max-w-3xl flex-shrink-0  lg:pt-8">
                 <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                  Create, remix, and share AI-generated art
+                  Create, remix, and share AI art
                 </h1>
                 <p className="mt-3 font-extralight text-xl leading-8 text-gray-300">
-                  Eden is a community of artists, technologists and machine
-                  learners building a social hub for creative AI.
+                  Eden is a community of artists and technologists building a
+                  social hub for creative AI.
                 </p>
                 <Link href={'https://app.eden.art'}>
                   <div className="mt-6">
                     <button className="text-white pl-4 pr-4 pt-3 pb-3 border border-2 rounded-2xl font-bold tracking-wide transition-transform hover:scale-105">
-                      Enter Garden of Eden
+                      Enter the Garden
                     </button>
                   </div>
                 </Link>
@@ -82,9 +82,12 @@ export default function EdenArtFrontPage() {
               <div className="info odd">
                 <span className="description-wrapper">
                   <Text className="description">
-                    <i>For artists</i> Create and share your art, get inspired
-                    by and collaborate with other artists. Own your profile and
-                    your creations.
+                    <i>For creators</i> Eden offers a suite of generators that
+                    produce images, video, and text, as well as tools for
+                    training custom concepts and animated characters.{' '}
+                    <a href="https://docs.eden.art/docs/guides/creation">
+                      Learn how to create with Eden.
+                    </a>
                   </Text>
                 </span>
 
@@ -110,8 +113,9 @@ export default function EdenArtFrontPage() {
 
                 <span className="description-wrapper">
                   <Text className="description">
-                    <i>For developers</i> Build applications with ease, connect
-                    new techniques and models to a shared ecosystem.
+                    <i>For curators</i> Discover, curate, and tell stories with
+                    your collections. Create a profile, remix the work of your
+                    favorite artists, and get personalized feeds.
                   </Text>
                 </span>
               </div>
@@ -120,8 +124,13 @@ export default function EdenArtFrontPage() {
                 <div>
                   <span className="description-wrapper">
                     <Text className="description">
-                      <i>For collectors</i> Discover, curate, and tell stories
-                      with your collections. Make the garden beautiful.
+                      <i>For developers</i> Eden provides an open API and SDK
+                      that lets you build custom applications and frontends on
+                      top of our generators, as well as deploy custom models
+                      that you own and control.{' '}
+                      <a href="https://docs.eden.art/docs/sdk/quickstart">
+                        Learn how to build with Eden.
+                      </a>
                     </Text>
                   </span>
                 </div>
